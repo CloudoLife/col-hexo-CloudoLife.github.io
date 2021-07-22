@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Smart Oral Evaluation-English (SOE-E)Tencent Cloud Smart Oral Evaluation-English (SOE-E) is a voice evaluation product launched by Tencent Cloud. In the past, oral English practice had to rely on prof">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Cloud Computing Tencent Cloud] WeChat Mini Program integrate Tencent Cloud Smart Oral Evaluation-English (SOE-E)">
+<meta property="og:url" content="https://cloudolife.com/2021/07/17/Cloud-Native/Cloud-Computing/Tencent-Cloud/WeChat-Mini-Program-integrate-Tencent-Cloud-Smart-Oral-Evaluation-English-SOE-E/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Smart Oral Evaluation-English (SOE-E)Tencent Cloud Smart Oral Evaluation-English (SOE-E) is a voice evaluation product launched by Tencent Cloud. In the past, oral English practice had to rely on prof">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-17T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.088Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Cloud Native">
+<meta property="article:tag" content="Cloud Computing">
+<meta property="article:tag" content="Smart Oral Evaluation-English (SOE-E)">
+<meta property="article:tag" content="SOE-E">
+<meta property="article:tag" content="English Speaking Assessment">
+<meta property="article:tag" content="WeChat Mini Program">
+<meta property="article:tag" content="WeChat Developer Tools">
+<meta property="article:tag" content="Tencent Cloud">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/07/17/Cloud-Native/Cloud-Computing/Tencent-Cloud/WeChat-Mini-Program-integrate-Tencent-Cloud-Smart-Oral-Evaluation-English-SOE-E/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2021&#x2F;07&#x2F;17&#x2F;Cloud-Native&#x2F;Cloud-Computing&#x2F;Tencent-Cloud&#x2F;WeChat-Mini-Program-integrate-Tencent-Cloud-Smart-Oral-Evaluation-English-SOE-E&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;07&#x2F;17&#x2F;Cloud-Native&#x2F;Cloud-Computing&#x2F;Tencent-Cloud&#x2F;WeChat-Mini-Program-integrate-Tencent-Cloud-Smart-Oral-Evaluation-English-SOE-E&#x2F;&quot;,&quot;title&quot;:&quot;[Cloud Computing Tencent Cloud] WeChat Mini Program integrate Tencent Cloud Smart Oral Evaluation-English (SOE-E)&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[Cloud Computing Tencent Cloud] WeChat Mini Program integrate Tencent Cloud Smart Oral Evaluation-English (SOE-E) | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Smart-Oral-Evaluation-English-SOE-E"><span class="nav-number">1.</span> <span class="nav-text">Smart Oral Evaluation-English (SOE-E)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Features"><span class="nav-number">1.1.</span> <span class="nav-text">Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mini-Program-plug-in"><span class="nav-number">1.2.</span> <span class="nav-text">Mini Program plug-in</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequites"><span class="nav-number">1.3.</span> <span class="nav-text">Prerequites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages"><span class="nav-number">1.4.</span> <span class="nav-text">Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Import-Plug-in-code"><span class="nav-number">1.4.1.</span> <span class="nav-text">Import Plug-in code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Initialization"><span class="nav-number">1.4.2.</span> <span class="nav-text">Initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Record-stop-and-get-evaluation-result"><span class="nav-number">1.4.3.</span> <span class="nav-text">Record, stop and get evaluation result:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/07/17/Cloud-Native/Cloud-Computing/Tencent-Cloud/WeChat-Mini-Program-integrate-Tencent-Cloud-Smart-Oral-Evaluation-English-SOE-E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Cloud Computing Tencent Cloud] WeChat Mini Program integrate Tencent Cloud Smart Oral Evaluation-English (SOE-E)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-17 00:00:00" itemprop="dateCreated datePublished" datetime="2021-07-17T00:00:00+00:00">2021-07-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/" itemprop="url" rel="index"><span itemprop="name">Cloud Native</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Cloud-Computing/" itemprop="url" rel="index"><span itemprop="name">Cloud Computing</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Cloud-Computing/Tencent-Cloud/" itemprop="url" rel="index"><span itemprop="name">Tencent Cloud</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/07/17/Cloud-Native/Cloud-Computing/Tencent-Cloud/WeChat-Mini-Program-integrate-Tencent-Cloud-Smart-Oral-Evaluation-English-SOE-E/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/17/Cloud-Native/Cloud-Computing/Tencent-Cloud/WeChat-Mini-Program-integrate-Tencent-Cloud-Smart-Oral-Evaluation-English-SOE-E/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>5.9k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Smart-Oral-Evaluation-English-SOE-E"><a href="#Smart-Oral-Evaluation-English-SOE-E" class="headerlink" title="Smart Oral Evaluation-English (SOE-E)"></a>Smart Oral Evaluation-English (SOE-E)</h1><p>Tencent Cloud Smart Oral Evaluation-English (SOE-E) is a voice evaluation product launched by Tencent Cloud. In the past, oral English practice had to rely on professional teachers to perform subjective assessment after listening, so the cost was high and the learning time was difficult to guarantee. Tencent Cloud launched an English voice evaluation product for this scenario, supporting voice evaluation covering all ages from children to adults, supporting multiple modes such as words (words), sentences, and supporting pronunciation accuracy (GOP), fluency, completeness, and stress Accuracy and other omni-directional scoring mechanism, and the similarity of experts’ scoring is more than 95%.</p>
+<span id="more"></span>
+
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li><p>Coverage for all ages</p>
+<p>  It supports English voice evaluation and scoring covering all age groups from children to adults, and provides personalized and differentiated evaluation ability support for children.</p>
+</li>
+<li><p>Multi-dimensional scoring</p>
+<p> Supports multiple voice evaluation modes such as words, sentences, paragraphs, and free speaking, and supports all-round scoring mechanisms such as pronunciation accuracy, fluency, and completeness.</p>
+</li>
+<li><p>Not an expert, better than an expert</p>
+<p>  The scoring results of the voice evaluation of Zhiling Speaking Evaluation are more than 95% fit with the expert scoring, which can be widely used in the oral English teaching business.</p>
+</li>
+</ul>
+<h2 id="Mini-Program-plug-in"><a href="#Mini-Program-plug-in" class="headerlink" title="Mini Program plug-in"></a>Mini Program plug-in</h2><p>The Smart Oral Evaluation-English (SOE-E) Mini Program plug-in Mini Program plug-in encapsulates the recording function of the Mini Program and the calls of Wisdom Speaking Evaluation API, allowing developers to access the voice evaluation capabilities through simple configuration, eliminating the need for complicated voice fragmentation and authentication logic. Focus on business development.</p>
+<h2 id="Prerequites"><a href="#Prerequites" class="headerlink" title="Prerequites"></a>Prerequites</h2><ul>
+<li><p>Tecent Cloud</p>
+<ul>
+<li><p>Account and Balance</p>
+<p>  First, you must have a Tencent Cloud Account and have sufficient balance in your account.</p>
+<p>  <a target="_blank" rel="noopener" href="https://intl.cloud.tencent.com/register">Sign up - Tencent Cloud - https://intl.cloud.tencent.com/register</a></p>
+</li>
+<li><p>API key</p>
+<p>  You can create an API key for a sub-user/collaborator. After the API key is created, the sub-user/collaborator can use APIs, SDKs, or other development tools to manage the resources under the root account within the scope of the configured permissions.</p>
+<p>  <a target="_blank" rel="noopener" href="https://intl.cloud.tencent.com/document/product/598/32675">Access Key | Tencent Cloud - https://intl.cloud.tencent.com/document/product/598/32675</a></p>
+</li>
+</ul>
+</li>
+<li><p>WeChat Mini Program</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/en/dev/devtools/download.html">WeChat Developer Tools - https://developers.weixin.qq.com/miniprogram/en/dev/devtools/download.html</a></p>
+<p>WeChat Developer Tools is a web debugging tools to help developers develop and debug Weixin Mini Programs more simply and efficiently based on the original Official Account.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Usages"><a href="#Usages" class="headerlink" title="Usages"></a>Usages</h2><h3 id="Import-Plug-in-code"><a href="#Import-Plug-in-code" class="headerlink" title="Import Plug-in code"></a>Import Plug-in code</h3><p>Log in to the <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/wxopen/plugindevdoc?appid=wxe5a00a1780c8eb95&token=486467026&lang=zh_CN">Mini Program Plug-in Center - https://mp.weixin.qq.com/wxopen/plugindevdoc?appid=wxe5a00a1780c8eb95&amp;token=486467026&amp;lang=zh_CN</a> to add the plug-in.</p>
+<p>Introduce the following code in <code>app.json</code>:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.json</span></span><br><span class="line"></span><br><span class="line"> &quot;plugins&quot;: &#123;</span><br><span class="line">   &quot;myPlugin&quot;: &#123;</span><br><span class="line">     &quot;version&quot;: &quot;1.1.1&quot;,</span><br><span class="line">     &quot;provider&quot;: &quot;wxe5a00a1780c8eb95&quot;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>Import plug-in code.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> plugin = requirePlugin(<span class="string">&quot;myPlugin&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h3><p>Option 1 (recommended): Obtain authorization credentials from the backend to the applet plug-in, and the applet plug-in obtains the authorization credentials to initiate a request. During the formal deployment, please add a layer of permission check of your own website on the backend:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> plugin = requirePlugin(<span class="string">&quot;myPlugin&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> manager = plugin.getSoeRecorderManager(&#123;</span><br><span class="line">getAuthorization: <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line"> wx.request(&#123;</span><br><span class="line">   url: <span class="string">&#x27;https://example.com/server/getAuthorization&#x27;</span>,</span><br><span class="line">   method: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">   data: &#123;&#125;,</span><br><span class="line">   success: <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">      callback(&#123;</span><br><span class="line">       timestamp: data.result.timestamp,</span><br><span class="line">       authorization: data.result.authorization</span><br><span class="line">     &#125;)</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Option 2: The authorization certificate is obtained through the applet cloud function, and the applet plug-in gets the authorization certificate to initiate a request. The applet cloud has its own permission check, and no additional permission check is required:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> plugin = requirePlugin(<span class="string">&quot;myPlugin&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> manager = plugin.getSoeRecorderManager(&#123;</span><br><span class="line">getAuthorization: <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line"> wx.cloud.callFunction(&#123;</span><br><span class="line">   name: <span class="string">&#x27;getAuthorization&#x27;</span>,</span><br><span class="line">   data: &#123;&#125;,</span><br><span class="line">   success: <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">     callback(&#123;</span><br><span class="line">       timestamp: data.result.timestamp,</span><br><span class="line">       authorization: data.result.authorization</span><br><span class="line">     &#125;)</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Option 3: The applet uses a fixed key to calculate the authorization certificate. This format is suitable for front-end debugging. If you use this format, please avoid revealing the key.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> plugin = requirePlugin(<span class="string">&quot;myPlugin&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> manager = plugin.getSoeRecorderManager(&#123;</span><br><span class="line"> secretId: yourSecretId,</span><br><span class="line"> secretKey: yourSecretKey</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Record-stop-and-get-evaluation-result"><a href="#Record-stop-and-get-evaluation-result" class="headerlink" title="Record, stop and get evaluation result:"></a>Record, stop and get evaluation result:</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// start record</span></span><br><span class="line">manager.start(&#123;</span><br><span class="line">   content: <span class="string">&#x27;about&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// stop record</span></span><br><span class="line">manager.stop()</span><br><span class="line"></span><br><span class="line"><span class="comment">// Or use local voice data(Base64)</span></span><br><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment">* 支持将音频数据作为参数进行测评，仅支持base64格式  </span></span><br><span class="line"><span class="comment">* <span class="doctag">@param <span class="type">&#123;  </span></span></span></span><br><span class="line"><span class="comment"><span class="doctag"><span class="type">*   content: &#x27;about&#x27;, // 测评文本  </span></span></span></span><br><span class="line"><span class="comment"><span class="doctag"><span class="type">*   audioBase64: &#x27;//uQBAAAA&#x27;, // 测评音频base64格式  </span></span></span></span><br><span class="line"><span class="comment"><span class="doctag"><span class="type">*   ...options // option中其他非必传参数  </span></span></span></span><br><span class="line"><span class="comment"><span class="doctag"><span class="type">* &#125;</span>  </span></span></span><br><span class="line"><span class="comment">*/</span>  </span><br><span class="line">manager.uploadLocalFile(&#123;    </span><br><span class="line">  content: <span class="string">&#x27;about&#x27;</span>,     </span><br><span class="line">  audioBase64: <span class="string">&#x27;//uQBAAAA&#x27;</span>  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Get evaluation result callback:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">manager.onSuccess(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="comment">//打印识别结果</span></span><br><span class="line"> <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Other callback methods:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// start callback</span></span><br><span class="line">manager.onStart(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">&quot;成功开始录音识别&quot;</span>, res)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// stop callback</span></span><br><span class="line">manager.onStop(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">&quot;录音已停止&quot;</span>, res)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// error callback</span></span><br><span class="line">manager.onError(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="comment">// print log</span></span><br><span class="line"> <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/soe-e">智聆口语评测（英文）_英语口语评测_英语语音评测 - 腾讯云 - https://cloud.tencent.com/product/soe-e</a></p>
+<p>[2] 智聆口语评测 - 文档中心 - 腾讯云 - <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/884](https://cloud.tencent.com/document/product/884)">https://cloud.tencent.com/document/product/884](https://cloud.tencent.com/document/product/884)</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/884/33984">智聆口语评测 小程序插件 - SDK 文档 - 文档中心 - 腾讯云 - https://cloud.tencent.com/document/product/884/33984</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/884/32605">智聆口语评测 发音数据传输接口附带初始化过程（常用实践） - API 文档 - 文档中心 - 腾讯云 - https://cloud.tencent.com/document/product/884/32605</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="https://github.com/Tencent/iHearing">Tencent/iHearing: 微信智聆口语测评小程序是针对口语练习场景开发的测评类小程序，通过智聆口语评测插件提供了句子和单词发音准确度等功能。 - https://github.com/Tencent/iHearing</a></p>
+<p>[6] <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/wxopen/plugindevdoc?appid=wx63d6102e26f0a3f8&token=1947236119&lang=zh_CN">智聆口语评测 | 小程序插件 | 微信公众平台 - https://mp.weixin.qq.com/wxopen/plugindevdoc?appid=wx63d6102e26f0a3f8&amp;token=1947236119&amp;lang=zh_CN</a></p>
+<p>[7] <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/en/dev/devtools/download.html">WeChat Developer Tools - https://developers.weixin.qq.com/miniprogram/en/dev/devtools/download.html</a></p>
+<p>[8] <a target="_blank" rel="noopener" href="https://intl.cloud.tencent.com/">Tencent Cloud - https://intl.cloud.tencent.com/</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/03/Kubernetes-K8S/A-few-ways-to-download-images-from-k8s-gcr-io/" rel="bookmark">[Kubernetes (K8S)] A few ways to download images from k8s.gcr.io</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/03/Kubernetes-K8S/Delete-the-terminating-Namespace-in-Kubernetes-K8S/" rel="bookmark">[Kubernetes (K8S)] Delete the terminating Namespace in Kubernetes (K8S)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/04/Kubernetes-K8S/Lens-THE-KUBERNETES-IDE-FOR-MONITORING/" rel="bookmark">[Kubernetes (K8S)] Lens: THE KUBERNETES IDE FOR MONITORING</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/03/Kubernetes-K8S/Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development/" rel="bookmark">[Kubernetes (K8S)] Use kubefwd to forward Kubernetes (K8S) ports for Local Development</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/12/05/Cloud-Native/Cloud-Computing/Network/Use-AliCloud-free-certificates-that-are-automatically-renewed-to-avoid-expiration-of-AliCloud-CDN-domain-certificates/" rel="bookmark">[Storage] Use AliCloud free certificates that are automatically renewed to avoid expiration of AliCloud CDN domain certificates</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2021/07/17/Cloud-Native/Cloud-Computing/Tencent-Cloud/WeChat-Mini-Program-integrate-Tencent-Cloud-Smart-Oral-Evaluation-English-SOE-E/" title="[Cloud Computing Tencent Cloud] WeChat Mini Program integrate Tencent Cloud Smart Oral Evaluation-English (SOE-E)">https://cloudolife.com/2021/07/17/Cloud-Native/Cloud-Computing/Tencent-Cloud/WeChat-Mini-Program-integrate-Tencent-Cloud-Smart-Oral-Evaluation-English-SOE-E/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Cloud-Native/" rel="tag"># Cloud Native</a>
+              <a href="/tags/Cloud-Computing/" rel="tag"># Cloud Computing</a>
+              <a href="/tags/Smart-Oral-Evaluation-English-SOE-E/" rel="tag"># Smart Oral Evaluation-English (SOE-E)</a>
+              <a href="/tags/SOE-E/" rel="tag"># SOE-E</a>
+              <a href="/tags/English-Speaking-Assessment/" rel="tag"># English Speaking Assessment</a>
+              <a href="/tags/WeChat-Mini-Program/" rel="tag"># WeChat Mini Program</a>
+              <a href="/tags/WeChat-Developer-Tools/" rel="tag"># WeChat Developer Tools</a>
+              <a href="/tags/Tencent-Cloud/" rel="tag"># Tencent Cloud</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/17/Programming-Language/Ruby/Installation/Install-multiple-Ruby-versions-on-macOS/" rel="prev" title="[Ruby Installation] Install multiple Ruby versions on macOS">
+                  <i class="fa fa-chevron-left"></i> [Ruby Installation] Install multiple Ruby versions on macOS
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

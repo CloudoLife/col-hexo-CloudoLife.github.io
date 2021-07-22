@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="7. Managing Growing Projects with Packages, Crates, and ModulesRust has a number of features that allow you to manage your code’s organization, including which details are exposed, which details are p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[The Rust Programming Language] 7. Managing Growing Projects with Packages, Crates, and Modules">
+<meta property="og:url" content="https://cloudolife.com/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/7-Managing-Growing-Projects-with-Packages-Crates-and-Modules/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="7. Managing Growing Projects with Packages, Crates, and ModulesRust has a number of features that allow you to manage your code’s organization, including which details are exposed, which details are p">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.104Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Rust">
+<meta property="article:tag" content="Module">
+<meta property="article:tag" content="The Rust Programming Language">
+<meta property="article:tag" content="Package">
+<meta property="article:tag" content="Crate">
+<meta property="article:tag" content="Path">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/7-Managing-Growing-Projects-with-Packages-Crates-and-Modules/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2020&#x2F;02&#x2F;01&#x2F;Programming-Language&#x2F;Rust&#x2F;The-Rust-Programming-Language&#x2F;7-Managing-Growing-Projects-with-Packages-Crates-and-Modules&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;02&#x2F;01&#x2F;Programming-Language&#x2F;Rust&#x2F;The-Rust-Programming-Language&#x2F;7-Managing-Growing-Projects-with-Packages-Crates-and-Modules&#x2F;&quot;,&quot;title&quot;:&quot;[The Rust Programming Language] 7. Managing Growing Projects with Packages, Crates, and Modules&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[The Rust Programming Language] 7. Managing Growing Projects with Packages, Crates, and Modules | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#7-Managing-Growing-Projects-with-Packages-Crates-and-Modules"><span class="nav-number">1.</span> <span class="nav-text">7. Managing Growing Projects with Packages, Crates, and Modules</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-Packages-and-Crates"><span class="nav-number">1.1.</span> <span class="nav-text">7.1 Packages and Crates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-Defining-Modules-to-Control-Scope-and-Privacy"><span class="nav-number">1.2.</span> <span class="nav-text">7.2 Defining Modules to Control Scope and Privacy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-Paths-for-Referring-to-an-Item-in-the-Module-Tree"><span class="nav-number">1.3.</span> <span class="nav-text">7.3 Paths for Referring to an Item in the Module Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exposing-Paths-with-the-pub-Keyword"><span class="nav-number">1.3.1.</span> <span class="nav-text">Exposing Paths with the pub Keyword</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Starting-Relative-Paths-with-super"><span class="nav-number">1.3.2.</span> <span class="nav-text">Starting Relative Paths with super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Making-Structs-and-Enums-Public"><span class="nav-number">1.3.3.</span> <span class="nav-text">Making Structs and Enums Public</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-Bringing-Paths-into-Scope-with-the-use-Keyword"><span class="nav-number">1.4.</span> <span class="nav-text">7.4 Bringing Paths into Scope with the use Keyword</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-Idiomatic-use-Paths"><span class="nav-number">1.4.1.</span> <span class="nav-text">Creating Idiomatic use Paths</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Providing-New-Names-with-the-as-Keyword"><span class="nav-number">1.4.2.</span> <span class="nav-text">Providing New Names with the as Keyword</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Re-exporting-Names-with-pub-use"><span class="nav-number">1.4.3.</span> <span class="nav-text">Re-exporting Names with pub use</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-External-Packages"><span class="nav-number">1.4.4.</span> <span class="nav-text">Using External Packages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Nested-Paths-to-Clean-Up-Large-use-Lists"><span class="nav-number">1.4.5.</span> <span class="nav-text">Using Nested Paths to Clean Up Large use Lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Glob-Operator"><span class="nav-number">1.4.6.</span> <span class="nav-text">The Glob Operator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5-Separating-Modules-into-Different-Files"><span class="nav-number">1.5.</span> <span class="nav-text">7.5 Separating Modules into Different Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.6.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/7-Managing-Growing-Projects-with-Packages-Crates-and-Modules/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [The Rust Programming Language] 7. Managing Growing Projects with Packages, Crates, and Modules
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-02-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-01T00:00:00+00:00">2020-02-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/The-Rust-Programming-Language/" itemprop="url" rel="index"><span itemprop="name">The Rust Programming Language</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/7-Managing-Growing-Projects-with-Packages-Crates-and-Modules/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/7-Managing-Growing-Projects-with-Packages-Crates-and-Modules/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>11 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="7-Managing-Growing-Projects-with-Packages-Crates-and-Modules"><a href="#7-Managing-Growing-Projects-with-Packages-Crates-and-Modules" class="headerlink" title="7. Managing Growing Projects with Packages, Crates, and Modules"></a>7. Managing Growing Projects with Packages, Crates, and Modules</h1><p>Rust has a number of features that allow you to manage your code’s organization, including which details are exposed, which details are private, and what names are in each scope in your programs. These features, sometimes collectively referred to as the module system, include:</p>
+<span id="more"></span>
+
+<ul>
+<li><p>Packages: A Cargo feature that lets you build, test, and share crates</p>
+</li>
+<li><p>Crates: A tree of modules that produces a library or executable</p>
+</li>
+<li><p>Modules and use: Let you control the organization, scope, and privacy of paths</p>
+</li>
+<li><p>Paths: A way of naming an item, such as a struct, function, or module</p>
+</li>
+</ul>
+<h2 id="7-1-Packages-and-Crates"><a href="#7-1-Packages-and-Crates" class="headerlink" title="7.1 Packages and Crates"></a>7.1 Packages and Crates</h2><p>A crate is a binary or library. The crate root is a source file that the Rust compiler starts from and makes up the root module of your crate (we’ll explain modules in depth in the <a target="_blank" rel="noopener" href="https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html">“Defining Modules to Control Scope and Privacy” - https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html</a> section). </p>
+<p>A package is one or more crates that provide a set of functionality. A package contains a Cargo.toml file that describes how to build those crates.</p>
+<p>Several rules determine what a package can contain. A package must contain zero or one library crates, and no more. It can contain as many binary crates as you’d like, but it must contain at least one crate (either library or binary).</p>
+<p>Let’s walk through what happens when we create a package. First, we enter the command cargo new:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cargo new my-project</span></span><br><span class="line">     Created binary (application) `my-project` package</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls my-project</span></span><br><span class="line">Cargo.toml</span><br><span class="line">src</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls my-project/src</span></span><br><span class="line">main.rs</span><br></pre></td></tr></table></figure>
+
+<p>When we entered the command, Cargo created a Cargo.toml file, giving us a package. Looking at the contents of Cargo.toml, there’s no mention of <code>src/main.rs</code> because Cargo follows a convention that <code>src/main.r</code>s is the crate root of a binary crate with the same name as the package. Likewise, Cargo knows that if the package directory contains <code>src/lib.rs</code>, the package contains a library crate with the same name as the package, and <code>src/lib.rs</code> is its crate root. Cargo passes the crate root files to <code>rustc</code> to build the library or binary.</p>
+<figure class="highlight ini"><figcaption><span>/ toml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[package]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;my-project&quot;</span></span><br><span class="line"><span class="attr">version</span> = <span class="string">&quot;0.1.0&quot;</span></span><br><span class="line"><span class="attr">authors</span> = [<span class="string">&quot;Benjamin CloudoLife &lt;benjamin@cloudolife.com&gt;&quot;</span>]</span><br><span class="line"><span class="attr">edition</span> = <span class="string">&quot;2018&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html</span></span><br><span class="line"></span><br><span class="line"><span class="section">[dependencies]</span></span><br></pre></td></tr></table></figure>
+
+<p>Run rustc:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cargo rustc</span>  </span><br><span class="line">   Compiling my-project v0.1.0 (/Users/cloudolife/my-project)</span><br><span class="line">    Finished dev [unoptimized + debuginfo] target(s) in 8.05s</span><br></pre></td></tr></table></figure>
+
+<p>Run binary:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> target/debug/my-project</span></span><br><span class="line">Hello, world!</span><br></pre></td></tr></table></figure>
+
+<p>Here, we have a package that only contains src/main.rs, meaning it only contains a binary crate named my-project. If a package contains src/main.rs and src/lib.rs, it has two crates: a library and a binary, both with the same name as the package. A package can have multiple binary crates by placing files in the src/bin directory: each file will be a separate binary crate.</p>
+<p>A crate will group related functionality together in a scope so the functionality is easy to share between multiple projects.</p>
+<h2 id="7-2-Defining-Modules-to-Control-Scope-and-Privacy"><a href="#7-2-Defining-Modules-to-Control-Scope-and-Privacy" class="headerlink" title="7.2 Defining Modules to Control Scope and Privacy"></a>7.2 Defining Modules to Control Scope and Privacy</h2><p>Namely paths that allow you to name items; the <code>use</code> keyword that brings a path into scope; and the <code>pub</code> keyword to make items public. We’ll also discuss the <code>as</code> keyword, external packages, and the glob operator. For now, let’s focus on modules!</p>
+<p>Modules let us organize code within a crate into groups for readability and easy reuse. Modules also control the privacy of items, which is whether an item can be used by outside code (public) or is an internal implementation detail and not available for outside use (private).</p>
+<p>To structure our crate in the same way that a real restaurant works, we can organize the functions into nested modules. Create a new library named restaurant by running cargo new –lib restaurant; then put the code in Listing 7-1 into src/lib.rs to define some modules and function signatures.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mod</span> front_of_house &#123;</span><br><span class="line">    <span class="keyword">mod</span> hosting &#123;</span><br><span class="line">        <span class="function"><span class="keyword">fn</span> <span class="title">add_to_waitlist</span></span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">fn</span> <span class="title">seat_at_table</span></span>() &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">mod</span> serving &#123;</span><br><span class="line">        <span class="function"><span class="keyword">fn</span> <span class="title">take_order</span></span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">fn</span> <span class="title">serve_order</span></span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">fn</span> <span class="title">take_payment</span></span>() &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-3-Paths-for-Referring-to-an-Item-in-the-Module-Tree"><a href="#7-3-Paths-for-Referring-to-an-Item-in-the-Module-Tree" class="headerlink" title="7.3 Paths for Referring to an Item in the Module Tree"></a>7.3 Paths for Referring to an Item in the Module Tree</h2><p>To show Rust where to find an item in a module tree, we use a path in the same way we use a path when navigating a filesystem. If we want to call a function, we need to know its path.</p>
+<p>A path can take two forms:</p>
+<ul>
+<li><p>An absolute path starts from a crate root by using a crate name or a literal crate.</p>
+</li>
+<li><p>A relative path starts from the current module and uses self, super, or an identifier in the current module.<br>Both absolute and relative paths are followed by one or more identifiers separated by double colons (::).</p>
+</li>
+</ul>
+<p>Our preference is to specify absolute paths because it’s more likely to move code definitions and item calls independently of each other.</p>
+<h3 id="Exposing-Paths-with-the-pub-Keyword"><a href="#Exposing-Paths-with-the-pub-Keyword" class="headerlink" title="Exposing Paths with the pub Keyword"></a>Exposing Paths with the pub Keyword</h3><p>Modules aren’t useful only for organizing your code. They also define Rust’s privacy boundary: the line that encapsulates the implementation details external code isn’t allowed to know about, call, or rely on. So, if you want to make an item like a function or struct private, you put it in a module.</p>
+<p>The way privacy works in Rust is that all items (functions, methods, structs, enums, modules, and constants) are private by default. Items in a parent module can’t use the private items inside child modules, but items in child modules can use the items in their ancestor modules. The reason is that child modules wrap and hide their implementation details, but the child modules can see the context in which they’re defined. To continue with the restaurant metaphor, think of the privacy rules as being like the back office of a restaurant: what goes on in there is private to restaurant customers, but office managers can see and do everything in the restaurant in which they operate.</p>
+<p>Rust chose to have the module system function this way so that hiding inner implementation details is the default. That way, you know which parts of the inner code you can change without breaking outer code. But you can expose inner parts of child modules’ code to outer ancestor modules by using the pub keyword to make an item public.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mod</span> front_of_house &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">mod</span> hosting &#123;   <span class="comment">// Remember to make pub</span></span><br><span class="line">        <span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">add_to_waitlist</span></span>() &#123;&#125; <span class="comment">// Remember to make pub</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">eat_at_restaurant</span></span>() &#123;</span><br><span class="line">    <span class="comment">// Absolute path</span></span><br><span class="line">    crate::front_of_house::hosting::add_to_waitlist();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Relative path</span></span><br><span class="line">    front_of_house::hosting::add_to_waitlist();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Starting-Relative-Paths-with-super"><a href="#Starting-Relative-Paths-with-super" class="headerlink" title="Starting Relative Paths with super"></a>Starting Relative Paths with super</h3><p>We can also construct relative paths that begin in the parent module by using <code>super</code> at the start of the path. </p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">serve_order</span></span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">mod</span> back_of_house &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">fix_incorrect_order</span></span>() &#123;</span><br><span class="line">        cook_order();</span><br><span class="line">        super::serve_order();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">cook_order</span></span>() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Making-Structs-and-Enums-Public"><a href="#Making-Structs-and-Enums-Public" class="headerlink" title="Making Structs and Enums Public"></a>Making Structs and Enums Public</h3><p>We can also use pub to designate structs and enums as public, but there are a few extra details. If we use pub before a struct definition, we make the struct public, but the struct’s fields will still be private. We can make each field public or not on a case-by-case basis.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mod</span> back_of_house &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="class"><span class="keyword">struct</span> <span class="title">Breakfast</span></span> &#123;</span><br><span class="line">        <span class="keyword">pub</span> toast: <span class="built_in">String</span>,</span><br><span class="line">        seasonal_fruit: <span class="built_in">String</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">impl</span> Breakfast &#123;</span><br><span class="line">        <span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">summer</span></span>(toast: &amp;<span class="built_in">str</span>) -&gt; Breakfast &#123;</span><br><span class="line">            Breakfast &#123;</span><br><span class="line">                toast: <span class="built_in">String</span>::from(toast),</span><br><span class="line">                seasonal_fruit: <span class="built_in">String</span>::from(<span class="string">&quot;peaches&quot;</span>),</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">eat_at_restaurant</span></span>() &#123;</span><br><span class="line">    <span class="comment">// Order a breakfast in the summer with Rye toast</span></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> meal = back_of_house::Breakfast::summer(<span class="string">&quot;Rye&quot;</span>);</span><br><span class="line">    <span class="comment">// Change our mind about what bread we&#x27;d like</span></span><br><span class="line">    meal.toast = <span class="built_in">String</span>::from(<span class="string">&quot;Wheat&quot;</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;I&#x27;d like &#123;&#125; toast please&quot;</span>, meal.toast);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The next line won&#x27;t compile if we uncomment it; we&#x27;re not allowed</span></span><br><span class="line">    <span class="comment">// to see or modify the seasonal fruit that comes with the meal</span></span><br><span class="line">    <span class="comment">// meal.seasonal_fruit = String::from(&quot;blueberries&quot;);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>In contrast, if we make an enum public, all of its variants are then public. We only need the pub before the enum keyword,</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mod</span> back_of_house &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="class"><span class="keyword">enum</span> <span class="title">Appetizer</span></span> &#123;</span><br><span class="line">        Soup,</span><br><span class="line">        Salad,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">eat_at_restaurant</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> order1 = back_of_house::Appetizer::Soup;</span><br><span class="line">    <span class="keyword">let</span> order2 = back_of_house::Appetizer::Salad;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-4-Bringing-Paths-into-Scope-with-the-use-Keyword"><a href="#7-4-Bringing-Paths-into-Scope-with-the-use-Keyword" class="headerlink" title="7.4 Bringing Paths into Scope with the use Keyword"></a>7.4 Bringing Paths into Scope with the use Keyword</h2><p>We can bring a path into a scope once and then call the items in that path as if they’re local items with the use keyword.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mod</span> front_of_house &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">mod</span> hosting &#123;</span><br><span class="line">        <span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">add_to_waitlist</span></span>() &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> crate::front_of_house::hosting;</span><br><span class="line"><span class="comment">// Or use relative path.</span></span><br><span class="line"><span class="comment">// use self::front_of_house::hosting;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">eat_at_restaurant</span></span>() &#123;</span><br><span class="line">    hosting::add_to_waitlist();</span><br><span class="line">    hosting::add_to_waitlist();</span><br><span class="line">    hosting:</span><br></pre></td></tr></table></figure>
+
+<h3 id="Creating-Idiomatic-use-Paths"><a href="#Creating-Idiomatic-use-Paths" class="headerlink" title="Creating Idiomatic use Paths"></a>Creating Idiomatic use Paths</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mod</span> front_of_house &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">mod</span> hosting &#123;</span><br><span class="line">        <span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">add_to_waitlist</span></span>() &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> crate::front_of_house::hosting::add_to_waitlist;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">eat_at_restaurant</span></span>() &#123;</span><br><span class="line">    add_to_waitlist();</span><br><span class="line">    add_to_waitlist();</span><br><span class="line">    add_to_waitlist();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Providing-New-Names-with-the-as-Keyword"><a href="#Providing-New-Names-with-the-as-Keyword" class="headerlink" title="Providing New Names with the as Keyword"></a>Providing New Names with the as Keyword</h3><p>There’s another solution to the problem of bringing two types of the same name into the same scope with use: after the path, we can specify as and a new local name, or alias, for the type.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::fmt::<span class="built_in">Result</span>;</span><br><span class="line"><span class="keyword">use</span> std::io::<span class="built_in">Result</span> <span class="keyword">as</span> IoResult;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">function1</span></span>() -&gt; <span class="built_in">Result</span> &#123;</span><br><span class="line">    <span class="comment">// --snip--</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">function2</span></span>() -&gt; IoResult&lt;()&gt; &#123;</span><br><span class="line">    <span class="comment">// --snip--</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Re-exporting-Names-with-pub-use"><a href="#Re-exporting-Names-with-pub-use" class="headerlink" title="Re-exporting Names with pub use"></a>Re-exporting Names with pub use</h3><p>When we bring a name into scope with the use keyword, the name available in the new scope is private. To enable the code that calls our code to refer to that name as if it had been defined in that code’s scope, we can combine pub and use. This technique is called re-exporting because we’re bringing an item into scope but also making that item available for others to bring into their scope.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mod</span> front_of_house &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">mod</span> hosting &#123;</span><br><span class="line">        <span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">add_to_waitlist</span></span>() &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">use</span> crate::front_of_house::hosting;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">eat_at_restaurant</span></span>() &#123;</span><br><span class="line">    hosting::add_to_waitlist();</span><br><span class="line">    hosting::add_to_waitlist();</span><br><span class="line">    hosting::add_to_waitlist();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Using-External-Packages"><a href="#Using-External-Packages" class="headerlink" title="Using External Packages"></a>Using External Packages</h3><p>Adding rand as a dependency in Cargo.toml tells Cargo to download the rand package and any dependencies from crates.io and make rand available to our project.</p>
+<figure class="highlight ini"><figcaption><span>/ toml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="attr">rand</span> = <span class="string">&quot;0.8.3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Then, to bring rand definitions into the scope of our package, we added a use line starting with the name of the crate, rand, and listed the items we wanted to bring into scope. </p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> rand::Rng;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> secret_number = rand::thread_rng().gen_range(<span class="number">1</span>..<span class="number">101</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Using-Nested-Paths-to-Clean-Up-Large-use-Lists"><a href="#Using-Nested-Paths-to-Clean-Up-Large-use-Lists" class="headerlink" title="Using Nested Paths to Clean Up Large use Lists"></a>Using Nested Paths to Clean Up Large use Lists</h3><p>We do this by specifying the common part of the path, followed by two colons, and then curly brackets around a list of the parts of the paths that differ, as shown in Listing 7-18.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// --snip--</span></span><br><span class="line"><span class="keyword">use</span> std::&#123;cmp::Ordering, io&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Equal to follow:</span></span><br><span class="line"><span class="comment">// use std::cmp::Ordering;</span></span><br><span class="line"><span class="comment">// use std::io;</span></span><br></pre></td></tr></table></figure>
+
+<p>We can use a nested path at any level in a path, which is useful when combining two use statements that share a subpath. </p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io::&#123;<span class="keyword">self</span>, Write&#125;; <span class="comment">// This line brings std::io and std::io::Write into scope.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Equal to follow:</span></span><br><span class="line"><span class="comment">// use std::io;</span></span><br><span class="line"><span class="comment">// use std::io::Write;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="The-Glob-Operator"><a href="#The-Glob-Operator" class="headerlink" title="The Glob Operator"></a>The Glob Operator</h3><p>If we want to bring all public items defined in a path into scope, we can specify that path followed by *, the glob operator:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::collections::*;</span><br></pre></td></tr></table></figure>
+
+<p>Be careful when using the glob operator! Glob can make it harder to tell what names are in scope and where a name used in your program was defined.</p>
+<p>The glob operator is often used when testing to bring everything under test into the tests module; we’ll talk about that in the <a target="_blank" rel="noopener" href="https://doc.rust-lang.org/book/ch11-01-writing-tests.html#how-to-write-tests">“How to Write Tests” - https://doc.rust-lang.org/book/ch11-01-writing-tests.html#how-to-write-tests</a> section in <a target="_blank" rel="noopener" href="https://doc.rust-lang.org/std/prelude/index.html#other-preludes">Chapter 11 - https://doc.rust-lang.org/std/prelude/index.html#other-preludes</a>. The glob operator is also sometimes used as part of the prelude pattern: see the standard library documentation for more information on that pattern.</p>
+<h2 id="7-5-Separating-Modules-into-Different-Files"><a href="#7-5-Separating-Modules-into-Different-Files" class="headerlink" title="7.5 Separating Modules into Different Files"></a>7.5 Separating Modules into Different Files</h2><p>Using a semicolon after mod <code>front_of_house</code> rather than using a block tells Rust to load the contents of the module from another file with the same name as the module. </p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/lib.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">mod</span> front_of_house; <span class="comment">// With a semicolon(;), load the contents of the module from another file with the same name as the module</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">use</span> crate::front_of_house::hosting;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">eat_at_restaurant</span></span>() &#123;</span><br><span class="line">    hosting::add_to_waitlist();</span><br><span class="line">    hosting::add_to_waitlist();</span><br><span class="line">    hosting::add_to_waitlist();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/front_of_house.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">mod</span> hosting &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">add_to_waitlist</span></span>() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>To continue with our example and extract the hosting module to its own file as well, we change <code>src/front_of_house.rs</code> to contain only the declaration of the hosting module:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/front_of_house.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">mod</span> hosting;    <span class="comment">// Remember to use pub to re-export module name.</span></span><br></pre></td></tr></table></figure>
+
+<p>Then we create a src/front_of_house directory and a file <code>src/front_of_house/hosting.rs</code> to contain the definitions made in the hosting module:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/front_of_house/hosting.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">add_to_waitlist</span></span>() &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The <code>mod</code> keyword declares modules, and Rust looks in a file with the same name as the module for the code that goes into that module.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://doc.rust-lang.org/book/title-page.html">The Rust Programming Language - The Rust Programming Language - https://doc.rust-lang.org/book/title-page.html</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">Managing Growing Projects with Packages, Crates, and Modules - The Rust Programming Language - https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/02/08/Programming-Language/Rust/The-Rust-Programming-Language/10-Generic-Types-Traits-and-Lifetimes/" rel="bookmark">[The Rust Programming Language] 10. Generic Types, Traits, and Lifetimes</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/02/08/Programming-Language/Rust/The-Rust-Programming-Language/15-Smart-Pointers/" rel="bookmark">[The Rust Programming Language] 15. Smart Pointers</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/02/08/Programming-Language/Rust/The-Rust-Programming-Language/17-Object-Oriented-Programming-Features-of-Rust/" rel="bookmark">[The Rust Programming Language] 17. Object Oriented Programming Features of Rust</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/02/08/Programming-Language/Rust/The-Rust-Programming-Language/19-Advanced-Features/" rel="bookmark">[The Rust Programming Language] 19. Advanced Features</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/5-Using-Structs-to-Structure-Related-Data/" rel="bookmark">[The Rust Programming Language] 5. Using Structs to Structure Related Data</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/7-Managing-Growing-Projects-with-Packages-Crates-and-Modules/" title="[The Rust Programming Language] 7. Managing Growing Projects with Packages, Crates, and Modules">https://cloudolife.com/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/7-Managing-Growing-Projects-with-Packages-Crates-and-Modules/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Rust/" rel="tag"># Rust</a>
+              <a href="/tags/Module/" rel="tag"># Module</a>
+              <a href="/tags/The-Rust-Programming-Language/" rel="tag"># The Rust Programming Language</a>
+              <a href="/tags/Package/" rel="tag"># Package</a>
+              <a href="/tags/Crate/" rel="tag"># Crate</a>
+              <a href="/tags/Path/" rel="tag"># Path</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/9-Error-Handling/" rel="prev" title="[The Rust Programming Language] 9. Error Handling">
+                  <i class="fa fa-chevron-left"></i> [The Rust Programming Language] 9. Error Handling
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/6-Enums-and-Pattern-Matching/" rel="next" title="[The Rust Programming Language] 6. Enums and Pattern Matching">
+                  [The Rust Programming Language] 6. Enums and Pattern Matching <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

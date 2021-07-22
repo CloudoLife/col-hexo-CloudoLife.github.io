@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="kubefwdkubefwd is a command line utility built to port forward multiple services within one or more namespaces on one or more Kubernetes clusters. kubefwd uses the same port exposed by the service and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Kubernetes (K8S)] Use kubefwd to forward Kubernetes (K8S) ports for Local Development">
+<meta property="og:url" content="https://cloudolife.com/2020/10/03/Kubernetes-K8S/Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="kubefwdkubefwd is a command line utility built to port forward multiple services within one or more namespaces on one or more Kubernetes clusters. kubefwd uses the same port exposed by the service and">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://camo.githubusercontent.com/6c35bdcb997d0b6456109962e42d6bdee9ed31a524f8b6b830e8c39e8e9fc901/68747470733a2f2f6d6b2e696d74692e636f2f696d616765732f636f6e74656e742f6b7562656677642d6e65742e706e67">
+<meta property="article:published_time" content="2020-10-03T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.092Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Kubernetes (K8S)">
+<meta property="article:tag" content="Cloud Native">
+<meta property="article:tag" content="Cloud Computing">
+<meta property="article:tag" content="kubefwd">
+<meta property="article:tag" content="Port Forward">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/6c35bdcb997d0b6456109962e42d6bdee9ed31a524f8b6b830e8c39e8e9fc901/68747470733a2f2f6d6b2e696d74692e636f2f696d616765732f636f6e74656e742f6b7562656677642d6e65742e706e67">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/10/03/Kubernetes-K8S/Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2020&#x2F;10&#x2F;03&#x2F;Kubernetes-K8S&#x2F;Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;10&#x2F;03&#x2F;Kubernetes-K8S&#x2F;Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development&#x2F;&quot;,&quot;title&quot;:&quot;[Kubernetes (K8S)] Use kubefwd to forward Kubernetes (K8S) ports for Local Development&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[Kubernetes (K8S)] Use kubefwd to forward Kubernetes (K8S) ports for Local Development | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kubefwd"><span class="nav-number">1.</span> <span class="nav-text">kubefwd</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.2.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.3.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">1.3.1.</span> <span class="nav-text">Docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Help"><span class="nav-number">1.4.</span> <span class="nav-text">Help</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/10/03/Kubernetes-K8S/Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Kubernetes (K8S)] Use kubefwd to forward Kubernetes (K8S) ports for Local Development
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-03 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-03T00:00:00+00:00">2020-10-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/" itemprop="url" rel="index"><span itemprop="name">Cloud Native</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Cloud-Computing/" itemprop="url" rel="index"><span itemprop="name">Cloud Computing</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Cloud-Computing/Kubernetes-K8S/" itemprop="url" rel="index"><span itemprop="name">Kubernetes (K8S)</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/10/03/Kubernetes-K8S/Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/10/03/Kubernetes-K8S/Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>4.6k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="kubefwd"><a href="#kubefwd" class="headerlink" title="kubefwd"></a>kubefwd</h1><p>kubefwd is a command line utility built to port forward multiple services within one or more namespaces on one or more Kubernetes clusters. kubefwd uses the same port exposed by the service and forwards it from a loopback IP address on your local workstation. kubefwd temporally adds domain entries to your /etc/hosts file with the service names it forwards.</p>
+<p>kubefwd helps to enable a seamless and efficient way to develop applications and services on a local workstation. Locally develop applications that intend to interact with other services in a Kubernetes cluster. kubefwd allows applications with connection strings like <a target="_blank" rel="noopener" href="http://elasticsearch:9200/">http://elasticsearch:9200/</a> or tcp://db:3306 to communicate into the remote cluster. kubefwd can be used to reduce or eliminate the need for local environment specific connection configurations.</p>
+<span id="more"></span>
+
+<p><img src="https://camo.githubusercontent.com/6c35bdcb997d0b6456109962e42d6bdee9ed31a524f8b6b830e8c39e8e9fc901/68747470733a2f2f6d6b2e696d74692e636f2f696d616765732f636f6e74656e742f6b7562656677642d6e65742e706e67" alt="Architecture"></p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://kubernetes.io/">Kubernetes (K8S)</a><br>  Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a><br>  Homebrew is the Missing Package Manager for macOS (or Linux).</p>
+<p>  For more information about installing and using Homebrew, see the <a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew - https://brew.sh/</a>.</p>
+</li>
+</ul>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>If you are running MacOS and use <code>homebrew</code> you can install <code>kubefwd</code> directly from the txn2 tap:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> macOS</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew install txn2/tap/kubefwd</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew upgrade kubefwd</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>Forward all services for the namespace the-project. Kubefwd finds the first Pod associated with each Kubernetes service found in the Namespace and port forwards it based on the Service spec to a local IP address and port. A domain name is added to your /etc/hosts file pointing to the local IP.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo kubefwd services -n the-project</span></span><br></pre></td></tr></table></figure>
+
+<p>Execute a curl call to the service sin your Kubernetes cluster:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -s the-project:80</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> curl -s the-project:443</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>Forward all services from the namespace the-project to a Docker container named the-project</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker run -it --rm --privileged --name the-project \</span></span><br><span class="line"><span class="bash">    -v <span class="variable">$HOME</span>/.kube/config:/root/.kube/config \</span></span><br><span class="line"><span class="bash">    txn2/kubefwd services -n the-project</span></span><br><span class="line">INFO[02:10:46]  _          _           __             _</span><br><span class="line">INFO[02:10:46] | | ___   _| |__   ___ / _|_      ____| |</span><br><span class="line">INFO[02:10:46] | |/ / | | | &#x27;_ \ / _ \ |_\ \ /\ / / _  |</span><br><span class="line">INFO[02:10:46] |   &lt;| |_| | |_) |  __/  _|\ V  V / (_| |</span><br><span class="line">INFO[02:10:46] |_|\_\\__,_|_.__/ \___|_|   \_/\_/ \__,_|</span><br><span class="line">INFO[02:10:46]</span><br><span class="line">INFO[02:10:46] Version 1.18.1</span><br><span class="line">INFO[02:10:46] https://github.com/txn2/kubefwd</span><br><span class="line">INFO[02:10:46]</span><br><span class="line">INFO[02:10:46] Press [Ctrl-C] to stop forwarding.</span><br><span class="line">INFO[02:10:46] &#x27;cat /etc/hosts&#x27; to see all host entries.</span><br><span class="line">INFO[02:10:46] Loaded hosts file /etc/hosts</span><br><span class="line">INFO[02:10:46] HostFile management: Backing up your original hosts file /etc/hosts to /root/hosts.original</span><br><span class="line">INFO[02:10:46] Successfully connected context: kubernetes-admin@kubernetes</span><br><span class="line">INFO[02:10:46] Port-Forward: 127.1.27.1 the-project:80 to pod the-project-c44fd599c-shbdg:80</span><br><span class="line">INFO[02:10:46] Port-Forward: 127.1.27.1 the-project:443 to pod the-project-c44fd599c-shbdg:443</span><br></pre></td></tr></table></figure>
+
+<p>Execute a curl call to the service sin your Kubernetes cluster:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> the-project curl -s the-project:80</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> the-project curl -s the-project:443</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Help"><a href="#Help" class="headerlink" title="Help"></a>Help</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubefwd svc --<span class="built_in">help</span></span></span><br><span class="line"></span><br><span class="line">INFO[20:48:38]  _          _           __             _</span><br><span class="line">INFO[20:48:38] | | ___   _| |__   ___ / _|_      ____| |</span><br><span class="line">INFO[20:48:38] | |/ / | | | &#x27;_ \ / _ \ |_\ \ /\ / / _  |</span><br><span class="line">INFO[20:48:38] |   &lt;| |_| | |_) |  __/  _|\ V  V / (_| |</span><br><span class="line">INFO[20:48:38] |_|\_\\__,_|_.__/ \___|_|   \_/\_/ \__,_|</span><br><span class="line">INFO[20:48:38]</span><br><span class="line">INFO[20:48:38] Version 1.11.0</span><br><span class="line">INFO[20:48:38] https://github.com/txn2/kubefwd</span><br><span class="line">INFO[20:48:38]</span><br><span class="line">Forward multiple Kubernetes services from one or more namespaces. Filter services with selector.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line">  kubefwd services [flags]</span><br><span class="line"></span><br><span class="line">Aliases:</span><br><span class="line">  services, svcs, svc</span><br><span class="line"></span><br><span class="line">Examples:</span><br><span class="line">  kubefwd svc -n the-project</span><br><span class="line">  kubefwd svc -n the-project -l app=wx,component=api</span><br><span class="line">  kubefwd svc -n default -n the-project</span><br><span class="line">  kubefwd svc -n default -d internal.example.com</span><br><span class="line">  kubefwd svc -n the-project -x prod-cluster</span><br><span class="line">  kubefwd svc -n the-project -m 80:8080 -m 443:1443</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flags:</span><br><span class="line">  -x, --context strings     specify a context to override the current context</span><br><span class="line">  -d, --domain string       Append a pseudo domain name to generated host names.</span><br><span class="line">      --exitonfailure       Exit(1) on failure. Useful for forcing a container restart.</span><br><span class="line">  -h, --help                help for services</span><br><span class="line">  -c, --kubeconfig string   absolute path to a kubectl config file</span><br><span class="line">  -n, --namespace strings   Specify a namespace. Specify multiple namespaces by duplicating this argument.</span><br><span class="line">  -l, --selector string     Selector (label query) to filter on; supports &#x27;=&#x27;, &#x27;==&#x27;, &#x27;!=&#x27; (e.g. -l key1=value1,key2=value2) and &#x27;in&#x27; (e.g. -l &quot;app in (value1, value2)&quot;).</span><br><span class="line">  -m, --mapping strings     Specify a port mapping. Specify multiple mapping by duplicating this argument.</span><br><span class="line">  -v, --verbose             Verbose output.</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://imti.co/kubernetes-port-forwarding/">Kubernetes Port Forwarding for Local Development - IMTI - Craig Johnston - https://imti.co/kubernetes-port-forwarding/</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://github.com/txn2/kubefwd">GitHub - txn2/kubefwd: Bulk port forwarding Kubernetes services for local development. - https://github.com/txn2/kubefwd</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward">Kubectl Reference Docs - https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://www.telepresence.io/">Home - Telepresence - https://www.telepresence.io/</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="https://erkanerol.github.io/post/debugging-k8s-services/">Debugging k8s services: 3 tools for 3 scenarios · Erkan Erol - https://erkanerol.github.io/post/debugging-k8s-services/</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/03/Kubernetes-K8S/A-few-ways-to-download-images-from-k8s-gcr-io/" rel="bookmark">[Kubernetes (K8S)] A few ways to download images from k8s.gcr.io</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/03/Kubernetes-K8S/Delete-the-terminating-Namespace-in-Kubernetes-K8S/" rel="bookmark">[Kubernetes (K8S)] Delete the terminating Namespace in Kubernetes (K8S)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/04/Kubernetes-K8S/Lens-THE-KUBERNETES-IDE-FOR-MONITORING/" rel="bookmark">[Kubernetes (K8S)] Lens: THE KUBERNETES IDE FOR MONITORING</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/31/Kubernetes-K8S/Access-Service-with-80-or-443-port-outside-macOS-Docker-Desktop-Kubernetes-K8S/" rel="bookmark">[Kubernetes (K8S)] Access Service or Pod with 80 or 443 port outside macOS Docker-Desktop Kubernetes (K8S)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/05/01/Kubernetes-K8S/FAQs-cert-manager/" rel="bookmark">[Kubernetes (K8S)] FAQs - cert-manager</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2020/10/03/Kubernetes-K8S/Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development/" title="[Kubernetes (K8S)] Use kubefwd to forward Kubernetes (K8S) ports for Local Development">https://cloudolife.com/2020/10/03/Kubernetes-K8S/Use-kubefwd-to-forward-Kubernetes-K8S-ports-for-Local-Development/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Kubernetes-K8S/" rel="tag"># Kubernetes (K8S)</a>
+              <a href="/tags/Cloud-Native/" rel="tag"># Cloud Native</a>
+              <a href="/tags/Cloud-Computing/" rel="tag"># Cloud Computing</a>
+              <a href="/tags/kubefwd/" rel="tag"># kubefwd</a>
+              <a href="/tags/Port-Forward/" rel="tag"># Port Forward</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/03/Kubernetes-K8S/Helm/Helm-install-Rancher-Container-Management-Platform-for-Kubernetes-K8S/" rel="prev" title="[Kubernetes (K8S)] Helm install Rancher Container Management Platform for Kubernetes (K8S)">
+                  <i class="fa fa-chevron-left"></i> [Kubernetes (K8S)] Helm install Rancher Container Management Platform for Kubernetes (K8S)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/10/03/Kubernetes-K8S/Delete-the-terminating-Namespace-in-Kubernetes-K8S/" rel="next" title="[Kubernetes (K8S)] Delete the terminating Namespace in Kubernetes (K8S)">
+                  [Kubernetes (K8S)] Delete the terminating Namespace in Kubernetes (K8S) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

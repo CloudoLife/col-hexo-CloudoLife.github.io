@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="ActiveRecord::StoreActiveRecord::Store gives you a thin wrapper around serialize for the purpose of storing hashes in a single column. It’s like a simple key&#x2F;value store baked into your record when yo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Ruby on Rails (RoR)] Use ActiveRecord::Store to store hashes in a single column">
+<meta property="og:url" content="https://cloudolife.com/2021/01/02/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-ActiveRecord-Store-to-store-hashes-in-a-single-column/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="ActiveRecord::StoreActiveRecord::Store gives you a thin wrapper around serialize for the purpose of storing hashes in a single column. It’s like a simple key&#x2F;value store baked into your record when yo">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-02T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.104Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Rails &#x2F; Ruby on Rails (RoR)">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Hash">
+<meta property="article:tag" content="ActiveRecord::Store">
+<meta property="article:tag" content="store">
+<meta property="article:tag" content="store_accessor">
+<meta property="article:tag" content="Database Table Column">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/01/02/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-ActiveRecord-Store-to-store-hashes-in-a-single-column/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2021&#x2F;01&#x2F;02&#x2F;Programming-Language&#x2F;Ruby&#x2F;Ruby-on-Rails-RoR&#x2F;Use-ActiveRecord-Store-to-store-hashes-in-a-single-column&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;01&#x2F;02&#x2F;Programming-Language&#x2F;Ruby&#x2F;Ruby-on-Rails-RoR&#x2F;Use-ActiveRecord-Store-to-store-hashes-in-a-single-column&#x2F;&quot;,&quot;title&quot;:&quot;[Ruby on Rails (RoR)] Use ActiveRecord::Store to store hashes in a single column&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[Ruby on Rails (RoR)] Use ActiveRecord::Store to store hashes in a single column | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ActiveRecord-Store"><span class="nav-number">1.</span> <span class="nav-text">ActiveRecord::Store</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Migration"><span class="nav-number">1.1.</span> <span class="nav-text">Migration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Database-Backen"><span class="nav-number">1.3.</span> <span class="nav-text">Database Backen</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overwriting-default-accessors"><span class="nav-number">1.3.1.</span> <span class="nav-text">Overwriting default accessors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/01/02/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-ActiveRecord-Store-to-store-hashes-in-a-single-column/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Ruby on Rails (RoR)] Use ActiveRecord::Store to store hashes in a single column
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-02 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-02T00:00:00+00:00">2021-01-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Rails-Ruby-on-Rails-RoR/" itemprop="url" rel="index"><span itemprop="name">Rails / Ruby on Rails (RoR)</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/01/02/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-ActiveRecord-Store-to-store-hashes-in-a-single-column/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/01/02/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-ActiveRecord-Store-to-store-hashes-in-a-single-column/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>4.2k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="ActiveRecord-Store"><a href="#ActiveRecord-Store" class="headerlink" title="ActiveRecord::Store"></a>ActiveRecord::Store</h1><p>ActiveRecord::Store gives you a thin wrapper around serialize for the purpose of storing hashes in a single column. It’s like a simple key/value store baked into your record when you don’t care about being able to query that store outside the context of a single record.</p>
+<span id="more"></span>
+
+<p>You can then declare accessors to this store that are then accessible just like any other attribute of the model. This is very helpful for easily exposing store keys to a form or elsewhere that’s already built around just accessing attributes on the model.</p>
+<p>Every accessor comes with dirty tracking methods (<code>key_changed?</code>, <code>key_was</code> and <code>key_change</code>) and methods to access the changes made during the last save (<code>saved_change_to_key?</code>, <code>saved_change_to_key</code> and <code>key_before_last_save</code>).</p>
+<hr>
+<p>NOTE: There is no key_will_change! method for accessors, use store_will_change! instead.</p>
+<hr>
+<p>Make sure that you declare the database column used for the serialized store as a text, so there’s plenty of room.</p>
+<p>You can set custom coder to encode/decode your serialized attributes to/from different formats. JSON, YAML, Marshal are supported out of the box. Generally it can be any wrapper that provides load and dump.</p>
+<hr>
+<p>NOTE: If you are using structured database data types (e.g. PostgreSQL hstore/json, or MySQL 5.7+ json) there is no need for the serialization provided by .store. Simply use .store_accessor instead to generate the accessor methods. Be aware that these columns use a string keyed hash and do not allow access using a symbol.</p>
+<hr>
+<hr>
+<p>NOTE: The default validations with the exception of uniqueness will work. For example, if you want to check for uniqueness with hstore you will need to use a custom validation to handle it.</p>
+<hr>
+<h2 id="Migration"><a href="#Migration" class="headerlink" title="Migration"></a>Migration</h2><p>First, craate a migration:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> &lt; ActiveRecord::Migration[6.0]</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">    create_table <span class="symbol">:users</span> <span class="keyword">do</span> <span class="params">|t|</span></span><br><span class="line">      t.text <span class="symbol">:settings</span></span><br><span class="line">      t.text <span class="symbol">:parent</span></span><br><span class="line">      t.text <span class="symbol">:spouse</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>Examples:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> &lt; ActiveRecord::Base</span></span><br><span class="line">  store <span class="symbol">:settings</span>, <span class="symbol">accessors:</span> [ <span class="symbol">:color</span>, <span class="symbol">:homepage</span> ], <span class="symbol">coder:</span> JSON</span><br><span class="line">  store <span class="symbol">:parent</span>, <span class="symbol">accessors:</span> [ <span class="symbol">:name</span> ], <span class="symbol">coder:</span> JSON, <span class="symbol">prefix:</span> <span class="literal">true</span></span><br><span class="line">  store <span class="symbol">:spouse</span>, <span class="symbol">accessors:</span> [ <span class="symbol">:name</span> ], <span class="symbol">coder:</span> JSON, <span class="symbol">prefix:</span> <span class="symbol">:partner</span></span><br><span class="line">  store <span class="symbol">:settings</span>, <span class="symbol">accessors:</span> [ <span class="symbol">:two_factor_auth</span> ], <span class="symbol">suffix:</span> <span class="literal">true</span></span><br><span class="line">  store <span class="symbol">:settings</span>, <span class="symbol">accessors:</span> [ <span class="symbol">:login_retry</span> ], <span class="symbol">suffix:</span> <span class="symbol">:config</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">u = User.new(<span class="symbol">color:</span> <span class="string">&#x27;black&#x27;</span>, <span class="symbol">homepage:</span> <span class="string">&#x27;37signals.com&#x27;</span>, <span class="symbol">parent_name:</span> <span class="string">&#x27;Mary&#x27;</span>, <span class="symbol">partner_name:</span> <span class="string">&#x27;Lily&#x27;</span>)</span><br><span class="line">u.color                          <span class="comment"># Accessor stored attribute</span></span><br><span class="line">u.parent_name                    <span class="comment"># Accessor stored attribute with prefix</span></span><br><span class="line">u.partner_name                   <span class="comment"># Accessor stored attribute with custom prefix</span></span><br><span class="line">u.two_factor_auth_settings       <span class="comment"># Accessor stored attribute with suffix</span></span><br><span class="line">u.login_retry_config             <span class="comment"># Accessor stored attribute with custom suffix</span></span><br><span class="line">u.settings[<span class="symbol">:country</span>] = <span class="string">&#x27;Denmark&#x27;</span> <span class="comment"># Any attribute, even if not specified with an accessor</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># There is no difference between strings and symbols for accessing custom attributes</span></span><br><span class="line">u.settings[<span class="symbol">:country</span>]  <span class="comment"># =&gt; &#x27;Denmark&#x27;</span></span><br><span class="line">u.settings[<span class="string">&#x27;country&#x27;</span>] <span class="comment"># =&gt; &#x27;Denmark&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dirty tracking</span></span><br><span class="line">u.color = <span class="string">&#x27;green&#x27;</span></span><br><span class="line">u.color_changed? <span class="comment"># =&gt; true</span></span><br><span class="line">u.color_was <span class="comment"># =&gt; &#x27;black&#x27;</span></span><br><span class="line">u.color_change <span class="comment"># =&gt; [&#x27;black&#x27;, &#x27;red&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Add additional accessors to an existing store through store_accessor</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperUser</span> &lt; User</span></span><br><span class="line">  store_accessor <span class="symbol">:settings</span>, <span class="symbol">:privileges</span>, <span class="symbol">:servants</span></span><br><span class="line">  store_accessor <span class="symbol">:parent</span>, <span class="symbol">:birthday</span>, <span class="symbol">prefix:</span> <span class="literal">true</span></span><br><span class="line">  store_accessor <span class="symbol">:settings</span>, <span class="symbol">:secret_question</span>, <span class="symbol">suffix:</span> <span class="symbol">:config</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>The stored attribute names can be retrieved using <code>.stored_attributes</code>.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User.stored_attributes[<span class="symbol">:settings</span>] <span class="comment"># [:color, :homepage, :two_factor_auth, :login_retry]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Database-Backen"><a href="#Database-Backen" class="headerlink" title="Database Backen"></a>Database Backen</h2><p>The above values will store into the <code>settings</code> and <code>parent</code> columns with JSON format.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id <span class="params">|                               settings                                |</span>  parent</span><br><span class="line">----+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------------------</span><br><span class="line">  <span class="number">1</span> <span class="params">| &quot;&#123;\&quot;color\&quot;:\&quot;black\&quot;,\&quot;homepage\&quot;:\&quot;37signals.com\&quot;&#125;&quot; |</span> <span class="string">&quot;&#123;\&quot;parent_name\&quot;:\&quot;Mary\&quot;,\&quot;partner_name\&quot;:\&quot;Lily\&quot;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Overwriting-default-accessors"><a href="#Overwriting-default-accessors" class="headerlink" title="Overwriting default accessors"></a>Overwriting default accessors</h3><p>All stored values are automatically available through accessors on the Active Record object, but sometimes you want to specialize this behavior. This can be done by overwriting the default accessors (using the same name as the attribute) and calling super to actually change things.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Song</span> &lt; ActiveRecord::Base</span></span><br><span class="line">  <span class="comment"># Uses a stored integer to hold the volume adjustment of the song</span></span><br><span class="line">  store <span class="symbol">:settings</span>, <span class="symbol">accessors:</span> [<span class="symbol">:volume_adjustment</span>]</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">volume_adjustment=</span><span class="params">(decibels)</span></span></span><br><span class="line">    <span class="keyword">super</span>(decibels.to_i)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">volume_adjustment</span></span></span><br><span class="line">    <span class="keyword">super</span>.to_i</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://api.rubyonrails.org/classes/ActiveRecord/Store.html">ActiveRecord::Store - https://api.rubyonrails.org/classes/ActiveRecord/Store.html</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/18/Programming-Language/Ruby/Installation/Install-Ruby-Version-Manager-RVM-and-try-out-ruby/" rel="bookmark">[Ruby on Rails (RoR)] Install Ruby Version Manager (RVM) and try out ruby</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/18/Programming-Language/Ruby/Installation/Use-RubyGems-mirror-to-speed-up-downloading-gems/" rel="bookmark">[Ruby on Rails (RoR)] Use RubyGems mirror to speed up downloading gems</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/18/Programming-Language/Ruby/Installation/Use-asdf-and-Ruby-plugin-to-install-multiple-Ruby-versions/" rel="bookmark">[Ruby on Rails (RoR)] Use asdf and Ruby plugin to install multiple Ruby versions</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/18/Programming-Language/Ruby/Installation/Use-brew-to-install-Ruby-versions-on-macOS-with-the-Homebrew-package-manager/" rel="bookmark">[Ruby on Rails (RoR)] Use brew to install Ruby on macOS with the Homebrew package manager</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Best-practices-about-Rails-Action-Controller-Overview/" rel="bookmark">[Ruby on Rails (RoR)] Best practices about Rails Action Controller Overview</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2021/01/02/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-ActiveRecord-Store-to-store-hashes-in-a-single-column/" title="[Ruby on Rails (RoR)] Use ActiveRecord::Store to store hashes in a single column">https://cloudolife.com/2021/01/02/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-ActiveRecord-Store-to-store-hashes-in-a-single-column/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Rails-Ruby-on-Rails-RoR/" rel="tag"># Rails / Ruby on Rails (RoR)</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Hash/" rel="tag"># Hash</a>
+              <a href="/tags/ActiveRecord-Store/" rel="tag"># ActiveRecord::Store</a>
+              <a href="/tags/store/" rel="tag"># store</a>
+              <a href="/tags/store-accessor/" rel="tag"># store_accessor</a>
+              <a href="/tags/Database-Table-Column/" rel="tag"># Database Table Column</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/01/Raspberry-Pi/Installing-Docker-and-Docker-Compose-on-Raspberry-Pi-OS/" rel="prev" title="[Raspberry Pi] Installing Docker and Docker Compose on Raspberry Pi OS">
+                  <i class="fa fa-chevron-left"></i> [Raspberry Pi] Installing Docker and Docker Compose on Raspberry Pi OS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/02/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-benchmark-gem-to-provides-methods-for-benchmarking-Ruby-code/" rel="next" title="[Awesome Ruby Gem] Use benchmark gem to provides methods for benchmarking Ruby code">
+                  [Awesome Ruby Gem] Use benchmark gem to provides methods for benchmarking Ruby code <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="SentrySentry is a service that helps you monitor and fix crashes in realtime. The server is in Python, but it contains a full API for sending events from any language, in any application. This article">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Kubernetes (K8S)] Helm install Sentry 9.x to collect and aggregate crash reporting within Kubernetes (K8S)">
+<meta property="og:url" content="https://cloudolife.com/2021/01/23/Kubernetes-K8S/Helm/Helm-install-Sentry-9-x-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="SentrySentry is a service that helps you monitor and fix crashes in realtime. The server is in Python, but it contains a full API for sending events from any language, in any application. This article">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-23T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.092Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Kubernetes (K8S)">
+<meta property="article:tag" content="Cloud Native">
+<meta property="article:tag" content="Helm">
+<meta property="article:tag" content="Site Reliability Engineering (SRE)">
+<meta property="article:tag" content="Sentry">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/01/23/Kubernetes-K8S/Helm/Helm-install-Sentry-9-x-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2021&#x2F;01&#x2F;23&#x2F;Kubernetes-K8S&#x2F;Helm&#x2F;Helm-install-Sentry-9-x-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;01&#x2F;23&#x2F;Kubernetes-K8S&#x2F;Helm&#x2F;Helm-install-Sentry-9-x-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S&#x2F;&quot;,&quot;title&quot;:&quot;[Kubernetes (K8S)] Helm install Sentry 9.x to collect and aggregate crash reporting within Kubernetes (K8S)&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[Kubernetes (K8S)] Helm install Sentry 9.x to collect and aggregate crash reporting within Kubernetes (K8S) | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sentry"><span class="nav-number">1.</span> <span class="nav-text">Sentry</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Install"><span class="nav-number">1.2.</span> <span class="nav-text">How to Install</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Custom-values-yaml"><span class="nav-number">1.2.1.</span> <span class="nav-text">Custom .values.yaml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-UI"><span class="nav-number">1.3.</span> <span class="nav-text">Web UI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQS"><span class="nav-number">1.4.</span> <span class="nav-text">FAQS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#502-Bad-Gateway"><span class="nav-number">1.4.1.</span> <span class="nav-text">502 Bad Gateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update-PostgreSQL-database-password"><span class="nav-number">1.4.2.</span> <span class="nav-text">Update PostgreSQL database password</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/01/23/Kubernetes-K8S/Helm/Helm-install-Sentry-9-x-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Kubernetes (K8S)] Helm install Sentry 9.x to collect and aggregate crash reporting within Kubernetes (K8S)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-23 00:00:00" itemprop="dateCreated datePublished" datetime="2021-01-23T00:00:00+00:00">2021-01-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/" itemprop="url" rel="index"><span itemprop="name">Cloud Native</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Kubernetes-K8S/" itemprop="url" rel="index"><span itemprop="name">Kubernetes (K8S)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Kubernetes-K8S/Helm/" itemprop="url" rel="index"><span itemprop="name">Helm</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Kubernetes-K8S/Helm/Sentry/" itemprop="url" rel="index"><span itemprop="name">Sentry</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Kubernetes-K8S/Helm/Sentry/Site-Reliability-Engineering-SRE/" itemprop="url" rel="index"><span itemprop="name">Site Reliability Engineering (SRE)</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/01/23/Kubernetes-K8S/Helm/Helm-install-Sentry-9-x-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/01/23/Kubernetes-K8S/Helm/Helm-install-Sentry-9-x-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>6k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Sentry"><a href="#Sentry" class="headerlink" title="Sentry"></a>Sentry</h1><p>Sentry is a service that helps you monitor and fix crashes in realtime. The server is in Python, but it contains a full API for sending events from any language, in any application.</p>
+<p>This article is about how to use Helm to install Sentry 9.x on Kubernetes (K8S).</p>
+<span id="more"></span>
+
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://kubernetes.io/">Kubernetes (K8S)</a><br>  Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
+<p>  For more information about installing and using Kubernetes (K8s), see the <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/home/">Kubernetes (K8s) Docs</a>.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://helm.sh/">Helm</a><br>  Helm is the best way to find, share, and use software built for Kubernetes.</p>
+<p>  For more information about installing and using Helm, see the <a target="_blank" rel="noopener" href="https://helm.sh/docs/">Helm Docs</a>.</p>
+</li>
+</ul>
+<hr>
+<p>As of Nov 13, 2020, charts in this repo will no longer be updated. For more information, see the <a target="_blank" rel="noopener" href="https://helm.sh/blog/charts-repo-deprecation/">Helm Charts Deprecation and Archive Notice</a>, and <a target="_blank" rel="noopener" href="https://github.com/helm/charts#%EF%B8%8F-deprecation-and-archive-notice">Update</a>.</p>
+<hr>
+<p>You can use <a target="_blank" rel="noopener" href="http://mirror.azure.cn/kubernetes/charts/">Azure Helm mirror - http://mirror.azure.cn/kubernetes/charts/</a> to replace <a target="_blank" rel="noopener" href="https://kubernetes-charts.storage.googleapis.com/">https://kubernetes-charts.storage.googleapis.com</a></p>
+<h2 id="How-to-Install"><a href="#How-to-Install" class="headerlink" title="How to Install"></a>How to Install</h2><p>Helm install sentry into sentry namespace.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> crate namespace:</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl create namespace sentry</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Add the Stable Helm repository:</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> helm repo add stable http://mirror.azure.cn/kubernetes/charts/</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (Deprecation) $ helm repo add stable https://kubernetes-charts.storage.googleapis.com</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Update your <span class="built_in">local</span> Helm chart repository cache:</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> helm repo update</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> To install Helm chart:</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> helm install sentry stable/sentry -n sentry -f .values.yaml</span></span><br></pre></td></tr></table></figure>
+
+<p>See Helm release about sentry</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> helm list --namespace sentry</span></span><br><span class="line">NAME                       	NAMESPACE             	REVISION	UPDATED                                	STATUS  	CHART</span><br><span class="line">sentry                      	sentry           	1       	2021-01-23 11:19:51.65893 +0800 +0800  	deployed	sentry-v9.1.2                    	v4.4.3</span><br></pre></td></tr></table></figure>
+
+<p>See pods about sentry.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods -n sentry</span> </span><br><span class="line">NAME                                     READY   STATUS              RESTARTS   AGE</span><br><span class="line">sentry-cron-6c46dd9547-nzxbq      1/1     Running             0          36m</span><br><span class="line">sentry-metrics-5ccd67487f-59j64   1/1     Running             0          36m</span><br><span class="line">sentry-sentry-postgresql-0        1/1     Running             0          36m</span><br><span class="line">sentry-sentry-redis-master-0      1/1     Running             0          36m</span><br><span class="line">sentry-sentry-redis-slave-0       1/1     Running             0          36m</span><br><span class="line">sentry-sentry-redis-slave-1       1/1     Running             0          15m</span><br><span class="line">sentry-web-5864cddf47-mmql9       1/1     Pending             0          36m</span><br><span class="line">sentry-worker-cf5967658-7zfs7     1/1     Running             0          11m</span><br><span class="line">sentry-worker-cf5967658-bmq9d     1/1     Running             0          11m</span><br></pre></td></tr></table></figure>
+
+<h3 id="Custom-values-yaml"><a href="#Custom-values-yaml" class="headerlink" title="Custom .values.yaml"></a>Custom .values.yaml</h3><p>Remember to replace content within <code>&#123;&#123; &#125;&#125;</code> with your prefer value.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># charts/.Values.yaml at master · helm/charts</span></span><br><span class="line"><span class="comment"># https://github.com/helm/charts/blob/master/stable/sentry/.Values.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Admin user to create</span></span><br><span class="line"><span class="attr">user:</span></span><br><span class="line">  <span class="comment"># Indicated to create the admin user or not,</span></span><br><span class="line">  <span class="comment"># Default is true as the initial installation.</span></span><br><span class="line">  <span class="attr">create:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">email:</span> &#123;&#123; <span class="string">.Values.user.email</span> &#125;&#125;</span><br><span class="line">  <span class="attr">password:</span> &#123;&#123; <span class="string">.Values.user.password</span> &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Name of the service and what port to expose on the pod</span></span><br><span class="line"><span class="comment"># Don&#x27;t change these unless you know what you&#x27;re doing</span></span><br><span class="line"><span class="attr">service:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ClusterIP</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure the location of Sentry artifacts</span></span><br><span class="line"><span class="attr">filestore:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">filesystem:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">## Enable persistence using Persistent Volume Claims</span></span><br><span class="line">    <span class="comment">## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/</span></span><br><span class="line">    <span class="comment">##</span></span><br><span class="line">    <span class="attr">persistence:</span></span><br><span class="line">      <span class="comment"># enabled: true</span></span><br><span class="line">      <span class="comment"># database data Persistent Volume Storage Class</span></span><br><span class="line">      <span class="comment"># If defined, storageClassName: &lt;storageClass&gt;</span></span><br><span class="line">      <span class="comment"># If set to &quot;-&quot;, storageClassName: &quot;&quot;, which disables dynamic provisioning</span></span><br><span class="line">      <span class="comment"># If undefined (the default) or set to null, no storageClassName spec is</span></span><br><span class="line">      <span class="comment">#   set, choosing the default provisioner.  (gp2 on AWS, standard on</span></span><br><span class="line">      <span class="comment">#   GKE, AWS &amp; OpenStack)</span></span><br><span class="line">      <span class="comment">#</span></span><br><span class="line">      <span class="attr">storageClass:</span> &#123;&#123; <span class="string">.Values.filestore.filesystem.persistence.storageClass</span> &#125;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## Configure ingress resource that allow you to access the</span></span><br><span class="line"><span class="comment">## Sentry installation. Set up the URL</span></span><br><span class="line"><span class="comment">## ref: http://kubernetes.io/docs/user-guide/ingress/</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">ingress:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubernetes.io/ingress.class:</span> <span class="string">&quot;nginx&quot;</span></span><br><span class="line">    <span class="comment"># kubernetes.io/tls-acme: &quot;true&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">certmanager.k8s.io/acme-challenge-type:</span> <span class="string">http01</span></span><br><span class="line">    <span class="attr">certmanager.k8s.io/cluster-issuer:</span> &#123;&#123; <span class="string">.Values.clusterIssuer</span> &#125;&#125;</span><br><span class="line">    <span class="comment"># cert-manager.io/acme-challenge-type: dns01</span></span><br><span class="line">    <span class="comment"># cert-manager.io/cluster-issuer: cert-manager-webhook-dnspod-cluster-issuer</span></span><br><span class="line">  </span><br><span class="line">  <span class="attr">hostname:</span> &#123;&#123; <span class="string">.Values.ingress.hostname</span> &#125;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="attr">tls:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">secretName:</span> &#123;&#123; <span class="string">.Values.ingress.secretName</span> &#125;&#125;</span><br><span class="line">      <span class="attr">hosts:</span></span><br><span class="line">        <span class="bullet">-</span> &#123;&#123; <span class="string">.Values.ingress.hostname</span> &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="attr">postgresql:</span></span><br><span class="line">  <span class="attr">password:</span> &#123;&#123; <span class="string">.Values.postgresql.password</span> &#125;&#125;</span><br><span class="line">  <span class="attr">postgresqlPassword:</span> &#123;&#123; <span class="string">.Values.postgresql.password</span> &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="attr">redis:</span></span><br><span class="line">  <span class="attr">password:</span> &#123;&#123; <span class="string">.Values.redis.password</span> &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## Prometheus Exporter / Metrics</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="attr">metrics:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Web-UI"><a href="#Web-UI" class="headerlink" title="Web UI"></a>Web UI</h2><p>Then, you can visit <code>https://&#123;&#123; .Values.ingress.hostname &#125;&#125;</code> to access Sentry Web UI.</p>
+<h2 id="FAQS"><a href="#FAQS" class="headerlink" title="FAQS"></a>FAQS</h2><h3 id="502-Bad-Gateway"><a href="#502-Bad-Gateway" class="headerlink" title="502 Bad Gateway"></a>502 Bad Gateway</h3><p>Sentry may fail to initialize or upgrade database since it will take too long. You can do it yoursef.</p>
+<p>First, enter into Pod sentry-web bash.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl <span class="built_in">exec</span> -n sentry `kubectl get pods -n sentry | grep sentry-web | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>` -it -- bash</span></span><br></pre></td></tr></table></figure>
+
+<p>Then, run <code>sentry upgrade</code> within container to run all migrations and create an admin account.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sentry upgrade</span></span><br></pre></td></tr></table></figure>
+
+<p>Finally, you can visit Web UI without any error.</p>
+<h3 id="Update-PostgreSQL-database-password"><a href="#Update-PostgreSQL-database-password" class="headerlink" title="Update PostgreSQL database password"></a>Update PostgreSQL database password</h3><p>Sentry can’t update PostgreSQL database password automatic when you change password. You can do it yoursef too.</p>
+<p>First, enter into Pod sentry-postgresql bash.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl <span class="built_in">exec</span> -n sentry `kubectl get pods -n sentry | grep sentry-postgresql | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>` -it -- bash</span></span><br></pre></td></tr></table></figure>
+
+<p>Then, change database password within container.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Allow postgres login without password from <span class="built_in">local</span>.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sed -ibak <span class="string">&#x27;s/^\([^#]*\)md5/\1trust/g&#x27;</span> /opt/bitnami/postgresql/conf/pg_hba.conf</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Relaod PostgreSQL configuration.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pg_ctl reload</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Show password</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$&#123;POSTGRES_PASSWORD&#125;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modify password.</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> Remember to replace &#123;&#123; POSTGRES_PASSWORD &#125;&#125; with your prefer password.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> psql -U postgres</span></span><br><span class="line">postgres=# alter user postgres with password &quot;&#123;&#123; POSTGRES_PASSWORD &#125;&#125;&quot;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://github.com/helm/charts/tree/master/stable/sentry">charts/stable/sentry at master · helm/charts - https://github.com/helm/charts/tree/master/stable/sentry</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="http://mirror.azure.cn/kubernetes/charts/">Azure Helm mirror - http://mirror.azure.cn/kubernetes/charts/</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://github.com/helm/charts/blob/master/stable/sentry/.Values.yaml">charts/.Values.yaml at master · helm/charts - https://github.com/helm/charts/blob/master/stable/sentry/.Values.yaml</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://sentry.io/welcome/">Sentry | Error Tracking Software — JavaScript, Python, PHP, Ruby, more - https://sentry.io/welcome/</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="https://github.com/getsentry/sentry">getsentry/sentry: Sentry is cross-platform application monitoring, with a focus on error reporting. - https://github.com/getsentry/sentry</a></p>
+<p>[6] <a target="_blank" rel="noopener" href="https://helm.sh/">Helm - https://helm.sh/</a></p>
+<p>[7] <a target="_blank" rel="noopener" href="https://kubernetes.io/">Kubernetes - https://kubernetes.io/</a></p>
+<p>[8] <a target="_blank" rel="noopener" href="https://docs.bitnami.com/aws/infrastructure/postgresql/administration/change-reset-password/">Modify the default administrator password - https://docs.bitnami.com/aws/infrastructure/postgresql/administration/change-reset-password/</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/01/16/Kubernetes-K8S/Helm/Helm-install-PostHog-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S/" rel="bookmark">[Kubernetes (K8S)] Helm install PostHog to provide product analytics stack within Kubernetes (K8S)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/05/01/Kubernetes-K8S/FAQs-cert-manager/" rel="bookmark">[Kubernetes (K8S)] FAQs - cert-manager</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/09/12/Kubernetes-K8S/Helm/Helm-install-Alidns-Webhook-for-Cert-Manager-within-Kubernetes-K8S/" rel="bookmark">[Kubernetes (K8S)] Helm install Alidns Webhook for cert-manager within Kubernetes (K8S)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/10/31/Kubernetes-K8S/Helm/Helm-install-AppCode-Kubed-to-sync-ConfigMaps-Secrets-across-Kubernetes-K8S-namespaces-or-Clusters/" rel="bookmark">[Kubernetes (K8S)] Helm install AppCode Kubed to sync ConfigMaps/Secrets across Kubernetes (K8S) namespaces or Clusters</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/09/12/Kubernetes-K8S/Helm/Helm-install-Cert-Manager-within-Kubernetes-K8S/" rel="bookmark">[Kubernetes (K8S)] Helm install cert-manager within Kubernetes (K8S)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2021/01/23/Kubernetes-K8S/Helm/Helm-install-Sentry-9-x-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S/" title="[Kubernetes (K8S)] Helm install Sentry 9.x to collect and aggregate crash reporting within Kubernetes (K8S)">https://cloudolife.com/2021/01/23/Kubernetes-K8S/Helm/Helm-install-Sentry-9-x-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Kubernetes-K8S/" rel="tag"># Kubernetes (K8S)</a>
+              <a href="/tags/Cloud-Native/" rel="tag"># Cloud Native</a>
+              <a href="/tags/Helm/" rel="tag"># Helm</a>
+              <a href="/tags/Site-Reliability-Engineering-SRE/" rel="tag"># Site Reliability Engineering (SRE)</a>
+              <a href="/tags/Sentry/" rel="tag"># Sentry</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/16/Kubernetes-K8S/Helm/Helm-install-PostHog-to-collect-and-aggregate-crash-reporting-within-Kubernetes-K8S/" rel="prev" title="[Kubernetes (K8S)] Helm install PostHog to provide product analytics stack within Kubernetes (K8S)">
+                  <i class="fa fa-chevron-left"></i> [Kubernetes (K8S)] Helm install PostHog to provide product analytics stack within Kubernetes (K8S)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/23/Instant-Messaging-IM/Rocket-Chat/Use-Rocket-Chat-Incoming-WebHook-to-receive-message-from-external-thirdparty-system/" rel="next" title="[Rocket.Chat] Use Rocket.Chat Incoming WebHook to receive message from external thirdparty system">
+                  [Rocket.Chat] Use Rocket.Chat Incoming WebHook to receive message from external thirdparty system <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

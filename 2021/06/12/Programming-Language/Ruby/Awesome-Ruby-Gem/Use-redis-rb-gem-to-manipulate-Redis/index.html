@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="redis-rbA Ruby client that tries to match Redis’ API one-to-one, while still providing an idiomatic interface.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Ruby Gem] Use redis-rb gem to manipulate Redis">
+<meta property="og:url" content="https://cloudolife.com/2021/06/12/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-rb-gem-to-manipulate-Redis/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="redis-rbA Ruby client that tries to match Redis’ API one-to-one, while still providing an idiomatic interface.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-12T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.100Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Awesome Ruby Gem">
+<meta property="article:tag" content="redis-rb">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/06/12/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-rb-gem-to-manipulate-Redis/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2021&#x2F;06&#x2F;12&#x2F;Programming-Language&#x2F;Ruby&#x2F;Awesome-Ruby-Gem&#x2F;Use-redis-rb-gem-to-manipulate-Redis&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;12&#x2F;Programming-Language&#x2F;Ruby&#x2F;Awesome-Ruby-Gem&#x2F;Use-redis-rb-gem-to-manipulate-Redis&#x2F;&quot;,&quot;title&quot;:&quot;[Awesome Ruby Gem] Use redis-rb gem to manipulate Redis&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[Awesome Ruby Gem] Use redis-rb gem to manipulate Redis | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#redis-rb"><span class="nav-number">1.</span> <span class="nav-text">redis-rb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages"><span class="nav-number">1.2.</span> <span class="nav-text">Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentinel-support"><span class="nav-number">1.2.1.</span> <span class="nav-text">Sentinel support</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cluster-support"><span class="nav-number">1.2.2.</span> <span class="nav-text">Cluster support</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Storing-objects"><span class="nav-number">1.2.3.</span> <span class="nav-text">Storing objects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pipelining"><span class="nav-number">1.2.4.</span> <span class="nav-text">Pipelining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Executing-commands-atomically"><span class="nav-number">1.2.5.</span> <span class="nav-text">Executing commands atomically</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Futures"><span class="nav-number">1.2.6.</span> <span class="nav-text">Futures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Handling"><span class="nav-number">1.2.7.</span> <span class="nav-text">Error Handling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Timeouts"><span class="nav-number">1.2.8.</span> <span class="nav-text">Timeouts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reconnections"><span class="nav-number">1.2.9.</span> <span class="nav-text">Reconnections</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL-TLS-Support"><span class="nav-number">1.2.10.</span> <span class="nav-text">SSL&#x2F;TLS Support</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alternate-drivers"><span class="nav-number">1.2.11.</span> <span class="nav-text">Alternate drivers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hiredis"><span class="nav-number">1.2.12.</span> <span class="nav-text">hiredis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#synchrony"><span class="nav-number">1.2.12.1.</span> <span class="nav-text">synchrony</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/06/12/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-rb-gem-to-manipulate-Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Ruby Gem] Use redis-rb gem to manipulate Redis
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+00:00">2021-06-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Awesome-Ruby-Gem/" itemprop="url" rel="index"><span itemprop="name">Awesome Ruby Gem</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/06/12/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-rb-gem-to-manipulate-Redis/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/06/12/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-rb-gem-to-manipulate-Redis/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>10k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>9 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="redis-rb"><a href="#redis-rb" class="headerlink" title="redis-rb"></a>redis-rb</h1><p>A Ruby client that tries to match Redis’ API one-to-one, while still providing an idiomatic interface.</p>
+<span id="more"></span>
+
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>You can install it as a gem:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gem install redis</span></span><br></pre></td></tr></table></figure>
+
+<p>or add it into a Gemfile (Bundler):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GitHub - redis/redis-rb: A Ruby client library for Redis</span></span><br><span class="line"><span class="comment"># https://github.com/redis/redis-rb</span></span><br><span class="line">gem <span class="string">&#x27;redis&#x27;</span>, <span class="string">&#x27;4.3.1&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>Then, run <code>bundle install</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> bundle install</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Usages"><a href="#Usages" class="headerlink" title="Usages"></a>Usages</h2><p>You can connect to Redis by instantiating the Redis class:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&quot;redis&quot;</span></span><br><span class="line"></span><br><span class="line">redis = Redis.new</span><br></pre></td></tr></table></figure>
+
+<p>This assumes Redis was started with a default configuration, and is listening on localhost, port 6379. If you need to connect to a remote server or a different port, try:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(<span class="symbol">host:</span> <span class="string">&quot;10.0.1.1&quot;</span>, <span class="symbol">port:</span> <span class="number">6380</span>, <span class="symbol">db:</span> <span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+
+<p>You can also specify connection options as a redis:// URL:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(<span class="symbol">url:</span> <span class="string">&quot;redis://:p4ssw0rd@10.0.1.1:6380/15&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>The client expects passwords with special chracters to be URL-encoded (i.e. CGI.escape(password)).</p>
+<p>By default, the client will try to read the REDIS_URL environment variable and use that as URL to connect to. The above statement is therefore equivalent to setting this environment variable and calling Redis.new without arguments.</p>
+<p>To connect to Redis listening on a Unix socket, try:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(<span class="symbol">path:</span> <span class="string">&quot;/tmp/redis.sock&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>To connect to a password protected Redis instance, use:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(<span class="symbol">password:</span> <span class="string">&quot;mysecret&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>To connect a Redis instance using ACL, use:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(<span class="symbol">username:</span> <span class="string">&#x27;myname&#x27;</span>, <span class="symbol">password:</span> <span class="string">&#x27;mysecret&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>The Redis class exports methods that are named identical to the commands they execute. The arguments these methods accept are often identical to the arguments specified on the Redis website. For instance, the <code>SET</code> and <code>GET</code> commands can be called like this:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis.set(<span class="string">&quot;mykey&quot;</span>, <span class="string">&quot;hello world&quot;</span>)</span><br><span class="line"><span class="comment"># =&gt; &quot;OK&quot;</span></span><br><span class="line"></span><br><span class="line">redis.get(<span class="string">&quot;mykey&quot;</span>)</span><br><span class="line"><span class="comment"># =&gt; &quot;hello world&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>All commands, their arguments, and return values are documented and available on <a target="_blank" rel="noopener" href="https://www.rubydoc.info/gems/redis">File: README — Documentation for redis (4.2.5) - https://www.rubydoc.info/gems/redis</a>.</p>
+<h3 id="Sentinel-support"><a href="#Sentinel-support" class="headerlink" title="Sentinel support"></a>Sentinel support</h3><p>The client is able to perform automatic failover by using Redis Sentinel. Make sure to run Redis 2.8+ if you want to use this feature.</p>
+<p>To connect using Sentinel, use:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SENTINELS = [&#123; <span class="symbol">host:</span> <span class="string">&quot;127.0.0.1&quot;</span>, <span class="symbol">port:</span> <span class="number">26380</span> &#125;,</span><br><span class="line">             &#123; <span class="symbol">host:</span> <span class="string">&quot;127.0.0.1&quot;</span>, <span class="symbol">port:</span> <span class="number">26381</span> &#125;]</span><br><span class="line"></span><br><span class="line">redis = Redis.new(<span class="symbol">url:</span> <span class="string">&quot;redis://mymaster&quot;</span>, <span class="symbol">sentinels:</span> SENTINELS, <span class="symbol">role:</span> <span class="symbol">:master</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>The master name identifies a group of Redis instances composed of a master and one or more slaves (mymaster in the example).</p>
+</li>
+<li><p>It is possible to optionally provide a role. The allowed roles are master and slave. When the role is slave, the client will try to connect to a random slave of the specified master. If a role is not specified, the client will connect to the master.</p>
+</li>
+<li><p>When using the Sentinel support you need to specify a list of sentinels to connect to. The list does not need to enumerate all your Sentinel instances, but a few so that if one is down the client will try the next one. The client is able to remember the last Sentinel that was able to reply correctly and will use it for the next requests.</p>
+</li>
+</ul>
+<p>If you want to authenticate Sentinel itself, you must specify the password option per instance.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SENTINELS = [&#123; <span class="symbol">host:</span> <span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="symbol">port:</span> <span class="number">26380</span>, <span class="symbol">password:</span> <span class="string">&#x27;mysecret&#x27;</span> &#125;,</span><br><span class="line">             &#123; <span class="symbol">host:</span> <span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="symbol">port:</span> <span class="number">26381</span>, <span class="symbol">password:</span> <span class="string">&#x27;mysecret&#x27;</span> &#125;]</span><br><span class="line"></span><br><span class="line">redis = Redis.new(<span class="symbol">host:</span> <span class="string">&#x27;mymaster&#x27;</span>, <span class="symbol">sentinels:</span> SENTINELS, <span class="symbol">role:</span> <span class="symbol">:master</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Cluster-support"><a href="#Cluster-support" class="headerlink" title="Cluster support"></a>Cluster support</h3><p>redis-rb supports clustering.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Nodes can be passed to the client as an array of connection URLs.</span></span><br><span class="line">nodes = (<span class="number">7000</span>..<span class="number">7005</span>).map &#123; <span class="params">|port|</span> <span class="string">&quot;redis://127.0.0.1:<span class="subst">#&#123;port&#125;</span>&quot;</span> &#125;</span><br><span class="line">redis = Redis.new(<span class="symbol">cluster:</span> nodes)</span><br><span class="line"></span><br><span class="line"><span class="comment"># You can also specify the options as a Hash. The options are the same as for a single server connection.</span></span><br><span class="line">(<span class="number">7000</span>..<span class="number">7005</span>).map &#123; <span class="params">|port|</span> &#123; <span class="symbol">host:</span> <span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="symbol">port:</span> port &#125; &#125;</span><br></pre></td></tr></table></figure>
+<p>You can also specify only a subset of the nodes, and the client will discover the missing ones using the CLUSTER NODES command.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Redis.new(<span class="symbol">cluster:</span> <span class="string">%w[redis://127.0.0.1:7000]</span>)</span><br></pre></td></tr></table></figure>
+
+<p>If you want the connection to be able to read from any replica, you must pass the replica: true. Note that this connection won’t be usable to write keys.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Redis.new(<span class="symbol">cluster:</span> nodes, <span class="symbol">replica:</span> <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<p>The calling code is responsible for avoiding cross slot commands.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(<span class="symbol">cluster:</span> <span class="string">%w[redis://127.0.0.1:7000]</span>)</span><br><span class="line"></span><br><span class="line">redis.mget(<span class="string">&#x27;key1&#x27;</span>, <span class="string">&#x27;key2&#x27;</span>)</span><br><span class="line"><span class="comment">#=&gt; Redis::CommandError (CROSSSLOT Keys in request don&#x27;t hash to the same slot)</span></span><br><span class="line"></span><br><span class="line">redis.mget(<span class="string">&#x27;&#123;key&#125;1&#x27;</span>, <span class="string">&#x27;&#123;key&#125;2&#x27;</span>)</span><br><span class="line"><span class="comment">#=&gt; [nil, nil]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>The client automatically reconnects after a failover occurred, but the caller is responsible for handling errors while it is happening.</p>
+</li>
+<li><p>The client support permanent node failures, and will reroute requests to promoted slaves.</p>
+</li>
+<li><p>The client supports MOVED and ASK redirections transparently.</p>
+</li>
+</ul>
+<h3 id="Storing-objects"><a href="#Storing-objects" class="headerlink" title="Storing objects"></a>Storing objects</h3><p>Redis “string” types can be used to store serialized Ruby objects, for example with JSON:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&quot;json&quot;</span></span><br><span class="line"></span><br><span class="line">redis.set <span class="string">&quot;foo&quot;</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].to_json</span><br><span class="line"><span class="comment"># =&gt; OK</span></span><br><span class="line"></span><br><span class="line">JSON.parse(redis.get(<span class="string">&quot;foo&quot;</span>))</span><br><span class="line"><span class="comment"># =&gt; [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Pipelining"><a href="#Pipelining" class="headerlink" title="Pipelining"></a>Pipelining</h3><p>When multiple commands are executed sequentially, but are not dependent, the calls can be pipelined. This means that the client doesn’t wait for reply of the first command before sending the next command. The advantage is that multiple commands are sent at once, resulting in faster overall execution.</p>
+<p>The client can be instructed to pipeline commands by using the #pipelined method. After the block is executed, the client sends all commands to Redis and gathers their replies. These replies are returned by the #pipelined method.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis.pipelined <span class="keyword">do</span></span><br><span class="line">  redis.set <span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span></span><br><span class="line">  redis.incr <span class="string">&quot;baz&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment"># =&gt; [&quot;OK&quot;, 1]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Executing-commands-atomically"><a href="#Executing-commands-atomically" class="headerlink" title="Executing commands atomically"></a>Executing commands atomically</h3><p>You can use MULTI/EXEC to run a number of commands in an atomic fashion. This is similar to executing a pipeline, but the commands are preceded by a call to <code>MULTI</code>, and followed by a call to EXEC. Like the regular pipeline, the replies to the commands are returned by the <code>#multi</code> method.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis.multi <span class="keyword">do</span></span><br><span class="line">  redis.set <span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span></span><br><span class="line">  redis.incr <span class="string">&quot;baz&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment"># =&gt; [&quot;OK&quot;, 1]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Futures"><a href="#Futures" class="headerlink" title="Futures"></a>Futures</h3><p>Replies to commands in a pipeline can be accessed via the futures they emit (since redis-rb 3.0). All calls inside a pipeline block return a Future object, which responds to the #value method. When the pipeline has successfully executed, all futures are assigned their respective replies and can be used.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">redis.pipelined <span class="keyword">do</span></span><br><span class="line">  <span class="variable">@set</span> = redis.set <span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span></span><br><span class="line">  <span class="variable">@incr</span> = redis.incr <span class="string">&quot;baz&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="variable">@set</span>.value</span><br><span class="line"><span class="comment"># =&gt; &quot;OK&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">@incr</span>.value</span><br><span class="line"><span class="comment"># =&gt; 1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h3><p>In general, if something goes wrong you’ll get an exception. For example, if it can’t connect to the server a Redis::CannotConnectError error will be raised.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">begin</span></span><br><span class="line">  redis.ping</span><br><span class="line"><span class="keyword">rescue</span> StandardError =&gt; e</span><br><span class="line">  e.inspect</span><br><span class="line"><span class="comment"># =&gt; #&lt;Redis::CannotConnectError: Timed out connecting to Redis on 10.0.1.1:6380&gt;</span></span><br><span class="line"></span><br><span class="line">  e.message</span><br><span class="line"><span class="comment"># =&gt; Timed out connecting to Redis on 10.0.1.1:6380</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>See lib/redis/errors.rb for information about what exceptions are possible.</p>
+<h3 id="Timeouts"><a href="#Timeouts" class="headerlink" title="Timeouts"></a>Timeouts</h3><p>The client allows you to configure connect, read, and write timeouts. Passing a single timeout option will set all three values:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Redis.new(<span class="symbol">:timeout</span> =&gt; <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>But you can use specific values for each of them:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Redis.new(</span><br><span class="line">  <span class="symbol">:connect_timeout</span> =&gt; <span class="number">0.2</span>,</span><br><span class="line">  <span class="symbol">:read_timeout</span>    =&gt; <span class="number">1.0</span>,</span><br><span class="line">  <span class="symbol">:write_timeout</span>   =&gt; <span class="number">0.5</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>All timeout values are specified in seconds.</p>
+<p>When using pub/sub, you can subscribe to a channel using a timeout as well:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(<span class="symbol">reconnect_attempts:</span> <span class="number">0</span>)</span><br><span class="line">redis.subscribe_with_timeout(<span class="number">5</span>, <span class="string">&quot;news&quot;</span>) <span class="keyword">do</span> <span class="params">|on|</span></span><br><span class="line">  on.message <span class="keyword">do</span> <span class="params">|channel, message|</span></span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>If no message is received after 5 seconds, the client will unsubscribe.</p>
+<h3 id="Reconnections"><a href="#Reconnections" class="headerlink" title="Reconnections"></a>Reconnections</h3><p>The client allows you to configure how many <code>reconnect_attempts</code> it should complete before declaring a connection as failed. Furthermore, you may want to control the maximum duration between reconnection attempts with <code>reconnect_delay</code> and <code>reconnect_delay_max</code>.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Redis.new(</span><br><span class="line">  <span class="symbol">:reconnect_attempts</span> =&gt; <span class="number">10</span>,</span><br><span class="line">  <span class="symbol">:reconnect_delay</span> =&gt; <span class="number">1.5</span>,</span><br><span class="line">  <span class="symbol">:reconnect_delay_max</span> =&gt; <span class="number">10.0</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>The delay values are specified in seconds. With the above configuration, the client would attempt 10 reconnections, exponentially increasing the duration between each attempt but it never waits longer than reconnect_delay_max.</p>
+<p>This is the retry algorithm:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">attempt_wait_time = [(reconnect_delay * <span class="number">2</span>**(attempt-<span class="number">1</span>)), reconnect_delay_max].min</span><br></pre></td></tr></table></figure>
+
+<h3 id="SSL-TLS-Support"><a href="#SSL-TLS-Support" class="headerlink" title="SSL/TLS Support"></a>SSL/TLS Support</h3><p>This library supports natively terminating client side SSL/TLS connections when talking to Redis via a server-side proxy such as stunnel, hitch, or ghostunnel.</p>
+<p>To enable SSL support, pass the :ssl =&gt; true option when configuring the Redis client, or pass in <code>:url =&gt; &quot;rediss://...&quot;</code> (like HTTPS for Redis). You will also need to pass in an :ssl_params =&gt; { … } hash used to configure the OpenSSL::SSL::SSLContext object used for the connection:</p>
+<p>Here is an example of passing in params that can be used for SSL client certificate authentication (a.k.a. mutual TLS):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(</span><br><span class="line">  <span class="symbol">:url</span>        =&gt; <span class="string">&quot;rediss://:p4ssw0rd@10.0.1.1:6381/15&quot;</span>,</span><br><span class="line">  <span class="symbol">:ssl_params</span> =&gt; &#123;</span><br><span class="line">    <span class="symbol">:ca_file</span> =&gt; <span class="string">&quot;/path/to/ca.crt&quot;</span>,</span><br><span class="line">    <span class="symbol">:cert</span>    =&gt; OpenSSL::X509::Certificate.new(File.read(<span class="string">&quot;client.crt&quot;</span>)),</span><br><span class="line">    <span class="symbol">:key</span>     =&gt; OpenSSL::PKey::RSA.new(File.read(<span class="string">&quot;client.key&quot;</span>))</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>NOTE: SSL is only supported by the default “Ruby” driver</p>
+<hr>
+<h3 id="Alternate-drivers"><a href="#Alternate-drivers" class="headerlink" title="Alternate drivers"></a>Alternate drivers</h3><p>By default, <code>redis-rb</code> uses Ruby’s socket library to talk with Redis. To use an alternative connection driver it should be specified as option when instantiating the client object. These instructions are only valid for <code>redis-rb</code> 3.0. For instructions on how to use alternate drivers from <code>redis-rb</code> 2.2, please refer to an older README.</p>
+<h3 id="hiredis"><a href="#hiredis" class="headerlink" title="hiredis"></a>hiredis</h3><p>The <code>hiredis</code> driver uses the connection facility of <code>hiredis-rb</code>. In turn, <code>hiredis-rb</code> is a binding to the official hiredis client library. It optimizes for speed, at the cost of portability. Because it is a C extension, <code>JRuby</code> is not supported (by default).</p>
+<p>It is best to use <code>hiredis</code> when you have large replies (for example: LRANGE, SMEMBERS, ZRANGE, etc.) and/or use big pipelines.</p>
+<p>In your Gemfile, include hiredis:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">&quot;redis&quot;</span>, <span class="string">&quot;~&gt; 3.0.1&quot;</span></span><br><span class="line">gem <span class="string">&quot;hiredis&quot;</span>, <span class="string">&quot;~&gt; 0.4.5&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>When instantiating the client object, specify <code>hiredis</code>:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(<span class="symbol">:driver</span> =&gt; <span class="symbol">:hiredis</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="synchrony"><a href="#synchrony" class="headerlink" title="synchrony"></a>synchrony</h4><p>The <code>synchrony</code> driver adds support for <code>em-</code>synchrony<code>. This makes </code>redis-rb<code>work with EventMachine&#39;s asynchronous I/O, while not changing the exposed API. The</code>hiredis` gem needs to be available as well, because the synchrony driver uses hiredis for parsing the Redis protocol.</p>
+<p>In your Gemfile, include em-synchrony and hiredis:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">&quot;redis&quot;</span>, <span class="string">&quot;~&gt; 3.0.1&quot;</span></span><br><span class="line">gem <span class="string">&quot;hiredis&quot;</span>, <span class="string">&quot;~&gt; 0.4.5&quot;</span></span><br><span class="line">gem <span class="string">&quot;em-synchrony&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>When instantiating the client object, specify <code>synchrony</code>:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis = Redis.new(<span class="symbol">:driver</span> =&gt; <span class="symbol">:synchrony</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://github.com/redis/redis-rb">GitHub - redis/redis-rb: A Ruby client library for Redis - https://github.com/redis/redis-rb</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://rubygems.org/gems/redis/">redis | RubyGems.org | your community gem host - https://rubygems.org/gems/redis/</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://www.rubydoc.info/gems/redis">File: README — Documentation for redis (4.2.5) - https://www.rubydoc.info/gems/redis</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://redis.io/">Redis - https://redis.io/</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2018/11/15/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-hiredis-rb-gem-to-wrap-redis-rb-gem-to-manipulate-Redis/" rel="bookmark">[Awesome Ruby Gem] Use hredis-rb gem to wrap redis-rb gem to manipulate Redis</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/02/06/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-namespace-gem-to-namespace-Redis-keys/" rel="bookmark">[Awesome Ruby Gem] Use redis-namespace gem to namespace Redis keys</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/06/05/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-hash-store-gem-to-easily-use-Redis-hashes-for-caching/" rel="bookmark">[Awesome Ruby Gem] Use redis_hash_store gem to easily use Redis hashes for caching</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/04/03/Programming-Language/Ruby/Awesome-Ruby-Gem/Remove-yanked-mimemagic-from-Gemfile/" rel="bookmark">[Awesome Ruby Gem] Remove yanked mimemagic from Gemfile</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/03/05/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-ahoy-matey-gem-to-track-visits-and-events-in-Ruby-JavaScript-and-native-apps/" rel="bookmark">[Awesome Ruby Gem] Use ahoy_matey gem to track visits and events in Ruby, JavaScript, and native apps</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2021/06/12/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-rb-gem-to-manipulate-Redis/" title="[Awesome Ruby Gem] Use redis-rb gem to manipulate Redis">https://cloudolife.com/2021/06/12/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-rb-gem-to-manipulate-Redis/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/Awesome-Ruby-Gem/" rel="tag"># Awesome Ruby Gem</a>
+              <a href="/tags/redis-rb/" rel="tag"># redis-rb</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/05/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-redis-hash-store-gem-to-easily-use-Redis-hashes-for-caching/" rel="prev" title="[Awesome Ruby Gem] Use redis_hash_store gem to easily use Redis hashes for caching">
+                  <i class="fa fa-chevron-left"></i> [Awesome Ruby Gem] Use redis_hash_store gem to easily use Redis hashes for caching
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/06/12/Programming-Language/Golang-Go/Talking-Golang-Go/Errors/" rel="next" title="[Talking-Golang (Go)] Errors">
+                  [Talking-Golang (Go)] Errors <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

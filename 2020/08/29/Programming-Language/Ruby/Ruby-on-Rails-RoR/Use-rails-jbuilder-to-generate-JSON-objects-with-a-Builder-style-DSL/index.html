@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="jbuilderJbuilder gives you a simple DSL for declaring JSON structures that beats manipulating giant hash structures. This is particularly helpful when the generation process is fraught with conditiona">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Ruby on Rails (RoR)] Use rails jbuilder to generate JSON objects with a Builder-style DSL ">
+<meta property="og:url" content="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="jbuilderJbuilder gives you a simple DSL for declaring JSON structures that beats manipulating giant hash structures. This is particularly helpful when the generation process is fraught with conditiona">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-29T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.104Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Rails &#x2F; Ruby on Rails (RoR)">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="JavaScript Object Notation (JSON)">
+<meta property="article:tag" content="Awesome Ruby Gem">
+<meta property="article:tag" content="jbuilder">
+<meta property="article:tag" content="RESTful API">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2020&#x2F;08&#x2F;29&#x2F;Programming-Language&#x2F;Ruby&#x2F;Ruby-on-Rails-RoR&#x2F;Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;08&#x2F;29&#x2F;Programming-Language&#x2F;Ruby&#x2F;Ruby-on-Rails-RoR&#x2F;Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL&#x2F;&quot;,&quot;title&quot;:&quot;[Ruby on Rails (RoR)] Use rails jbuilder to generate JSON objects with a Builder-style DSL &quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[Ruby on Rails (RoR)] Use rails jbuilder to generate JSON objects with a Builder-style DSL  | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jbuilder"><span class="nav-number">1.</span> <span class="nav-text">jbuilder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.1.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamical-Attribute"><span class="nav-number">1.2.</span> <span class="nav-text">Dynamical Attribute</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attribute-Merge"><span class="nav-number">1.3.</span> <span class="nav-text">Attribute Merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">1.4.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jbuilder-Object"><span class="nav-number">1.5.</span> <span class="nav-text">Jbuilder Object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Partial-Render"><span class="nav-number">1.6.</span> <span class="nav-text">Partial Render</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fragment-caching"><span class="nav-number">1.7.</span> <span class="nav-text">Fragment caching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Format"><span class="nav-number">1.8.</span> <span class="nav-text">Key Format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.9.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Ruby on Rails (RoR)] Use rails jbuilder to generate JSON objects with a Builder-style DSL 
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-29 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-29T00:00:00+00:00">2020-08-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Rails-Ruby-on-Rails-RoR/" itemprop="url" rel="index"><span itemprop="name">Rails / Ruby on Rails (RoR)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Rails-Ruby-on-Rails-RoR/Best-Practices/" itemprop="url" rel="index"><span itemprop="name">Best Practices</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>9.8k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>9 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="jbuilder"><a href="#jbuilder" class="headerlink" title="jbuilder"></a>jbuilder</h1><p>Jbuilder gives you a simple DSL for declaring JSON structures that beats manipulating giant hash structures. This is particularly helpful when the generation process is fraught with conditionals and loops. JSON objects can be use in RESTful API or composing objects.</p>
+<span id="more"></span>
+
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Here’s a simple example:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/views/messages/show.json.jbuilder</span></span><br><span class="line"></span><br><span class="line">json.content format_content(<span class="variable">@message</span>.content)</span><br><span class="line"><span class="comment"># You can use the call syntax instead of an explicit extract! call:</span></span><br><span class="line">json.extract! <span class="variable">@message</span>, <span class="symbol">:created_at</span>, <span class="symbol">:updated_at</span></span><br><span class="line">json.(<span class="variable">@message</span>, <span class="symbol">:created_at</span>, <span class="symbol">:updated_at</span>)</span><br><span class="line"></span><br><span class="line">json.author <span class="keyword">do</span></span><br><span class="line">  json.name <span class="variable">@message</span>.creator.name.familiar</span><br><span class="line">  json.email_address <span class="variable">@message</span>.creator.email_address_with_name</span><br><span class="line">  json.url url_for(<span class="variable">@message</span>.creator, <span class="symbol">format:</span> <span class="symbol">:json</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> current_user.admin?</span><br><span class="line">  json.visitors calculate_visitors(<span class="variable">@message</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">json.comments <span class="variable">@message</span>.comments, <span class="symbol">:content</span>, <span class="symbol">:created_at</span></span><br><span class="line"></span><br><span class="line">json.attachments <span class="variable">@message</span>.attachments <span class="keyword">do</span> <span class="params">|attachment|</span></span><br><span class="line">  json.filename attachment.filename</span><br><span class="line">  json.url url_for(attachment)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>This will build the following structure:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;content&quot;</span>: <span class="string">&quot;&lt;p&gt;This is &lt;i&gt;serious&lt;/i&gt; monkey business&lt;/p&gt;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;created_at&quot;</span>: <span class="string">&quot;2011-10-29T20:45:28-05:00&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;updated_at&quot;</span>: <span class="string">&quot;2011-10-29T20:45:28-05:00&quot;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="attr">&quot;author&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;David H.&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;email_address&quot;</span>: <span class="string">&quot;&#x27;David Heinemeier Hansson&#x27; &lt;david@heinemeierhansson.com&gt;&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;http://example.com/users/1-david.json&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">&quot;visitors&quot;</span>: <span class="number">15</span>,</span><br><span class="line"></span><br><span class="line">  <span class="attr">&quot;comments&quot;</span>: [</span><br><span class="line">    &#123; <span class="attr">&quot;content&quot;</span>: <span class="string">&quot;Hello everyone!&quot;</span>, <span class="attr">&quot;created_at&quot;</span>: <span class="string">&quot;2011-10-29T20:45:28-05:00&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">&quot;content&quot;</span>: <span class="string">&quot;To you my good sir!&quot;</span>, <span class="attr">&quot;created_at&quot;</span>: <span class="string">&quot;2011-10-29T20:47:28-05:00&quot;</span> &#125;</span><br><span class="line">  ],</span><br><span class="line"></span><br><span class="line">  <span class="attr">&quot;attachments&quot;</span>: [</span><br><span class="line">    &#123; <span class="attr">&quot;filename&quot;</span>: <span class="string">&quot;forecast.xls&quot;</span>, <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;http://example.com/downloads/forecast.xls&quot;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">&quot;filename&quot;</span>: <span class="string">&quot;presentation.pdf&quot;</span>, <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;http://example.com/downloads/presentation.pdf&quot;</span> &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Dynamical-Attribute"><a href="#Dynamical-Attribute" class="headerlink" title="Dynamical Attribute"></a>Dynamical Attribute</h2><p>To define attribute and structure names dynamically, use the set! method:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json.set! <span class="symbol">:author</span> <span class="keyword">do</span></span><br><span class="line">  json.set! <span class="symbol">:name</span>, <span class="string">&#x27;David&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; &#123;&quot;author&quot;: &#123; &quot;name&quot;: &quot;David&quot; &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Attribute-Merge"><a href="#Attribute-Merge" class="headerlink" title="Attribute Merge"></a>Attribute Merge</h2><p>To merge existing hash or array to current context:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hash = &#123; <span class="symbol">author:</span> &#123; <span class="symbol">name:</span> <span class="string">&quot;David&quot;</span> &#125; &#125;</span><br><span class="line">json.post <span class="keyword">do</span></span><br><span class="line">  json.title <span class="string">&quot;Merge HOWTO&quot;</span></span><br><span class="line">  json.merge! hash</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; &quot;post&quot;: &#123; &quot;title&quot;: &quot;Merge HOWTO&quot;, &quot;author&quot;: &#123; &quot;name&quot;: &quot;David&quot; &#125; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><p>Top level arrays can be handled directly. Useful for index and other collection actions.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># <span class="doctag">@comments</span> = <span class="doctag">@post</span>.comments</span></span><br><span class="line"></span><br><span class="line">json.array! <span class="variable">@comments</span> <span class="keyword">do</span> <span class="params">|comment|</span></span><br><span class="line">  <span class="keyword">next</span> <span class="keyword">if</span> comment.marked_as_spam_by?(current_user)</span><br><span class="line"></span><br><span class="line">  json.body comment.body</span><br><span class="line">  json.author <span class="keyword">do</span></span><br><span class="line">    json.first_name comment.author.first_name</span><br><span class="line">    json.last_name comment.author.last_name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; [ &#123; &quot;body&quot;: &quot;great post...&quot;, &quot;author&quot;: &#123; &quot;first_name&quot;: &quot;Joe&quot;, &quot;last_name&quot;: &quot;Bloe&quot; &#125;&#125; ]</span></span><br></pre></td></tr></table></figure>
+
+<p>You can also extract attributes from array directly.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># <span class="doctag">@people</span> = People.all</span></span><br><span class="line"></span><br><span class="line">json.array! <span class="variable">@people</span>, <span class="symbol">:id</span>, <span class="symbol">:name</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; [ &#123; &quot;id&quot;: 1, &quot;name&quot;: &quot;David&quot; &#125;, &#123; &quot;id&quot;: 2, &quot;name&quot;: &quot;Jamie&quot; &#125; ]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Jbuilder-Object"><a href="#Jbuilder-Object" class="headerlink" title="Jbuilder Object"></a>Jbuilder Object</h2><p>Jbuilder objects can be directly nested inside each other. Useful for composing objects.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/jbuilder/person_jbuilder.rb</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line">  <span class="comment"># ... Class Definition ... #</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">to_builder</span></span></span><br><span class="line">    Jbuilder.new <span class="keyword">do</span> <span class="params">|person|</span></span><br><span class="line">      person.(<span class="keyword">self</span>, <span class="symbol">:name</span>, <span class="symbol">:age</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Company</span></span></span><br><span class="line">  <span class="comment"># ... Class Definition ... #</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">to_builder</span></span></span><br><span class="line">    Jbuilder.new <span class="keyword">do</span> <span class="params">|company|</span></span><br><span class="line">      company.name name</span><br><span class="line">      company.president president.to_builder</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">company = Company.new(<span class="string">&#x27;Doodle Corp&#x27;</span>, Person.new(<span class="string">&#x27;John Stobs&#x27;</span>, <span class="number">58</span>))</span><br><span class="line">company.to_builder.target!</span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; &#123;&quot;name&quot;:&quot;Doodle Corp&quot;,&quot;president&quot;:&#123;&quot;name&quot;:&quot;John Stobs&quot;,&quot;age&quot;:58&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>You can either use Jbuilder stand-alone or directly as an ActionView template language. When required in Rails, you can create views a la show.json.jbuilder (the json is already yielded):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Any helpers available to views are available to the builder</span></span><br><span class="line">json.content format_content(<span class="variable">@message</span>.content)</span><br><span class="line">json.(<span class="variable">@message</span>, <span class="symbol">:created_at</span>, <span class="symbol">:updated_at</span>)</span><br><span class="line"></span><br><span class="line">json.author <span class="keyword">do</span></span><br><span class="line">  json.name <span class="variable">@message</span>.creator.name.familiar</span><br><span class="line">  json.email_address <span class="variable">@message</span>.creator.email_address_with_name</span><br><span class="line">  json.url url_for(<span class="variable">@message</span>.creator, <span class="symbol">format:</span> <span class="symbol">:json</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> current_user.admin?</span><br><span class="line">  json.visitors calculate_visitors(<span class="variable">@message</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Partial-Render"><a href="#Partial-Render" class="headerlink" title="Partial Render"></a>Partial Render</h2><p>You can use partials as well. The following will render the file views/comments/_comments.json.jbuilder, and set a local variable comments with all this message’s comments, which you can use inside the partial.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.partial! <span class="string">&#x27;comments/comments&#x27;</span>, <span class="symbol">comments:</span> <span class="variable">@message</span>.comments</span><br></pre></td></tr></table></figure>
+
+<p>It’s also possible to render collections of partials:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">json.array! <span class="variable">@posts</span>, <span class="symbol">partial:</span> <span class="string">&#x27;posts/post&#x27;</span>, <span class="symbol">as:</span> <span class="symbol">:post</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">json.partial! <span class="string">&#x27;posts/post&#x27;</span>, <span class="symbol">collection:</span> <span class="variable">@posts</span>, <span class="symbol">as:</span> <span class="symbol">:post</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">json.partial! <span class="symbol">partial:</span> <span class="string">&#x27;posts/post&#x27;</span>, <span class="symbol">collection:</span> <span class="variable">@posts</span>, <span class="symbol">as:</span> <span class="symbol">:post</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">json.comments <span class="variable">@post</span>.comments, <span class="symbol">partial:</span> <span class="string">&#x27;comments/comment&#x27;</span>, <span class="symbol">as:</span> <span class="symbol">:comment</span></span><br></pre></td></tr></table></figure>
+
+<p>The as: :some_symbol is used with partials. It will take care of mapping the passed in object to a variable for the partial. If the value is a collection (either implicitly or explicitly by using the collection: option, then each value of the collection is passed to the partial as the variable some_symbol. If the value is a singular object, then the object is passed to the partial as the variable some_symbol.</p>
+<p>Be sure not to confuse the as: option to mean nesting of the partial. For example:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># Use the default `views/comments/_comment.json.jbuilder`, putting <span class="doctag">@comment</span> as the comment local variable.</span></span><br><span class="line"> <span class="comment"># Note, `comment` attributes are &quot;inlined&quot;.</span></span><br><span class="line"> json.partial! <span class="variable">@comment</span>, <span class="symbol">as:</span> <span class="symbol">:comment</span></span><br><span class="line">is quite different <span class="symbol">than:</span></span><br><span class="line"></span><br><span class="line"> <span class="comment"># comment attributes are nested under a &quot;comment&quot; property</span></span><br><span class="line">json.comment <span class="keyword">do</span></span><br><span class="line">  json.partial! <span class="string">&quot;/comments/comment.json.jbuilder&quot;</span>, <span class="symbol">comment:</span> @comment</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>You can pass any objects into partial templates with or without :locals option.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">json.partial! <span class="string">&#x27;sub_template&#x27;</span>, <span class="symbol">locals:</span> &#123; <span class="symbol">user:</span> user &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"></span><br><span class="line">json.partial! <span class="string">&#x27;sub_template&#x27;</span>, <span class="symbol">user:</span> user</span><br></pre></td></tr></table></figure>
+
+<p>You can explicitly make Jbuilder object return null if you want:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">json.extract! <span class="variable">@post</span>, <span class="symbol">:id</span>, <span class="symbol">:title</span>, <span class="symbol">:content</span>, <span class="symbol">:published_at</span></span><br><span class="line">json.author <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">if</span> <span class="variable">@post</span>.anonymous?</span><br><span class="line">    json.null! <span class="comment"># or json.nil!</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    json.first_name <span class="variable">@post</span>.author_first_name</span><br><span class="line">    json.last_name <span class="variable">@post</span>.author_last_name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>To prevent Jbuilder from including null values in the output, you can use the ignore_nil! method:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json.ignore_nil!</span><br><span class="line">json.foo <span class="literal">nil</span></span><br><span class="line">json.bar <span class="string">&quot;bar&quot;</span></span><br><span class="line"><span class="comment"># =&gt; &#123; &quot;bar&quot;: &quot;bar&quot; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Fragment-caching"><a href="#Fragment-caching" class="headerlink" title="Fragment caching"></a>Fragment caching</h2><p>Fragment caching is supported within <a target="_blank" rel="noopener" href="https://github.com/rails/jbuilder">rails/jbuilder: Jbuilder: generate JSON objects with a Builder-style DSL - https://github.com/rails/jbuilder</a>, it uses Rails.cache and works like caching in HTML templates:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">json.cache! [<span class="string">&#x27;v1&#x27;</span>, <span class="variable">@person</span>], <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes <span class="keyword">do</span></span><br><span class="line">  json.extract! <span class="variable">@person</span>, <span class="symbol">:name</span>, <span class="symbol">:age</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>You can also conditionally cache a block by using cache_if! like this:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">json.cache_if! !admin?, [<span class="string">&#x27;v1&#x27;</span>, <span class="variable">@person</span>], <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes <span class="keyword">do</span></span><br><span class="line">  json.extract! <span class="variable">@person</span>, <span class="symbol">:name</span>, <span class="symbol">:age</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>If you are rendering fragments for a collection of objects, have a look at <a target="_blank" rel="noopener" href="https://github.com/yonahforst/jbuilder_cache_multi">yonahforst/jbuilder_cache_multi - https://github.com/yonahforst/jbuilder_cache_multi</a> gem. It uses fetch_multi (&gt;= Rails 4.1) to fetch multiple keys at once.</p>
+<p>Renders the given block for each item in the collection. Accepts optional ‘key’ attribute in options (e.g. key: ‘v1’).</p>
+<p>Note: At the moment, does not accept the partial name as an argument (#todo)</p>
+<p>Examples:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">json.cache_collection! <span class="variable">@people</span>, <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes <span class="keyword">do</span> <span class="params">|person|</span></span><br><span class="line">  json.partial! <span class="string">&#x27;person&#x27;</span>, <span class="symbol">:person</span> =&gt; person</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Or with optional key</span></span><br><span class="line"></span><br><span class="line">json.cache_collection! <span class="variable">@people</span>, <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes, <span class="symbol">key:</span> <span class="string">&#x27;v1&#x27;</span> <span class="keyword">do</span> <span class="params">|person|</span></span><br><span class="line">  json.partial! <span class="string">&#x27;person&#x27;</span>, <span class="symbol">:person</span> =&gt; person</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Or with a proc as a key </span></span><br><span class="line"></span><br><span class="line">json.cache_collection! <span class="variable">@people</span>, <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes, <span class="symbol">key:</span> <span class="built_in">proc</span> &#123;<span class="params">|person|</span> person.last_posted_at &#125; <span class="keyword">do</span> <span class="params">|person|</span></span><br><span class="line">  json.partial! <span class="string">&#x27;person&#x27;</span>, <span class="symbol">:person</span> =&gt; person</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>Last thing: If you are using a collection for the cache key, may I recommend the ‘scope_cache_key’ gem? (check out my fork for a Rails 4 version: <a target="_blank" rel="noopener" href="https://github.com/joshblour/scope_cache_key">https://github.com/joshblour/scope_cache_key</a>). It very quickly calculates a hash for all items in the collection (MD5 hash of updated_at + IDs).</p>
+<p>You can also conditionally cache a block by using cache_collection_if! like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">json.cache_collection_if! do_cache?, @people, expires_in: 10.minutes do |person|</span><br><span class="line">  json.partial! &#39;person&#39;, :person &#x3D;&gt; person</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<h2 id="Key-Format"><a href="#Key-Format" class="headerlink" title="Key Format"></a>Key Format</h2><p>Keys can be auto formatted using key_format!. Specifies formatting to be applied to the key. Passing in a name of a function will cause that function to be called on the key.  So :upcase will upper case the key.  You can also pass in lambdas for more complex transformations.</p>
+<p>Example:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">json.key_format! <span class="symbol">:upcase</span></span><br><span class="line">json.author <span class="keyword">do</span></span><br><span class="line">    json.name <span class="string">&quot;David&quot;</span></span><br><span class="line">    json.age <span class="number">32</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; &#123; &quot;AUTHOR&quot;: &#123; &quot;NAME&quot;: &quot;David&quot;, &quot;AGE&quot;: 32 &#125; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>You can pass parameters to the method using a hash pair.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json.key_format! <span class="symbol">camelize:</span> <span class="symbol">:lower</span></span><br><span class="line">json.first_name <span class="string">&quot;David&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; &#123; &quot;firstName&quot;: &quot;David&quot; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Lambdas can also be used.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json.key_format! -&gt;(key)&#123; <span class="string">&quot;_&quot;</span> + key &#125;</span><br><span class="line">json.first_name <span class="string">&quot;David&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; &#123; &quot;_first_name&quot;: &quot;David&quot; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>You can set this globally with the class method key_format (from inside your config/initializers/jbuilder.rb or environment.rb for example):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/initializers/jbuilder.rb</span></span><br><span class="line"></span><br><span class="line">Jbuilder.key_format <span class="symbol">camelize:</span> <span class="symbol">:lower</span></span><br></pre></td></tr></table></figure>
+
+<p>See <a target="_blank" rel="noopener" href="https://github.com/rails/jbuilder/blob/07d31ca6b8791b1767f9186a372ae3d3cbf16cf5/lib/jbuilder.rb">lib/jbuilder.rb</a> to learn more usages.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://github.com/rails/jbuilder">rails/jbuilder: Jbuilder: generate JSON objects with a Builder-style DSL - https://github.com/rails/jbuilder</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://github.com/rails/jbuilder/blob/07d31ca6b8791b1767f9186a372ae3d3cbf16cf5/lib/jbuilder.rb">jbuilder/jbuilder.rb at 07d31ca6b8791b1767f9186a372ae3d3cbf16cf5 · rails/jbuilder - https://github.com/rails/jbuilder/blob/07d31ca6b8791b1767f9186a372ae3d3cbf16cf5/lib/jbuilder.rb</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://github.com/yonahforst/jbuilder_cache_multi">yonahforst/jbuilder_cache_multi - https://github.com/yonahforst/jbuilder_cache_multi</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://github.com/yonahforst/scope_cache_key">yonahforst/scope_cache_key: Add cache_key functionality to ActiveRecord scopes - https://github.com/yonahforst/scope_cache_key - https://github.com/yonahforst/scope_cache_key</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/18/Programming-Language/Ruby/Installation/Use-asdf-and-Ruby-plugin-to-install-multiple-Ruby-versions/" rel="bookmark">[Ruby on Rails (RoR)] Use asdf and Ruby plugin to install multiple Ruby versions</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Best-practices-about-Rails-Action-Controller-Overview/" rel="bookmark">[Ruby on Rails (RoR)] Best practices about Rails Action Controller Overview</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/30/Programming-Language/Ruby/Ruby-on-Rails-RoR/Best-practices-about-Rails-Console/" rel="bookmark">[Ruby on Rails (RoR)] Best practices about Rails Console</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Best-practices-about-Ruby-bundle-and-Gemfile/" rel="bookmark">[Ruby Best practices] Best practices about Ruby bundle and Gemfile </a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Difference-between-eql-equal-and-object-id-in-Ruby/" rel="bookmark">[Ruby on Rails (RoR)] Difference between ==, eql?, equal?, === and object_id in Ruby</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL/" title="[Ruby on Rails (RoR)] Use rails jbuilder to generate JSON objects with a Builder-style DSL ">https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Rails-Ruby-on-Rails-RoR/" rel="tag"># Rails / Ruby on Rails (RoR)</a>
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/JavaScript-Object-Notation-JSON/" rel="tag"># JavaScript Object Notation (JSON)</a>
+              <a href="/tags/Awesome-Ruby-Gem/" rel="tag"># Awesome Ruby Gem</a>
+              <a href="/tags/jbuilder/" rel="tag"># jbuilder</a>
+              <a href="/tags/RESTful-API/" rel="tag"># RESTful API</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/YAML-advanced-usage-in-Ruby-on-Rails/" rel="prev" title="[Best practices] YAML usage in Ruby on Rails">
+                  <i class="fa fa-chevron-left"></i> [Best practices] YAML usage in Ruby on Rails
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Speed-Up-Your-Rails-App-RESTful-API-by-cache/" rel="next" title="[Ruby on Rails (RoR)] Speed Up Your Rails App RESTful API by cache">
+                  [Ruby on Rails (RoR)] Speed Up Your Rails App RESTful API by cache <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

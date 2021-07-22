@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Functions, TypedefsFunctionsDart is a true object-oriented language, so even functions are objects and have a type, Function. This means that functions can be assigned to variables or passed as argume">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Dart Language Tour] Functions, Typedefs">
+<meta property="og:url" content="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Functions-Typedefs/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Functions, TypedefsFunctionsDart is a true object-oriented language, so even functions are objects and have a type, Function. This means that functions can be assigned to variables or passed as argume">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-07T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.092Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Dart">
+<meta property="article:tag" content="Function">
+<meta property="article:tag" content="Language Tour">
+<meta property="article:tag" content="return">
+<meta property="article:tag" content="void">
+<meta property="article:tag" content="Parameter">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Functions-Typedefs/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2020&#x2F;03&#x2F;07&#x2F;Programming-Language&#x2F;Dart&#x2F;Language-Tour&#x2F;Functions-Typedefs&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;03&#x2F;07&#x2F;Programming-Language&#x2F;Dart&#x2F;Language-Tour&#x2F;Functions-Typedefs&#x2F;&quot;,&quot;title&quot;:&quot;[Dart Language Tour] Functions, Typedefs&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[Dart Language Tour] Functions, Typedefs | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Functions-Typedefs"><span class="nav-number">1.</span> <span class="nav-text">Functions, Typedefs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Functions"><span class="nav-number">1.1.</span> <span class="nav-text">Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameters"><span class="nav-number">1.1.1.</span> <span class="nav-text">Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Named-parameters"><span class="nav-number">1.1.2.</span> <span class="nav-text">Named parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optional-positional-parameters"><span class="nav-number">1.1.3.</span> <span class="nav-text">Optional positional parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Default-parameter-values"><span class="nav-number">1.1.4.</span> <span class="nav-text">Default parameter values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-main-function"><span class="nav-number">1.1.5.</span> <span class="nav-text">The main() function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Functions-as-first-class-objects"><span class="nav-number">1.1.6.</span> <span class="nav-text">Functions as first-class objects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anonymous-functions"><span class="nav-number">1.1.7.</span> <span class="nav-text">Anonymous functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lexical-scope"><span class="nav-number">1.1.8.</span> <span class="nav-text">Lexical scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lexical-closures"><span class="nav-number">1.1.9.</span> <span class="nav-text">Lexical closures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing-functions-for-equality"><span class="nav-number">1.1.10.</span> <span class="nav-text">Testing functions for equality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Return-values"><span class="nav-number">1.1.11.</span> <span class="nav-text">Return values</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Typedefs"><span class="nav-number">1.2.</span> <span class="nav-text">Typedefs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Functions-Typedefs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Dart Language Tour] Functions, Typedefs
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-03-07 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-07T00:00:00+00:00">2020-03-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Dart/" itemprop="url" rel="index"><span itemprop="name">Dart</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Dart/Language-Tour/" itemprop="url" rel="index"><span itemprop="name">Language Tour</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/07/Programming-Language/Dart/Language-Tour/Functions-Typedefs/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/07/Programming-Language/Dart/Language-Tour/Functions-Typedefs/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>10k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>9 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Functions-Typedefs"><a href="#Functions-Typedefs" class="headerlink" title="Functions, Typedefs"></a>Functions, Typedefs</h1><h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><p>Dart is a true object-oriented language, so even functions are objects and have a type, Function. This means that functions can be assigned to variables or passed as arguments to other functions. You can also call an instance of a Dart class as if it were a function. For details, see Callable classes.</p>
+<p>Here’s an example of implementing a function:</p>
+<span id="more"></span>
+
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> isNoble(<span class="built_in">int</span> atomicNumber) &#123;</span><br><span class="line">  <span class="keyword">return</span> _nobleGases[atomicNumber] != <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Although Effective Dart recommends type annotations for public APIs, the function still works if you omit the types:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">isNoble(atomicNumber) &#123;</span><br><span class="line">  <span class="keyword">return</span> _nobleGases[atomicNumber] != <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>For functions that contain just one expression, you can use a shorthand syntax:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> isNoble(<span class="built_in">int</span> atomicNumber) =&gt; _nobleGases[atomicNumber] != <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p>The <code>=&gt;</code> expr syntax is a shorthand for <code>&#123; return expr; &#125;</code>. The <code>=&gt;</code> notation is sometimes referred to as arrow syntax.</p>
+<hr>
+<p> Note: Only an expression—not a statement—can appear between the arrow (=&gt;) and the semicolon (;). For example, you can’t put an if statement there, but you can use a conditional expression.</p>
+<hr>
+<h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><p>A function can have any number of required positional parameters. These can be followed either by named parameters or by optional positional parameters (but not both).</p>
+<hr>
+<p> Note: Some APIs — notably Flutter widget constructors — use only named parameters, even for parameters that are mandatory. See the next section for details.</p>
+<hr>
+<p>You can use trailing commas when you pass arguments to a function or when you define function parameters.</p>
+<h3 id="Named-parameters"><a href="#Named-parameters" class="headerlink" title="Named parameters"></a>Named parameters</h3><p>Named parameters are optional unless they’re specifically marked as required.</p>
+<p>When calling a function, you can specify named parameters using paramName: value. For example:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enableFlags(bold: <span class="keyword">true</span>, hidden: <span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>When defining a function, use {param1, param2, …} to specify named parameters:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;&#x2F; Sets the [bold] and [hidden] flags ...</span><br><span class="line">void enableFlags(&#123;bool bold, bool hidden&#125;) &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Although named parameters are a kind of optional parameter, you can annotate them with <code>@required</code> to indicate that the parameter is mandatory — that users must provide a value for the parameter. For example:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Scrollbar(&#123;Key key, <span class="meta">@required</span> Widget child&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>If someone tries to create a Scrollbar without specifying the child argument, then the analyzer reports an issue.</p>
+<p>To use the <code>@required</code> annotation, depend on the meta package and <code>import package:meta/meta.dart</code>.</p>
+<h3 id="Optional-positional-parameters"><a href="#Optional-positional-parameters" class="headerlink" title="Optional positional parameters"></a>Optional positional parameters</h3><p>Wrapping a set of function parameters in <code>[]</code> marks them as optional positional parameters:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> say(<span class="built_in">String</span> from, <span class="built_in">String</span> msg, [<span class="built_in">String</span> device]) &#123;</span><br><span class="line">  <span class="keyword">var</span> result = <span class="string">&#x27;<span class="subst">$from</span> says <span class="subst">$msg</span>&#x27;</span>;</span><br><span class="line">  <span class="keyword">if</span> (device != <span class="keyword">null</span>) &#123;</span><br><span class="line">    result = <span class="string">&#x27;<span class="subst">$result</span> with a <span class="subst">$device</span>&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Here’s an example of calling this function without the optional parameter:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span>(say(<span class="string">&#x27;Bob&#x27;</span>, <span class="string">&#x27;Howdy&#x27;</span>) == <span class="string">&#x27;Bob says Howdy&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>And here’s an example of calling this function with the third parameter:</p>
+<p>assert(say(‘Bob’, ‘Howdy’, ‘smoke signal’) ==<br>    ‘Bob says Howdy with a smoke signal’);</p>
+<h3 id="Default-parameter-values"><a href="#Default-parameter-values" class="headerlink" title="Default parameter values"></a>Default parameter values</h3><p>Your function can use <code>=</code> to define default values for both named and positional parameters. The default values must be compile-time constants. If no default value is provided, the default value is <code>null</code>.</p>
+<p>Here’s an example of setting default values for named parameters:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="markdown">Sets the [bold] and [hidden] flags ...</span></span></span><br><span class="line"><span class="keyword">void</span> enableFlags(&#123;<span class="built_in">bool</span> bold = <span class="keyword">false</span>, <span class="built_in">bool</span> hidden = <span class="keyword">false</span>&#125;) &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bold will be true; hidden will be false.</span></span><br><span class="line">enableFlags(bold: <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p> Deprecation note: Old code might use a colon (:) instead of = to set default values of named parameters. The reason is that originally, only : was supported for named parameters. That support might be deprecated, so we recommend that you use = to specify default values.</p>
+<hr>
+<p>The next example shows how to set default values for positional parameters:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> say(<span class="built_in">String</span> from, <span class="built_in">String</span> msg,</span><br><span class="line">    [<span class="built_in">String</span> device = <span class="string">&#x27;carrier pigeon&#x27;</span>]) &#123;</span><br><span class="line">  <span class="keyword">var</span> result = <span class="string">&#x27;<span class="subst">$from</span> says <span class="subst">$msg</span> with a <span class="subst">$device</span>&#x27;</span>;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>(say(<span class="string">&#x27;Bob&#x27;</span>, <span class="string">&#x27;Howdy&#x27;</span>) ==</span><br><span class="line">    <span class="string">&#x27;Bob says Howdy with a carrier pigeon&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>You can also pass lists or maps as default values. The following example defines a function, doStuff(), that specifies a default list for the list parameter and a default map for the gifts parameter.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> doStuff(</span><br><span class="line">    &#123;<span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; list = <span class="keyword">const</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">    <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; gifts = <span class="keyword">const</span> &#123;</span><br><span class="line">      <span class="string">&#x27;first&#x27;</span>: <span class="string">&#x27;paper&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;second&#x27;</span>: <span class="string">&#x27;cotton&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;third&#x27;</span>: <span class="string">&#x27;leather&#x27;</span></span><br><span class="line">    &#125;&#125;) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;list:  <span class="subst">$list</span>&#x27;</span>);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;gifts: <span class="subst">$gifts</span>&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="The-main-function"><a href="#The-main-function" class="headerlink" title="The main() function"></a>The main() function</h3><p>Every app must have a top-level <code>main()</code> function, which serves as the entrypoint to the app. The <code>main()</code> function returns <code>void</code> and has an optional List<String> parameter for arguments.</p>
+<p>Here’s an example of the main() function for a web app:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="built_in">querySelector</span>(<span class="string">&#x27;#sample_text_id&#x27;</span>)</span><br><span class="line">    ..text = <span class="string">&#x27;Click me!&#x27;</span></span><br><span class="line">    ..onClick.listen(reverseText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> Note: The <code>..</code> syntax in the preceding code is called a cascade. With cascades, you can perform multiple operations on the members of a single object.</p>
+<p>Here’s an example of the <code>main()</code> function for a command-line app that takes arguments:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Run the app like this: dart args.dart 1 test</span></span><br><span class="line"><span class="keyword">void</span> main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; arguments) &#123;</span><br><span class="line">  <span class="built_in">print</span>(arguments);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">assert</span>(arguments.length == <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">assert</span>(<span class="built_in">int</span>.parse(arguments[<span class="number">0</span>]) == <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">assert</span>(arguments[<span class="number">1</span>] == <span class="string">&#x27;test&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You can use the <code>args</code> library to define and parse command-line arguments.</p>
+<h3 id="Functions-as-first-class-objects"><a href="#Functions-as-first-class-objects" class="headerlink" title="Functions as first-class objects"></a>Functions as first-class objects</h3><p>You can pass a function as a parameter to another function. For example:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> printElement(<span class="built_in">int</span> element) &#123;</span><br><span class="line">  <span class="built_in">print</span>(element);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Pass printElement as a parameter.</span></span><br><span class="line">list.forEach(printElement);</span><br><span class="line">You can also assign a function to a variable, such <span class="keyword">as</span>:</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> loudify = (msg) =&gt; <span class="string">&#x27;!!! <span class="subst">$&#123;msg.toUpperCase()&#125;</span> !!!&#x27;</span>;</span><br><span class="line"><span class="keyword">assert</span>(loudify(<span class="string">&#x27;hello&#x27;</span>) == <span class="string">&#x27;!!! HELLO !!!&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>This example uses an anonymous function. More about those in the next section.</p>
+<h3 id="Anonymous-functions"><a href="#Anonymous-functions" class="headerlink" title="Anonymous functions"></a>Anonymous functions</h3><p>Most functions are named, such as main() or printElement(). You can also create a nameless function called an anonymous function, or sometimes a lambda or closure. You might assign an anonymous function to a variable so that, for example, you can add or remove it from a collection.</p>
+<p>An anonymous function looks similar to a named function— zero or more parameters, separated by commas and optional type annotations, between parentheses.</p>
+<p>The code block that follows contains the function’s body:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">([[<span class="built_in">Type</span>] param1[, …]]) &#123;</span><br><span class="line">  codeBlock;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>The following example defines an anonymous function with an untyped parameter, item. The function, invoked for each item in the list, prints a string that includes the value at the specified index.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = [<span class="string">&#x27;apples&#x27;</span>, <span class="string">&#x27;bananas&#x27;</span>, <span class="string">&#x27;oranges&#x27;</span>];</span><br><span class="line">list.forEach((item) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;<span class="subst">$&#123;list.indexOf(item)&#125;</span>: <span class="subst">$item</span>&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Click Run to execute the code.</p>
+<p>If the function contains only one return statement, you can shorten it using arrow notation. Paste the following line into DartPad and click Run to verify that it is functionally equivalent.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.forEach(</span><br><span class="line">    (item) =&gt; <span class="built_in">print</span>(<span class="string">&#x27;<span class="subst">$&#123;list.indexOf(item)&#125;</span>: <span class="subst">$item</span>&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="Lexical-scope"><a href="#Lexical-scope" class="headerlink" title="Lexical scope"></a>Lexical scope</h3><p>Dart is a lexically scoped language, which means that the scope of variables is determined statically, simply by the layout of the code. You can “follow the curly braces outwards” to see if a variable is in scope.</p>
+<p>Here is an example of nested functions with variables at each scope level:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> topLevel = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="keyword">var</span> insideMain = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> myFunction() &#123;</span><br><span class="line">    <span class="keyword">var</span> insideFunction = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> nestedFunction() &#123;</span><br><span class="line">      <span class="keyword">var</span> insideNestedFunction = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">assert</span>(topLevel);</span><br><span class="line">      <span class="keyword">assert</span>(insideMain);</span><br><span class="line">      <span class="keyword">assert</span>(insideFunction);</span><br><span class="line">      <span class="keyword">assert</span>(insideNestedFunction);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Notice how nestedFunction() can use variables from every level, all the way up to the top level.</p>
+<h3 id="Lexical-closures"><a href="#Lexical-closures" class="headerlink" title="Lexical closures"></a>Lexical closures</h3><p>A closure is a function object that has access to variables in its lexical scope, even when the function is used outside of its original scope.</p>
+<p>Functions can close over variables defined in surrounding scopes. In the following example, makeAdder() captures the variable addBy. Wherever the returned function goes, it remembers addBy.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="markdown">Returns a function that adds [addBy] to the</span></span></span><br><span class="line"><span class="comment">/// <span class="markdown">function&#x27;s argument.</span></span></span><br><span class="line"><span class="built_in">Function</span> makeAdder(<span class="built_in">int</span> addBy) &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="built_in">int</span> i) =&gt; addBy + i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// Create a function that adds 2.</span></span><br><span class="line">  <span class="keyword">var</span> add2 = makeAdder(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Create a function that adds 4.</span></span><br><span class="line">  <span class="keyword">var</span> add4 = makeAdder(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">assert</span>(add2(<span class="number">3</span>) == <span class="number">5</span>);</span><br><span class="line">  <span class="keyword">assert</span>(add4(<span class="number">3</span>) == <span class="number">7</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Testing-functions-for-equality"><a href="#Testing-functions-for-equality" class="headerlink" title="Testing functions for equality"></a>Testing functions for equality</h3><p>Here’s an example of testing top-level functions, static methods, and instance methods for equality:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> foo() &#123;&#125; <span class="comment">// A top-level function</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">void</span> bar() &#123;&#125; <span class="comment">// A static method</span></span><br><span class="line">  <span class="keyword">void</span> baz() &#123;&#125; <span class="comment">// An instance method</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="keyword">var</span> x;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Comparing top-level functions.</span></span><br><span class="line">  x = foo;</span><br><span class="line">  <span class="keyword">assert</span>(foo == x);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Comparing static methods.</span></span><br><span class="line">  x = A.bar;</span><br><span class="line">  <span class="keyword">assert</span>(A.bar == x);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Comparing instance methods.</span></span><br><span class="line">  <span class="keyword">var</span> v = A(); <span class="comment">// Instance #1 of A</span></span><br><span class="line">  <span class="keyword">var</span> w = A(); <span class="comment">// Instance #2 of A</span></span><br><span class="line">  <span class="keyword">var</span> y = w;</span><br><span class="line">  x = w.baz;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// These closures refer to the same instance (#2),</span></span><br><span class="line">  <span class="comment">// so they&#x27;re equal.</span></span><br><span class="line">  <span class="keyword">assert</span>(y.baz == x);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// These closures refer to different instances,</span></span><br><span class="line">  <span class="comment">// so they&#x27;re unequal.</span></span><br><span class="line">  <span class="keyword">assert</span>(v.baz != w.baz);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Return-values"><a href="#Return-values" class="headerlink" title="Return values"></a>Return values</h3><p>All functions return a value. If no return value is specified, the statement return <code>null</code>; is implicitly appended to the function body.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foo() &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>(foo() == <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Typedefs"><a href="#Typedefs" class="headerlink" title="Typedefs"></a>Typedefs</h2><p>In Dart, functions are objects, just like strings and numbers are objects. A <code>typedef</code>, or function-type alias, gives a function type a name that you can use when declaring fields and return types. A <code>typedef</code> retains type information when a function type is assigned to a variable.</p>
+<p>Consider the following code, which doesn’t use a <code>typedef</code>:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SortedCollection</span> </span>&#123;</span><br><span class="line">  <span class="built_in">Function</span> compare;</span><br><span class="line"></span><br><span class="line">  SortedCollection(<span class="built_in">int</span> f(<span class="built_in">Object</span> a, <span class="built_in">Object</span> b)) &#123;</span><br><span class="line">    compare = f;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Initial, broken implementation.</span></span><br><span class="line"><span class="built_in">int</span> sort(<span class="built_in">Object</span> a, <span class="built_in">Object</span> b) =&gt; <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  SortedCollection coll = SortedCollection(sort);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// All we know is that compare is a function,</span></span><br><span class="line">  <span class="comment">// but what type of function?</span></span><br><span class="line">  <span class="keyword">assert</span>(coll.compare <span class="keyword">is</span> <span class="built_in">Function</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Type information is lost when assigning f to compare. The type of f is <code>(Object, Object) → int</code> (where → means returns), yet the type of compare is <code>Function</code>. If we change the code to use explicit names and retain type information, both developers and tools can use that information.</p>
+<p>typedef Compare = int Function(Object a, Object b);</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SortedCollection</span> </span>&#123;</span><br><span class="line">  Compare compare;</span><br><span class="line"></span><br><span class="line">  SortedCollection(<span class="keyword">this</span>.compare);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Initial, broken implementation.</span></span><br><span class="line"><span class="built_in">int</span> sort(<span class="built_in">Object</span> a, <span class="built_in">Object</span> b) =&gt; <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  SortedCollection coll = SortedCollection(sort);</span><br><span class="line">  <span class="keyword">assert</span>(coll.compare <span class="keyword">is</span> <span class="built_in">Function</span>);</span><br><span class="line">  <span class="keyword">assert</span>(coll.compare <span class="keyword">is</span> Compare);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p> Note: Currently, typedefs are restricted to function types. We expect this to change.</p>
+<hr>
+<p>Because typedefs are simply aliases, they offer a way to check the type of any function. For example:</p>
+<p>typedef Compare<T> = int Function(T a, T b);</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> sort(<span class="built_in">int</span> a, <span class="built_in">int</span> b) =&gt; a - b;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="keyword">assert</span>(sort <span class="keyword">is</span> Compare&lt;<span class="built_in">int</span>&gt;); <span class="comment">// True!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://dart.dev/guides/language/language-tour">Language tour | Dart - https://dart.dev/guides/language/language-tour</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://dart.dev/guides/language/effective-dart/design">Effective Dart: Design | Dart - https://dart.dev/guides/language/effective-dart/design</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/03/07/Programming-Language/Dart/Language-Tour/A-basic-Dart-program-Important-concepts-Keywords/" rel="bookmark">[Dart Language Tour] A basic Dart program, Important concepts, Keywords</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/03/07/Programming-Language/Dart/Language-Tour/Asynchrony-support-Generators-Isolates/" rel="bookmark">[Dart Language Tour] Asynchrony support, Generators, Isolates</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/03/07/Programming-Language/Dart/Language-Tour/Control-flow-statements-Assert-Exception/" rel="bookmark">[Dart Language Tour] Control flow statements, Assert, Exception</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/03/07/Programming-Language/Dart/Language-Tour/Generics-Libraries-and-visibility/" rel="bookmark">[Dart Language Tour] Generics, Libraries and visibility</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/03/07/Programming-Language/Dart/Language-Tour/Classes-Enums-Callable-Classes-Metadata/" rel="bookmark">[Dart Language Tour] Classes, Enums, Callable Classes, Metadata</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Functions-Typedefs/" title="[Dart Language Tour] Functions, Typedefs">https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Functions-Typedefs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Dart/" rel="tag"># Dart</a>
+              <a href="/tags/Function/" rel="tag"># Function</a>
+              <a href="/tags/Language-Tour/" rel="tag"># Language Tour</a>
+              <a href="/tags/return/" rel="tag"># return</a>
+              <a href="/tags/void/" rel="tag"># void</a>
+              <a href="/tags/Parameter/" rel="tag"># Parameter</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/03/07/Programming-Language/Dart/Language-Tour/Generics-Libraries-and-visibility/" rel="prev" title="[Dart Language Tour] Generics, Libraries and visibility">
+                  <i class="fa fa-chevron-left"></i> [Dart Language Tour] Generics, Libraries and visibility
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/03/07/Programming-Language/Dart/Language-Tour/Control-flow-statements-Assert-Exception/" rel="next" title="[Dart Language Tour] Control flow statements, Assert, Exception">
+                  [Dart Language Tour] Control flow statements, Assert, Exception <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

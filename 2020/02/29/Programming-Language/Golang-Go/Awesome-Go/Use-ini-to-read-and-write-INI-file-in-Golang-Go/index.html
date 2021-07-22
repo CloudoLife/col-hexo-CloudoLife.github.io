@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="iniPackage ini provides INI file read and write functionality in Go.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Go] Use ini to read and write INI file in Golang (Go)">
+<meta property="og:url" content="https://cloudolife.com/2020/02/29/Programming-Language/Golang-Go/Awesome-Go/Use-ini-to-read-and-write-INI-file-in-Golang-Go/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="iniPackage ini provides INI file read and write functionality in Go.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-29T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.092Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Golang (Go)">
+<meta property="article:tag" content="Awesome Go">
+<meta property="article:tag" content="ini">
+<meta property="article:tag" content="INI file">
+<meta property="article:tag" content="struc">
+<meta property="article:tag" content="Marshal">
+<meta property="article:tag" content="Unmarshal">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/02/29/Programming-Language/Golang-Go/Awesome-Go/Use-ini-to-read-and-write-INI-file-in-Golang-Go/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2020&#x2F;02&#x2F;29&#x2F;Programming-Language&#x2F;Golang-Go&#x2F;Awesome-Go&#x2F;Use-ini-to-read-and-write-INI-file-in-Golang-Go&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;02&#x2F;29&#x2F;Programming-Language&#x2F;Golang-Go&#x2F;Awesome-Go&#x2F;Use-ini-to-read-and-write-INI-file-in-Golang-Go&#x2F;&quot;,&quot;title&quot;:&quot;[Awesome Go] Use ini to read and write INI file in Golang (Go)&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[Awesome Go] Use ini to read and write INI file in Golang (Go) | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ini"><span class="nav-number">1.</span> <span class="nav-text">ini</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Features"><span class="nav-number">1.1.</span> <span class="nav-text">Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.2.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-Started"><span class="nav-number">1.3.</span> <span class="nav-text">Getting Started</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-between-struct-and-section"><span class="nav-number">1.4.</span> <span class="nav-text">Map between struct and section</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Map-To-Struct"><span class="nav-number">1.4.1.</span> <span class="nav-text">Map To Struct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reflect-From-Struct"><span class="nav-number">1.4.2.</span> <span class="nav-text">Reflect From Struct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map-with-ShadowLoad"><span class="nav-number">1.4.3.</span> <span class="nav-text">Map with ShadowLoad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-Notes-On-Map-Reflect"><span class="nav-number">1.4.4.</span> <span class="nav-text">Other Notes On Map&#x2F;Reflect</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/02/29/Programming-Language/Golang-Go/Awesome-Go/Use-ini-to-read-and-write-INI-file-in-Golang-Go/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Go] Use ini to read and write INI file in Golang (Go)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-02-29 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-29T00:00:00+00:00">2020-02-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Golang-Go/" itemprop="url" rel="index"><span itemprop="name">Golang (Go)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Golang-Go/Awesome-Go/" itemprop="url" rel="index"><span itemprop="name">Awesome Go</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/02/29/Programming-Language/Golang-Go/Awesome-Go/Use-ini-to-read-and-write-INI-file-in-Golang-Go/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/29/Programming-Language/Golang-Go/Awesome-Go/Use-ini-to-read-and-write-INI-file-in-Golang-Go/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>6.5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>6 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="ini"><a href="#ini" class="headerlink" title="ini"></a>ini</h1><p>Package ini provides INI file read and write functionality in Go.</p>
+<span id="more"></span>
+
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li><p>Load from multiple data sources(<code>file</code>, <code>[]byte</code>, <code>io.Reader</code> and <code>io.ReadCloser</code>) with overwrites.</p>
+</li>
+<li><p>Read with recursion values.</p>
+</li>
+<li><p>Read with parent-child sections.</p>
+</li>
+<li><p>Read with auto-increment key names.</p>
+</li>
+<li><p>Read with multiple-line values.</p>
+</li>
+<li><p>Read with tons of helper methods.</p>
+</li>
+<li><p>Read and convert values to Go types.</p>
+</li>
+<li><p>Read and WRITE comments of sections and keys.</p>
+</li>
+<li><p>Manipulate sections, keys and comments with ease.</p>
+</li>
+<li><p>Keep sections and keys in order as you parse and save.</p>
+</li>
+</ul>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>Standard go get:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> go get -u gopkg.in/ini.v1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>We will go through a very simple example to illustrate how to get started.</p>
+<p>First of all, create two files (my.ini and main.go) under the directory of your choice, let’s say we choose <code>/tmp/ini</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p /tmp/ini</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /tmp/ini</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> touch my.ini main.go</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tree .</span></span><br><span class="line">.</span><br><span class="line">├── main.go</span><br><span class="line">└── my.ini</span><br><span class="line"></span><br><span class="line">0 directories, 2 files</span><br></pre></td></tr></table></figure>
+
+<p>Now, we put some content into the <code>my.ini</code> file (partially take from Grafana).</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># possible values : production, development</span></span><br><span class="line"><span class="attr">app_mode</span> = development</span><br><span class="line"></span><br><span class="line"><span class="section">[paths]</span></span><br><span class="line"><span class="comment"># Path to where grafana can store temp files, sessions, and the sqlite3 db (if that is used)</span></span><br><span class="line"><span class="attr">data</span> = /home/git/grafana</span><br><span class="line"></span><br><span class="line"><span class="section">[server]</span></span><br><span class="line"><span class="comment"># Protocol (http or https)</span></span><br><span class="line"><span class="attr">protocol</span> = http</span><br><span class="line"></span><br><span class="line"><span class="comment"># The http port  to use</span></span><br><span class="line"><span class="attr">http_port</span> = <span class="number">9999</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Redirect to correct domain if host header does not match domain</span></span><br><span class="line"><span class="comment"># Prevents DNS rebinding attacks</span></span><br><span class="line"><span class="attr">enforce_domain</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>Great, let’s start writing some code in <code>main.go</code> to manipulate this file.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;os&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;gopkg.in/ini.v1&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    cfg, err := ini.Load(<span class="string">&quot;my.ini&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;Fail to read file: %v&quot;</span>, err)</span><br><span class="line">        os.Exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Classic read of values, default section can be represented as empty string</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;App Mode:&quot;</span>, cfg.Section(<span class="string">&quot;&quot;</span>).Key(<span class="string">&quot;app_mode&quot;</span>).String())</span><br><span class="line">    fmt.Println(<span class="string">&quot;Data Path:&quot;</span>, cfg.Section(<span class="string">&quot;paths&quot;</span>).Key(<span class="string">&quot;data&quot;</span>).String())</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Let&#x27;s do some candidate value limitation</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;Server Protocol:&quot;</span>,</span><br><span class="line">        cfg.Section(<span class="string">&quot;server&quot;</span>).Key(<span class="string">&quot;protocol&quot;</span>).In(<span class="string">&quot;http&quot;</span>, []<span class="keyword">string</span>&#123;<span class="string">&quot;http&quot;</span>, <span class="string">&quot;https&quot;</span>&#125;))</span><br><span class="line">    <span class="comment">// Value read that is not in candidates will be discarded and fall back to given default value</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;Email Protocol:&quot;</span>,</span><br><span class="line">        cfg.Section(<span class="string">&quot;server&quot;</span>).Key(<span class="string">&quot;protocol&quot;</span>).In(<span class="string">&quot;smtp&quot;</span>, []<span class="keyword">string</span>&#123;<span class="string">&quot;imap&quot;</span>, <span class="string">&quot;smtp&quot;</span>&#125;))</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Try out auto-type conversion</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;Port Number: (%[1]T) %[1]d\n&quot;</span>, cfg.Section(<span class="string">&quot;server&quot;</span>).Key(<span class="string">&quot;http_port&quot;</span>).MustInt(<span class="number">9999</span>))</span><br><span class="line">    fmt.Printf(<span class="string">&quot;Enforce Domain: (%[1]T) %[1]v\n&quot;</span>, cfg.Section(<span class="string">&quot;server&quot;</span>).Key(<span class="string">&quot;enforce_domain&quot;</span>).MustBool(<span class="literal">false</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Now, make some changes and save it</span></span><br><span class="line">    cfg.Section(<span class="string">&quot;&quot;</span>).Key(<span class="string">&quot;app_mode&quot;</span>).SetValue(<span class="string">&quot;production&quot;</span>)</span><br><span class="line">    cfg.SaveTo(<span class="string">&quot;my.ini.local&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Almost there, let’s run this program and check the output.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> go run main.go</span></span><br><span class="line">App Mode: development</span><br><span class="line">Data Path: /home/git/grafana</span><br><span class="line">Server Protocol: http</span><br><span class="line">Email Protocol: smtp</span><br><span class="line">Port Number: (int) 9999</span><br><span class="line">Enforce Domain: (bool) true</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat my.ini.local</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> possible values : production, development</span></span><br><span class="line">app_mode = production</span><br><span class="line"></span><br><span class="line">[paths]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Path to <span class="built_in">where</span> grafana can store temp files, sessions, and the sqlite3 db (<span class="keyword">if</span> that is used)</span></span><br><span class="line">data = /home/git/grafana</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>Perfect! Though the example is very basic and covered only a small bit of all functionality, but it’s a good start.</p>
+<h2 id="Map-between-struct-and-section"><a href="#Map-between-struct-and-section" class="headerlink" title="Map between struct and section"></a>Map between struct and section</h2><h3 id="Map-To-Struct"><a href="#Map-To-Struct" class="headerlink" title="Map To Struct"></a>Map To Struct</h3><p>Want more objective way to play with INI? Cool.</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Name</span> = Unknwon</span><br><span class="line"><span class="attr">age</span> = <span class="number">21</span></span><br><span class="line"><span class="attr">Male</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">Born</span> = <span class="number">1993</span>-<span class="number">01</span>-<span class="number">01</span>T20:<span class="number">17</span>:<span class="number">05</span>Z</span><br><span class="line"></span><br><span class="line"><span class="section">[Note]</span></span><br><span class="line"><span class="attr">Content</span> = Hi is a good man!</span><br><span class="line"><span class="attr">Cities</span> = HangZhou, Boston</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Note <span class="keyword">struct</span> &#123;</span><br><span class="line">    Content <span class="keyword">string</span></span><br><span class="line">    Cities  []<span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">    Name <span class="keyword">string</span></span><br><span class="line">    Age  <span class="keyword">int</span> <span class="string">`ini:&quot;age&quot;`</span></span><br><span class="line">    Male <span class="keyword">bool</span></span><br><span class="line">    Born time.Time</span><br><span class="line">    Note</span><br><span class="line">    Created time.Time <span class="string">`ini:&quot;-&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    cfg, err := ini.Load(<span class="string">&quot;path/to/ini&quot;</span>)</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    p := <span class="built_in">new</span>(Person)</span><br><span class="line">    err = cfg.MapTo(p)</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Things can be simpler.</span></span><br><span class="line">    err = ini.MapTo(p, <span class="string">&quot;path/to/ini&quot;</span>)</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Just map a section? Fine.</span></span><br><span class="line">    n := <span class="built_in">new</span>(Note)</span><br><span class="line">    err = cfg.Section(<span class="string">&quot;Note&quot;</span>).MapTo(n)</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Can I have default value for field? Absolutely.</p>
+<p>Assign it before you map to struct. It will keep the value as it is if the key is not presented or got wrong type.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line">p := &amp;Person&#123;</span><br><span class="line">    Name: <span class="string">&quot;Joe&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<p>It’s really cool, but what’s the point if you can’t give me my file back from struct?</p>
+<h3 id="Reflect-From-Struct"><a href="#Reflect-From-Struct" class="headerlink" title="Reflect From Struct"></a>Reflect From Struct</h3><p>Why not?</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Embeded <span class="keyword">struct</span> &#123;</span><br><span class="line">    Dates  []time.Time <span class="string">`delim:&quot;|&quot; comment:&quot;Time data&quot;`</span></span><br><span class="line">    Places []<span class="keyword">string</span>    <span class="string">`ini:&quot;places,omitempty&quot;`</span></span><br><span class="line">    None   []<span class="keyword">int</span>       <span class="string">`ini:&quot;,omitempty&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Author <span class="keyword">struct</span> &#123;</span><br><span class="line">    Name      <span class="keyword">string</span> <span class="string">`ini:&quot;NAME&quot;`</span></span><br><span class="line">    Male      <span class="keyword">bool</span></span><br><span class="line">    Age       <span class="keyword">int</span> <span class="string">`comment:&quot;Author&#x27;s age&quot;`</span></span><br><span class="line">    GPA       <span class="keyword">float64</span></span><br><span class="line">    NeverMind <span class="keyword">string</span> <span class="string">`ini:&quot;-&quot;`</span></span><br><span class="line">    *Embeded <span class="string">`comment:&quot;Embeded section&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a := &amp;Author&#123;<span class="string">&quot;Unknwon&quot;</span>, <span class="literal">true</span>, <span class="number">21</span>, <span class="number">2.8</span>, <span class="string">&quot;&quot;</span>,</span><br><span class="line">        &amp;Embeded&#123;</span><br><span class="line">            []time.Time&#123;time.Now(), time.Now()&#125;,</span><br><span class="line">            []<span class="keyword">string</span>&#123;<span class="string">&quot;HangZhou&quot;</span>, <span class="string">&quot;Boston&quot;</span>&#125;,</span><br><span class="line">            []<span class="keyword">int</span>&#123;&#125;,</span><br><span class="line">        &#125;&#125;</span><br><span class="line">    cfg := ini.Empty()</span><br><span class="line">    err = ini.ReflectFrom(cfg, a)</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>So, what do I get?</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">NAME</span> = Unknwon</span><br><span class="line"><span class="attr">Male</span> = <span class="literal">true</span></span><br><span class="line"><span class="comment">; Author&#x27;s age</span></span><br><span class="line"><span class="attr">Age</span> = <span class="number">21</span></span><br><span class="line"><span class="attr">GPA</span> = <span class="number">2.8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Embeded section</span></span><br><span class="line"><span class="section">[Embeded]</span></span><br><span class="line"><span class="comment">; Time data</span></span><br><span class="line"><span class="attr">Dates</span> = <span class="number">2015</span>-<span class="number">08</span>-<span class="number">07</span>T22:<span class="number">14</span>:<span class="number">22</span>+<span class="number">08</span>:<span class="number">00</span>|<span class="number">2015</span>-<span class="number">08</span>-<span class="number">07</span>T22:<span class="number">14</span>:<span class="number">22</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line"><span class="attr">places</span> = HangZhou,Boston</span><br></pre></td></tr></table></figure>
+
+<h3 id="Map-with-ShadowLoad"><a href="#Map-with-ShadowLoad" class="headerlink" title="Map with ShadowLoad"></a>Map with ShadowLoad</h3><p>If you want to map a section to a struct along with <a target="_blank" rel="noopener" href="https://ini.unknwon.io/docs/howto/work_with_keys#same-key-with-multiple-values">ShadowLoad</a>, then you need to indicate allowshadow in the struct tag.</p>
+<p>For example, suppose you have the following configuration:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[IP]</span></span><br><span class="line"><span class="attr">value</span> = <span class="number">192.168</span>.<span class="number">31.201</span></span><br><span class="line"><span class="attr">value</span> = <span class="number">192.168</span>.<span class="number">31.211</span></span><br><span class="line"><span class="attr">value</span> = <span class="number">192.168</span>.<span class="number">31.221</span></span><br></pre></td></tr></table></figure>
+
+<p>You should define your struct as follows:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> IP <span class="keyword">struct</span> &#123;</span><br><span class="line">   Value    []<span class="keyword">string</span> <span class="string">`ini:&quot;value,omitempty,allowshadow&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>In case you don’t need the first two tag rules, then you can just have <code>ini:&quot;,,allowshadow&quot;</code>.</p>
+<h3 id="Other-Notes-On-Map-Reflect"><a href="#Other-Notes-On-Map-Reflect" class="headerlink" title="Other Notes On Map/Reflect"></a>Other Notes On Map/Reflect</h3><p>Any embedded struct is treated as a section by default, and there is no automatic parent-child relations in map/reflect feature:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Child <span class="keyword">struct</span> &#123;</span><br><span class="line">    Age <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Parent <span class="keyword">struct</span> &#123;</span><br><span class="line">    Name <span class="keyword">string</span></span><br><span class="line">    Child</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Config <span class="keyword">struct</span> &#123;</span><br><span class="line">    City <span class="keyword">string</span></span><br><span class="line">    Parent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Example configuration:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">City</span> = Boston</span><br><span class="line"></span><br><span class="line"><span class="section">[Parent]</span></span><br><span class="line"><span class="attr">Name</span> = Unknwon</span><br><span class="line"></span><br><span class="line"><span class="section">[Child]</span></span><br><span class="line"><span class="attr">Age</span> = <span class="number">21</span></span><br></pre></td></tr></table></figure>
+
+<p>What if, yes, I’m paranoid, I want embedded <code>struct</code> to be in the same section. Well, all roads lead to Rome.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Child <span class="keyword">struct</span> &#123;</span><br><span class="line">    Age <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Parent <span class="keyword">struct</span> &#123;</span><br><span class="line">    Name <span class="keyword">string</span></span><br><span class="line">    Child <span class="string">`ini:&quot;Parent&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Config <span class="keyword">struct</span> &#123;</span><br><span class="line">    City <span class="keyword">string</span></span><br><span class="line">    Parent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Example configuration:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">City</span> = Boston</span><br><span class="line"></span><br><span class="line"><span class="section">[Parent]</span></span><br><span class="line"><span class="attr">Name</span> = Unknwon</span><br><span class="line"><span class="attr">Age</span> = <span class="number">21</span></span><br></pre></td></tr></table></figure>
+
+<p>See also <a target="_blank" rel="noopener" href="https://ini.unknwon.io/docs/advanced/name_and_value_mapper">Customize name and value mappers - https://ini.unknwon.io/docs/advanced/name_and_value_mapper</a>.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://github.com/go-ini/ini">GitHub - go-ini/ini: Package ini provides INI file read and write functionality in Go. - https://github.com/go-ini/ini</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://ini.unknwon.io/">go-ini/ini: A fantastic package for INI manipulations in Go - https://ini.unknwon.io/</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://pkg.go.dev/github.com/go-ini/ini">ini · pkg.go.dev - https://pkg.go.dev/github.com/go-ini/ini</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/03/07/Programming-Language/Golang-Go/Awesome-Go/Use-mapstructure-to-decode-generic-map-values-to-structure-in-Golang-Go/" rel="bookmark">[Awesome Go] Use mapstructure to decode generic map values to structure in Golang (Go)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/03/14/Programming-Language/Golang-Go/Awesome-Go/Use-viper-to-load-local-or-remote-config-from-file-environment-variables-and-write-config-to-file-in-Golang-Go/" rel="bookmark">[Awesome Go] Use viper to load local or remote config from file & environment variables and write config to file in Golang (Go)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/16/Programming-Language/Golang-Go/Awesome-Go/Use-yaml-package-to-encode-and-decode-YAML-values/" rel="bookmark">[Awesome Go] Use yaml package to encode and decode YAML values</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/05/02/Programming-Language/Golang-Go/Awesome-Go/Use-GORM-package-to-make-developer-friendly-database-ORM/" rel="bookmark">[Awesome Go] Use GORM package to make developer-friendly database ORM</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/01/30/Programming-Language/Golang-Go/Awesome-Go/Use-air-to-hot-live-reload-for-Go-apps/" rel="bookmark">[Awesome Go] Use air to hot live reload for Go apps</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2020/02/29/Programming-Language/Golang-Go/Awesome-Go/Use-ini-to-read-and-write-INI-file-in-Golang-Go/" title="[Awesome Go] Use ini to read and write INI file in Golang (Go)">https://cloudolife.com/2020/02/29/Programming-Language/Golang-Go/Awesome-Go/Use-ini-to-read-and-write-INI-file-in-Golang-Go/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Golang-Go/" rel="tag"># Golang (Go)</a>
+              <a href="/tags/Awesome-Go/" rel="tag"># Awesome Go</a>
+              <a href="/tags/ini/" rel="tag"># ini</a>
+              <a href="/tags/INI-file/" rel="tag"># INI file</a>
+              <a href="/tags/struc/" rel="tag"># struc</a>
+              <a href="/tags/Marshal/" rel="tag"># Marshal</a>
+              <a href="/tags/Unmarshal/" rel="tag"># Unmarshal</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/29/Programming-Language/Rust/Awesome-Rust/Use-evcxr-repl-to-run-Interactive-Rust/" rel="prev" title="[Awesome Rust] Use evcxr_repl to run Interactive Rust">
+                  <i class="fa fa-chevron-left"></i> [Awesome Rust] Use evcxr_repl to run Interactive Rust
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/03/02/Programming-Language/Golang-Go/Talking-Golang-Go/Index/" rel="next" title="[Talking-Golang (Go)] Index">
+                  [Talking-Golang (Go)] Index <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>

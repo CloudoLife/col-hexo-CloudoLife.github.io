@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;cloudolife.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:true,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Homebrew - The Missing Package Manager for macOS (or Linux)Homebrew is an essential piece of software to help you organize the tools you use. The package manager allows you to install a large number o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Homebrew (brew) Cheatsheet] Homebrew (brew) Basics Commands">
+<meta property="og:url" content="https://cloudolife.com/2019/06/01/Awesome%20Software/Homebrew-brew/Homebrew-brew-Basics-Commands/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Homebrew - The Missing Package Manager for macOS (or Linux)Homebrew is an essential piece of software to help you organize the tools you use. The package manager allows you to install a large number o">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-06-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T00:47:19.084Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Awesome Software">
+<meta property="article:tag" content="Homebrew (brew)">
+<meta property="article:tag" content="Cheatsheet">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2019/06/01/Awesome%20Software/Homebrew-brew/Homebrew-brew-Basics-Commands/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;cloudolife.com&#x2F;2019&#x2F;06&#x2F;01&#x2F;Awesome%20Software&#x2F;Homebrew-brew&#x2F;Homebrew-brew-Basics-Commands&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;06&#x2F;01&#x2F;Awesome Software&#x2F;Homebrew-brew&#x2F;Homebrew-brew-Basics-Commands&#x2F;&quot;,&quot;title&quot;:&quot;[Homebrew (brew) Cheatsheet] Homebrew (brew) Basics Commands&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>[Homebrew (brew) Cheatsheet] Homebrew (brew) Basics Commands | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;G-8Y9QPJWXQN&quot;,&quot;only_pageview&quot;:false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cloud-oriented Life</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">928</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">198</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">331</span></a></li>
+        <li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li>
+        <li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li>
+        <li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li>
+        <li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li>
+        <li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li>
+        <li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li>
+        <li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li>
+        <li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li>
+        <li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li>
+        <li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li>
+        <li class="menu-item menu-item-weekly"><a href="/categories/Weekly/" rel="section"><i class="fa fa-book fa-fw"></i>Weekly</a></li>
+        <li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Homebrew-The-Missing-Package-Manager-for-macOS-or-Linux"><span class="nav-number">1.</span> <span class="nav-text">Homebrew - The Missing Package Manager for macOS (or Linux)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commands"><span class="nav-number">1.2.</span> <span class="nav-text">Commands</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-install"><span class="nav-number">1.2.1.</span> <span class="nav-text">brew install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-upgrade-update-outdated"><span class="nav-number">1.2.2.</span> <span class="nav-text">brew upgrade, update outdated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-cask"><span class="nav-number">1.2.3.</span> <span class="nav-text">brew cask</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-search-info"><span class="nav-number">1.2.4.</span> <span class="nav-text">brew search, info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-service"><span class="nav-number">1.2.5.</span> <span class="nav-text">brew service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-cleanup"><span class="nav-number">1.2.6.</span> <span class="nav-text">brew cleanup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-uninstall"><span class="nav-number">1.2.7.</span> <span class="nav-text">brew uninstall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-tab"><span class="nav-number">1.2.8.</span> <span class="nav-text">brew tab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-analytics"><span class="nav-number">1.2.9.</span> <span class="nav-text">brew analytics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew-doctor"><span class="nav-number">1.2.10.</span> <span class="nav-text">brew doctor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Uninstall-Homebrew"><span class="nav-number">1.2.11.</span> <span class="nav-text">Uninstall Homebrew</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">198</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">928</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2019/06/01/Awesome%20Software/Homebrew-brew/Homebrew-brew-Basics-Commands/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+      <meta itemprop="description" content="A Husband and Fateher, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Homebrew (brew) Cheatsheet] Homebrew (brew) Basics Commands
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-01T00:00:00+00:00">2019-06-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-22 00:47:19" itemprop="dateModified" datetime="2021-07-22T00:47:19+00:00">2021-07-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/" itemprop="url" rel="index"><span itemprop="name">Awesome Software</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/Homebrew-brew/" itemprop="url" rel="index"><span itemprop="name">Homebrew (brew)</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/06/01/Awesome%20Software/Homebrew-brew/Homebrew-brew-Basics-Commands/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/01/Awesome Software/Homebrew-brew/Homebrew-brew-Basics-Commands/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>3.6k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>3 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Homebrew-The-Missing-Package-Manager-for-macOS-or-Linux"><a href="#Homebrew-The-Missing-Package-Manager-for-macOS-or-Linux" class="headerlink" title="Homebrew - The Missing Package Manager for macOS (or Linux)"></a>Homebrew - The Missing Package Manager for macOS (or Linux)</h1><p>Homebrew is an essential piece of software to help you organize the tools you use. The package manager allows you to install a large number of software like <code>NodeJS</code> or new versions of Git and will help you to keep them up to date.</p>
+<p>These Homebrew commands will help you installing and maintaining the set of tools you need to develop good software.</p>
+<span id="more"></span>
+
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> /bin/bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)</span>&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h2><h3 id="brew-install"><a href="#brew-install" class="headerlink" title="brew install"></a>brew install</h3><p>Homebrew will give you a convenient way to install a package as simple as running the following in your terminal:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install &lt;package&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="brew-upgrade-update-outdated"><a href="#brew-upgrade-update-outdated" class="headerlink" title="brew upgrade, update outdated"></a>brew upgrade, update outdated</h3><p>You want to update a specific package? Run the following command:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew upgrade &lt;package&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Update all installed packages.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew upgrade</span></span><br></pre></td></tr></table></figure>
+
+<p>If there is a package that you want to exclude from further updates, you can pin the package’s version like this:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew pin &lt;package&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Undone by running</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew unpin &lt;package&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>In order to update Homebrew itself, run <code>brew update</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew update</span></span><br></pre></td></tr></table></figure>
+
+<p>Simply run the following command to check all packages at once:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew outdated</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="brew-cask"><a href="#brew-cask" class="headerlink" title="brew cask"></a>brew cask</h3><p>Homebrew Cask provides a friendly CLI workflow for the administration of macOS applications distributed as binaries.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Tap the Cask repository from Github.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew tap homebrew/cask</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> List all the installed casks .</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew cask list</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Search all known casks based on the substring text.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew search &lt;text&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Install the given cask.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew cask install &lt;cask&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Reinstalls the given Cask</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew cask reinstall &lt;cask&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Uninstall the given cask.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew cask uninstall &lt;cask&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="brew-search-info"><a href="#brew-search-info" class="headerlink" title="brew search, info"></a>brew search, info</h3><p>To check if there is a specific package, you can run:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew search &lt;term&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Homebrew will list all matching packages that you can install with <code>brew install &lt;package&gt;</code> as mentioned above.</p>
+<p>Before installing a package, you can also lookup some information about it by running:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew info &lt;package&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>This will give you a description and further dependencies and requirements.</p>
+<h3 id="brew-service"><a href="#brew-service" class="headerlink" title="brew service"></a>brew service</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew services list</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew services start &lt;service&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew services stop &lt;service&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="brew-cleanup"><a href="#brew-cleanup" class="headerlink" title="brew cleanup"></a>brew cleanup</h3><p>Clean up old versions of all packages.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew cleanup</span></span><br></pre></td></tr></table></figure>
+
+<p>Clean up the old version of the specified package.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew cleanup &lt;package&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Remove old symlinks.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew prune</span></span><br></pre></td></tr></table></figure>
+
+<p>Uninstall everything.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew remove --force --ignore-dependencies $(brew list)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="brew-uninstall"><a href="#brew-uninstall" class="headerlink" title="brew uninstall"></a>brew uninstall</h3><p>To remove our package, we can run the uninstall task:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew uninstall &lt;package&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>View the old version package that can be cleaned up without performing actual operations.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew cleanup -n</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="brew-tab"><a href="#brew-tab" class="headerlink" title="brew tab"></a>brew tab</h3><p>It is possible to add additional repositories to homebrew by making use of the brew tap command. This allows you to install additional applications that does not form part of the default set of repositories.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> List all the current tapped repositories (taps)</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew tap</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Tap a formula repository from Github using https <span class="keyword">for</span> tap https://github.com/user/homebrew-repo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew tap &lt;user/repo&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Tap a formula repository from the specified URL</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew tap &lt;user/repo&gt; &lt;URL&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Remove the given tap from the repository</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew untap &lt;user/repo&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="brew-analytics"><a href="#brew-analytics" class="headerlink" title="brew analytics"></a>brew analytics</h3><p>If you don’t mind the collection of metrics then you do not have to do anything. If you do not want to be anonymously tracked then simply turn off the analytics:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew analytics</span></span><br><span class="line">Analytics are enabled.</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew analytics off</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> brew analytics</span></span><br><span class="line">Analytics are disabled.</span><br></pre></td></tr></table></figure>
+
+<h3 id="brew-doctor"><a href="#brew-doctor" class="headerlink" title="brew doctor"></a>brew doctor</h3><p>Try <code>brew doctor</code> first! It will give you a bunch of useful hints like:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew doctor</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Uninstall-Homebrew"><a href="#Uninstall-Homebrew" class="headerlink" title="Uninstall Homebrew"></a>Uninstall Homebrew</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> /bin/bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)</span>&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a target="_blank" rel="noopener" href="https://brew.sh/">The Missing Package Manager for macOS (or Linux) — Homebrew - https://brew.sh/</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://docs.brew.sh/FAQ">FAQ — Homebrew Documentation - https://docs.brew.sh/FAQ</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://dev.to/code2bits/homebrew---basics--cheatsheet-3a3n">Homebrew - Basics Commands and Cheatsheet - DEV Community - https://dev.to/code2bits/homebrew—basics–cheatsheet-3a3n</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://blog.steven266.de/5-essential-homebrew-commands-you-should-know-ab6ecee0f7ee">5 Essential Homebrew Commands You Should Know | by Steven | Steven’s Blog - https://blog.steven266.de/5-essential-homebrew-commands-you-should-know-ab6ecee0f7ee</a></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2019/03/02/Awesome Software/System/Use-SwitchHosts-to-manage-and-switch-hosts/" rel="bookmark">[Awesome macOS App] Use SwitchHosts to manage and switch hosts</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2015/05/01/Awesome Software/Integrated-Development-Environment-IDE/Visual-Studio-Code-VS-Code/Visual-Studio-Code-A-code-editor-redefined-and-optimized-for-building-and-debugging-modern-web-and-cloud-applications/" rel="bookmark">[Visual Studio Code (VSCode)] Visual Studio Code : A code editor redefined and optimized for building and debugging modern web and cloud applications</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/12/26/Awesome Software/Knowledge/Logseq/Logseq-A-privacy-first-open-source-knowledge-base/" rel="bookmark">[Knowledge] Logseq: A privacy-first, open-source knowledge base</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2021/03/13/Awesome Software/Security/Certificate/Use-mkcert-to-make-locally-trusted-development-certificates/" rel="bookmark">Use mkcert to make locally-trusted development certificates</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/2020/07/04/Kubernetes-K8S/Lens-THE-KUBERNETES-IDE-FOR-MONITORING/" rel="bookmark">[Kubernetes (K8S)] Lens: THE KUBERNETES IDE FOR MONITORING</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>CloudoLife
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://cloudolife.com/2019/06/01/Awesome%20Software/Homebrew-brew/Homebrew-brew-Basics-Commands/" title="[Homebrew (brew) Cheatsheet] Homebrew (brew) Basics Commands">https://cloudolife.com/2019/06/01/Awesome Software/Homebrew-brew/Homebrew-brew-Basics-Commands/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/CloudoLife">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Awesome-Software/" rel="tag"># Awesome Software</a>
+              <a href="/tags/Homebrew-brew/" rel="tag"># Homebrew (brew)</a>
+              <a href="/tags/Cheatsheet/" rel="tag"># Cheatsheet</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/06/01/Programming-Language/Ruby/Talking-Ruby/Syntactic-sugar-in-Ruby/" rel="prev" title="[Talking-Ruby] Syntactic sugar in Ruby">
+                  <i class="fa fa-chevron-left"></i> [Talking-Ruby] Syntactic sugar in Ruby
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/06/15/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-whenever-gem-to-cron-jobs-in-Ruby/" rel="next" title="[Awesome Ruby Gem] Use whenever gem to cron jobs in Ruby">
+                  [Awesome Ruby Gem] Use whenever gem to cron jobs in Ruby <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">1.5m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;cloudolife&quot;,&quot;count&quot;:true,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+</body>
+</html>
