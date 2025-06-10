@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="closure_tree Closure_tree lets your ActiveRecord models act as nodes in a tree data structure. Common applications include modeling hierarchical data, like tags, threaded comments, page graphs in CMSe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Ruby Gem] Use closure_tree gem to model hierarchical tree data structure">
+<meta property="og:url" content="https://cloudolife.com/2020/09/05/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-closure-tree-gem-to-model-hierarchical-tree-data-structure/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="closure_tree Closure_tree lets your ActiveRecord models act as nodes in a tree data structure. Common applications include modeling hierarchical data, like tags, threaded comments, page graphs in CMSe">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-05T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.935Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Awesome Ruby Gem">
+<meta property="article:tag" content="ActiveRecord">
+<meta property="article:tag" content="closure_tree">
+<meta property="article:tag" content="Hierarchical Tree Data Structure">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/09/05/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-closure-tree-gem-to-model-hierarchical-tree-data-structure/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/09/05/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-closure-tree-gem-to-model-hierarchical-tree-data-structure/","path":"2020/09/05/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-closure-tree-gem-to-model-hierarchical-tree-data-structure/","title":"[Awesome Ruby Gem] Use closure_tree gem to model hierarchical tree data structure"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Ruby Gem] Use closure_tree gem to model hierarchical tree data structure | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">closure_tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration"><span class="nav-number">1.2.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.3.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creation"><span class="nav-number">1.3.1.</span> <span class="nav-text">Creation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find-or-create-by-path"><span class="nav-number">1.3.2.</span> <span class="nav-text">find_or_create_by_path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Moving-nodes-around-the-tree"><span class="nav-number">1.3.3.</span> <span class="nav-text">Moving nodes around the tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-hashes"><span class="nav-number">1.3.4.</span> <span class="nav-text">Nested hashes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Eager-loading"><span class="nav-number">1.3.5.</span> <span class="nav-text">Eager loading</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More"><span class="nav-number">1.4.</span> <span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/09/05/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-closure-tree-gem-to-model-hierarchical-tree-data-structure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Ruby Gem] Use closure_tree gem to model hierarchical tree data structure | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Ruby Gem] Use closure_tree gem to model hierarchical tree data structure
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-09-05 00:00:00" itemprop="dateCreated datePublished" datetime="2020-09-05T00:00:00+00:00">2020-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Awesome-Ruby-Gem/" itemprop="url" rel="index"><span itemprop="name">Awesome Ruby Gem</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>7.1k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>6 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>closure_tree</h1>
+<p>Closure_tree lets your ActiveRecord models act as nodes in a tree data structure.</p>
+<p>Common applications include modeling hierarchical data, like tags, threaded comments, page graphs in CMSes, and tracking user referrals.</p>
+<span id="more"></span>
+<h2 id="Installation">Installation</h2>
+<p>You can install it as a gem:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gem install closure_tree</span></span><br></pre></td></tr></table></figure>
+<p>or add it into a Gemfile (Bundler):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ClosureTree/closure_tree: Easily and efficiently make your ActiveRecord models support hierarchies</span></span><br><span class="line"><span class="comment"># https://github.com/ClosureTree/closure_tree</span></span><br><span class="line">gem <span class="string">&#x27;closure_tree&#x27;</span>, <span class="string">`7.2.0&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Then, run <code>bundle install</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle install</span></span><br></pre></td></tr></table></figure>
+<h2 id="Configuration">Configuration</h2>
+<ol>
+<li>
+<p>Add has_closure_tree (or acts_as_tree, which is an alias of the same method) to your hierarchical model:</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Tag</span> &lt; <span class="title class_ inherited__">ActiveRecord::Base</span></span><br><span class="line">    has_closure_tree <span class="comment"># or acts_as_tree</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>Add a migration to add a parent_id column to the hierarchical model. You may want to also add a column for deterministic ordering of children, but that’s optional.</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AddParentIdToTag</span> &lt; <span class="title class_ inherited__">ActiveRecord::Migration</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">change</span></span><br><span class="line">    add_column <span class="symbol">:tags</span>, <span class="symbol">:parent_id</span>, <span class="symbol">:integer</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>The column must be nullable. Root nodes have a NULL parent_id.</p>
+</li>
+<li>
+<p>Run rails g closure_tree:migration tag (and replace tag with your model name) to create the closure tree table for your model.</p>
+<p>By default the table name will be the model’s table name, followed by “_hierarchies”. Note that by calling has_closure_tree, a “virtual model” (in this case, TagHierarchy) will be created dynamically. You don’t need to create it.</p>
+</li>
+<li>
+<p>Run rake db:migrate</p>
+</li>
+<li>
+<p>If you’re migrating from another system where your model already has a parent_id column, run Tag.rebuild! and your tag_hierarchies table will be truncated and rebuilt.</p>
+<p>If you’re starting from scratch you don’t need to call rebuild!.</p>
+</li>
+</ol>
+<p>NOTE: Run rails g closure_tree:config to create an initializer with extra configurations. (Optional)</p>
+<h2 id="Usage">Usage</h2>
+<h3 id="Creation">Creation</h3>
+<p>Create a root node:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">grandparent = <span class="title class_">Tag</span>.create(<span class="symbol">name:</span> <span class="string">&#x27;Grandparent&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Child nodes are created by appending to the children collection:</span></span><br><span class="line"></span><br><span class="line">parent = grandparent.children.create(<span class="symbol">name:</span> <span class="string">&#x27;Parent&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Or by appending to the children collection:</span></span><br><span class="line"></span><br><span class="line">child2 = <span class="title class_">Tag</span>.new(<span class="symbol">name:</span> <span class="string">&#x27;Second Child&#x27;</span>)</span><br><span class="line">parent.children &lt;&lt; child2</span><br><span class="line"></span><br><span class="line"><span class="comment"># Or by calling the &quot;add_child&quot; method:</span></span><br><span class="line"></span><br><span class="line">child3 = <span class="title class_">Tag</span>.new(<span class="symbol">name:</span> <span class="string">&#x27;Third Child&#x27;</span>)</span><br><span class="line">parent.add_child child3</span><br><span class="line"></span><br><span class="line"><span class="comment"># Or by setting the parent on the child :</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Tag</span>.create(<span class="symbol">name:</span> <span class="string">&#x27;Fourth Child&#x27;</span>, <span class="symbol">parent:</span> parent)</span><br></pre></td></tr></table></figure>
+<p>Then:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grandparent.self_and_descendants.collect(&amp;<span class="symbol">:name</span>)</span><br><span class="line">=&gt; [<span class="string">&quot;Grandparent&quot;</span>, <span class="string">&quot;Parent&quot;</span>, <span class="string">&quot;First Child&quot;</span>, <span class="string">&quot;Second Child&quot;</span>, <span class="string">&quot;Third Child&quot;</span>, <span class="string">&quot;Fourth Child&quot;</span>]</span><br><span class="line"></span><br><span class="line">child1.ancestry_path</span><br><span class="line">=&gt; [<span class="string">&quot;Grandparent&quot;</span>, <span class="string">&quot;Parent&quot;</span>, <span class="string">&quot;First Child&quot;</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="find-or-create-by-path">find_or_create_by_path</h3>
+<p>You can find as well as find_or_create by “ancestry paths”.</p>
+<p>If you provide an array of strings to these methods, they reference the name column in your model, which can be overridden with the :name_column option provided to has_closure_tree.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">child = <span class="title class_">Tag</span>.find_or_create_by_path(<span class="string">%w[grandparent parent child]</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># As of v5.0.0, find_or_create_by_path can also take an array of attribute hashes:</span></span><br><span class="line"></span><br><span class="line">child = <span class="title class_">Tag</span>.find_or_create_by_path([</span><br><span class="line">  &#123;<span class="symbol">name:</span> <span class="string">&#x27;Grandparent&#x27;</span>, <span class="symbol">title:</span> <span class="string">&#x27;Sr.&#x27;</span>&#125;,</span><br><span class="line">  &#123;<span class="symbol">name:</span> <span class="string">&#x27;Parent&#x27;</span>, <span class="symbol">title:</span> <span class="string">&#x27;Mrs.&#x27;</span>&#125;,</span><br><span class="line">  &#123;<span class="symbol">name:</span> <span class="string">&#x27;Child&#x27;</span>, <span class="symbol">title:</span> <span class="string">&#x27;Jr.&#x27;</span>&#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># If you&#x27;re using STI, The attribute hashes can contain the sti_name and things work as expected:</span></span><br><span class="line"></span><br><span class="line">child = <span class="title class_">Label</span>.find_or_create_by_path([</span><br><span class="line">  &#123;<span class="symbol">type:</span> <span class="string">&#x27;DateLabel&#x27;</span>, <span class="symbol">name:</span> <span class="string">&#x27;2014&#x27;</span>&#125;,</span><br><span class="line">  &#123;<span class="symbol">type:</span> <span class="string">&#x27;DateLabel&#x27;</span>, <span class="symbol">name:</span> <span class="string">&#x27;August&#x27;</span>&#125;,</span><br><span class="line">  &#123;<span class="symbol">type:</span> <span class="string">&#x27;DateLabel&#x27;</span>, <span class="symbol">name:</span> <span class="string">&#x27;5&#x27;</span>&#125;,</span><br><span class="line">  &#123;<span class="symbol">type:</span> <span class="string">&#x27;EventLabel&#x27;</span>, <span class="symbol">name:</span> <span class="string">&#x27;Visit the Getty Center&#x27;</span>&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h3 id="Moving-nodes-around-the-tree">Moving nodes around the tree</h3>
+<p>Nodes can be moved around to other parents, and closure_tree moves the node’s descendancy to the new parent for you:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">d = <span class="title class_">Tag</span>.find_or_create_by_path <span class="string">%w[a b c d]</span></span><br><span class="line">h = <span class="title class_">Tag</span>.find_or_create_by_path <span class="string">%w[e f g h]</span></span><br><span class="line">e = h.root</span><br><span class="line">d.add_child(e) <span class="comment"># &quot;d.children &lt;&lt; e&quot; would work too, of course</span></span><br><span class="line">h.ancestry_path</span><br><span class="line">=&gt; [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>, <span class="string">&quot;e&quot;</span>, <span class="string">&quot;f&quot;</span>, <span class="string">&quot;g&quot;</span>, <span class="string">&quot;h&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>When it is more convenient to simply change the parent_id of a node directly (for example, when dealing with a form <select>), closure_tree will handle the necessary changes automatically when the record is saved:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">j = <span class="title class_">Tag</span>.find <span class="number">102</span></span><br><span class="line">j.self_and_ancestor_ids</span><br><span class="line">=&gt; [<span class="number">102</span>, <span class="number">87</span>, <span class="number">77</span>]</span><br><span class="line">j.update <span class="symbol">parent_id:</span> <span class="number">96</span></span><br><span class="line">j.self_and_ancestor_ids</span><br><span class="line">=&gt; [<span class="number">102</span>, <span class="number">96</span>, <span class="number">95</span>, <span class="number">78</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="Nested-hashes">Nested hashes</h3>
+<p>hash_tree provides a method for rendering a subtree as an ordered nested hash:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">b = <span class="title class_">Tag</span>.find_or_create_by_path <span class="string">%w(a b)</span></span><br><span class="line">a = b.parent</span><br><span class="line">b2 = <span class="title class_">Tag</span>.find_or_create_by_path <span class="string">%w(a b2)</span></span><br><span class="line">d1 = b.find_or_create_by_path <span class="string">%w(c1 d1)</span></span><br><span class="line">c1 = d1.parent</span><br><span class="line">d2 = b.find_or_create_by_path <span class="string">%w(c2 d2)</span></span><br><span class="line">c2 = d2.parent</span><br><span class="line"></span><br><span class="line"><span class="title class_">Tag</span>.hash_tree</span><br><span class="line">=&gt; &#123;a =&gt; &#123;b =&gt; &#123;c1 =&gt; &#123;d1 =&gt; &#123;&#125;&#125;, c2 =&gt; &#123;d2 =&gt; &#123;&#125;&#125;&#125;, b2 =&gt; &#123;&#125;&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Tag</span>.hash_tree(<span class="symbol">:limit_depth</span> =&gt; <span class="number">2</span>)</span><br><span class="line">=&gt; &#123;a =&gt; &#123;b =&gt; &#123;&#125;, b2 =&gt; &#123;&#125;&#125;&#125;</span><br><span class="line"></span><br><span class="line">b.hash_tree</span><br><span class="line">=&gt; &#123;b =&gt; &#123;c1 =&gt; &#123;d1 =&gt; &#123;&#125;&#125;, c2 =&gt; &#123;d2 =&gt; &#123;&#125;&#125;&#125;&#125;</span><br><span class="line"></span><br><span class="line">b.hash_tree(<span class="symbol">:limit_depth</span> =&gt; <span class="number">2</span>)</span><br><span class="line">=&gt; &#123;b =&gt; &#123;c1 =&gt; &#123;&#125;, c2 =&gt; &#123;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>If your tree is large (or might become so), use :limit_depth.</p>
+<p>Without this option, hash_tree will load the entire contents of that table into RAM. Your server may not be happy trying to do this.</p>
+<h3 id="Eager-loading">Eager loading</h3>
+<p>Since most of closure_tree’s methods (e.g. children) return regular ActiveRecord scopes, you can use the includes method for eager loading, e.g.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">comment.children.includes(<span class="symbol">:author</span>)</span><br></pre></td></tr></table></figure>
+<p>However, note that the above approach only eager loads the requested associations for the immediate children of comment. If you want to walk through the entire tree, you may still end up making many queries and loading duplicate copies of objects.</p>
+<p>In some cases, a viable alternative is the following:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">comment.self_and_descendants.includes(<span class="symbol">:author</span>)</span><br></pre></td></tr></table></figure>
+<p>This would load authors for comment and all its descendants in a constant number of queries. However, the return value is an array of Comments, and the tree structure is thus lost, which makes it difficult to walk the tree using elegant recursive algorithms.</p>
+<p>A third option is to use has_closure_tree_root on the model that is composed by the closure_tree model (e.g. a Post may be composed by a tree of Comments). So in post.rb, you would do:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/post.rb</span></span><br><span class="line">has_closure_tree_root <span class="symbol">:root_comment</span></span><br></pre></td></tr></table></figure>
+<p>This gives you a plain has_one association (root_comment) to the root Comment (i.e. that with null parent_id).</p>
+<p>It also gives you a method called root_comment_including_tree, which you can invoke as follows:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a_post.root_comment_including_tree(<span class="symbol">:author</span>)</span><br></pre></td></tr></table></figure>
+<p>The result of this call will be the root Comment with all descendants and associations loaded in a constant number of queries. Inverse associations are also setup on all nodes, so as you walk the tree, calling children or parent on any node will not trigger any further queries and no duplicate copies of objects are loaded into memory.</p>
+<p>The class and foreign key of root_comment are assumed to be Comment and post_id, respectively. These can be overridden in the usual way.</p>
+<p>The same caveat stated above with hash_tree also applies here: this method will load the entire tree into memory. If the tree is very large, this may be a bad idea, in which case using the eager loading methods above may be preferred.</p>
+<h2 id="More">More</h2>
+<p>Visit <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ClosureTree/closure_tree">ClosureTree/closure_tree: Easily and efficiently make your ActiveRecord models support hierarchies - https://github.com/ClosureTree/closure_tree</a><br>
+to learn more about Available options, Accessing Data, FAQs, etc.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ClosureTree/closure_tree">ClosureTree/closure_tree: Easily and efficiently make your ActiveRecord models support hierarchies - https://github.com/ClosureTree/closure_tree</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rubygems.org/gems/closure_tree/">closure_tree | RubyGems.org | your community gem host - https://rubygems.org/gems/closure_tree/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Awesome-Ruby-Gem/" rel="tag"># Awesome Ruby Gem</a>
+              <a href="/tags/ActiveRecord/" rel="tag"># ActiveRecord</a>
+              <a href="/tags/closure-tree/" rel="tag"># closure_tree</a>
+              <a href="/tags/Hierarchical-Tree-Data-Structure/" rel="tag"># Hierarchical Tree Data Structure</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/09/05/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-paranoia-or-acts_as_paranoid-gem-soft-delete-to-hide-and-restore-records-without-actually-deleting-them/" rel="prev" title="[Awesome Ruby Gem] Use paranoia or acts_as_paranoid gem soft delete to hide and restore records without actually deleting them">
+                  <i class="fa fa-angle-left"></i> [Awesome Ruby Gem] Use paranoia or acts_as_paranoid gem soft delete to hide and restore records without actually deleting them
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/09/05/Site/Hexo/Use-alternate-site-or-theme-configuration-to-minimal-invasive-site-and-theme-configuration-in-Hexo/" rel="next" title="[Hexo Best Practices] Use alternate site or theme configuration to minimal invasive site and theme configuration in Hexo">
+                  [Hexo Best Practices] Use alternate site or theme configuration to minimal invasive site and theme configuration in Hexo <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"306d6f909163456b3581e962989b15c6"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

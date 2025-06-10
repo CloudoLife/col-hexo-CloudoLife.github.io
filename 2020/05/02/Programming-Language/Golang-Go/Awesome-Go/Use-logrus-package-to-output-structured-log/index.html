@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="logrus Logrus is a structured logger for Go (golang), completely API compatible with the standard library logger. Logrus is in maintenance-mode. We will not be introducing new features. It’s simply to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Golang (Go)] Use logrus package to output structured log">
+<meta property="og:url" content="https://cloudolife.com/2020/05/02/Programming-Language/Golang-Go/Awesome-Go/Use-logrus-package-to-output-structured-log/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="logrus Logrus is a structured logger for Go (golang), completely API compatible with the standard library logger. Logrus is in maintenance-mode. We will not be introducing new features. It’s simply to">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-02T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.927Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Golang (Go)">
+<meta property="article:tag" content="Logging">
+<meta property="article:tag" content="Awesome Go">
+<meta property="article:tag" content="Logger">
+<meta property="article:tag" content="logrus">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/05/02/Programming-Language/Golang-Go/Awesome-Go/Use-logrus-package-to-output-structured-log/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/05/02/Programming-Language/Golang-Go/Awesome-Go/Use-logrus-package-to-output-structured-log/","path":"2020/05/02/Programming-Language/Golang-Go/Awesome-Go/Use-logrus-package-to-output-structured-log/","title":"[Golang (Go)] Use logrus package to output structured log"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Golang (Go)] Use logrus package to output structured log | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">logrus</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Logging-Method-Name"><span class="nav-number">1.2.1.</span> <span class="nav-text">Logging Method Name</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.3.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fields"><span class="nav-number">1.4.</span> <span class="nav-text">Fields</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Default-Fields"><span class="nav-number">1.5.</span> <span class="nav-text">Default Fields</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hooks"><span class="nav-number">1.6.</span> <span class="nav-text">Hooks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-logging"><span class="nav-number">1.7.</span> <span class="nav-text">Level logging</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Entries"><span class="nav-number">1.8.</span> <span class="nav-text">Entries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Formatters"><span class="nav-number">1.9.</span> <span class="nav-text">Formatters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rotation"><span class="nav-number">1.10.</span> <span class="nav-text">Rotation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools"><span class="nav-number">1.11.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fatal-handlers"><span class="nav-number">1.12.</span> <span class="nav-text">Fatal handlers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread-safety"><span class="nav-number">1.13.</span> <span class="nav-text">Thread safety</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.14.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/05/02/Programming-Language/Golang-Go/Awesome-Go/Use-logrus-package-to-output-structured-log/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Golang (Go)] Use logrus package to output structured log | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Golang (Go)] Use logrus package to output structured log
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-05-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-02T00:00:00+00:00">2020-05-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Golang-Go/" itemprop="url" rel="index"><span itemprop="name">Golang (Go)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Golang-Go/Awesome-Go/" itemprop="url" rel="index"><span itemprop="name">Awesome Go</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Golang-Go/Awesome-Go/Logging/" itemprop="url" rel="index"><span itemprop="name">Logging</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>11 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>logrus</h1>
+<p>Logrus is a structured logger for Go (golang), completely API compatible with the standard library logger.</p>
+<p>Logrus is in maintenance-mode. We will not be introducing new features. It’s simply too hard to do in a way that won’t break many people’s projects, which is the last thing you want from your Logging library (again…).</p>
+<span id="more"></span>
+<p>This does not mean Logrus is dead. Logrus will continue to be maintained for security, (backwards compatible) bug fixes, and performance (where we are limited by the interface).</p>
+<p>I believe Logrus’ biggest contribution is to have played a part in today’s widespread use of structured logging in Golang. There doesn’t seem to be a reason to do a major, breaking iteration into Logrus V2, since the fantastic Go community has built those independently. Many fantastic alternatives have sprung up. Logrus would look like those, had it been re-designed with what we know about structured logging in Go today. Check out, for example, <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rs/zerolog">Zerolog - https://github.com/rs/zerolog</a>, <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/uber-go/zap">Zap - https://github.com/uber-go/zap</a>, and <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/apex/log">Apex - https://github.com/apex/log</a>.</p>
+<h2 id="Installation">Installation</h2>
+<p>Standard go get:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">go get -u github.com/sirupsen/logrus</span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<p>With <code>log.SetFormatter(&amp;log.JSONFormatter&#123;&#125;)</code>, for easy parsing by logstash or Splunk:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;animal&quot;:&quot;walrus&quot;,&quot;level&quot;:&quot;info&quot;,&quot;msg&quot;:&quot;A group of walrus emerges from the</span><br><span class="line">ocean&quot;,&quot;size&quot;:10,&quot;time&quot;:&quot;2014-03-10 19:57:38.562264131 -0400 EDT&quot;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&quot;level&quot;:&quot;warning&quot;,&quot;msg&quot;:&quot;The group&#x27;s number increased tremendously!&quot;,</span><br><span class="line">&quot;number&quot;:122,&quot;omg&quot;:true,&quot;time&quot;:&quot;2014-03-10 19:57:38.562471297 -0400 EDT&quot;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&quot;animal&quot;:&quot;walrus&quot;,&quot;level&quot;:&quot;info&quot;,&quot;msg&quot;:&quot;A giant walrus appears!&quot;,</span><br><span class="line">&quot;size&quot;:10,&quot;time&quot;:&quot;2014-03-10 19:57:38.562500591 -0400 EDT&quot;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&quot;animal&quot;:&quot;walrus&quot;,&quot;level&quot;:&quot;info&quot;,&quot;msg&quot;:&quot;Tremendously sized cow enters the ocean.&quot;,</span><br><span class="line">&quot;size&quot;:9,&quot;time&quot;:&quot;2014-03-10 19:57:38.562527896 -0400 EDT&quot;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&quot;level&quot;:&quot;fatal&quot;,&quot;msg&quot;:&quot;The ice breaks!&quot;,&quot;number&quot;:100,&quot;omg&quot;:true,</span><br><span class="line">&quot;time&quot;:&quot;2014-03-10 19:57:38.562543128 -0400 EDT&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>With the default log.SetFormatter(&amp;log.TextFormatter{}) when a TTY is not attached, the output is compatible with the logfmt format:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">time=&quot;2015-03-26T01:27:38-04:00&quot; level=debug msg=&quot;Started observing beach&quot; animal=walrus number=8</span><br><span class="line">time=&quot;2015-03-26T01:27:38-04:00&quot; level=info msg=&quot;A group of walrus emerges from the ocean&quot; animal=walrus size=10</span><br><span class="line">time=&quot;2015-03-26T01:27:38-04:00&quot; level=warning msg=&quot;The group&#x27;s number increased tremendously!&quot; number=122 omg=true</span><br><span class="line">time=&quot;2015-03-26T01:27:38-04:00&quot; level=debug msg=&quot;Temperature changes&quot; temperature=-4</span><br><span class="line">time=&quot;2015-03-26T01:27:38-04:00&quot; level=panic msg=&quot;It&#x27;s over 9000!&quot; animal=orca size=9009</span><br><span class="line">time=&quot;2015-03-26T01:27:38-04:00&quot; level=fatal msg=&quot;The ice breaks!&quot; err=&amp;&#123;0x2082280c0 map[animal:orca size:9009] 2015-03-26 01:27:38.441574009 -0400 EDT panic It&#x27;s over 9000!&#125; number=100 omg=true</span><br></pre></td></tr></table></figure>
+<p>To ensure this behaviour even if a TTY is attached, set your formatter as follows:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">log.SetFormatter(&amp;log.TextFormatter&#123;</span><br><span class="line">	DisableColors: <span class="literal">true</span>,</span><br><span class="line">	FullTimestamp: <span class="literal">true</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Logging-Method-Name">Logging Method Name</h3>
+<p>If you wish to add the calling method as a field, instruct the logger via:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log.SetReportCaller(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<p>This adds the caller as ‘method’ like so:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;animal&quot;:&quot;penguin&quot;,&quot;level&quot;:&quot;fatal&quot;,&quot;method&quot;:&quot;github.com/sirupsen/arcticcreatures.migrate&quot;,&quot;msg&quot;:&quot;a penguin swims by&quot;,</span><br><span class="line">&quot;time&quot;:&quot;2014-03-10 19:57:38.562543129 -0400 EDT&quot;&#125;</span><br><span class="line">time=&quot;2015-03-26T01:27:38-04:00&quot; level=fatal method=github.com/sirupsen/arcticcreatures.migrate msg=&quot;a penguin swims by&quot; animal=penguin</span><br></pre></td></tr></table></figure>
+<p>Note that this does add measurable overhead - the cost will depend on the version of Go, but is between 20 and 40% in recent tests with 1.6 and 1.7. You can validate this in your environment via benchmarks:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">go <span class="built_in">test</span> -bench=.*CallerTracing</span></span><br></pre></td></tr></table></figure>
+<h2 id="Example">Example</h2>
+<p>The simplest way to use Logrus is simply the package-level exported logger:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">  <span class="string">&quot;os&quot;</span></span><br><span class="line">  log <span class="string">&quot;github.com/sirupsen/logrus&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="comment">// Log as JSON instead of the default ASCII formatter.</span></span><br><span class="line">  log.SetFormatter(&amp;log.JSONFormatter&#123;&#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Output to stdout instead of the default stderr</span></span><br><span class="line">  <span class="comment">// Can be any io.Writer, see below for File example</span></span><br><span class="line">  log.SetOutput(os.Stdout)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Only log the warning severity or above.</span></span><br><span class="line">  log.SetLevel(log.WarnLevel)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  log.WithFields(log.Fields&#123;</span><br><span class="line">    <span class="string">&quot;animal&quot;</span>: <span class="string">&quot;walrus&quot;</span>,</span><br><span class="line">    <span class="string">&quot;size&quot;</span>:   <span class="number">10</span>,</span><br><span class="line">  &#125;).Info(<span class="string">&quot;A group of walrus emerges from the ocean&quot;</span>)</span><br><span class="line"></span><br><span class="line">  log.WithFields(log.Fields&#123;</span><br><span class="line">    <span class="string">&quot;omg&quot;</span>:    <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;number&quot;</span>: <span class="number">122</span>,</span><br><span class="line">  &#125;).Warn(<span class="string">&quot;The group&#x27;s number increased tremendously!&quot;</span>)</span><br><span class="line"></span><br><span class="line">  log.WithFields(log.Fields&#123;</span><br><span class="line">    <span class="string">&quot;omg&quot;</span>:    <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;number&quot;</span>: <span class="number">100</span>,</span><br><span class="line">  &#125;).Fatal(<span class="string">&quot;The ice breaks!&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// A common pattern is to re-use fields between logging statements by re-using</span></span><br><span class="line">  <span class="comment">// the logrus.Entry returned from WithFields()</span></span><br><span class="line">  contextLogger := log.WithFields(log.Fields&#123;</span><br><span class="line">    <span class="string">&quot;common&quot;</span>: <span class="string">&quot;this is a common field&quot;</span>,</span><br><span class="line">    <span class="string">&quot;other&quot;</span>: <span class="string">&quot;I also should be logged always&quot;</span>,</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  contextLogger.Info(<span class="string">&quot;I&#x27;ll be logged with common and other field&quot;</span>)</span><br><span class="line">  contextLogger.Info(<span class="string">&quot;Me too&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>For more advanced usage such as logging to multiple locations from the same application, you can also create an instance of the logrus Logger:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">  <span class="string">&quot;os&quot;</span></span><br><span class="line">  <span class="string">&quot;github.com/sirupsen/logrus&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create a new instance of the logger. You can have any number of instances.</span></span><br><span class="line"><span class="keyword">var</span> log = logrus.New()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="comment">// The API for setting attributes is a little different than the package level</span></span><br><span class="line">  <span class="comment">// exported logger. See Godoc.</span></span><br><span class="line">  log.Out = os.Stdout</span><br><span class="line"></span><br><span class="line">  <span class="comment">// You could set this to any `io.Writer` such as a file</span></span><br><span class="line">  <span class="comment">// file, err := os.OpenFile(&quot;logrus.log&quot;, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)</span></span><br><span class="line">  <span class="comment">// if err == nil &#123;</span></span><br><span class="line">  <span class="comment">//  log.Out = file</span></span><br><span class="line">  <span class="comment">// &#125; else &#123;</span></span><br><span class="line">  <span class="comment">//  log.Info(&quot;Failed to log to file, using default stderr&quot;)</span></span><br><span class="line">  <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">  log.WithFields(logrus.Fields&#123;</span><br><span class="line">    <span class="string">&quot;animal&quot;</span>: <span class="string">&quot;walrus&quot;</span>,</span><br><span class="line">    <span class="string">&quot;size&quot;</span>:   <span class="number">10</span>,</span><br><span class="line">  &#125;).Info(<span class="string">&quot;A group of walrus emerges from the ocean&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Fields">Fields</h2>
+<p>Logrus encourages careful, structured logging through logging fields instead of long, unparseable error messages. For example, instead of: log.Fatalf(“Failed to send event %s to topic %s with key %d”), you should log the much more discoverable:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">log.WithFields(log.Fields&#123;</span><br><span class="line">  <span class="string">&quot;event&quot;</span>: event,</span><br><span class="line">  <span class="string">&quot;topic&quot;</span>: topic,</span><br><span class="line">  <span class="string">&quot;key&quot;</span>: key,</span><br><span class="line">&#125;).Fatal(<span class="string">&quot;Failed to send event&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>We’ve found this API forces you to think about logging in a way that produces much more useful logging messages. We’ve been in countless situations where just a single added field to a log statement that was already there would’ve saved us hours. The WithFields call is optional.</p>
+<p>In general, with Logrus using any of the printf-family functions should be seen as a hint you should add a field, however, you can still use the printf-family functions with Logrus.</p>
+<h2 id="Default-Fields">Default Fields</h2>
+<p>Often it’s helpful to have fields always attached to log statements in an application or parts of one. For example, you may want to always log the request_id and user_ip in the context of a request. Instead of writing log.WithFields(log.Fields{“request_id”: request_id, “user_ip”: user_ip}) on every line, you can create a logrus.Entry to pass around instead:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">requestLogger := log.WithFields(log.Fields&#123;<span class="string">&quot;request_id&quot;</span>: request_id, <span class="string">&quot;user_ip&quot;</span>: user_ip&#125;)</span><br><span class="line">requestLogger.Info(<span class="string">&quot;something happened on that request&quot;</span>) # will log request_id and user_ip</span><br><span class="line">requestLogger.Warn(<span class="string">&quot;something not great happened&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="Hooks">Hooks</h2>
+<p>You can add hooks for logging levels. For example to send errors to an exception tracking service on Error, Fatal and Panic, info to StatsD or log to multiple places simultaneously, e.g. syslog.</p>
+<p>Logrus comes with built-in hooks. Add those, or your custom hook, in init:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">  log <span class="string">&quot;github.com/sirupsen/logrus&quot;</span></span><br><span class="line">  <span class="string">&quot;gopkg.in/gemnasium/logrus-airbrake-hook.v2&quot;</span> <span class="comment">// the package is named &quot;airbrake&quot;</span></span><br><span class="line">  logrus_syslog <span class="string">&quot;github.com/sirupsen/logrus/hooks/syslog&quot;</span></span><br><span class="line">  <span class="string">&quot;log/syslog&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Use the Airbrake hook to report errors that have Error severity or above to</span></span><br><span class="line">  <span class="comment">// an exception tracker. You can create custom hooks, see the Hooks section.</span></span><br><span class="line">  log.AddHook(airbrake.NewHook(<span class="number">123</span>, <span class="string">&quot;xyz&quot;</span>, <span class="string">&quot;production&quot;</span>))</span><br><span class="line"></span><br><span class="line">  hook, err := logrus_syslog.NewSyslogHook(<span class="string">&quot;udp&quot;</span>, <span class="string">&quot;localhost:514&quot;</span>, syslog.LOG_INFO, <span class="string">&quot;&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    log.Error(<span class="string">&quot;Unable to connect to local syslog daemon&quot;</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    log.AddHook(hook)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A list of currently known service hooks can be found in this <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/sirupsen/logrus/wiki/Hooks">wiki page - https://github.com/sirupsen/logrus/wiki/Hooks</a>.</p>
+<h2 id="Level-logging">Level logging</h2>
+<p>Logrus has seven logging levels: Trace, Debug, Info, Warning, Error, Fatal and Panic.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">log.Trace(<span class="string">&quot;Something very low level.&quot;</span>)</span><br><span class="line">log.Debug(<span class="string">&quot;Useful debugging information.&quot;</span>)</span><br><span class="line">log.Info(<span class="string">&quot;Something noteworthy happened!&quot;</span>)</span><br><span class="line">log.Warn(<span class="string">&quot;You should probably take a look at this.&quot;</span>)</span><br><span class="line">log.Error(<span class="string">&quot;Something failed but I&#x27;m not quitting.&quot;</span>)</span><br><span class="line"><span class="comment">// Calls os.Exit(1) after logging</span></span><br><span class="line">log.Fatal(<span class="string">&quot;Bye.&quot;</span>)</span><br><span class="line"><span class="comment">// Calls panic() after logging</span></span><br><span class="line">log.Panic(<span class="string">&quot;I&#x27;m bailing.&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>You can set the logging level on a Logger, then it will only log entries with that severity or anything above it:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Will log anything that is info or above (warn, error, fatal, panic). Default.</span></span><br><span class="line">log.SetLevel(log.InfoLevel)</span><br></pre></td></tr></table></figure>
+<p>It may be useful to set <code>log.Level = logrus.DebugLevel</code> in a debug or verbose environment if your application has that.</p>
+<h2 id="Entries">Entries</h2>
+<p>Besides the fields added with WithField or WithFields some fields are automatically added to all logging events:</p>
+<ol>
+<li>
+<p>time. The timestamp when the entry was created.</p>
+</li>
+<li>
+<p>msg. The logging message passed to {Info,Warn,Error,Fatal,Panic} after the AddFields call. E.g. Failed to send event.</p>
+</li>
+<li>
+<p>level. The logging level. E.g. info.</p>
+</li>
+</ol>
+<h2 id="Formatters">Formatters</h2>
+<p>The built-in logging formatters are:</p>
+<ul>
+<li>
+<p>logrus.TextFormatter. Logs the event in colors if stdout is a tty, otherwise without colors.</p>
+<p>Note: to force colored output when there is no TTY, set the ForceColors field to true. To force no colored output even if there is a TTY set the DisableColors field to true. For Windows, see <a target="_blank" rel="noopener external nofollow noreferrer" href="http://github.com/mattn/go-colorable">github.com/mattn/go-colorable</a>.</p>
+<p>When colors are enabled, levels are truncated to 4 characters by default. To disable truncation set the DisableLevelTruncation field to true.</p>
+<p>When outputting to a TTY, it’s often helpful to visually scan down a column where all the levels are the same width. Setting the PadLevelText field to true enables this behavior, by adding padding to the level text.</p>
+</li>
+</ul>
+<p>All options are listed in the generated docs.</p>
+<ul>
+<li>logrus.JSONFormatter. Logs fields as JSON.</li>
+</ul>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/sirupsen/logrus#formatters">Formatters - https://github.com/sirupsen/logrus#formatters</a> to learn more Formatters.</p>
+<h2 id="Rotation">Rotation</h2>
+<p>Log rotation is not provided with Logrus. Log rotation should be done by an external program (like <code>logrotate(8)</code>) that can compress and delete old log entries. It should not be a feature of the application-level logger.</p>
+<h2 id="Tools">Tools</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/gogap/logrus_mate">Logrus Mate - https://github.com/gogap/logrus_mate</a></td>
+<td>Logrus mate is a tool for Logrus to manage loggers, you can initial logger’s level, hook and formatter by config file, the logger will be generated with different configs in different environments.</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/heirko/go-contrib/tree/master/logrusHelper">Logrus Viper Helper - https://github.com/heirko/go-contrib/tree/master/logrusHelper</a></td>
+<td>An Helper around Logrus to wrap with spf13/Viper to load configuration with fangs! And to simplify Logrus configuration use some behavior of <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/gogap/logrus_mate">Logrus Mate - https://github.com/gogap/logrus_mate</a>. <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/heirko/iris-contrib/blob/master/middleware/logrus-logger/example">sample - https://github.com/heirko/iris-contrib/blob/master/middleware/logrus-logger/example</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="Fatal-handlers">Fatal handlers</h2>
+<p>Logrus can register one or more functions that will be called when any fatal level message is logged. The registered handlers will be executed before logrus performs an os.Exit(1). This behavior may be helpful if callers need to gracefully shutdown. Unlike a <code>panic(&quot;Something went wrong...&quot;)</code> call which can be intercepted with a deferred recover a call to <code>os.Exit(1)</code> can not be intercepted.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">handler := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="comment">// gracefully shutdown something...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">logrus.RegisterExitHandler(handler)</span><br></pre></td></tr></table></figure>
+<h2 id="Thread-safety">Thread safety</h2>
+<p>By default, Logger is protected by a mutex for concurrent writes. The mutex is held when calling hooks and writing logs. If you are sure such locking is not needed, you can call logger.SetNoLock() to disable the locking.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/sirupsen/logrus">sirupsen/logrus: Structured, pluggable logging for Go. - https://github.com/sirupsen/logrus</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Golang-Go/" rel="tag"># Golang (Go)</a>
+              <a href="/tags/Logging/" rel="tag"># Logging</a>
+              <a href="/tags/Awesome-Go/" rel="tag"># Awesome Go</a>
+              <a href="/tags/Logger/" rel="tag"># Logger</a>
+              <a href="/tags/logrus/" rel="tag"># logrus</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/05/02/Programming-Language/Golang-Go/Awesome-Go/Wire/Wire-FAQs/" rel="prev" title="[Awesome Go Wire] Wire FAQs">
+                  <i class="fa fa-angle-left"></i> [Awesome Go Wire] Wire FAQs
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/02/Programming-Language/Golang-Go/Awesome-Go/Use-copy-to-copy-structs-to-from-others-structs-easier/" rel="next" title="[Awesome Go] Use copy to copy structs to&#x2F;from others structs easier">
+                  [Awesome Go] Use copy to copy structs to/from others structs easier <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"9f2084ace8abe032f25405f851f85a54"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

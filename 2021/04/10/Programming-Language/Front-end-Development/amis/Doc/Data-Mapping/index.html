@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Data Mapping Data Mapping allows users to obtain the value of a variable in the current Data Chain through $&amp;#123;xxx&amp;#125; or $xxx to achieve flexible data configuration functions. It is mainly used">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Baidu amis] Data Mapping">
+<meta property="og:url" content="https://cloudolife.com/2021/04/10/Programming-Language/Front-end-Development/amis/Doc/Data-Mapping/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Data Mapping Data Mapping allows users to obtain the value of a variable in the current Data Chain through $&amp;#123;xxx&amp;#125; or $xxx to achieve flexible data configuration functions. It is mainly used">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-10T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.926Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Baidu">
+<meta property="article:tag" content="TypeScript">
+<meta property="article:tag" content="HyperText Markup Language (HTML)">
+<meta property="article:tag" content="Front-end Development">
+<meta property="article:tag" content="Data Mapping">
+<meta property="article:tag" content="EJS">
+<meta property="article:tag" content="Low Code">
+<meta property="article:tag" content="Less Code">
+<meta property="article:tag" content="Front-end Framework">
+<meta property="article:tag" content="amis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/04/10/Programming-Language/Front-end-Development/amis/Doc/Data-Mapping/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/04/10/Programming-Language/Front-end-Development/amis/Doc/Data-Mapping/","path":"2021/04/10/Programming-Language/Front-end-Development/amis/Doc/Data-Mapping/","title":"[Baidu amis] Data Mapping"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Baidu amis] Data Mapping | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Data Mapping</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Template-string"><span class="nav-number">1.1.</span> <span class="nav-text">Template string</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Support-chain-value"><span class="nav-number">1.1.1.</span> <span class="nav-text">Support chain value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Custom-API-request-body-data-format"><span class="nav-number">1.1.2.</span> <span class="nav-text">Custom API request body data format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Complex-configuration"><span class="nav-number">1.1.3.</span> <span class="nav-text">Complex configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Expand-the-configured-data"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Expand the configured data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Array-extraction-value"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Array extraction value</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Namespace"><span class="nav-number">1.2.</span> <span class="nav-text">Namespace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter"><span class="nav-number">1.3.</span> <span class="nav-text">Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-filters-in-chain"><span class="nav-number">1.3.1.</span> <span class="nav-text">Use filters in chain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Custom-filter"><span class="nav-number">1.3.2.</span> <span class="nav-text">Custom filter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Custom-filter-in-JS-SDK"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">Custom filter in JS SDK</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/04/10/Programming-Language/Front-end-Development/amis/Doc/Data-Mapping/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Baidu amis] Data Mapping | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Baidu amis] Data Mapping
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-10 00:00:00" itemprop="dateCreated datePublished" datetime="2021-04-10T00:00:00+00:00">2021-04-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Front-end-Development/" itemprop="url" rel="index"><span itemprop="name">Front-end Development</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Front-end-Development/amis/" itemprop="url" rel="index"><span itemprop="name">amis</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>11 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Data Mapping</h1>
+<p>Data Mapping allows users to obtain the value of a variable in the current Data Chain through <code>$&#123;xxx&#125;</code> or <code>$xxx</code> to achieve flexible data configuration functions. It is mainly used in scenarios such as template strings and custom api request data body formats.</p>
+<span id="more"></span>
+<h2 id="Template-string">Template string</h2>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is rick</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tpl&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;tpl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;my name is $&#123;name&#125;&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Tip:</p>
+<p>By default, when amis is parsing the template string, it will try to parse the variable and replace the template variable when it encounters the <code>$</code> character. If you want to output plain text <code>$&#123;xxx&#125;</code> or <code>$xxx</code>, you need to precede the $ Add the escape character <code>\\</code>, that is, <code>\\$&#123;xxx&#125;</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```html</span><br><span class="line">my name is $&#123;name&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tpl&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;tpl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;my name is \\$&#123;name&#125;&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Support-chain-value">Support chain value</h3>
+<p>You can use <code>.</code> For chain value.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is rick, I work for baidu</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;company&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;baidu&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;department&quot;</span><span class="punctuation">:</span> <span class="string">&quot;it&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tpl&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;tpl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;my name is $&#123;name&#125;, I work for $&#123;company.name&#125;&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Custom-API-request-body-data-format">Custom API request body data format</h3>
+<p>In the form submission interface, the default request body data format of amis may not meet your expectations. Don’t worry, you can use Data Mapping to customize the data format you want:</p>
+<p>Look at the following scenario:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Form</span><br><span class="line"></span><br><span class="line">Name:</span><br><span class="line">Mail:</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;form&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;api&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;input-text&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;name&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;姓名：&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;email&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;input-text&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;邮箱：&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>After entering <code>name: rick</code> and <code>email: rick@gmail.com</code>, the form gets the current data field, and the data format submitted to the back-end interface should look like this:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;email&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick@gmail.com&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>Unfortunately, your back-end API only supports the following input data structures and cannot be modified:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;userName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xxx&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;userEmail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xxx@xxx.com&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>At this time, in addition to directly changing the name attribute of your name form item and mailbox form item to the corresponding field, you can configure the data attribute of the api, and use Data Mapping to easily customize the data format:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;form&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;api&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;method&quot;</span><span class="punctuation">:</span> <span class="string">&quot;post&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;userName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;name&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;userEmail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;email&#125;&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;input-text&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;name&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;姓名：&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;email&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;input-text&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;邮箱：&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>You can check the Network panel, the data body sent to the back-end API should have been successfully modified to:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;userName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;userEmail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick@gmail.com&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Complex-configuration">Complex configuration</h3>
+<h4 id="Expand-the-configured-data">Expand the configured data</h4>
+<p>You can use <code>&amp;</code> as the Data Mapping key to expand the configured variables, for example:</p>
+<p>In the following example, we want to add all the variables <code>e</code>, <code>f</code>, <code>g</code> under <code>c</code> in addition to the name and email variables when submitting, but according to what we said before, the api should be configured like this:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;form&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;b&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;e&quot;</span><span class="punctuation">:</span> <span class="string">&quot;3&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;f&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;g&quot;</span><span class="punctuation">:</span> <span class="string">&quot;5&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;api&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;method&quot;</span><span class="punctuation">:</span> <span class="string">&quot;post&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;name&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;email&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;email&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;e&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;c.e&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;f&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;c.f&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;g&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;c.g&#125;&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;input-text&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;name&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;姓名：&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;email&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;input-text&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;邮箱：&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>Click Submit to view the network panel data, you will find that the data is in line with expectations:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;email&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick@gmail.comn&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;e&quot;</span><span class="punctuation">:</span> <span class="string">&quot;3&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;f&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;g&quot;</span><span class="punctuation">:</span> <span class="string">&quot;5&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>But when there are too many variable fields, you need to map the configuration one by one, which may be a bit troublesome, so you can use the <code>&amp;</code> identifier to expand the configured variables:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;form&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;b&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;e&quot;</span><span class="punctuation">:</span> <span class="string">&quot;3&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;f&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;g&quot;</span><span class="punctuation">:</span> <span class="string">&quot;5&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;api&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;method&quot;</span><span class="punctuation">:</span> <span class="string">&quot;post&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;name&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;email&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;email&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;&amp;&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;c&#125;&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;input-text&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;name&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;姓名：&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;email&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;input-text&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;邮箱：&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>In the above example, our <code>api.data</code> configuration is as follows:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;name&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;email&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;email&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;&amp;&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;c&#125;&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>The <code>&amp;</code> identifier will expand and concatenate the value of the configured <code>c</code> variable in data. Looking at the Network panel, you can see the data as follows:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;email&quot;</span><span class="punctuation">:</span> <span class="string">&quot;rick@gmail.comn&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;e&quot;</span><span class="punctuation">:</span> <span class="string">&quot;3&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;f&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;g&quot;</span><span class="punctuation">:</span> <span class="string">&quot;5&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Array-extraction-value">Array extraction value</h4>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;form&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;api&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;method&quot;</span><span class="punctuation">:</span> <span class="string">&quot;post&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;items&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;$table&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;a&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;c&#125;&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;input-table&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;table&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;table&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;columns&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">          <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;A&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;B&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;b&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">          <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a1&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;b&quot;</span><span class="punctuation">:</span> <span class="string">&quot;b1&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c1&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a2&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;b&quot;</span><span class="punctuation">:</span> <span class="string">&quot;b2&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c2&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a3&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;b&quot;</span><span class="punctuation">:</span> <span class="string">&quot;b3&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c3&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>The data configuration format of the api in the above example is as follows:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;items&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;$table&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;a&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;c&#125;&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>This configuration means that only the a variable and the <code>c</code> variable in the table array are extracted to form a new array and assigned to the items variable</p>
+<p>Click Submit and check the web panel of the browser to find that the submitted data structure of the form is as follows:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;items&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a1&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c1&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a2&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c2&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;a&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a3&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c3&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Namespace">Namespace</h2>
+<hr>
+<p>Since 1.1.6</p>
+<hr>
+<p>The default value is to fetch data from the current component context Data Chain, but some data may not be in this Data Chain, such as some data in global variables, and some data in localstorage.</p>
+<p>Starting from version 1.1.6, a new syntax is supported, such as: <code>$&#123;window:document.title&#125;</code> which means to take the title of the page from the global variable.</p>
+<p>There are currently the following three namespaces</p>
+<ul>
+<li>
+<p><code>window</code> is a global variable</p>
+</li>
+<li>
+<p><code>ls</code> is localStorage. If the value is a json object, it can be used directly as an object. For example: ${ls:xxxxxlocalStrorageKey.xxxx}</p>
+</li>
+<li>
+<p><code>ss</code> is sessionStorage, ibid.</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The current page title is: amis-low-code front-end framework</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="string">&quot;The title of the current page is: &lt;span class=&#x27;label label-info&#x27;&gt;$&#123;window:document[title]&#125;&lt;/span&gt;&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Filter">Filter</h2>
+<p>Filter is an enhancement to Data Mapping. Its function is to do some processing on the acquired data. The basic usage is as follows:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;xxx [|filter1 |filter2...]&#125;</span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://baidu.github.io/amis/zh-CN/docs/concepts/data-mapping#%E8%BF%87%E6%BB%A4%E5%99%A8">Data Mapping | amis - 低代码前端框架 - https://baidu.github.io/amis/zh-CN/docs/concepts/data-mapping#%E8%BF%87%E6%BB%A4%E5%99%A8</a> to learn more Filter.</p>
+<h3 id="Use-filters-in-chain">Use filters in chain</h3>
+<p>Using a single filter may not meet all your needs. Fortunately, amis supports the use of filters in series, and the value of the previous filter will be used as the input parameter of the next filter for the next step. The syntax is as follows:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;xxx|filter1|filter2|...&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;page&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a,b,c&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tpl&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;tpl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;value|split|first&#125;&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>In the above example, <code>$&#123;value|split|first&#125;</code> will go through the following steps:</p>
+<ul>
+<li>
+<p>The split filter will be executed first to split the strings <code>a</code>, <code>b</code>, <code>c</code> into arrays <code>[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</code>;</p>
+</li>
+<li>
+<p>Then pass the data to the next filter first, execute the filter, and get the first element of the array, which is <code>a</code></p>
+</li>
+<li>
+<p>Output <code>a</code></p>
+</li>
+</ul>
+<h3 id="Custom-filter">Custom filter</h3>
+<p>The <code>registerFilter</code> method is exposed in the amis npm package, through which you can add your own filter logic.</p>
+<p>like:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;registerFilter&#125; <span class="keyword">from</span><span class="string">&#x27;amis&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">registerFilter</span>(<span class="string">&#x27;count&#x27;</span>, <span class="function">(<span class="params">input: string</span>) =&gt;</span></span><br><span class="line">   <span class="keyword">typeof</span> input ===<span class="string">&#x27;string&#x27;</span>? input.<span class="property">length</span>: <span class="number">0</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>After registration, you can pass <code>$&#123;xxx|count&#125;</code> to return the length of the string.</p>
+<p>If your filter still supports parameters, you can refer to this example.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;registerFilter&#125; <span class="keyword">from</span><span class="string">&#x27;amis&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">registerFilter</span>(<span class="string">&#x27;my-replace&#x27;</span>, <span class="function">(<span class="params">input: string, search: string, repalceWith</span>) =&gt;</span></span><br><span class="line">   <span class="keyword">typeof</span> input ===<span class="string">&#x27;string&#x27;</span>? input.<span class="title function_">replace</span>(search, repalceWith): input</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>The usage is <code>$&#123;xxxx|my-replace:aaaa:bbbb&#125;</code></p>
+<h4 id="Custom-filter-in-JS-SDK">Custom filter in JS SDK</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> amisLib = <span class="title function_">amisRequire</span>(<span class="string">&#x27;amis&#x27;</span>);</span><br><span class="line"></span><br><span class="line">amisLib.<span class="title function_">registerFilter</span>(<span class="string">&#x27;count&#x27;</span>, <span class="keyword">function</span> (<span class="params">input</span>) &#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">typeof</span> input ===<span class="string">&#x27;string&#x27;</span>? input.<span class="property">length</span>: <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://baidu.github.io/amis/zh-CN/docs/concepts/data-mapping">Data Mapping | amis - 低代码前端框架 - https://baidu.github.io/amis/zh-CN/docs/concepts/data-mapping</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://baidu.github.io/amis/zh-CN/docs/concepts/template">Template | amis - 低代码前端框架 - https://baidu.github.io/amis/zh-CN/docs/concepts/template</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://baidu.github.io/amis/zh-CN/docs/concepts/datascope-and-datachain">Data Domain and Data Chain | amis - 低代码前端框架 - https://baidu.github.io/amis/zh-CN/docs/concepts/datascope-and-datachain</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://baidu.github.io/amis/zh-CN/docs/types/api">API | amis - 低代码前端框架 - https://baidu.github.io/amis/zh-CN/docs/types/api</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/baidu/amis">baidu/amis: 前端低代码框架，通过 JSON 配置就能生成各种页面。 - https://github.com/baidu/amis</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://baidu.gitee.io/amis/">amis - 低代码前端框架 - https://baidu.gitee.io/amis/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Baidu/" rel="tag"># Baidu</a>
+              <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
+              <a href="/tags/HyperText-Markup-Language-HTML/" rel="tag"># HyperText Markup Language (HTML)</a>
+              <a href="/tags/Front-end-Development/" rel="tag"># Front-end Development</a>
+              <a href="/tags/Data-Mapping/" rel="tag"># Data Mapping</a>
+              <a href="/tags/EJS/" rel="tag"># EJS</a>
+              <a href="/tags/Low-Code/" rel="tag"># Low Code</a>
+              <a href="/tags/Less-Code/" rel="tag"># Less Code</a>
+              <a href="/tags/Front-end-Framework/" rel="tag"># Front-end Framework</a>
+              <a href="/tags/amis/" rel="tag"># amis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/10/Programming-Language/Front-end-Development/amis/Doc/Template/" rel="prev" title="[Baidu amis] Template">
+                  <i class="fa fa-angle-left"></i> [Baidu amis] Template
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/04/10/Programming-Language/Front-end-Development/amis/Doc/Data-Domain-and-Data-Chain/" rel="next" title="[Baidu amis] Data Domain and Data Chain">
+                  [Baidu amis] Data Domain and Data Chain <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"9340efe26deda41fa8c2dfdeaf220983"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

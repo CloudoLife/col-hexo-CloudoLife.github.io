@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="env_logger env_logger is a simple logger that can be configured via environment variables, for use with the logging facade exposed by the log crate. Despite having env in its name, env_logger can also">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Rust] env_logger : A simple logger that can be configured via environment variables">
+<meta property="og:url" content="https://cloudolife.com/2021/11/06/Programming-Language/Rust/Awesome-Rust/env-logger--A-simple-logger-that-can-be-configured-via-environment-variables/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="env_logger env_logger is a simple logger that can be configured via environment variables, for use with the logging facade exposed by the log crate. Despite having env in its name, env_logger can also">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-06T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.942Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Rust">
+<meta property="article:tag" content="Logger">
+<meta property="article:tag" content="cargo">
+<meta property="article:tag" content="Awesome Rust">
+<meta property="article:tag" content="env_logger">
+<meta property="article:tag" content="ENV">
+<meta property="article:tag" content="env">
+<meta property="article:tag" content="RUST_LOG">
+<meta property="article:tag" content="Log">
+<meta property="article:tag" content="Console">
+<meta property="article:tag" content="File">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/11/06/Programming-Language/Rust/Awesome-Rust/env-logger--A-simple-logger-that-can-be-configured-via-environment-variables/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/11/06/Programming-Language/Rust/Awesome-Rust/env-logger--A-simple-logger-that-can-be-configured-via-environment-variables/","path":"2021/11/06/Programming-Language/Rust/Awesome-Rust/env-logger--A-simple-logger-that-can-be-configured-via-environment-variables/","title":"[Awesome Rust] env_logger : A simple logger that can be configured via environment variables"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Rust] env_logger : A simple logger that can be configured via environment variables | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">env_logger</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dependencies"><span class="nav-number">1.1.</span> <span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enabling-logging"><span class="nav-number">1.3.</span> <span class="nav-text">Enabling logging</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filtering-results"><span class="nav-number">1.4.</span> <span class="nav-text">Filtering results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Capturing-logs-in-tests"><span class="nav-number">1.5.</span> <span class="nav-text">Capturing logs in tests</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Disabling-colors"><span class="nav-number">1.6.</span> <span class="nav-text">Disabling colors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tweaking-the-default-format"><span class="nav-number">1.7.</span> <span class="nav-text">Tweaking the default format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stability-of-the-default-format"><span class="nav-number">1.8.</span> <span class="nav-text">Stability of the default format</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-a-custom-format"><span class="nav-number">1.8.1.</span> <span class="nav-text">Using a custom format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Specifying-defaults-for-environment-variables"><span class="nav-number">1.8.2.</span> <span class="nav-text">Specifying defaults for environment variables</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.9.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/11/06/Programming-Language/Rust/Awesome-Rust/env-logger--A-simple-logger-that-can-be-configured-via-environment-variables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Rust] env_logger : A simple logger that can be configured via environment variables | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Rust] env_logger : A simple logger that can be configured via environment variables
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-06 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-06T00:00:00+00:00">2021-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/Awesome-Rust/" itemprop="url" rel="index"><span itemprop="name">Awesome Rust</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>7.6k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>7 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>env_logger</h1>
+<p>env_logger is a simple logger that can be configured via environment variables, for use with the logging facade exposed by the <code>log crate</code>.</p>
+<p>Despite having <code>env</code> in its name, env_logger can also be configured by other means besides environment variables. See the examples in the source repository for more approaches.</p>
+<p>By default, env_logger writes logs to <code>stderr</code>, but can be configured to instead write them to <code>stdout</code>.</p>
+<span id="more"></span>
+<h2 id="Dependencies">Dependencies</h2>
+<p>By default, env_logger can be depended on with:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cargo.toml</span></span><br><span class="line"></span><br><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="attr">log</span> = <span class="string">&quot;0.4.0&quot;</span></span><br><span class="line"><span class="attr">env_logger</span> = <span class="string">&quot;0.7.1&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Example">Example</h2>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/main.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> log::&#123;debug, error, log_enabled, info, Level&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    env_logger::<span class="title function_ invoke__">init</span>();</span><br><span class="line"></span><br><span class="line">    debug!(<span class="string">&quot;this is a debug &#123;&#125;&quot;</span>, <span class="string">&quot;message&quot;</span>);</span><br><span class="line">    error!(<span class="string">&quot;this is printed by default&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> log_enabled!(Level::Info) &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">x</span> = <span class="number">3</span> * <span class="number">4</span>; <span class="comment">// expensive computation</span></span><br><span class="line">        info!(<span class="string">&quot;the answer was: &#123;&#125;&quot;</span>, x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+<p>Run it:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">RUST_LOG=error cargo run</span></span><br><span class="line">[2017-11-09T02:12:24Z ERROR main] this is printed by default</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">RUST_LOG=info cargo run</span></span><br><span class="line">[2017-11-09T02:12:24Z ERROR main] this is printed by default</span><br><span class="line">[2017-11-09T02:12:24Z INFO main] the answer was: 12</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">RUST_LOG=debug cargo run</span></span><br><span class="line">[2017-11-09T02:12:24Z DEBUG main] this is a debug message</span><br><span class="line">[2017-11-09T02:12:24Z ERROR main] this is printed by default</span><br><span class="line">[2017-11-09T02:12:24Z INFO main] the answer was: 12</span><br></pre></td></tr></table></figure>
+<p>You can also set the log level on a per module basis:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">RUST_LOG=main=info cargo run</span></span><br><span class="line">[2017-11-09T02:12:24Z ERROR main] this is printed by default</span><br><span class="line">[2017-11-09T02:12:24Z INFO main] the answer was: 12</span><br></pre></td></tr></table></figure>
+<p>And enable all logging:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">RUST_LOG=main cargo run</span></span><br><span class="line">[2017-11-09T02:12:24Z DEBUG main] this is a debug message</span><br><span class="line">[2017-11-09T02:12:24Z ERROR main] this is printed by default</span><br><span class="line">[2017-11-09T02:12:24Z INFO main] the answer was: 12</span><br></pre></td></tr></table></figure>
+<p>If the binary name contains hyphens, you will need to replace them with underscores:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">RUST_LOG=my_app cargo run</span></span><br><span class="line">[2017-11-09T02:12:24Z DEBUG my_app] this is a debug message</span><br><span class="line">[2017-11-09T02:12:24Z ERROR my_app] this is printed by default</span><br><span class="line">[2017-11-09T02:12:24Z INFO my_app] the answer was: 12</span><br></pre></td></tr></table></figure>
+<p>This is because Rust modules and crates cannot contain hyphens in their name, although cargo continues to accept them.</p>
+<p>See the documentation for the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.rs/log/">log crate - https://docs.rs/log/</a> for more information about its API.</p>
+<h2 id="Enabling-logging">Enabling logging</h2>
+<p>Log levels are controlled on a per-module basis, and by default all logging is disabled except for the <code>error</code> level.</p>
+<p>Logging is controlled via the <code>RUST_LOG</code> environment variable. The value of this environment variable is a comma-separated list of logging directives. A logging directive is of the form:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">example::log::target=level</span><br></pre></td></tr></table></figure>
+<p>The log target is typically equal to the path of the module the message in question originated from, though it can be overriden.</p>
+<p>The path is rooted in the name of the crate it was compiled for, so if your program is in a file called, for example, <code>hello.rs</code>, the path would simply be be <code>hello</code>.</p>
+<p>Furthermore, the the log can be filtered using prefix-search based on the specified log target. A value of, for example, <code>RUST_LOG=example</code>, would match all of the messages with targets:</p>
+<ul>
+<li>
+<p>example</p>
+</li>
+<li>
+<p>example::test</p>
+</li>
+<li>
+<p>example::test::module::submodule</p>
+</li>
+<li>
+<p>examples::and_more_examples</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">When providing the crate name or a module path, explicitly specifying the log level is optional. If omitted, all logging for the item will be enabled.</span><br><span class="line"></span><br><span class="line">The names of the log levels that may be specified correspond to the variations of the log::Level enum from the log crate. They are:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>error</p>
+</li>
+<li>
+<p>warn</p>
+</li>
+<li>
+<p>info</p>
+</li>
+<li>
+<p>debug</p>
+</li>
+<li>
+<p>trace</p>
+</li>
+</ul>
+<p>There is also a pseudo logging level, off, which may be specified to disable all logging for a given module or for the entire application. As with the logging levels, the letter case is not significant1.</p>
+<p>The letter case is not significant for the logging level names; e.g., debug, DEBUG, and dEbuG all represent the same logging level. For consistency, our convention is to use the lower case names. Where our docs do use other forms, they do so in the context of specific examples, so you won’t be surprised if you see similar usage in the wild.</p>
+<p>As the log level for a module is optional, the module to enable logging for is also optional. If only a level is provided, then the global log level for all modules is set to this value.</p>
+<p>Some examples of valid values of RUST_LOG are:</p>
+<ul>
+<li>
+<p>hello turns on all logging for the ‘hello’ module</p>
+</li>
+<li>
+<p>trace turns on all logging for the application, regardless of its name</p>
+</li>
+<li>
+<p>TRACE turns on all logging for the application, regardless of its name (same as previous)</p>
+</li>
+<li>
+<p>info turns on all info logging</p>
+</li>
+<li>
+<p>INFO turns on all info logging (same as previous)</p>
+</li>
+<li>
+<p>hello=debug turns on debug logging for ‘hello’</p>
+</li>
+<li>
+<p>hello=DEBUG turns on debug logging for ‘hello’ (same as previous)</p>
+</li>
+<li>
+<p>hello,std::option turns on hello, and std’s option logging</p>
+</li>
+<li>
+<p>error,hello=warn turn on global error logging and also warn for hello</p>
+</li>
+<li>
+<p>error,hello=off turn on global error logging, but turn off logging for hello</p>
+</li>
+<li>
+<p>off turns off all logging for the application</p>
+</li>
+<li>
+<p>OFF turns off all logging for the application (same as previous)</p>
+</li>
+</ul>
+<h2 id="Filtering-results">Filtering results</h2>
+<p>A <code>RUST_LOG</code> directive may include a regex filter. The syntax is to append <code>/</code> followed by a regex. Each message is checked against the regex, and is only logged if it matches. Note that the matching is done after formatting the log string but before adding any logging meta-data. There is a single filter for all modules.</p>
+<p>Some examples:</p>
+<ul>
+<li>
+<p>hello/foo turns on all logging for the ‘hello’ module where the log message includes ‘foo’.</p>
+</li>
+<li>
+<p>info/f.o turns on all info logging where the log message includes ‘foo’, ‘f1o’, ‘fao’, etc.</p>
+</li>
+<li>
+<p>hello=debug/foo*foo turns on debug logging for ‘hello’ where the log message includes ‘foofoo’ or ‘fofoo’ or ‘fooooooofoo’, etc.</p>
+</li>
+<li>
+<p>error,hello=warn/[0-9]scopes turn on global error logging and also warn for hello. In both cases the log message must include a single digit number followed by ‘scopes’.</p>
+</li>
+</ul>
+<h2 id="Capturing-logs-in-tests">Capturing logs in tests</h2>
+<p>Records logged during cargo test will not be captured by the test harness by default. The <code>Builder::is_test</code> method can be used in unit tests to ensure logs will be captured:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/test.rs</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#[cfg(test)]</span></span><br><span class="line"><span class="keyword">mod</span> tests &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">init</span>() &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">_</span> = env_logger::<span class="title function_ invoke__">builder</span>().<span class="title function_ invoke__">is_test</span>(<span class="literal">true</span>).<span class="title function_ invoke__">try_init</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#[test]</span></span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">it_works</span>() &#123;</span><br><span class="line">        <span class="title function_ invoke__">init</span>();</span><br><span class="line"></span><br><span class="line">        info!(<span class="string">&quot;This record will be captured by `cargo test`&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">assert_eq!</span>(<span class="number">2</span>, <span class="number">1</span> + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Enabling test capturing comes at the expense of color and other style support and may have performance implications.</p>
+<h2 id="Disabling-colors">Disabling colors</h2>
+<p>Colors and other styles can be configured with the <code>RUST_LOG_STYLE</code> environment variable. It accepts the following values:</p>
+<ul>
+<li>
+<p>auto (default) will attempt to print style characters, but don’t force the issue. If the console isn’t available on Windows, or if TERM=dumb, for example, then don’t print colors.</p>
+</li>
+<li>
+<p>always will always print style characters even if they aren’t supported by the terminal. This includes emitting ANSI colors on Windows if the console API is unavailable.</p>
+</li>
+<li>
+<p>never will never print style characters.</p>
+</li>
+</ul>
+<h2 id="Tweaking-the-default-format">Tweaking the default format</h2>
+<p>Parts of the default format can be excluded from the log output using the <code>Builder</code>. The following example excludes the timestamp from the log output:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">env_logger::<span class="title function_ invoke__">builder</span>()</span><br><span class="line">    .format_timestamp(<span class="literal">None</span>)</span><br><span class="line">    .<span class="title function_ invoke__">init</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="Stability-of-the-default-format">Stability of the default format</h2>
+<p>The default format won’t optimise for long-term stability, and explicitly makes no guarantees about the stability of its output across major, minor or patch version bumps during 0.x.</p>
+<p>If you want to capture or interpret the output of env_logger programmatically then you should use a custom format.</p>
+<h3 id="Using-a-custom-format">Using a custom format</h3>
+<p>Custom formats can be provided as closures to the Builder. These closures take a Formatter and log::Record as arguments:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io::Write;</span><br><span class="line"></span><br><span class="line">env_logger::<span class="title function_ invoke__">builder</span>()</span><br><span class="line">    .format(|buf, record| &#123;</span><br><span class="line">        <span class="built_in">writeln!</span>(buf, <span class="string">&quot;&#123;&#125;: &#123;&#125;&quot;</span>, record.<span class="title function_ invoke__">level</span>(), record.<span class="title function_ invoke__">args</span>())</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_ invoke__">init</span>();</span><br></pre></td></tr></table></figure>
+<p>See the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.rs/env_logger/0.9.0/env_logger/fmt/index.html">fmt - https://docs.rs/env_logger/0.9.0/env_logger/fmt/index.html</a> module for more details about custom formats.</p>
+<h3 id="Specifying-defaults-for-environment-variables">Specifying defaults for environment variables</h3>
+<p>env_logger can read configuration from environment variables. If these variables aren’t present, the default value to use can be tweaked with the <code>Env</code> type. The following example defaults to log warn and above if the RUST_LOG environment variable isn’t set:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> env_logger::Env;</span><br><span class="line"></span><br><span class="line">env_logger::Builder::<span class="title function_ invoke__">from_env</span>(Env::<span class="title function_ invoke__">default</span>().<span class="title function_ invoke__">default_filter_or</span>(<span class="string">&quot;warn&quot;</span>)).<span class="title function_ invoke__">init</span>();</span><br></pre></td></tr></table></figure>
+<p>Similar to the universe of log level names, the off pseudo log level feature is also provided by the underlying log crate. ↩</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/env-logger-rs/env_logger">env-logger-rs/env_logger: A logging implementation for <code>log</code> which is configured via an environment variable. - https://github.com/env-logger-rs/env_logger</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://crates.io/crates/env_logger">env_logger - crates.io: Rust Package Registry - https://crates.io/crates/env_logger</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.rs/env_logger/0.9.0/env_logger/">env_logger - Rust - https://docs.rs/env_logger/0.9.0/env_logger/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.rs/log/">log - Rust - https://docs.rs/log/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Rust/" rel="tag"># Rust</a>
+              <a href="/tags/Logger/" rel="tag"># Logger</a>
+              <a href="/tags/cargo/" rel="tag"># cargo</a>
+              <a href="/tags/Awesome-Rust/" rel="tag"># Awesome Rust</a>
+              <a href="/tags/env-logger/" rel="tag"># env_logger</a>
+              <a href="/tags/ENV/" rel="tag"># ENV</a>
+              <a href="/tags/env/" rel="tag"># env</a>
+              <a href="/tags/RUST-LOG/" rel="tag"># RUST_LOG</a>
+              <a href="/tags/Log/" rel="tag"># Log</a>
+              <a href="/tags/Console/" rel="tag"># Console</a>
+              <a href="/tags/File/" rel="tag"># File</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/06/Programming-Language/Rust/Awesome-Rust/log-A-lightweight-logging-facade/" rel="prev" title="[Awesome Rust] log : A lightweight logging facade">
+                  <i class="fa fa-angle-left"></i> [Awesome Rust] log : A lightweight logging facade
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/11/06/Kubernetes-K8S/Tools/k9s-A-terminal-based-UI-to-interact-with-your-Kubernetes-clusters/" rel="next" title="[Kubernetes (K8S)] k9s: A terminal based UI to interact with your Kubernetes clusters">
+                  [Kubernetes (K8S)] k9s: A terminal based UI to interact with your Kubernetes clusters <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"9c62718885c7281c02ff835e3802d7ce"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

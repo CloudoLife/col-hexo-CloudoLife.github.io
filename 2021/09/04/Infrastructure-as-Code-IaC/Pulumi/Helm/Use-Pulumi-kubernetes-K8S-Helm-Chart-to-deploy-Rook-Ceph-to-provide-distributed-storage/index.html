@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Rook Storage Operators for Kubernetes Rook turns distributed storage systems into self-managing, self-scaling, self-healing storage services. It automates the tasks of a storage administrator: deploym">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Rook Ceph to provide distributed storage">
+<meta property="og:url" content="https://cloudolife.com/2021/09/04/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Rook-Ceph-to-provide-distributed-storage/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Rook Storage Operators for Kubernetes Rook turns distributed storage systems into self-managing, self-scaling, self-healing storage services. It automates the tasks of a storage administrator: deploym">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.916Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Infrastructure as Code (IaC)">
+<meta property="article:tag" content="Kubernetes (K8S)">
+<meta property="article:tag" content="Cloud Native">
+<meta property="article:tag" content="Helm">
+<meta property="article:tag" content="Pulumi">
+<meta property="article:tag" content="TypeScript">
+<meta property="article:tag" content="Storage">
+<meta property="article:tag" content="CNCF">
+<meta property="article:tag" content="Cloud Native Computing Foundation">
+<meta property="article:tag" content="Cloud Native Computing Foundation (CNCF)">
+<meta property="article:tag" content="Rook">
+<meta property="article:tag" content="Ceph">
+<meta property="article:tag" content="Operator">
+<meta property="article:tag" content="lvm2">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/09/04/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Rook-Ceph-to-provide-distributed-storage/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/09/04/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Rook-Ceph-to-provide-distributed-storage/","path":"2021/09/04/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Rook-Ceph-to-provide-distributed-storage/","title":"[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Rook Ceph to provide distributed storage"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Rook Ceph to provide distributed storage | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Rook Storage Operators for Kubernetes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pulumi-New"><span class="nav-number">1.2.1.</span> <span class="nav-text">Pulumi New</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pulumi-Configuration"><span class="nav-number">1.2.2.</span> <span class="nav-text">Pulumi Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Configure-Kubernetes"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Configure Kubernetes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ceph-Operator-Helm-Chart"><span class="nav-number">1.2.3.</span> <span class="nav-text">Ceph Operator Helm Chart</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Configure-Values-yaml"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Configure Values.yaml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pulumi-Up"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">Pulumi Up</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ceph-Cluster-Helm-Chart"><span class="nav-number">1.2.4.</span> <span class="nav-text">Ceph Cluster Helm Chart</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pulumi-Up-2"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">Pulumi Up</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Initialize-RDB-Pool"><span class="nav-number">1.2.5.</span> <span class="nav-text">Initialize RDB Pool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-Ceph-Block-Storage-Class"><span class="nav-number">1.2.6.</span> <span class="nav-text">Test Ceph Block Storage Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pulumi-Destroy"><span class="nav-number">1.2.7.</span> <span class="nav-text">Pulumi Destroy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">1.3.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cephobjectstores-ceph-rook-io-%E2%80%9Cceph-objectstore%E2%80%9D-already-exists-or-cephfilesystems-ceph-rook-io-%E2%80%9Cceph-filesystem%E2%80%9D-already-exists-when-run-pulumi-up"><span class="nav-number">1.3.1.</span> <span class="nav-text">cephobjectstores.ceph.rook.io “ceph-objectstore” already exists or cephfilesystems.ceph.rook.io “ceph-filesystem” already exists when run pulumi up</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#failed-to-read-label-for-lvm2"><span class="nav-number">1.3.2.</span> <span class="nav-text">failed to read label for lvm2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PersistentVolumeClaim-or-PersistentVolume-Creation-hangs-and-fails-failed-to-provision-volume-with-StorageClass-%E2%80%9Cceph-block%E2%80%9D-an-operation-with-the-given-Volume-ID-pvc-ID-already-exists"><span class="nav-number">1.3.3.</span> <span class="nav-text">PersistentVolumeClaim or PersistentVolume Creation hangs and fails, failed to provision volume with StorageClass “ceph-block”: an operation with the given Volume ID pvc-ID already exists</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/09/04/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Rook-Ceph-to-provide-distributed-storage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Rook Ceph to provide distributed storage | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Rook Ceph to provide distributed storage
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-04 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-04T00:00:00+00:00">2021-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/" itemprop="url" rel="index"><span itemprop="name">Infrastructure as Code (IaC)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Cloud-Native/" itemprop="url" rel="index"><span itemprop="name">Cloud Native</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Cloud-Native/Kubernetes-K8S/" itemprop="url" rel="index"><span itemprop="name">Kubernetes (K8S)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Cloud-Native/Kubernetes-K8S/Pulumi/" itemprop="url" rel="index"><span itemprop="name">Pulumi</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>13k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>11 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Rook Storage Operators for Kubernetes</h1>
+<p>Rook turns distributed storage systems into self-managing, self-scaling, self-healing storage services. It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management.</p>
+<p>This article is about how to use Pulumi, kubernetes (K8S) provider, Helm Chart and TypeScript SDK to deploy Rook Ceph within Kubernetes (K8S).</p>
+<span id="more"></span>
+<h2 id="Prerequisites">Prerequisites</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/">Kubernetes (K8S)</a></p>
+<p>Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/docs/setup/">Getting started | Kubernetes - https://kubernetes.io/docs/setup/</a> to leanr more.</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.pulumi.com/">Pulumi - Modern Infrastructure as Code - https://www.pulumi.com/</a></p>
+<p>Pulumi is a modern infrastructure-as-code platform that allows you to use common programming languages, tools, and frameworks, to provision, update, and manage cloud infrastructure resources.</p>
+<p>Install the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.pulumi.com/">Pulumi - https://www.pulumi.com/</a> CLI.</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mac OS X</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install pulumi</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.pulumi.com/docs/get-started/install/">Download and Install | Pulumi - https://www.pulumi.com/docs/get-started/install/</a> to learn more about others OS.</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://nodejs.org/en/">Node.js - https://nodejs.org/en/</a></p>
+<p>Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.</p>
+<p>Install <a target="_blank" rel="noopener external nofollow noreferrer" href="https://nodejs.org/en/">Node.js - https://nodejs.org/en/</a> CLI.</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mac OS X</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install node</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://nodejs.org/en/">Node.js - https://nodejs.org/en/</a> to learn more about others OS.</p>
+</li>
+<li>
+<p>LVM2</p>
+<p>Some Linux distributions do not ship with the lvm2 package. This package is required on all storage nodes in your k8s cluster. Please install it using your Linux distribution’s package manager; for example:</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Centos</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> yum install -y lvm2</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Ubuntu</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> apt-get install -y lvm2</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Usage">Usage</h2>
+<h3 id="Pulumi-New">Pulumi New</h3>
+<p>Create the workspace directory.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mkdir</span> -p col-example-pulumi-typescript-rook-ceph</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> col-example-pulumi-typescript-rook-ceph</span></span><br></pre></td></tr></table></figure>
+<p>Pulumi login into local file system.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi login file://.</span></span><br><span class="line">Logged in to cloudolife as cloudolife (file://.)</span><br><span class="line">or visit https://pulumi.com/docs/reference/install/ for manual instructions and release notes.</span><br></pre></td></tr></table></figure>
+<p>Pulumi new a project with kubernetes-typescript SDK.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi new kubernetes-typescript</span></span><br></pre></td></tr></table></figure>
+<p>The above command will create some files within the current directory.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tree . -L 1</span><br><span class="line">.</span><br><span class="line">├── node_modules/</span><br><span class="line">├── package.json</span><br><span class="line">├── package.json.lock</span><br><span class="line">├── Pulumi.dev.yaml</span><br><span class="line">├── Pulumi.yaml</span><br><span class="line">└── main.ts</span><br></pre></td></tr></table></figure>
+<p>Install <code>js-yaml</code> package to load and parse yaml file.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm i js-yaml</span></span><br></pre></td></tr></table></figure>
+<h3 id="Pulumi-Configuration">Pulumi Configuration</h3>
+<h4 id="Configure-Kubernetes">Configure Kubernetes</h4>
+<p>By default, Pulumi will look for a kubeconfig file in the following locations, just like kubectl:</p>
+<ul>
+<li>
+<p>The environment variable: <code>$KUBECONFIG</code>,</p>
+</li>
+<li>
+<p>Or in current user’s default kubeconfig directory: <code>~/.kube/config</code></p>
+</li>
+</ul>
+<p>If the kubeconfig file is not in either of these locations, Pulumi will not find it, and it will fail to authenticate against the cluster. Set one of these locations to a valid kubeconfig file, if you have not done so already.</p>
+<h3 id="Ceph-Operator-Helm-Chart">Ceph Operator Helm Chart</h3>
+<p>The Ceph Operator helm chart will install the basic components necessary to create a storage platform for your Kubernetes cluster.</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://rook.io/docs/rook/v1.7/helm-operator.html">Ceph Operator Helm Chart | Ceph Docs - https://rook.io/docs/rook/v1.7/helm-operator.html</a></p>
+<h4 id="Configure-Values-yaml">Configure Values.yaml</h4>
+<p>Edit <a href="./values.rook-ceph.yaml">values.rook-ceph.yaml</a> and replace content within <code>&#123;&#123; &#125;&#125;</code>.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># values.rook-ceph.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># rook/values.yaml at master · rook/rook</span></span><br><span class="line"><span class="comment"># https://github.com/rook/rook/blob/master/cluster/charts/rook-ceph/values.yaml</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>See and modify <a href="./main.ts">main.ts</a> file.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> pulumi <span class="keyword">from</span> <span class="string">&quot;@pulumi/pulumi&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> k8s <span class="keyword">from</span> <span class="string">&quot;@pulumi/kubernetes&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> yaml = <span class="built_in">require</span>(<span class="string">&#x27;js-yaml&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs   = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> nameRookCeph = <span class="string">&quot;rook-ceph&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// kubernetes.core/v1.Namespace | Pulumi</span></span><br><span class="line"><span class="comment">// https://www.pulumi.com/docs/reference/pkg/kubernetes/core/v1/namespace/</span></span><br><span class="line"><span class="keyword">const</span> namespaceRookCeph = <span class="keyword">new</span> k8s.<span class="property">core</span>.<span class="property">v1</span>.<span class="title class_">Namespace</span>(nameRookCeph, &#123;</span><br><span class="line">    <span class="attr">metadata</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: nameRookCeph,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> values = yaml.<span class="title function_">safeLoad</span>(fs.<span class="title function_">readFileSync</span>(<span class="string">&quot;./values.rook-ceph.yaml&quot;</span>, <span class="string">&#x27;utf8&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// Install Rook Ceph Operator</span></span><br><span class="line"><span class="keyword">const</span> charNameRookCeph = <span class="string">&quot;rook-ceph&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> charRookCeph = <span class="keyword">new</span> k8s.<span class="property">helm</span>.<span class="property">v3</span>.<span class="title class_">Chart</span>(charNameRookCeph, &#123;</span><br><span class="line">    <span class="attr">chart</span>: charNameRookCeph,</span><br><span class="line">    <span class="attr">version</span>: <span class="string">&quot;1.7.4&quot;</span>,</span><br><span class="line">    <span class="attr">fetchOpts</span>:&#123;</span><br><span class="line">        <span class="attr">repo</span>: <span class="string">&quot;https://charts.rook.io/release&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">namespace</span>: namespaceRookCeph.<span class="property">metadata</span>.<span class="property">name</span>,</span><br><span class="line">    <span class="attr">values</span>: values,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> charRookCeph = <span class="keyword">new</span> k8s.<span class="property">helm</span>.<span class="property">v3</span>.<span class="title class_">Chart</span>(charNameRookCeph, &#123;</span><br><span class="line">    <span class="attr">chart</span>: charNameRookCeph,</span><br><span class="line">    <span class="attr">version</span>: <span class="string">&quot;1.7.4&quot;</span>,</span><br><span class="line">    <span class="attr">fetchOpts</span>:&#123;</span><br><span class="line">        <span class="attr">repo</span>: <span class="string">&quot;https://charts.rook.io/release&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">namespace</span>: namespaceRookCeph.<span class="property">metadata</span>.<span class="property">name</span>,</span><br><span class="line">    <span class="attr">values</span>: values,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Install Rook Ceph Cluster</span></span><br><span class="line">values = yaml.<span class="title function_">safeLoad</span>(fs.<span class="title function_">readFileSync</span>(<span class="string">&quot;./values.rook-ceph-cluster.yaml&quot;</span>, <span class="string">&#x27;utf8&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> charNameRookCeph = <span class="string">&quot;rook-ceph-cluster&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> charRookCephCluster = <span class="keyword">new</span> k8s.<span class="property">helm</span>.<span class="property">v3</span>.<span class="title class_">Chart</span>(charNameRookCephCluster, &#123;</span><br><span class="line">    <span class="attr">chart</span>: charNameRookCephCluster,</span><br><span class="line">    <span class="attr">version</span>: <span class="string">&quot;1.7.4&quot;</span>,</span><br><span class="line">    <span class="attr">fetchOpts</span>:&#123;</span><br><span class="line">        <span class="attr">repo</span>: <span class="string">&quot;https://charts.rook.io/release&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">namespace</span>: namespaceRookCeph.<span class="property">metadata</span>.<span class="property">name</span>,</span><br><span class="line">    <span class="attr">values</span>: values,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Pulumi-Up">Pulumi Up</h4>
+<p>Run pulumi up to create the namespace and pods.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi up</span></span><br></pre></td></tr></table></figure>
+<p>See pods about rook-ceph.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl get pods -n rook-ceph</span></span><br><span class="line">NAME                                           READY   STATUS    RESTARTS       AGE</span><br><span class="line">rook-ceph-operator-5597fdc77-zfzgb             1/1     Running   2 (22m ago)    81m</span><br></pre></td></tr></table></figure>
+<h3 id="Ceph-Cluster-Helm-Chart">Ceph Cluster Helm Chart</h3>
+<p>Creates Rook resources to configure a Ceph cluster using the Helm package manager. This chart is a simple packaging of templates that will optionally create Rook resources such as:</p>
+<ul>
+<li>
+<p>CephCluster, CephFilesystem, and CephObjectStore CRs</p>
+</li>
+<li>
+<p>Storage classes to expose Ceph RBD volumes, CephFS volumes, and RGW buckets</p>
+</li>
+<li>
+<p>Ingress for external access to the dashboard</p>
+</li>
+<li>
+<p>Toolbox</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://rook.io/docs/rook/v1.7/helm-ceph-cluster.html">Ceph Docs - https://rook.io/docs/rook/v1.7/helm-ceph-cluster.html</a></p>
+<p>Edit <a href="./values.rook-ceph-cluster.yaml">values.rook-ceph-cluster…yaml</a> and replace content within <code>&#123;&#123; &#125;&#125;</code>.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rook-ceph-cluster.yaml</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># rook/values.yaml at master · rook/rook</span></span><br><span class="line"><span class="comment"># https://github.com/rook/rook/blob/master/cluster/charts/rook-ceph-cluster/values.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Installs a debugging toolbox deployment</span></span><br><span class="line"><span class="attr">toolbox:</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">monitoring:</span></span><br><span class="line">  <span class="comment"># requires Prometheus to be pre-installed</span></span><br><span class="line">  <span class="comment"># enabling will also create RBAC rules to allow Operator to create ServiceMonitors</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># All values below are taken from the CephCluster CRD</span></span><br><span class="line"><span class="comment"># More information can be found at [Ceph Cluster CRD](/Documentation/ceph-cluster-crd.md)</span></span><br><span class="line"><span class="attr">cephClusterSpec:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">mgr:</span></span><br><span class="line">    <span class="comment"># When higher availability of the mgr is needed, increase the count to 2.</span></span><br><span class="line">    <span class="comment"># In that case, one mgr will be active and one in standby. When Ceph updates which</span></span><br><span class="line">    <span class="comment"># mgr is active, Rook will update the mgr services to match the active mgr.</span></span><br><span class="line">    <span class="attr">count:</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># enable the ceph dashboard for viewing cluster status</span></span><br><span class="line">  <span class="attr">dashboard:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">storage:</span> <span class="comment"># cluster level storage configuration and selection</span></span><br><span class="line">    <span class="attr">useAllNodes:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">useAllDevices:</span> <span class="literal">true</span></span><br><span class="line">    </span><br><span class="line"><span class="attr">ingress:</span></span><br><span class="line">  <span class="attr">dashboard:</span> </span><br><span class="line">    <span class="attr">annotations:</span></span><br><span class="line">      <span class="attr">kubernetes.io/ingress.class:</span> <span class="string">nginx</span></span><br><span class="line">      <span class="comment"># external-dns.alpha.kubernetes.io/hostname: example.com</span></span><br><span class="line">      <span class="comment"># nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2</span></span><br><span class="line">    <span class="attr">host:</span></span><br><span class="line">      <span class="attr">name:</span> &#123;&#123; <span class="string">.Values.host</span> &#125;&#125;</span><br><span class="line">      <span class="comment"># path: &quot;/ceph-dashboard(/|$)(.*)&quot;</span></span><br><span class="line">    <span class="attr">tls:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">secretName:</span> &#123;&#123; <span class="string">.Values.tls.secretName</span> &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>See and append the follow code into <a href="./main.ts">main.ts</a> file.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Install Rook Ceph Cluster</span></span><br><span class="line">values = yaml.<span class="title function_">safeLoad</span>(fs.<span class="title function_">readFileSync</span>(<span class="string">&quot;./values.rook-ceph-cluster.yaml&quot;</span>, <span class="string">&#x27;utf8&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> charNameRookCeph = <span class="string">&quot;rook-ceph-cluster&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> charRookCephCluster = <span class="keyword">new</span> k8s.<span class="property">helm</span>.<span class="property">v3</span>.<span class="title class_">Chart</span>(charNameRookCephCluster, &#123;</span><br><span class="line">    <span class="attr">chart</span>: charNameRookCephCluster,</span><br><span class="line">    <span class="attr">version</span>: <span class="string">&quot;1.7.4&quot;</span>,</span><br><span class="line">    <span class="attr">fetchOpts</span>:&#123;</span><br><span class="line">        <span class="attr">repo</span>: <span class="string">&quot;https://charts.rook.io/release&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">namespace</span>: <span class="string">&quot;rook-ceph&quot;</span>,</span><br><span class="line">    <span class="attr">values</span>: values,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Pulumi-Up-2">Pulumi Up</h4>
+<p>Run pulumi up to create the namespace and pods.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi up</span></span><br></pre></td></tr></table></figure>
+<p>See pods about rook-ceph.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl get pods -n rook-ceph</span></span><br><span class="line">NAME                                                              READY   STATUS      RESTARTS       AGE</span><br><span class="line">csi-cephfsplugin-4xqgf                                            3/3     Running     3 (49m ago)    103m</span><br><span class="line">csi-cephfsplugin-8qsxx                                            3/3     Running     3 (46m ago)    103m</span><br><span class="line">csi-cephfsplugin-mkmsz                                            3/3     Running     3 (44m ago)    103m</span><br><span class="line">csi-cephfsplugin-provisioner-b54db7d9b-fhf7m                      6/6     Running     6 (46m ago)    103m</span><br><span class="line">csi-cephfsplugin-provisioner-b54db7d9b-qpw2q                      6/6     Running     11 (44m ago)   103m</span><br><span class="line">csi-rbdplugin-4mstv                                               3/3     Running     3 (49m ago)    102m</span><br><span class="line">csi-rbdplugin-58c84                                               3/3     Running     3 (44m ago)    103m</span><br><span class="line">csi-rbdplugin-9gbxk                                               3/3     Running     3 (46m ago)    103m</span><br><span class="line">csi-rbdplugin-provisioner-5845579d68-d2lct                        6/6     Running     6 (46m ago)    103m</span><br><span class="line">csi-rbdplugin-provisioner-5845579d68-hgm5k                        6/6     Running     7 (43m ago)    103m</span><br><span class="line">rook-ceph-crashcollector-cloudolife-694f4bdf9f-vglpw   1/1     Running     0              31s</span><br><span class="line">rook-ceph-crashcollector-cloudolife-5f6bf9b776-rs5gq   1/1     Running     0              31s</span><br><span class="line">rook-ceph-crashcollector-cloudolife-5f48565757-lnkp7   1/1     Running     0              43s</span><br><span class="line">rook-ceph-mgr-a-cb65bdc78-2x5sd                                   2/2     Running     0              52s</span><br><span class="line">rook-ceph-mgr-b-97cf45c4d-sp727                                   2/2     Running     0              51s</span><br><span class="line">rook-ceph-mon-a-5cff77b977-27s52                                  1/1     Running     0              107s</span><br><span class="line">rook-ceph-mon-b-595b488967-m7xch                                  1/1     Running     0              93s</span><br><span class="line">rook-ceph-mon-c-7bf54cd7c6-rfqvq                                  1/1     Running     0              75s</span><br><span class="line">rook-ceph-operator-5597fdc77-zfzgb                                1/1     Running     2 (44m ago)    103m</span><br><span class="line">rook-ceph-osd-0-665f56588d-kwggn                                  1/1     Running     0              31s</span><br><span class="line">rook-ceph-osd-1-5f5857f647-xtl2s                                  1/1     Running     0              31s</span><br><span class="line">rook-ceph-osd-2-9c7b6dfb6-cq6hc                                   1/1     Running     0              10s</span><br><span class="line">rook-ceph-osd-prepare-cloudolife--1-mqvkk              0/1     Completed   0              44s</span><br><span class="line">rook-ceph-osd-prepare-cloudolife--1-7ktxv              0/1     Completed   0              44s</span><br><span class="line">rook-ceph-osd-prepare-cloudolife--1-8f2xt              0/1     Completed   0              43s</span><br><span class="line">rook-ceph-tools-96c99fbf-lpjmb                                    1/1     Running     0              2m1s</span><br></pre></td></tr></table></figure>
+<p>Then, you can visit Ceph Dashboard with <code>http://&lt;Your Ceph Dashboard Host&gt;</code>.</p>
+<h3 id="Initialize-RDB-Pool">Initialize RDB Pool</h3>
+<p>Remember to initialize before use RDB Pool.</p>
+<ul>
+<li>
+<p>Execute <code>rbd pool init &lt;pool_name&gt;</code> command from toolbox or ceph-csi pods(similar to this).</p>
+</li>
+<li>
+<p>Restart the csi-rbdplugin-provisioner-xxx pods.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl -n rook-ceph delete pods -l app=csi-rbdplugin-provisioner</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Test-Ceph-Block-Storage-Class">Test Ceph Block Storage Class</h3>
+<p>Create or edit a <code>pvc.yaml</code> manifest file.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pvc.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolumeClaim</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">test-ceph-block</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">test</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">ceph-block</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">storage:</span> <span class="string">1Gi</span></span><br></pre></td></tr></table></figure>
+<p>Run command to run and check.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl apply -f pvc.yaml</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl get pvc</span></span><br><span class="line">NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE</span><br><span class="line">test-ceph-block   Bound    pvc-ce500448-7ce8-42a4-b9aa-f96bd005fd5b   1Gi       RWO            ceph-block     19</span><br></pre></td></tr></table></figure>
+<h3 id="Pulumi-Destroy">Pulumi Destroy</h3>
+<p>Destroy all resources created by Pulumi.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi destroy</span></span><br></pre></td></tr></table></figure>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="cephobjectstores-ceph-rook-io-“ceph-objectstore”-already-exists-or-cephfilesystems-ceph-rook-io-“ceph-filesystem”-already-exists-when-run-pulumi-up"><a target="_blank" rel="noopener external nofollow noreferrer" href="http://cephobjectstores.ceph.rook.io">cephobjectstores.ceph.rook.io</a> “ceph-objectstore” already exists or <a target="_blank" rel="noopener external nofollow noreferrer" href="http://cephfilesystems.ceph.rook.io">cephfilesystems.ceph.rook.io</a> “ceph-filesystem” already exists when run pulumi up</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi up</span></span><br><span class="line">  kubernetes:ceph.rook.io/v1:CephObjectStore (rook-ceph/ceph-objectstore):</span><br><span class="line">    error: resource rook-ceph/ceph-objectstore was not successfully created by the Kubernetes API server : object is being deleted: cephobjectstores.ceph.rook.io &quot;ceph-objectstore&quot; already exists</span><br><span class="line"> </span><br><span class="line">  kubernetes:ceph.rook.io/v1:CephFilesystem (rook-ceph/ceph-filesystem):</span><br><span class="line">    error: resource rook-ceph/ceph-filesystem was not successfully created by the Kubernetes API server : object is being deleted: cephfilesystems.ceph.rook.io &quot;ceph-filesystem&quot; already exists</span><br></pre></td></tr></table></figure>
+<p>Delete previouse CRD resources related to <code>ceph.rook.io</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl patch -p <span class="string">&#x27;&#123;&quot;metadata&quot;:&#123;&quot;finalizers&quot;:[]&#125;&#125;&#x27;</span> --<span class="built_in">type</span>=merge -n rook-ceph CephObjectStore ceph-objectstore</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl patch -p <span class="string">&#x27;&#123;&quot;metadata&quot;:&#123;&quot;finalizers&quot;:[]&#125;&#125;&#x27;</span> --<span class="built_in">type</span>=merge -n rook-ceph CephFilesystem ceph-filesystem</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl patch -p <span class="string">&#x27;&#123;&quot;metadata&quot;:&#123;&quot;finalizers&quot;:[]&#125;&#125;&#x27;</span> --<span class="built_in">type</span>=merge -n rook-ceph CephCluster rook-ceph</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl patch -p <span class="string">&#x27;&#123;&quot;metadata&quot;:&#123;&quot;finalizers&quot;:[]&#125;&#125;&#x27;</span> --<span class="built_in">type</span>=merge -n rook-ceph CephBlockPool ceph-blockpool</span></span><br></pre></td></tr></table></figure>
+<p>Delete CRD related to <code>ceph.rook.io</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl patch -p <span class="string">&#x27;&#123;&quot;metadata&quot;:&#123;&quot;finalizers&quot;:[]&#125;&#125;&#x27;</span> --<span class="built_in">type</span>=merge crd cephblockpools.ceph.rook.io</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl patch -p <span class="string">&#x27;&#123;&quot;metadata&quot;:&#123;&quot;finalizers&quot;:[]&#125;&#125;&#x27;</span> --<span class="built_in">type</span>=merge crd cephclusters.ceph.rook.io</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl patch -p <span class="string">&#x27;&#123;&quot;metadata&quot;:&#123;&quot;finalizers&quot;:[]&#125;&#125;&#x27;</span> --<span class="built_in">type</span>=merge crd cephfilesystems.ceph.rook.io</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl patch -p <span class="string">&#x27;&#123;&quot;metadata&quot;:&#123;&quot;finalizers&quot;:[]&#125;&#125;&#x27;</span> --<span class="built_in">type</span>=merge crd cephobjectstores.ceph.rook.io</span></span><br></pre></td></tr></table></figure>
+<p>Then, run <code>pulumi up</code>.</p>
+<h3 id="failed-to-read-label-for-lvm2">failed to read label for lvm2</h3>
+<p>Some Linux distributions do not ship with the lvm2 package. This package is required on all storage nodes in your k8s cluster. Please install it using your Linux distribution’s package manager; for example:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Centos</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> yum install -y lvm2</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Ubuntu</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> apt-get install -y lvm2</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rook/rook/issues/8749">failed to provision volume with StorageClass “ceph-block”: an operation with the given Volume ID pvc-ID already exists · Issue #8749 · rook/rook - https://github.com/rook/rook/issues/8749</a> to learn more.</p>
+<h3 id="PersistentVolumeClaim-or-PersistentVolume-Creation-hangs-and-fails-failed-to-provision-volume-with-StorageClass-“ceph-block”-an-operation-with-the-given-Volume-ID-pvc-ID-already-exists">PersistentVolumeClaim or PersistentVolume Creation hangs and fails, failed to provision volume with StorageClass “ceph-block”: an operation with the given Volume ID pvc-ID already exists</h3>
+<p>Particularly, ceph csi v3.4.0 (built with ceph pacific base image) and rook v1.7.1(which ships with cephcsi v3.4.0 as default) is affected by this issue.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rook/rook/issues/8696">New BlockPool / SC + Parallel RBD Volume Creation hangs and fails · Issue #8696 · rook/rook - https://github.com/rook/rook/issues/8696</a> to learn more.</p>
+<ul>
+<li>
+<p>Execute <code>rbd pool init &lt;pool_name&gt;</code> command from toolbox or ceph-csi pods(similar to this).</p>
+</li>
+<li>
+<p>Restart the csi-rbdplugin-provisioner-xxx pods.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl -n rook-ceph delete pods -l app=csi-rbdplugin-provisioner</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rook.io/docs/rook/v1.7/helm-operator.html">Ceph Operator Helm Chart | Ceph Docs - https://rook.io/docs/rook/v1.7/helm-operator.html</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rook.io/docs/rook/v1.7/helm-ceph-cluster.html">Ceph Docs - https://rook.io/docs/rook/v1.7/helm-ceph-cluster.html</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rook.io/">Rook - https://rook.io/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://ceph.io/en/">Ceph.io — Home - https://ceph.io/en/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Infrastructure-as-Code-IaC/" rel="tag"># Infrastructure as Code (IaC)</a>
+              <a href="/tags/Kubernetes-K8S/" rel="tag"># Kubernetes (K8S)</a>
+              <a href="/tags/Cloud-Native/" rel="tag"># Cloud Native</a>
+              <a href="/tags/Helm/" rel="tag"># Helm</a>
+              <a href="/tags/Pulumi/" rel="tag"># Pulumi</a>
+              <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
+              <a href="/tags/Storage/" rel="tag"># Storage</a>
+              <a href="/tags/CNCF/" rel="tag"># CNCF</a>
+              <a href="/tags/Cloud-Native-Computing-Foundation/" rel="tag"># Cloud Native Computing Foundation</a>
+              <a href="/tags/Cloud-Native-Computing-Foundation-CNCF/" rel="tag"># Cloud Native Computing Foundation (CNCF)</a>
+              <a href="/tags/Rook/" rel="tag"># Rook</a>
+              <a href="/tags/Ceph/" rel="tag"># Ceph</a>
+              <a href="/tags/Operator/" rel="tag"># Operator</a>
+              <a href="/tags/lvm2/" rel="tag"># lvm2</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/04/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-cert-manager/" rel="prev" title="[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy cert-manager">
+                  <i class="fa fa-angle-left"></i> [Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy cert-manager
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/04/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Rancher-Labs-Longhorn/" rel="next" title="[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Rancher Labs Longhorn">
+                  [Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Rancher Labs Longhorn <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"e8034a4f3530df8b402058780185c077"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

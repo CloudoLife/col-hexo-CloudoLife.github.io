@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="8. Common Collections Collections can contain multiple values. Unlike the built-in array and tuple types, the data these collections point to is stored on the heap, which means the amount of data does">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[The Rust Programming Language] 8. Common Collections">
+<meta property="og:url" content="https://cloudolife.com/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/8-Common-Collections/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="8. Common Collections Collections can contain multiple values. Unlike the built-in array and tuple types, the data these collections point to is stored on the heap, which means the amount of data does">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.944Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Rust">
+<meta property="article:tag" content="String">
+<meta property="article:tag" content="The Rust Programming Language">
+<meta property="article:tag" content="Collection">
+<meta property="article:tag" content="Vec">
+<meta property="article:tag" content="Unicode">
+<meta property="article:tag" content="UTF-8">
+<meta property="article:tag" content="HashMap">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/8-Common-Collections/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/8-Common-Collections/","path":"2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/8-Common-Collections/","title":"[The Rust Programming Language] 8. Common Collections"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[The Rust Programming Language] 8. Common Collections | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">8. Common Collections</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-Storing-Lists-of-Values-with-Vectors"><span class="nav-number">1.1.</span> <span class="nav-text">8.1 Storing Lists of Values with Vectors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-New-Vector"><span class="nav-number">1.1.1.</span> <span class="nav-text">Creating a New Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Updating-a-Vector"><span class="nav-number">1.1.2.</span> <span class="nav-text">Updating a Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dropping-a-Vector-Drops-Its-Elements"><span class="nav-number">1.1.3.</span> <span class="nav-text">Dropping a Vector Drops Its Elements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reading-Elements-of-Vectors"><span class="nav-number">1.1.4.</span> <span class="nav-text">Reading Elements of Vectors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterating-over-the-Values-in-a-Vector"><span class="nav-number">1.1.5.</span> <span class="nav-text">Iterating over the Values in a Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-an-Enum-to-Store-Multiple-Types"><span class="nav-number">1.1.6.</span> <span class="nav-text">Using an Enum to Store Multiple Types</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-Storing-UTF-8-Encoded-Text-with-Strings"><span class="nav-number">1.2.</span> <span class="nav-text">8.2 Storing UTF-8 Encoded Text with Strings</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-New-String"><span class="nav-number">1.2.1.</span> <span class="nav-text">Creating a New String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Updating-a-String"><span class="nav-number">1.2.2.</span> <span class="nav-text">Updating a String</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Appending-to-a-String-with-push-str-and-push"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Appending to a String with push_str and push</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concatenation-with-the-Operator-or-the-format-Macro"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Concatenation with the + Operator or the format! Macro</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Indexing-into-Strings"><span class="nav-number">1.2.3.</span> <span class="nav-text">Indexing into Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Internal-Representation"><span class="nav-number">1.2.4.</span> <span class="nav-text">Internal Representation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bytes-and-Scalar-Values-and-Grapheme-Clusters-Oh-My"><span class="nav-number">1.2.5.</span> <span class="nav-text">Bytes and Scalar Values and Grapheme Clusters! Oh My!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slicing-Strings"><span class="nav-number">1.2.6.</span> <span class="nav-text">Slicing Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Methods-for-Iterating-Over-Strings"><span class="nav-number">1.2.7.</span> <span class="nav-text">Methods for Iterating Over Strings</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-Storing-Keys-with-Associated-Values-in-Hash-Maps"><span class="nav-number">1.3.</span> <span class="nav-text">8.3 Storing Keys with Associated Values in Hash Maps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-a-New-Hash-Map"><span class="nav-number">1.3.1.</span> <span class="nav-text">Creating a New Hash Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash-Maps-and-Ownership"><span class="nav-number">1.3.2.</span> <span class="nav-text">Hash Maps and Ownership</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accessing-Values-in-a-Hash-Map"><span class="nav-number">1.3.3.</span> <span class="nav-text">Accessing Values in a Hash Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Only-Inserting-a-Value-If-the-Key-Has-No-Value"><span class="nav-number">1.3.4.</span> <span class="nav-text">Only Inserting a Value If the Key Has No Value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Updating-a-Value-Based-on-the-Old-Value"><span class="nav-number">1.3.5.</span> <span class="nav-text">Updating a Value Based on the Old Value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashing-Functions"><span class="nav-number">1.3.6.</span> <span class="nav-text">Hashing Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/8-Common-Collections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[The Rust Programming Language] 8. Common Collections | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [The Rust Programming Language] 8. Common Collections
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-02-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-01T00:00:00+00:00">2020-02-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/The-Rust-Programming-Language/" itemprop="url" rel="index"><span itemprop="name">The Rust Programming Language</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>15k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>13 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>8. Common Collections</h1>
+<p>Collections can contain multiple values. Unlike the built-in array and tuple types, the data these collections point to is stored on the heap, which means the amount of data does not need to be known at compile time and can grow or shrink as the program runs. Each kind of collection has different capabilities and costs, and choosing an appropriate one for your current situation is a skill you’ll develop over time.</p>
+<span id="more"></span>
+<p>We’ll discuss three collections that are used very often in Rust programs:</p>
+<ul>
+<li>
+<p>A vector allows you to store a variable number of values next to each other.</p>
+</li>
+<li>
+<p>A string is a collection of characters. We’ve mentioned the String type previously, but in this chapter we’ll talk about it in depth.</p>
+</li>
+<li>
+<p>A hash map allows you to associate a value with a particular key. It’s a particular implementation of the more general data structure called a map.</p>
+</li>
+</ul>
+<h2 id="8-1-Storing-Lists-of-Values-with-Vectors">8.1 Storing Lists of Values with Vectors</h2>
+<p>Vectors allow you to store more than one value in a single data structure that puts all the values next to each other in memory. Vectors can only store values of the same type.</p>
+<h3 id="Creating-a-New-Vector">Creating a New Vector</h3>
+<p>To create a new, empty vector, we can call the <code>Vec::new</code> function</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">v</span>: <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt; = <span class="type">Vec</span>::<span class="title function_ invoke__">new</span>();</span><br></pre></td></tr></table></figure>
+<p>It’s more common to create a Vec<T> that has initial values, and Rust provides the vec! macro for convenience. The macro will create a new vector that holds the values you give it.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">v</span> = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="Updating-a-Vector">Updating a Vector</h3>
+<p>To create a vector and then add elements to it, we can use the <code>push</code> method</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">v</span> = <span class="type">Vec</span>::<span class="title function_ invoke__">new</span>(); <span class="comment">// need to make it mutable using the mut keyword</span></span><br><span class="line"></span><br><span class="line">v.<span class="title function_ invoke__">push</span>(<span class="number">5</span>);  <span class="comment">// The numbers we place inside are all of type i32, and Rust infers this from the data</span></span><br><span class="line">v.<span class="title function_ invoke__">push</span>(<span class="number">6</span>);</span><br><span class="line">v.<span class="title function_ invoke__">push</span>(<span class="number">7</span>);</span><br><span class="line">v.<span class="title function_ invoke__">push</span>(<span class="number">8</span>);</span><br></pre></td></tr></table></figure>
+<p>As with any variable, if we want to be able to change its value, we need to make it mutable using the mut keyword,</p>
+<h3 id="Dropping-a-Vector-Drops-Its-Elements">Dropping a Vector Drops Its Elements</h3>
+<p>Like any other struct, a vector is freed when it goes out of scope, as annotated in Listing 8-4.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">v</span> = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// do stuff with v</span></span><br><span class="line">&#125; <span class="comment">// &lt;- v goes out of scope and is freed here</span></span><br></pre></td></tr></table></figure>
+<p>When the vector gets dropped, all of its contents are also dropped, meaning those integers it holds will be cleaned up.</p>
+<h3 id="Reading-Elements-of-Vectors">Reading Elements of Vectors</h3>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">v</span> = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">third</span>: &amp;<span class="type">i32</span> = &amp;v[<span class="number">2</span>];    <span class="comment">// Indexed by number, starting at zero, using &amp; and []</span></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;The third element is &#123;&#125;&quot;</span>, third);</span><br><span class="line"></span><br><span class="line"><span class="keyword">match</span> v.<span class="title function_ invoke__">get</span>(<span class="number">2</span>) &#123;</span><br><span class="line">    <span class="title function_ invoke__">Some</span>(third) =&gt; <span class="built_in">println!</span>(<span class="string">&quot;The third element is &#123;&#125;&quot;</span>, third),  <span class="comment">// Using an Option&lt;&amp;T&gt;.</span></span><br><span class="line">    <span class="literal">None</span> =&gt; <span class="built_in">println!</span>(<span class="string">&quot;There is no third element.&quot;</span>),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Rust has two ways to reference an element so you can choose how the program behaves when you try to use an index value that the vector doesn’t have an element for.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">v</span> = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">does_not_exist</span> = &amp;v[<span class="number">100</span>];   <span class="comment">// Cause the program to panic because it references a nonexistent element. </span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">does_not_exist</span> = v.<span class="title function_ invoke__">get</span>(<span class="number">100</span>);    <span class="comment">//  Returns None without panicking. </span></span><br></pre></td></tr></table></figure>
+<p>Adding a new element onto the end of the vector might require allocating new memory and copying the old elements to the new space, if there isn’t enough room to put all the elements next to each other where the vector currently is. In that case, the reference to the first element would be pointing to deallocated memory. The borrowing rules prevent programs from ending up in that situation.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">v</span> = <span class="built_in">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">first</span> = &amp;v[<span class="number">0</span>];  <span class="comment">// immutable borrow occurs here</span></span><br><span class="line"></span><br><span class="line">v.<span class="title function_ invoke__">push</span>(<span class="number">6</span>);  <span class="comment">// immutable borrow later used here</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;The first element is: &#123;&#125;&quot;</span>, first);</span><br></pre></td></tr></table></figure>
+<h3 id="Iterating-over-the-Values-in-a-Vector">Iterating over the Values in a Vector</h3>
+<p>We can iterate through all of the elements rather than use indices to access one at a time</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">v</span> = <span class="built_in">vec!</span>[<span class="number">100</span>, <span class="number">32</span>, <span class="number">57</span>];</span><br><span class="line"><span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> &amp;v &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We can also iterate over mutable references to each element in a mutable vector in order to make changes to all the elements.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">v</span> = <span class="built_in">vec!</span>[<span class="number">100</span>, <span class="number">32</span>, <span class="number">57</span>];</span><br><span class="line"><span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> &amp;<span class="keyword">mut</span> v &#123;</span><br><span class="line">    *i += <span class="number">50</span>;   <span class="comment">// use the dereference operator (`*`) to get to the value in i</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>To change the value that the mutable reference refers to, we have to use the dereference operator (<code>*</code>) to get to the value in i before we can use the <code>+=</code> operator. We’ll talk more about the dereference operator in the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://doc.rust-lang.org/book/ch15-02-deref.html#following-the-pointer-to-the-value-with-the-dereference-operator">“Following the Pointer to the Value with the Dereference Operator” - https://doc.rust-lang.org/book/ch15-02-deref.html#following-the-pointer-to-the-value-with-the-dereference-operator</a> section of Chapter 15.</p>
+<h3 id="Using-an-Enum-to-Store-Multiple-Types">Using an Enum to Store Multiple Types</h3>
+<p>Fortunately, the variants of an enum are defined under the same enum type, so when we need to store elements of a different type in a vector, we can define and use an enum!</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">SpreadsheetCell</span> &#123;</span><br><span class="line">     <span class="title function_ invoke__">Int</span>(<span class="type">i32</span>),</span><br><span class="line">     <span class="title function_ invoke__">Float</span>(<span class="type">f64</span>),</span><br><span class="line">     <span class="title function_ invoke__">Text</span>(<span class="type">String</span>),</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">let</span> <span class="variable">row</span> = <span class="built_in">vec!</span>[</span><br><span class="line">     SpreadsheetCell::<span class="title function_ invoke__">Int</span>(<span class="number">3</span>),</span><br><span class="line">     SpreadsheetCell::<span class="title function_ invoke__">Text</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;blue&quot;</span>)),</span><br><span class="line">     SpreadsheetCell::<span class="title function_ invoke__">Float</span>(<span class="number">10.12</span>),</span><br><span class="line"> ];</span><br></pre></td></tr></table></figure>
+<p>When you’re writing a program, if you don’t know the exhaustive set of types the program will get at runtime to store in a vector, the enum technique won’t work. Instead, you can use a trait object, which we’ll cover in Chapter 17.</p>
+<h2 id="8-2-Storing-UTF-8-Encoded-Text-with-Strings">8.2 Storing UTF-8 Encoded Text with Strings</h2>
+<p>Rust has only one string type in the core language, which is the string slice str that is usually seen in its borrowed form &amp;str. String literals, are stored in the program’s binary and are therefore string slices.</p>
+<p>The String type, which is provided by Rust’s standard library rather than coded into the core language, is a growable, mutable, owned, UTF-8 encoded string type.</p>
+<p>Rust’s standard library also includes a number of other string types, such as OsString, OsStr, CString, and CStr. Library crates can provide even more options for storing string data.</p>
+<h3 id="Creating-a-New-String">Creating a New String</h3>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Using the new function</span></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Using the to_string method</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">data</span> = <span class="string">&quot;initial contents&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = data.<span class="title function_ invoke__">to_string</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// the method also works on a literal directly:</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="string">&quot;initial contents&quot;</span>.<span class="title function_ invoke__">to_string</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Using the function String::from</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;initial contents&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Updating-a-String">Updating a String</h3>
+<p>A String can grow in size and its contents can change, just like the contents of a Vec<T>, if you push more data into it. In addition, you can conveniently use the + operator or the format! macro to concatenate String values.</p>
+<h4 id="Appending-to-a-String-with-push-str-and-push">Appending to a String with push_str and push</h4>
+<p>We can grow a String by using the <code>push_str</code> method to append a string slice</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;foo&quot;</span>);</span><br><span class="line">s.<span class="title function_ invoke__">push_str</span>(<span class="string">&quot;bar&quot;</span>);  <span class="comment">// will contain foobar</span></span><br></pre></td></tr></table></figure>
+<p>The <code>push_str</code> method takes a string slice because we don’t necessarily want to take ownership of the parameter</p>
+<p>The push method takes a single character as a parameter and adds it to the String. Listing 8-17 shows code that adds the letter “l” to a String using the push method.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;lo&quot;</span>);</span><br><span class="line">s.<span class="title function_ invoke__">push</span>(<span class="string">&#x27;l&#x27;</span>);    <span class="comment">// lol</span></span><br></pre></td></tr></table></figure>
+<h4 id="Concatenation-with-the-Operator-or-the-format-Macro">Concatenation with the + Operator or the format! Macro</h4>
+<p>One way is to use the + operator</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Hello, &quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;world!&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s3</span> = s1 + &amp;s2; <span class="comment">// note s1 has been moved here and can no longer be used</span></span><br></pre></td></tr></table></figure>
+<p>The + operator uses the add method, whose signature looks something like this:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">add</span>(<span class="keyword">self</span>, s: &amp;<span class="type">str</span>) <span class="punctuation">-&gt;</span> <span class="type">String</span></span><br></pre></td></tr></table></figure>
+<p>When we call the add method, Rust uses a deref coercion, which here turns &amp;s2 into &amp;s2[…]. We’ll discuss deref coercion in more depth in Chapter 15. Because add does not take ownership of the s parameter, s2 will still be a valid String after this operation.</p>
+<p>Second, we can see in the signature that add takes ownership of self, because self does not have an &amp;. This statement actually takes ownership of s1, appends a copy of the contents of s2, and then returns ownership of the result.</p>
+<p>For more complicated string combining, we can use the format! macro:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;tic&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;tac&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s3</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;toe&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = <span class="built_in">format!</span>(<span class="string">&quot;&#123;&#125;-&#123;&#125;-&#123;&#125;&quot;</span>, s1, s2, s3);    <span class="comment">// tic-tac-toe</span></span><br></pre></td></tr></table></figure>
+<p>The <code>format!</code> macro works in the same way as <code>println!</code>, but instead of printing the output to the screen, it returns a String with the contents. The version of the code using <code>format!</code> is much easier to read and doesn’t take ownership of any of its parameters.</p>
+<h3 id="Indexing-into-Strings">Indexing into Strings</h3>
+<p>If you try to access parts of a String using indexing syntax in Rust, you’ll get an error.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// This code does not compile!</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">h</span> = s1[<span class="number">0</span>];  <span class="comment">// error[E0277]: the type `String` cannot be indexed by `&#123;integer&#125;`</span></span><br></pre></td></tr></table></figure>
+<h3 id="Internal-Representation">Internal Representation</h3>
+<p>A String is a wrapper over a Vec<u8>.</p>
+<h3 id="Bytes-and-Scalar-Values-and-Grapheme-Clusters-Oh-My">Bytes and Scalar Values and Grapheme Clusters! Oh My!</h3>
+<p>Another point about UTF-8 is that there are actually three relevant ways to look at strings from Rust’s perspective: as bytes, scalar values, and grapheme clusters (the closest thing to what we would call letters).</p>
+<p>A final reason Rust doesn’t allow us to index into a String to get a character is that indexing operations are expected to always take constant time (O(1)). But it isn’t possible to guarantee that performance with a String, because Rust would have to walk through the contents from the beginning to the index to determine how many valid characters there were.</p>
+<h3 id="Slicing-Strings">Slicing Strings</h3>
+<p>Indexing into a string is often a bad idea because it’s not clear what the return type of the string-indexing operation should be: a byte value, a character, a grapheme cluster, or a string slice. Therefore, Rust asks you to be more specific if you really need to use indices to create string slices. To be more specific in your indexing and indicate that you want a string slice, rather than indexing using [] with a single number, you can use [] with a range to create a string slice containing particular bytes:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">hello</span> = <span class="string">&quot;Здравствуйте&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = &amp;hello[<span class="number">0</span>..<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line">&amp;hello[<span class="number">0</span>..<span class="number">1</span>]    <span class="comment">// would panic at runtime in the same way as if an invalid index were accessed in a vector</span></span><br></pre></td></tr></table></figure>
+<p>You should use ranges to create string slices with caution, because doing so can crash your program.</p>
+<h3 id="Methods-for-Iterating-Over-Strings">Methods for Iterating Over Strings</h3>
+<p>If you need to perform operations on individual Unicode scalar values, the best way to do so is to use the chars method.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="variable">c</span> <span class="keyword">in</span> <span class="string">&quot;नमस्ते&quot;</span>.<span class="title function_ invoke__">chars</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The bytes method returns each raw byte, which might be appropriate for your domain:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="variable">b</span> <span class="keyword">in</span> <span class="string">&quot;नमस्ते&quot;</span>.<span class="title function_ invoke__">bytes</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>But be sure to remember that valid Unicode scalar values may be made up of more than 1 byte.</p>
+<p>Getting grapheme clusters from strings is complex, so this functionality is not provided by the standard library. Crates are available on <a target="_blank" rel="noopener external nofollow noreferrer" href="http://crates.io">crates.io</a> if this is the functionality you need.</p>
+<h2 id="8-3-Storing-Keys-with-Associated-Values-in-Hash-Maps">8.3 Storing Keys with Associated Values in Hash Maps</h2>
+<p>The type HashMap&lt;K, V&gt; stores a mapping of keys of type K to values of type V. It does this via a hashing function, which determines how it places these keys and values into memory.</p>
+<h3 id="Creating-a-New-Hash-Map">Creating a New Hash Map</h3>
+<p>You can create an empty hash map with new and add elements with insert. In Listing 8-20, we’re keeping track of the scores of two teams whose names are Blue and Yellow. The Blue team starts with 10 points, and the Yellow team starts with 50.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::collections::HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">scores</span> = HashMap::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line">scores.<span class="title function_ invoke__">insert</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Blue&quot;</span>), <span class="number">10</span>);</span><br><span class="line">scores.<span class="title function_ invoke__">insert</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Yellow&quot;</span>), <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p>Another way of constructing a hash map is by using iterators and the collect method on a vector of tuples, where each tuple consists of a key and its value. We’ll be going into more detail about iterators and their associated methods in the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://doc.rust-lang.org/book/ch13-02-iterators.html">”Processing a Series of Items with Iterators” - https://doc.rust-lang.org/book/ch13-02-iterators.html</a> section of Chapter 13.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::collections::HashMap;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">teams</span> = <span class="built_in">vec!</span>[<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Blue&quot;</span>), <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Yellow&quot;</span>)];</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">initial_scores</span> = <span class="built_in">vec!</span>[<span class="number">10</span>, <span class="number">50</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">scores</span>: HashMap&lt;_, _&gt; =</span><br><span class="line">        teams.<span class="title function_ invoke__">into_iter</span>().<span class="title function_ invoke__">zip</span>(initial_scores.<span class="title function_ invoke__">into_iter</span>()).<span class="title function_ invoke__">collect</span>();</span><br></pre></td></tr></table></figure>
+<p>The type annotation <code>HashMap&lt;_, _&gt;</code> is needed here because it’s possible to collect into many different data structures and Rust doesn’t know which you want unless you specify. For the parameters for the key and value types, however, we use underscores, and Rust can infer the types that the hash map contains based on the types of the data in the vectors.</p>
+<h3 id="Hash-Maps-and-Ownership">Hash Maps and Ownership</h3>
+<p>For types that implement the Copy trait, like i32, the values are copied into the hash map. For owned values like String, the values will be moved and the hash map will be the owner of those values.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">field_name</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Favorite color&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">field_value</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Blue&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">map</span> = HashMap::<span class="title function_ invoke__">new</span>();</span><br><span class="line">map.<span class="title function_ invoke__">insert</span>(field_name, field_value);</span><br><span class="line"><span class="comment">// field_name and field_value are invalid at this point, try using them and</span></span><br><span class="line"><span class="comment">// see what compiler error you get!</span></span><br></pre></td></tr></table></figure>
+<p>If we insert references to values into the hash map, the values won’t be moved into the hash map. The values that the references point to must be valid for at least as long as the hash map is valid. We’ll talk more about these issues in the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html#validating-references-with-lifetimes">“Validating References with Lifetimes” - https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html#validating-references-with-lifetimes</a> section in Chapter 10.</p>
+<h3 id="Accessing-Values-in-a-Hash-Map">Accessing Values in a Hash Map</h3>
+<p>We can get a value out of the hash map by providing its key to the get method.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::collections::HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">scores</span> = HashMap::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line">scores.<span class="title function_ invoke__">insert</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Blue&quot;</span>), <span class="number">10</span>);</span><br><span class="line">scores.<span class="title function_ invoke__">insert</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Yellow&quot;</span>), <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">team_name</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Blue&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">score</span> = scores.<span class="title function_ invoke__">get</span>(&amp;team_name); <span class="comment">// Some(&amp;10)</span></span><br></pre></td></tr></table></figure>
+<p>Here, score will have the value that’s associated with the Blue team, and the result will be Some(&amp;10). The result is wrapped in Some because get returns an Option&lt;&amp;V&gt;; if there’s no value for that key in the hash map, get will return None.</p>
+<p>We can iterate over each key/value pair in a hash map in a similar manner as we do with vectors, using a for loop:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::collections::HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">scores</span> = HashMap::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line">scores.<span class="title function_ invoke__">insert</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Blue&quot;</span>), <span class="number">10</span>);</span><br><span class="line">scores.<span class="title function_ invoke__">insert</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Yellow&quot;</span>), <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (key, value) <span class="keyword">in</span> &amp;scores &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;: &#123;&#125;&quot;</span>, key, value); <span class="comment">// will print each pair in an arbitrary order:</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Only-Inserting-a-Value-If-the-Key-Has-No-Value">Only Inserting a Value If the Key Has No Value</h3>
+<p>It’s common to check whether a particular key has a value and, if it doesn’t, insert a value for it. Hash maps have a special API for this called entry that takes the key you want to check as a parameter. The return value of the entry method is an enum called Entry that represents a value that might or might not exist.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::collections::HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">scores</span> = HashMap::<span class="title function_ invoke__">new</span>();</span><br><span class="line">scores.<span class="title function_ invoke__">insert</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Blue&quot;</span>), <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">scores.<span class="title function_ invoke__">entry</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Yellow&quot;</span>)).<span class="title function_ invoke__">or_insert</span>(<span class="number">50</span>); <span class="comment">// will insert the key for the Yellow team with the value 50 because the Yellow team doesn’t have a value already.</span></span><br><span class="line">scores.<span class="title function_ invoke__">entry</span>(<span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;Blue&quot;</span>)).<span class="title function_ invoke__">or_insert</span>(<span class="number">50</span>);   <span class="comment">// will not change the hash map because the Blue team already has the value 10.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;:?&#125;&quot;</span>, scores);   <span class="comment">// will print &#123;&quot;Yellow&quot;: 50, &quot;Blue&quot;: 10&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Updating-a-Value-Based-on-the-Old-Value">Updating a Value Based on the Old Value</h3>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::collections::HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">text</span> = <span class="string">&quot;hello world wonderful world&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">map</span> = HashMap::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="variable">word</span> <span class="keyword">in</span> text.<span class="title function_ invoke__">split_whitespace</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">count</span> = map.<span class="title function_ invoke__">entry</span>(word).<span class="title function_ invoke__">or_insert</span>(<span class="number">0</span>);   <span class="comment">// returns a mutable reference (&amp;mut V) to the value for this key</span></span><br><span class="line">    *count += <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;:?&#125;&quot;</span>, map);  <span class="comment">// &#123;&quot;world&quot;: 2, &quot;hello&quot;: 1, &quot;wonderful&quot;: 1&#125;</span></span><br></pre></td></tr></table></figure>
+<p>This code will print {“world”: 2, “hello”: 1, “wonderful”: 1}. The or_insert method actually returns a mutable reference (&amp;mut V) to the value for this key. Here we store that mutable reference in the count variable, so in order to assign to that value, we must first dereference count using the asterisk (*). The mutable reference goes out of scope at the end of the for loop, so all of these changes are safe and allowed by the borrowing rules.</p>
+<h3 id="Hashing-Functions">Hashing Functions</h3>
+<p>By default, HashMap uses a hashing function called SipHash that can provide resistance to Denial of Service (DoS) attacks involving hash tables1. This is not the fastest hashing algorithm available, but the trade-off for better security that comes with the drop in performance is worth it. If you profile your code and find that the default hash function is too slow for your purposes, you can switch to another function by specifying a different hasher. A hasher is a type that implements the BuildHasher trait. We’ll talk about traits and how to implement them in Chapter 10. You don’t necessarily have to implement your own hasher from scratch; <a target="_blank" rel="noopener external nofollow noreferrer" href="http://crates.io">crates.io</a> has libraries shared by other Rust users that provide hashers implementing many common hashing algorithms.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://doc.rust-lang.org/book/title-page.html">The Rust Programming Language - The Rust Programming Language - https://doc.rust-lang.org/book/title-page.html</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://doc.rust-lang.org/book/ch08-00-common-collections.html">Common Collections - The Rust Programming Language - https://doc.rust-lang.org/book/ch08-00-common-collections.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Rust/" rel="tag"># Rust</a>
+              <a href="/tags/String/" rel="tag"># String</a>
+              <a href="/tags/The-Rust-Programming-Language/" rel="tag"># The Rust Programming Language</a>
+              <a href="/tags/Collection/" rel="tag"># Collection</a>
+              <a href="/tags/Vec/" rel="tag"># Vec</a>
+              <a href="/tags/Unicode/" rel="tag"># Unicode</a>
+              <a href="/tags/UTF-8/" rel="tag"># UTF-8</a>
+              <a href="/tags/HashMap/" rel="tag"># HashMap</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/9-Error-Handling/" rel="prev" title="[The Rust Programming Language] 9. Error Handling">
+                  <i class="fa fa-angle-left"></i> [The Rust Programming Language] 9. Error Handling
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/02/01/Programming-Language/Rust/The-Rust-Programming-Language/7-Managing-Growing-Projects-with-Packages-Crates-and-Modules/" rel="next" title="[The Rust Programming Language] 7. Managing Growing Projects with Packages, Crates, and Modules">
+                  [The Rust Programming Language] 7. Managing Growing Projects with Packages, Crates, and Modules <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"230ba3eb0d549f35359614b9e4a63df4"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

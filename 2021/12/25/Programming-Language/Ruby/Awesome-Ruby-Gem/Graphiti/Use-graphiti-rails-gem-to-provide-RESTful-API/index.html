@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="graphiti-rails Graphiti makes RESTful Resources a first-class concept. This enables reading and writing a graph of data in a single request, a schema with backwards-compatible guarantee, end-to-end in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Ruby Gem - Graphiti] Use graphiti-rails gem to provide RESTful API">
+<meta property="og:url" content="https://cloudolife.com/2021/12/25/Programming-Language/Ruby/Awesome-Ruby-Gem/Graphiti/Use-graphiti-rails-gem-to-provide-RESTful-API/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="graphiti-rails Graphiti makes RESTful Resources a first-class concept. This enables reading and writing a graph of data in a single request, a schema with backwards-compatible guarantee, end-to-end in">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-25T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.934Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Controller">
+<meta property="article:tag" content="GraphQL">
+<meta property="article:tag" content="Rails">
+<meta property="article:tag" content="JavaScript Object Notation (JSON)">
+<meta property="article:tag" content="Resource">
+<meta property="article:tag" content="JSON">
+<meta property="article:tag" content="JavaScript Object Notation">
+<meta property="article:tag" content="JSON:API">
+<meta property="article:tag" content="JSON API">
+<meta property="article:tag" content="RESTful">
+<meta property="article:tag" content="Representational State Transfer">
+<meta property="article:tag" content="Representational State Transfer (RESTful)">
+<meta property="article:tag" content="Awesome Ruby Gem">
+<meta property="article:tag" content="Ruby on Rails (RoR)">
+<meta property="article:tag" content="kaminari">
+<meta property="article:tag" content="RoR">
+<meta property="article:tag" content="Ruby on Rails">
+<meta property="article:tag" content="gem">
+<meta property="article:tag" content="graphiti-rails">
+<meta property="article:tag" content="Model">
+<meta property="article:tag" content="Graphiti">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/12/25/Programming-Language/Ruby/Awesome-Ruby-Gem/Graphiti/Use-graphiti-rails-gem-to-provide-RESTful-API/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/12/25/Programming-Language/Ruby/Awesome-Ruby-Gem/Graphiti/Use-graphiti-rails-gem-to-provide-RESTful-API/","path":"2021/12/25/Programming-Language/Ruby/Awesome-Ruby-Gem/Graphiti/Use-graphiti-rails-gem-to-provide-RESTful-API/","title":"[Awesome Ruby Gem - Graphiti] Use graphiti-rails gem to provide RESTful API"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Ruby Gem - Graphiti] Use graphiti-rails gem to provide RESTful API | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">graphiti-rails</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages"><span class="nav-number">1.2.</span> <span class="nav-text">Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Defining-a-Model"><span class="nav-number">1.2.1.</span> <span class="nav-text">Defining a Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config"><span class="nav-number">1.2.2.</span> <span class="nav-text">Config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Defining-a-Resource"><span class="nav-number">1.2.3.</span> <span class="nav-text">Defining a Resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Check-generated-code"><span class="nav-number">1.2.4.</span> <span class="nav-text">Check generated code</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PostsController"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">PostsController</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ApplicationController"><span class="nav-number">1.2.5.</span> <span class="nav-text">ApplicationController</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Route"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">Route</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ApplicationResource"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">ApplicationResource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PostResource"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">PostResource</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run"><span class="nav-number">1.2.6.</span> <span class="nav-text">Run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seeding-Data"><span class="nav-number">1.2.7.</span> <span class="nav-text">Seeding Data</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">1.3.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined-method-delete-suffix%E2%80%99-for-nil-NilClass-NoMethodError"><span class="nav-number">1.3.1.</span> <span class="nav-text">undefined method &#96;delete_suffix’ for nil:NilClass (NoMethodError)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-unchanged-The-supplied-flag-value-not-found-config-routes-rb"><span class="nav-number">1.3.2.</span> <span class="nav-text">File unchanged! The supplied flag value not found!  config&#x2F;routes.rb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uninitialized-constant-ApplicationResource-NameError"><span class="nav-number">1.3.3.</span> <span class="nav-text">uninitialized constant ApplicationResource (NameError)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NoMethodError-undefined-method-respond-with%E2%80%99"><span class="nav-number">1.3.4.</span> <span class="nav-text">NoMethodError (undefined method &#96;respond_with’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Could-not-find-type-jsonb-This-was-specified-on-attribute-annotations-within-resource-DataDictionaryResource-Graphiti-Errors-TypeNotFound"><span class="nav-number">1.3.5.</span> <span class="nav-text">Could not find type :jsonb! This was specified on attribute :annotations within resource DataDictionaryResource (Graphiti::Errors::TypeNotFound)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr-local-lib-ruby-3-0-0-debug-rb-6-in-main-undefined-method-%E2%80%99-for-nil-NilClass-NoMethodError"><span class="nav-number">1.3.6.</span> <span class="nav-text">&#x2F;usr&#x2F;local&#x2F;lib&#x2F;ruby&#x2F;3.0.0&#x2F;debug.rb:6:in &lt;main&gt;&#39;: undefined method &gt;’ for nil:NilClass (NoMethodError)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/12/25/Programming-Language/Ruby/Awesome-Ruby-Gem/Graphiti/Use-graphiti-rails-gem-to-provide-RESTful-API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Ruby Gem - Graphiti] Use graphiti-rails gem to provide RESTful API | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Ruby Gem - Graphiti] Use graphiti-rails gem to provide RESTful API
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-25 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-25T00:00:00+00:00">2021-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Awesome-Ruby-Gem/" itemprop="url" rel="index"><span itemprop="name">Awesome Ruby Gem</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Awesome-Ruby-Gem/Graphiti/" itemprop="url" rel="index"><span itemprop="name">Graphiti</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>7.5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>7 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>graphiti-rails</h1>
+<p>Graphiti makes RESTful Resources a first-class concept. This enables reading and writing a graph of data in a single request, a schema with backwards-compatible guarantee, end-to-end integration test patterns, seamless microservices and much more.</p>
+<p>This quickstart will use Rails with ActiveRecord to give an overview of Graphiti functionality on familiar ground. For a more in-depth breakdown, head to the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.graphiti.dev/guides">Guides - https://www.graphiti.dev/guides</a>.</p>
+<span id="more"></span>
+<h2 id="Installation">Installation</h2>
+<p>You can install it as a gem:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gem install graphiti-rails</span></span><br></pre></td></tr></table></figure>
+<p>or add it into a Gemfile (Bundler):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># graphiti-api/graphiti-rails</span></span><br><span class="line"><span class="comment"># https://github.com/graphiti-api/graphiti-rails</span></span><br><span class="line">gem <span class="string">&#x27;graphiti-rails&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># For automatic ActiveRecord pagination</span></span><br><span class="line">gem <span class="string">&#x27;kaminari&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Test-specific gems</span></span><br><span class="line">group <span class="symbol">:development</span>, <span class="symbol">:test</span> <span class="keyword">do</span></span><br><span class="line">  gem <span class="string">&#x27;rspec-rails&#x27;</span></span><br><span class="line">  gem <span class="string">&#x27;factory_bot_rails&#x27;</span></span><br><span class="line">  gem <span class="string">&#x27;faker&#x27;</span></span><br><span class="line">  gem <span class="string">&#x27;graphiti_spec_helpers&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">group <span class="symbol">:test</span> <span class="keyword">do</span></span><br><span class="line">  gem <span class="string">&#x27;database_cleaner&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>Then, run <code>bundle install</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle install</span></span><br></pre></td></tr></table></figure>
+<h2 id="Usages">Usages</h2>
+<h3 id="Defining-a-Model">Defining a Model</h3>
+<p>First, let’s define our Model:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle <span class="built_in">exec</span> rails generate model Post title:string upvotes:<span class="built_in">integer</span> active:boolean</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle <span class="built_in">exec</span> rails db:migrate</span></span><br></pre></td></tr></table></figure>
+<h3 id="Config">Config</h3>
+<p>The <code>.graphiticfg.yml</code> file lives in the root directory of your application. It holds configuration we need to reuse across a variety of contexts (primarily generates and rake tasks). If you use our template to create your application, it’s created for you.</p>
+<p>Primarily this is used to hold your “API namespace”:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .graphiticfg.yml</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">namespace:</span> <span class="string">/api/v1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>If this file doesn’t exist you may get unexpected errors - make sure to create it!</p>
+<hr>
+<h3 id="Defining-a-Resource">Defining a Resource</h3>
+<p>A Resource defines how to query and persist your Model. In other words: a Model is to the database as Resource is to the API.</p>
+<p>Now we can use the built-in generator to define our Resource, corresponding Endpoint, and Integration Tests.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle <span class="built_in">exec</span> rails g graphiti:resource Post title:string upvotes:<span class="built_in">integer</span> active:boolean</span></span><br><span class="line">      create  app/controllers/api/v1/posts_controller.rb</span><br><span class="line">      modify  config/routes.rb</span><br><span class="line">      create  app/resources/post_resource.rb</span><br><span class="line">      create  spec/resources/post/writes_spec.rb</span><br><span class="line">      create  spec/resources/post/reads_spec.rb</span><br><span class="line">      create  spec/api/v1/posts/index_spec.rb</span><br><span class="line">      create  spec/api/v1/posts/show_spec.rb</span><br><span class="line">      create  spec/api/v1/posts/create_spec.rb</span><br><span class="line">      create  spec/api/v1/posts/update_spec.rb</span><br><span class="line">      create  spec/api/v1/posts/destroy_spec.rb</span><br></pre></td></tr></table></figure>
+<h3 id="Check-generated-code">Check generated code</h3>
+<h4 id="PostsController">PostsController</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/controllers/api/v1/posts_controller.rb</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> <span class="title class_">Api</span></span><br><span class="line">  <span class="keyword">module</span> <span class="title class_">V1</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">PostsController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">      <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">        posts = <span class="title class_">PostResource</span>.all(params)</span><br><span class="line">        respond_with(posts)</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">def</span> <span class="title function_">show</span></span><br><span class="line">        post = <span class="title class_">PostResource</span>.find(params)</span><br><span class="line">        respond_with(post)</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">def</span> <span class="title function_">create</span></span><br><span class="line">        post = <span class="title class_">PostResource</span>.build(params)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> post.save</span><br><span class="line">          render <span class="symbol">jsonapi:</span> post, <span class="symbol">status:</span> <span class="number">201</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">          render <span class="symbol">jsonapi_errors:</span> post</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">def</span> <span class="title function_">update</span></span><br><span class="line">        post = <span class="title class_">PostResource</span>.find(params)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> post.update_attributes</span><br><span class="line">          render <span class="symbol">jsonapi:</span> post</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">          render <span class="symbol">jsonapi_errors:</span> post</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">def</span> <span class="title function_">destroy</span></span><br><span class="line">        post = <span class="title class_">PostResource</span>.find(params)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> post.destroy</span><br><span class="line">          render <span class="symbol">jsonapi:</span> &#123; <span class="symbol">meta:</span> &#123;&#125; &#125;, <span class="symbol">status:</span> <span class="number">200</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">          render <span class="symbol">jsonapi_errors:</span> post</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="ApplicationController">ApplicationController</h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/controller/application_controller.rb</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApplicationController</span> &lt; <span class="title class_ inherited__">ActionController::API</span></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">Graphiti::Rails::Responders</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="Route">Route</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/routes.rb</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rails</span>.application.routes.draw <span class="keyword">do</span></span><br><span class="line">  <span class="comment"># Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Defines the root path route (&quot;/&quot;)</span></span><br><span class="line">  <span class="comment"># root &quot;articles#index&quot;</span></span><br><span class="line"></span><br><span class="line">  namespace <span class="symbol">:api</span> <span class="keyword">do</span></span><br><span class="line">    namespace <span class="symbol">:v1</span> <span class="keyword">do</span></span><br><span class="line">      resources <span class="symbol">:posts</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="ApplicationResource">ApplicationResource</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/resources/application_resource.rb</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ApplicationResource is similar to ApplicationRecord - a base class that</span></span><br><span class="line"><span class="comment"># holds configuration/methods for subclasses.</span></span><br><span class="line"><span class="comment"># All Resources should inherit from ApplicationResource.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ApplicationResource</span> &lt; <span class="title class_ inherited__">Graphiti::Resource</span></span><br><span class="line">  <span class="comment"># Use the ActiveRecord Adapter for all subclasses.</span></span><br><span class="line">  <span class="comment"># Subclasses can still override this default.</span></span><br><span class="line">  <span class="variable language_">self</span>.abstract_class = <span class="literal">true</span></span><br><span class="line">  <span class="variable language_">self</span>.adapter = <span class="title class_">Graphiti</span><span class="symbol">:</span><span class="symbol">:Adapters</span><span class="symbol">:</span><span class="symbol">:ActiveRecord</span></span><br><span class="line">  <span class="variable language_">self</span>.base_url = <span class="title class_">Rails</span>.application.routes.default_url_options[<span class="symbol">:host</span>]</span><br><span class="line">  <span class="variable language_">self</span>.endpoint_namespace = <span class="string">&#x27;/api/v1&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="PostResource">PostResource</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/resources/post_resource.rb</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">PostResource</span> &lt; <span class="title class_ inherited__">ApplicationResource</span></span><br><span class="line">  attribute <span class="symbol">:name</span>, <span class="symbol">:string</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>Call <code>PostResource</code> built-in methods:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rails c</span></span><br><span class="line">irb(main):001:0&gt; PostResource.all.data # =&gt; [#&lt;Post&gt;, #&lt;Post&gt;, ...]</span><br><span class="line"></span><br><span class="line">irb(main):001:1&gt; PostResource.all.to_json</span><br><span class="line"></span><br><span class="line">irb(main):001:2&gt; PostResource.all.to_json</span><br></pre></td></tr></table></figure>
+<h3 id="Run">Run</h3>
+<p>You’ll see a number of files created. Now run your app!:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle <span class="built_in">exec</span> rails s</span></span><br></pre></td></tr></table></figure>
+<p>Verify <code>http://localhost:3000/api/v1/posts</code> renders JSON correctly. Now we just need data.</p>
+<h3 id="Seeding-Data">Seeding Data</h3>
+<p>Edit <code>db/seeds.rb</code> to create a few Posts:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Post</span>.create!(<span class="symbol">title:</span> <span class="string">&#x27;My title&#x27;</span>, <span class="symbol">upvotes:</span> <span class="number">10</span>, <span class="symbol">active:</span> <span class="literal">true</span>)</span><br><span class="line"><span class="title class_">Post</span>.create!(<span class="symbol">title:</span> <span class="string">&#x27;Another title&#x27;</span>, <span class="symbol">upvotes:</span> <span class="number">20</span>, <span class="symbol">active:</span> <span class="literal">false</span>)</span><br><span class="line"><span class="title class_">Post</span>.create!(<span class="symbol">title:</span> <span class="string">&#x27;OMG! A title&#x27;</span>, <span class="symbol">upvotes:</span> <span class="number">30</span>, <span class="symbol">active:</span> <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<p>And run the script:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle <span class="built_in">exec</span> rails db:seed</span></span><br></pre></td></tr></table></figure>
+<p>Now load <code>http://localhost:3000/api/v1/posts</code>. You should have 3 Posts in your database!</p>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="undefined-method-delete-suffix’-for-nil-NilClass-NoMethodError">undefined method `delete_suffix’ for nil:NilClass (NoMethodError)</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle <span class="built_in">exec</span> rails g graphiti:resource Post title:string upvotes:<span class="built_in">integer</span> active:boolean</span></span><br><span class="line">      create  app/controllers/posts_controller.rb</span><br><span class="line">/Users/cloudolife/.asdf/installs/ruby/3.0.3/lib/ruby/gems/3.0.0/gems/graphiti-1.3.5/deprecated_generators/graphiti/generator_mixin.rb:15:in `api_namespace&#x27;: undefined method `delete_suffix&#x27; for nil:NilClass (NoMethodError)</span><br></pre></td></tr></table></figure>
+<p>File <code>.graphiticfg.yml</code> doesn’t exist you may get unexpected errors - make sure to create it!</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .graphiticfg.yml</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">namespace:</span> <span class="string">/api/v1</span></span><br></pre></td></tr></table></figure>
+<h3 id="File-unchanged-The-supplied-flag-value-not-found-config-routes-rb">File unchanged! The supplied flag value not found!  config/routes.rb</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle <span class="built_in">exec</span> rails g graphiti:resource Post title:string upvotes:<span class="built_in">integer</span> active:boolean</span></span><br><span class="line">File unchanged! The supplied flag value not found!  config/routes.rb</span><br></pre></td></tr></table></figure>
+<p>TODO</p>
+<h3 id="uninitialized-constant-ApplicationResource-NameError">uninitialized constant ApplicationResource (NameError)</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle <span class="built_in">exec</span> rails g graphiti:resource Post title:string upvotes:<span class="built_in">integer</span> active:boolean</span></span><br><span class="line">      create  app/resources/post_resource.rb</span><br><span class="line">/Users/cloudolife/graphiti-rails-demo/app/resources/post_resource.rb:1:in `&lt;main&gt;&#x27;: uninitialized constant ApplicationResource (NameError)</span><br><span class="line">Did you mean?  ApplicationRecord</span><br></pre></td></tr></table></figure>
+<p>Try to run <code>bundle exec rails g graphiti:resource Post title:string upvotes:integer active:boolean</code> again to fix that issue.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle <span class="built_in">exec</span> rails g graphiti:resource Post title:string upvotes:<span class="built_in">integer</span> active:boolean</span></span><br></pre></td></tr></table></figure>
+<h3 id="NoMethodError-undefined-method-respond-with’">NoMethodError (undefined method `respond_with’</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NoMethodError (undefined method `respond_with&#x27; for #&lt;Restful::Api::V1::DataDictionariesController:0x000000000131a0&gt;</span><br><span class="line">Did you mean?  respond_to?):</span><br></pre></td></tr></table></figure>
+<p>Append <code>include Graphiti::Rails::Responders</code> into file <code>application_controller.rb</code>.</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># app/controller/application_controller.rb</span><br><span class="line"></span><br><span class="line">class ApplicationController &lt; ActionController::API</span><br><span class="line"><span class="addition">+  include Graphiti::Rails::Responders</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h3 id="Could-not-find-type-jsonb-This-was-specified-on-attribute-annotations-within-resource-DataDictionaryResource-Graphiti-Errors-TypeNotFound">Could not find type :jsonb! This was specified on attribute :annotations within resource DataDictionaryResource (Graphiti::Errors::TypeNotFound)</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">RAILS_ENV=production rails c</span> </span><br><span class="line">~/.asdf/installs/ruby/3.0.3/lib/ruby/gems/3.0.0/gems/graphiti-1.3.5/lib/graphiti/resource/dsl.rb:127:in `attribute&#x27;: Could not find type :jsonb! This was specified on attribute :annotations within resource DataDictionaryResource (Graphiti::Errors::TypeNotFound)</span><br></pre></td></tr></table></figure>
+<p>TODO</p>
+<h3 id="usr-local-lib-ruby-3-0-0-debug-rb-6-in-main-undefined-method-’-for-nil-NilClass-NoMethodError">/usr/local/lib/ruby/3.0.0/debug.rb:6:in <code>&lt;main&gt;': undefined method </code>&gt;’ for nil:NilClass (NoMethodError)</h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /usr/local/lib/ruby/3.0.0/debug.rb</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="variable">$SAFE</span> &gt; <span class="number">0</span></span><br><span class="line">  <span class="variable constant_">STDERR</span>.print <span class="string">&quot;-r debug.rb is not available in safe mode\n&quot;</span></span><br><span class="line">  exit <span class="number">1</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.graphiti.dev/guides/">Stylish Graph APIs | Guides - https://www.graphiti.dev/guides/</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/graphiti-api/graphiti">graphiti-api/graphiti: Stylish Graph APIs - https://github.com/graphiti-api/graphiti</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.graphiti.dev/guides/graphiti-rails-migration">Migrating to graphiti-rails - https://www.graphiti.dev/guides/graphiti-rails-migration</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/graphiti-api/graphiti-rails">graphiti-api/graphiti-rails - https://github.com/graphiti-api/graphiti-rails</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rubygems.org/gems/graphiti-rails/">graphiti-rails | RubyGems.org | your community gem host - https://rubygems.org/gems/graphiti-rails/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://jsonapi.org/">JSON:API — A specification for building APIs in JSON - https://jsonapi.org/</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://jsonapi.org/implementations/">JSON:API — Implementations - https://jsonapi.org/implementations/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Controller/" rel="tag"># Controller</a>
+              <a href="/tags/GraphQL/" rel="tag"># GraphQL</a>
+              <a href="/tags/Rails/" rel="tag"># Rails</a>
+              <a href="/tags/JavaScript-Object-Notation-JSON/" rel="tag"># JavaScript Object Notation (JSON)</a>
+              <a href="/tags/Resource/" rel="tag"># Resource</a>
+              <a href="/tags/JSON/" rel="tag"># JSON</a>
+              <a href="/tags/JavaScript-Object-Notation/" rel="tag"># JavaScript Object Notation</a>
+              <a href="/tags/JSON-API/" rel="tag"># JSON:API</a>
+              <a href="/tags/JSON-API/" rel="tag"># JSON API</a>
+              <a href="/tags/RESTful/" rel="tag"># RESTful</a>
+              <a href="/tags/Representational-State-Transfer/" rel="tag"># Representational State Transfer</a>
+              <a href="/tags/Representational-State-Transfer-RESTful/" rel="tag"># Representational State Transfer (RESTful)</a>
+              <a href="/tags/Awesome-Ruby-Gem/" rel="tag"># Awesome Ruby Gem</a>
+              <a href="/tags/Ruby-on-Rails-RoR/" rel="tag"># Ruby on Rails (RoR)</a>
+              <a href="/tags/kaminari/" rel="tag"># kaminari</a>
+              <a href="/tags/RoR/" rel="tag"># RoR</a>
+              <a href="/tags/Ruby-on-Rails/" rel="tag"># Ruby on Rails</a>
+              <a href="/tags/gem/" rel="tag"># gem</a>
+              <a href="/tags/graphiti-rails/" rel="tag"># graphiti-rails</a>
+              <a href="/tags/Model/" rel="tag"># Model</a>
+              <a href="/tags/Graphiti/" rel="tag"># Graphiti</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/18/Awesome-Software/Remote/Neverinstall-The-fastest-way-to-run-desktop-apps-remotely/" rel="prev" title="[Awesome Remote] Neverinstall: The fastest way to run desktop apps remotely">
+                  <i class="fa fa-angle-left"></i> [Awesome Remote] Neverinstall: The fastest way to run desktop apps remotely
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/25/Programming-Language/Ruby/Awesome-Ruby-Gem/Graphiti/Use-graphiti-graphql-to-support-GraphQL-for-Graphiti/" rel="next" title="[Awesome Ruby Gem - Graphiti] Use graphiti_graphql to support GraphQL for Graphiti">
+                  [Awesome Ruby Gem - Graphiti] Use graphiti_graphql to support GraphQL for Graphiti <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"e25f0ef7d026af235029f66755d74579"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

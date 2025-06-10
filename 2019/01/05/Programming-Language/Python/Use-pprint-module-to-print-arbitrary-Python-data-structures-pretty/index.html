@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="pprint The pprint module provides a capability to “pretty-print” arbitrary Python data structures in a form which can be used as input to the interpreter. If the formatted structures include objects w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Python] Use pprint module to print arbitrary Python data structures pretty">
+<meta property="og:url" content="https://cloudolife.com/2019/01/05/Programming-Language/Python/Use-pprint-module-to-print-arbitrary-Python-data-structures-pretty/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="pprint The pprint module provides a capability to “pretty-print” arbitrary Python data structures in a form which can be used as input to the interpreter. If the formatted structures include objects w">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-05T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.933Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="pprint">
+<meta property="article:tag" content="pp">
+<meta property="article:tag" content="print">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2019/01/05/Programming-Language/Python/Use-pprint-module-to-print-arbitrary-Python-data-structures-pretty/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2019/01/05/Programming-Language/Python/Use-pprint-module-to-print-arbitrary-Python-data-structures-pretty/","path":"2019/01/05/Programming-Language/Python/Use-pprint-module-to-print-arbitrary-Python-data-structures-pretty/","title":"[Python] Use pprint module to print arbitrary Python data structures pretty"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Python] Use pprint module to print arbitrary Python data structures pretty | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">pprint</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages"><span class="nav-number">1.1.</span> <span class="nav-text">Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PrettyPrinter"><span class="nav-number">1.1.1.</span> <span class="nav-text">PrettyPrinter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#class-pprint-PrettyPrinter-indent-1-width-80-depth-None-stream-None-compact-False-sort-dicts-True"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">class pprint.PrettyPrinter(indent&#x3D;1, width&#x3D;80, depth&#x3D;None, stream&#x3D;None, *, compact&#x3D;False, sort_dicts&#x3D;True)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shortcut-Functions"><span class="nav-number">1.1.2.</span> <span class="nav-text">Shortcut Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pprint-pformat-object-indent-1-width-80-depth-None-compact-False-sort-dicts-True"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">pprint.pformat(object, indent&#x3D;1, width&#x3D;80, depth&#x3D;None, *, compact&#x3D;False, sort_dicts&#x3D;True)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pprint-isreadable-object"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">pprint.isreadable(object)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pprint-isrecursive-object"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">pprint.isrecursive(object)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pprint-saferepr-object"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">pprint.saferepr(object)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2019/01/05/Programming-Language/Python/Use-pprint-module-to-print-arbitrary-Python-data-structures-pretty/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Python] Use pprint module to print arbitrary Python data structures pretty | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Python] Use pprint module to print arbitrary Python data structures pretty
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-05 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-05T00:00:00+00:00">2019-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>10 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>pprint</h1>
+<p>The <code>pprint</code> module provides a capability to “pretty-print” arbitrary Python data structures in a form which can be used as input to the interpreter. If the formatted structures include objects which are not fundamental Python types, the representation may not be loadable. This may be the case if objects such as files, sockets or classes are included, as well as many other objects which are not representable as Python literals.</p>
+<span id="more"></span>
+<p>The formatted representation keeps objects on a single line if it can, and breaks them onto multiple lines if they don’t fit within the allowed width. Construct PrettyPrinter objects explicitly if you need to adjust the width constraint.</p>
+<p>Dictionaries are sorted by key before the display is computed.</p>
+<h2 id="Usages">Usages</h2>
+<h3 id="PrettyPrinter">PrettyPrinter</h3>
+<p>The <code>pprint</code> module defines one class:</p>
+<h4 id="class-pprint-PrettyPrinter-indent-1-width-80-depth-None-stream-None-compact-False-sort-dicts-True">class pprint.PrettyPrinter(indent=1, width=80, depth=None, stream=None, *, compact=False, sort_dicts=True)</h4>
+<p>Construct a <code>PrettyPrinter</code> instance. This constructor understands several keyword parameters.</p>
+<ul>
+<li>
+<p>An output stream may be set using the stream keyword; the only method used on the stream object is the file protocol’s <code>write()</code> method. If not specified, the <code>PrettyPrinte</code>r adopts <code>sys.stdout</code>.</p>
+</li>
+<li>
+<p>The amount of indentation added for each recursive level is specified by indent; the default is one. Other values can cause output to look a little odd, but can make nesting easier to spot. The number of levels which may be printed is controlled by depth; if the data structure being printed is too deep, the next contained level is replaced by … By default, there is no constraint on the depth of the objects being formatted.</p>
+</li>
+<li>
+<p>The desired output width is constrained using the width parameter; the default is 80 characters. If a structure cannot be formatted within the constrained width, a best effort will be made.</p>
+</li>
+<li>
+<p>If compact is false (the default) each item of a long sequence will be formatted on a separate line. If compact is true, as many items as will fit within the width will be formatted on each output line.</p>
+</li>
+<li>
+<p>If sort_dicts is true (the default), dictionaries will be formatted with their keys sorted, otherwise they will display in insertion order.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pprint</span><br><span class="line"></span><br><span class="line">stuff = [<span class="string">&#x27;spam&#x27;</span>, <span class="string">&#x27;eggs&#x27;</span>, <span class="string">&#x27;lumberjack&#x27;</span>, <span class="string">&#x27;knights&#x27;</span>, <span class="string">&#x27;ni&#x27;</span>]</span><br><span class="line">stuff.insert(<span class="number">0</span>, stuff[:])</span><br><span class="line">pp = pprint.PrettyPrinter(indent=<span class="number">4</span>)</span><br><span class="line">pp.pprint(stuff)</span><br><span class="line"><span class="comment"># [   [&#x27;spam&#x27;, &#x27;eggs&#x27;, &#x27;lumberjack&#x27;, &#x27;knights&#x27;, &#x27;ni&#x27;],</span></span><br><span class="line"><span class="comment">#     &#x27;spam&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;eggs&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;lumberjack&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;knights&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;ni&#x27;]</span></span><br><span class="line"></span><br><span class="line">pp = pprint.PrettyPrinter(width=<span class="number">41</span>, compact=<span class="literal">True</span>)</span><br><span class="line">pp.pprint(stuff)</span><br><span class="line"><span class="comment"># [[&#x27;spam&#x27;, &#x27;eggs&#x27;, &#x27;lumberjack&#x27;,</span></span><br><span class="line"><span class="comment">#   &#x27;knights&#x27;, &#x27;ni&#x27;],</span></span><br><span class="line"><span class="comment">#  &#x27;spam&#x27;, &#x27;eggs&#x27;, &#x27;lumberjack&#x27;, &#x27;knights&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;ni&#x27;]</span></span><br><span class="line"></span><br><span class="line">tup = (<span class="string">&#x27;spam&#x27;</span>, (<span class="string">&#x27;eggs&#x27;</span>, (<span class="string">&#x27;lumberjack&#x27;</span>, (<span class="string">&#x27;knights&#x27;</span>, (<span class="string">&#x27;ni&#x27;</span>, (<span class="string">&#x27;dead&#x27;</span>,</span><br><span class="line">(<span class="string">&#x27;parrot&#x27;</span>, (<span class="string">&#x27;fresh fruit&#x27;</span>,))))))))</span><br><span class="line">pp = pprint.PrettyPrinter(depth=<span class="number">6</span>)</span><br><span class="line">pp.pprint(tup)</span><br><span class="line"><span class="comment"># (&#x27;spam&#x27;, (&#x27;eggs&#x27;, (&#x27;lumberjack&#x27;, (&#x27;knights&#x27;, (&#x27;ni&#x27;, (&#x27;dead&#x27;, (...)))))))</span></span><br></pre></td></tr></table></figure>
+<h3 id="Shortcut-Functions">Shortcut Functions</h3>
+<p>The pprint module also provides several shortcut functions:</p>
+<h4 id="pprint-pformat-object-indent-1-width-80-depth-None-compact-False-sort-dicts-True">pprint.pformat(object, indent=1, width=80, depth=None, *, compact=False, sort_dicts=True)</h4>
+<p>Return the formatted representation of object as a string. indent, width, depth, compact and sort_dicts will be passed to the PrettyPrinter constructor as formatting parameters.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="comment">#### pprint.pp(object, *args, sort_dicts=False, **kwargs)</span></span><br><span class="line"></span><br><span class="line">Prints the formatted representation of <span class="built_in">object</span> followed by a newline. If sort_dicts <span class="keyword">is</span> false (the default), dictionaries will be displayed <span class="keyword">with</span> their keys <span class="keyword">in</span> insertion order, otherwise the <span class="built_in">dict</span> keys will be <span class="built_in">sorted</span>. args <span class="keyword">and</span> kwargs will be passed to pprint() <span class="keyword">as</span> formatting parameters.</span><br><span class="line"></span><br><span class="line"><span class="comment">#### pprint.pprint(object, stream=None, indent=1, width=80, depth=None, *, compact=False, sort_dicts=True)</span></span><br><span class="line"></span><br><span class="line">Prints the formatted representation of <span class="built_in">object</span> on stream, followed by a newline. If stream <span class="keyword">is</span> <span class="literal">None</span>, sys.stdout <span class="keyword">is</span> used. This may be used <span class="keyword">in</span> the interactive interpreter instead of the <span class="built_in">print</span>() function <span class="keyword">for</span> inspecting values (you can even reassign <span class="built_in">print</span> = pprint.pprint <span class="keyword">for</span> use within a scope). indent, width, depth, compact <span class="keyword">and</span> sort_dicts will be passed to the PrettyPrinter constructor <span class="keyword">as</span> formatting parameters.</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"><span class="keyword">import</span> pprint</span><br><span class="line">stuff = [<span class="string">&#x27;spam&#x27;</span>, <span class="string">&#x27;eggs&#x27;</span>, <span class="string">&#x27;lumberjack&#x27;</span>, <span class="string">&#x27;knights&#x27;</span>, <span class="string">&#x27;ni&#x27;</span>]</span><br><span class="line">stuff.insert(<span class="number">0</span>, stuff)</span><br><span class="line">pprint.pprint(stuff)</span><br><span class="line"><span class="comment"># [&lt;Recursion on list with id=...&gt;,</span></span><br><span class="line"><span class="comment">#  &#x27;spam&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;eggs&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;lumberjack&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;knights&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;ni&#x27;]</span></span><br></pre></td></tr></table></figure>
+<h4 id="pprint-isreadable-object">pprint.isreadable(object)</h4>
+<p>Determine if the formatted representation of object is “readable”, or can be used to reconstruct the value using eval(). This always returns False for recursive objects.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pprint.isreadable(stuff)</span><br><span class="line"><span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+<h4 id="pprint-isrecursive-object">pprint.isrecursive(object)</h4>
+<p>Determine if object requires a recursive representation.</p>
+<h4 id="pprint-saferepr-object">pprint.saferepr(object)</h4>
+<p>Return a string representation of object, protected against recursive data structures. If the representation of object exposes a recursive entry, the recursive reference will be represented as <code>&lt;Recursion on typename with id=number&gt;</code>. The representation is not otherwise formatted.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pprint.saferepr(stuff)</span><br><span class="line"><span class="comment"># &quot;[&lt;Recursion on list with id=...&gt;, &#x27;spam&#x27;, &#x27;eggs&#x27;, &#x27;lumberjack&#x27;, &#x27;knights&#x27;, &#x27;ni&#x27;]&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Example">Example</h2>
+<p>To demonstrate several uses of the <code>pprint()</code> function and its parameters, let’s fetch information about a project from PyPI:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> pprint</span><br><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">with</span> urlopen(<span class="string">&#x27;https://pypi.org/pypi/sampleproject/json&#x27;</span>) <span class="keyword">as</span> resp:</span><br><span class="line">    project_info = json.load(resp)[<span class="string">&#x27;info&#x27;</span>]</span><br><span class="line"></span><br><span class="line">pprint.pprint(project_info)</span><br><span class="line"><span class="comment"># &#123;&#x27;author&#x27;: &#x27;The Python Packaging Authority&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;author_email&#x27;: &#x27;pypa-dev@googlegroups.com&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;bugtrack_url&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;classifiers&#x27;: [&#x27;Development Status :: 3 - Alpha&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Intended Audience :: Developers&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;License :: OSI Approved :: MIT License&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 2&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 2.6&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 2.7&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 3&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 3.2&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 3.3&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 3.4&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Topic :: Software Development :: Build Tools&#x27;],</span></span><br><span class="line"><span class="comment">#  &#x27;description&#x27;: &#x27;A sample Python project\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;=======================\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;This is the description file for the project.\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;The file should use UTF-8 encoding and be written using &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;ReStructured Text. It\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;will be used to generate the project webpage on PyPI, and &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;should be written for\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;that purpose.\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;Typical contents for this file would include an overview of &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;the project, basic\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;usage examples, etc. Generally, including the project &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;changelog in here is not\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;a good idea, although a simple &quot;What\&#x27;s New&quot; section for the &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;most recent version\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;may be appropriate.&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;description_content_type&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;docs_url&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;download_url&#x27;: &#x27;UNKNOWN&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;downloads&#x27;: &#123;&#x27;last_day&#x27;: -1, &#x27;last_month&#x27;: -1, &#x27;last_week&#x27;: -1&#125;,</span></span><br><span class="line"><span class="comment">#  &#x27;home_page&#x27;: &#x27;https://github.com/pypa/sampleproject&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;keywords&#x27;: &#x27;sample setuptools development&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;license&#x27;: &#x27;MIT&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;maintainer&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;maintainer_email&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;name&#x27;: &#x27;sampleproject&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;package_url&#x27;: &#x27;https://pypi.org/project/sampleproject/&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;platform&#x27;: &#x27;UNKNOWN&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;project_url&#x27;: &#x27;https://pypi.org/project/sampleproject/&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;project_urls&#x27;: &#123;&#x27;Download&#x27;: &#x27;UNKNOWN&#x27;,</span></span><br><span class="line"><span class="comment">#                   &#x27;Homepage&#x27;: &#x27;https://github.com/pypa/sampleproject&#x27;&#125;,</span></span><br><span class="line"><span class="comment">#  &#x27;release_url&#x27;: &#x27;https://pypi.org/project/sampleproject/1.2.0/&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;requires_dist&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;requires_python&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;summary&#x27;: &#x27;A sample Python project&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;version&#x27;: &#x27;1.2.0&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line">pprint.pp(<span class="string">f&#x27;project_info = <span class="subst">&#123;pprint.pformat(project_info)&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="comment"># project_info = &#123;&#x27;author&#x27;: &#x27;The Python Packaging Authority&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;author_email&#x27;: &#x27;pypa-dev@googlegroups.com&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;bugtrack_url&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;classifiers&#x27;: [&#x27;Development Status :: 3 - Alpha&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Intended Audience :: Developers&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;License :: OSI Approved :: MIT License&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 2&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 2.6&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 2.7&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 3&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 3.2&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 3.3&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Programming Language :: Python :: 3.4&#x27;,</span></span><br><span class="line"><span class="comment">#                  &#x27;Topic :: Software Development :: Build Tools&#x27;],</span></span><br><span class="line"><span class="comment">#  &#x27;description&#x27;: &#x27;A sample Python project\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;=======================\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;This is the description file for the project.\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;The file should use UTF-8 encoding and be written using &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;ReStructured Text. It\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;will be used to generate the project webpage on PyPI, and &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;should be written for\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;that purpose.\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;Typical contents for this file would include an overview of &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;the project, basic\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;usage examples, etc. Generally, including the project &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;changelog in here is not\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;a good idea, although a simple &quot;What\&#x27;s New&quot; section for the &#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;most recent version\n&#x27;</span></span><br><span class="line"><span class="comment">#                 &#x27;may be appropriate.&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;description_content_type&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;docs_url&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;download_url&#x27;: &#x27;UNKNOWN&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;downloads&#x27;: &#123;&#x27;last_day&#x27;: -1, &#x27;last_month&#x27;: -1, &#x27;last_week&#x27;: -1&#125;,</span></span><br><span class="line"><span class="comment">#  &#x27;home_page&#x27;: &#x27;https://github.com/pypa/sampleproject&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;keywords&#x27;: &#x27;sample setuptools development&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;license&#x27;: &#x27;MIT&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;maintainer&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;maintainer_email&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;name&#x27;: &#x27;sampleproject&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;package_url&#x27;: &#x27;https://pypi.org/project/sampleproject/&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;platform&#x27;: &#x27;UNKNOWN&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;project_url&#x27;: &#x27;https://pypi.org/project/sampleproject/&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;project_urls&#x27;: &#123;&#x27;Download&#x27;: &#x27;UNKNOWN&#x27;,</span></span><br><span class="line"><span class="comment">#                   &#x27;Homepage&#x27;: &#x27;https://github.com/pypa/sampleproject&#x27;&#125;,</span></span><br><span class="line"><span class="comment">#  &#x27;release_url&#x27;: &#x27;https://pypi.org/project/sampleproject/1.2.0/&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;requires_dist&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;requires_python&#x27;: None,</span></span><br><span class="line"><span class="comment">#  &#x27;summary&#x27;: &#x27;A sample Python project&#x27;,</span></span><br><span class="line"><span class="comment">#  &#x27;version&#x27;: &#x27;1.2.0&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.python.org/3/library/pprint.html">pprint — Data pretty printer — Python 3.9.5 documentation - https://docs.python.org/3/library/pprint.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/pprint/" rel="tag"># pprint</a>
+              <a href="/tags/pp/" rel="tag"># pp</a>
+              <a href="/tags/print/" rel="tag"># print</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/05/Programming-Language/Golang-Go/The-Go-Blog/Go-maps-in-action/" rel="prev" title="[The Go Blog] Go maps in action">
+                  <i class="fa fa-angle-left"></i> [The Go Blog] Go maps in action
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/01/05/Programming-Language/Golang-Go/Effective-Go/" rel="next" title="[Golang (Go)] Effective Go">
+                  [Golang (Go)] Effective Go <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"8cf520ad0bd950bb184b37a1c5b017e2"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Logging Java Persistence API (JPA) and Hibernate SQL Spring JDBC and JPA provide abstractions over native JDBC APIs, allowing developers to do away with native SQL queries. However, we often need to s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Spring Data JPA Logging] Logging Java Persistence API (JPA) and Hibernate SQL in Spring Boot">
+<meta property="og:url" content="https://cloudolife.com/2021/02/20/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Logging-Java-Persistence-API-JPA-and-Hibernate-SQL-in-Spring-Boot/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Logging Java Persistence API (JPA) and Hibernate SQL Spring JDBC and JPA provide abstractions over native JDBC APIs, allowing developers to do away with native SQL queries. However, we often need to s">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-20T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.932Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Logging">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Java Persistence API (JPA)">
+<meta property="article:tag" content="Spring Data JPA">
+<meta property="article:tag" content="Gradle">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="Structured Query Language (SQL)">
+<meta property="article:tag" content="Spring JDBC">
+<meta property="article:tag" content="JdbcTemplate">
+<meta property="article:tag" content="Java Database Connectivity (JDBC)">
+<meta property="article:tag" content="bundle.gradle">
+<meta property="article:tag" content="Maven">
+<meta property="article:tag" content="pom.xml">
+<meta property="article:tag" content="p6spy">
+<meta property="article:tag" content="p6spy-spring-boot-starter">
+<meta property="article:tag" content="Logback">
+<meta property="article:tag" content="Hibernate">
+<meta property="article:tag" content="application.properties">
+<meta property="article:tag" content="application.yml">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/02/20/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Logging-Java-Persistence-API-JPA-and-Hibernate-SQL-in-Spring-Boot/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/02/20/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Logging-Java-Persistence-API-JPA-and-Hibernate-SQL-in-Spring-Boot/","path":"2021/02/20/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Logging-Java-Persistence-API-JPA-and-Hibernate-SQL-in-Spring-Boot/","title":"[Spring Data JPA Logging] Logging Java Persistence API (JPA) and Hibernate SQL in Spring Boot"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Spring Data JPA Logging] Logging Java Persistence API (JPA) and Hibernate SQL in Spring Boot | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Logging Java Persistence API (JPA) and Hibernate SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#To-Standard-Output"><span class="nav-number">1.1.</span> <span class="nav-text">To Standard Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Via-Loggers"><span class="nav-number">1.2.</span> <span class="nav-text">Via Loggers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logging-JdbcTemplate-Queries"><span class="nav-number">1.3.</span> <span class="nav-text">Logging JdbcTemplate Queries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Via-p6spy"><span class="nav-number">1.4.</span> <span class="nav-text">Via p6spy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-number">1.4.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration"><span class="nav-number">1.4.2.</span> <span class="nav-text">Configuration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">1.5.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-print-SQL-parameters-of-LIMIT-and-OFFSET-in-JPA"><span class="nav-number">1.5.1.</span> <span class="nav-text">How to print SQL parameters of LIMIT and OFFSET in JPA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.6.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/02/20/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Logging-Java-Persistence-API-JPA-and-Hibernate-SQL-in-Spring-Boot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Spring Data JPA Logging] Logging Java Persistence API (JPA) and Hibernate SQL in Spring Boot | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Spring Data JPA Logging] Logging Java Persistence API (JPA) and Hibernate SQL in Spring Boot
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-20 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-20T00:00:00+00:00">2021-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/Spring/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/" itemprop="url" rel="index"><span itemprop="name">Spring Data JPA</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>5.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Logging Java Persistence API (JPA) and Hibernate SQL</h1>
+<p>Spring JDBC and JPA provide abstractions over native JDBC APIs, allowing developers to do away with native SQL queries. However, we often need to see those auto-generated SQL queries and the order in which they were executed for debugging purposes.</p>
+<span id="more"></span>
+<h2 id="To-Standard-Output">To Standard Output</h2>
+<p>The simplest way to dump the queries to standard out is to add the following to <code>application.properties</code>:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.jpa.show-sql</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>Or <code>application.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">jpa:</span></span><br><span class="line">    <span class="attr">show-sql:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>To beautify or pretty print the SQL, we can add:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.jpa.properties.hibernate.format_sql</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>Or <code>application.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># application.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">jpa:</span></span><br><span class="line">    <span class="attr">properties:</span></span><br><span class="line">      <span class="attr">hibernate:</span> </span><br><span class="line">        <span class="attr">format_sql:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>While this is extremely simple, it’s not recommended, as it directly unloads everything to standard output without any optimizations of a logging framework.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hibernate: select next_val as id_val from hibernate_sequence for update</span><br><span class="line">Hibernate: update hibernate_sequence set next_val= ? where next_val=?</span><br><span class="line">Hibernate: insert into employee (name, id) values (?, ?)</span><br></pre></td></tr></table></figure>
+<p>Moreover, it doesn’t log the parameters of prepared statements.</p>
+<h2 id="Via-Loggers">Via Loggers</h2>
+<p>Now let’s see how we can log the SQL statements by configuring loggers in the properties file <code>application.properties</code>:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging.level.org.hibernate.SQL</span>=DEBUG</span><br><span class="line"><span class="attr">logging.level.org.hibernate.type.descriptor.sql.BasicBinder</span>=TRACE</span><br></pre></td></tr></table></figure>
+<p>The first line logs the SQL queries, and the second statement logs the prepared statement parameters.</p>
+<p>Or <code>application.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">    <span class="attr">org:</span></span><br><span class="line">      <span class="attr">hibernate:</span> </span><br><span class="line">        <span class="attr">SQL:</span> <span class="string">DEBUG</span></span><br><span class="line">        <span class="attr">type:</span> </span><br><span class="line">          <span class="attr">descriptor:</span></span><br><span class="line">            <span class="attr">BasicBinder:</span> <span class="string">TRACE</span></span><br></pre></td></tr></table></figure>
+<p>The pretty print property will work in this configuration as well.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2020-11-10 15:40:24.582 DEBUG 92677 --- [nio-8080-exec-1] org.hibernate.SQL                        : select next_val as id_val from hibernate_sequence for update</span><br><span class="line">2020-11-10 15:40:24.592 DEBUG 92677 --- [nio-8080-exec-1] org.hibernate.SQL                        : update hibernate_sequence set next_val= ? where next_val=?</span><br><span class="line">2020-11-10 15:40:24.608 DEBUG 92677 --- [nio-8080-exec-1] org.hibernate.SQL                        : insert into employee (name, id) values (?, ?)</span><br><span class="line">2020-11-10 15:40:24.610 TRACE 92677 --- [nio-8080-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [test]</span><br><span class="line">2020-11-10 15:40:24.611 TRACE 92677 --- [nio-8080-exec-1] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [1]</span><br></pre></td></tr></table></figure>
+<p>By setting these properties, logs will be sent to the configured appender. By default, Spring Boot uses logback with a standard out appender.</p>
+<h2 id="Logging-JdbcTemplate-Queries">Logging JdbcTemplate Queries</h2>
+<p>To configure statement logging when using <code>JdbcTemplate</code>, we need the following properties:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging.level.org.springframework.jdbc.core.JdbcTemplate</span>=DEBUG</span><br><span class="line"><span class="attr">logging.level.org.springframework.jdbc.core.StatementCreatorUtils</span>=TRACE</span><br></pre></td></tr></table></figure>
+<p>Or <code>application.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">    <span class="attr">org:</span></span><br><span class="line">      <span class="attr">springframework:</span> </span><br><span class="line">        <span class="attr">jdbc:</span></span><br><span class="line">          <span class="attr">core:</span> </span><br><span class="line">            <span class="attr">JdbcTemplate:</span> <span class="string">DEBUG</span></span><br><span class="line">            <span class="attr">StatementCreatorUtils:</span> <span class="string">TRACE</span></span><br></pre></td></tr></table></figure>
+<p>Similar to the JPA logging configuration, the first line is for logging statements and the second is to log parameters of prepared statements.</p>
+<h2 id="Via-p6spy">Via p6spy</h2>
+<p>P6Spy is a framework that enables database data to be seamlessly intercepted and logged with no code changes to existing application. The P6Spy distribution includes P6Log, an application which logs all JDBC transactions for any Java application.</p>
+<p>Spring Boot autoconfiguration is handled by the separate project: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/gavlyukovskiy/spring-boot-data-source-decorator">gavlyukovskiy/spring-boot-data-source-decorator: Spring Boot integration with p6spy, datasource-proxy, flexy-pool and spring-cloud-sleuth - https://github.com/gavlyukovskiy/spring-boot-data-source-decorator</a>, please consult the respective documentation for usage.</p>
+<h3 id="Installation">Installation</h3>
+<p>Install <code>spring-boot-data-source-decorator</code>:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation(<span class="string">&quot;com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.7.1&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>Or</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.gavlyukovskiy<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>p6spy-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Configuration">Configuration</h3>
+<p>Update database url and driver class:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># application.properties</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># spring.datasource.url=jdbc:postgresql://postgres:5432/cloudolife_development</span></span><br><span class="line"><span class="comment"># Update JDBC URL in the datasource with p6spy:</span></span><br><span class="line"><span class="attr">spring.datasource.url</span>=jdbc:p6spy:postgresql://postgres:<span class="number">5432</span>/cloudolife_development</span><br><span class="line"><span class="attr">spring.datasource.username</span>=cloudolife</span><br><span class="line"><span class="attr">spring.datasource.password</span>=cloudolife</span><br><span class="line"></span><br><span class="line"><span class="comment"># Change driver in the datasource</span></span><br><span class="line"><span class="attr">spring.datasource.driver-class-name</span>=com.p6spy.engine.spy.P6SpyDriver</span><br></pre></td></tr></table></figure>
+<p>Or <code>application.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># application.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="comment"># url: jdbc:postgresql://postgres:5432/cloudolife_development</span></span><br><span class="line">    <span class="comment"># Update JDBC URL in the datasource with p6spy:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:p6spy:postgresql://postgres:5432/cloudolife_development</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">cloudolife</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">cloudolife</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Change driver in the datasource</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.p6spy.engine.spy.P6SpyDriver</span></span><br></pre></td></tr></table></figure>
+<p>Replace <code>jdbc:p6spy:postgresql</code> to <code>jdbc:p6spy:mysql</code> or others in other databses.</p>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="How-to-print-SQL-parameters-of-LIMIT-and-OFFSET-in-JPA">How to print SQL parameters of LIMIT and OFFSET in JPA</h3>
+<p>JPA doesn’t allow to use keywords LIMIT/OFFSET in it. The calls setFirstResult(1) and setMaxResults(3) don’t append OFFSET and LIMIT clause to the query. The first option is to use a native SQL query for your DB, but it will make the code non-portable. Another option is utilization of a Pageable for retrieving results (not sure if it will produce for you the expected log lines either, but you need to check):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Query(&quot;SELECT f FROM Foo f ORDER BY f.id DESC&quot;)</span> <span class="comment">// or ASC</span></span><br><span class="line">List&lt;Foo&gt; <span class="title function_">getLastDetails</span><span class="params">(Pageable pageable)</span>;</span><br><span class="line"></span><br><span class="line">List&lt;Foo&gt; fooList = getLastDetails(<span class="keyword">new</span> <span class="title class_">PageRequest</span>(<span class="number">0</span>,<span class="number">1</span>)); <span class="comment">// (int page, int size)</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://stackoverflow.com/questions/57336837/how-to-print-sql-parameters-of-limit-and-offset">java - How to print SQL parameters of LIMIT and OFFSET - Stack Overflow - https://stackoverflow.com/questions/57336837/how-to-print-sql-parameters-of-limit-and-offset</a></p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.baeldung.com/sql-logging-spring-boot">Show Hibernate/JPA SQL Statements in Spring Boot | Baeldung - https://www.baeldung.com/sql-logging-spring-boot</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.yawintutor.com/print-hibernate-sql-query-string-with-parameter-values/">Print Hibernate SQL query string with parameter values in Spring Boot – Yawin Tutor - https://www.yawintutor.com/print-hibernate-sql-query-string-with-parameter-values/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.logging">Logging | “How-to” Guides - https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.logging</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="http://logback.qos.ch/">Logback Home - http://logback.qos.ch/</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/gavlyukovskiy/spring-boot-data-source-decorator">gavlyukovskiy/spring-boot-data-source-decorator: Spring Boot integration with p6spy, datasource-proxy, flexy-pool and spring-cloud-sleuth - https://github.com/gavlyukovskiy/spring-boot-data-source-decorator</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://spring.io/projects/spring-boot">Spring Boot - https://spring.io/projects/spring-boot</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Logging/" rel="tag"># Logging</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/Java-Persistence-API-JPA/" rel="tag"># Java Persistence API (JPA)</a>
+              <a href="/tags/Spring-Data-JPA/" rel="tag"># Spring Data JPA</a>
+              <a href="/tags/Gradle/" rel="tag"># Gradle</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+              <a href="/tags/Structured-Query-Language-SQL/" rel="tag"># Structured Query Language (SQL)</a>
+              <a href="/tags/Spring-JDBC/" rel="tag"># Spring JDBC</a>
+              <a href="/tags/JdbcTemplate/" rel="tag"># JdbcTemplate</a>
+              <a href="/tags/Java-Database-Connectivity-JDBC/" rel="tag"># Java Database Connectivity (JDBC)</a>
+              <a href="/tags/bundle-gradle/" rel="tag"># bundle.gradle</a>
+              <a href="/tags/Maven/" rel="tag"># Maven</a>
+              <a href="/tags/pom-xml/" rel="tag"># pom.xml</a>
+              <a href="/tags/p6spy/" rel="tag"># p6spy</a>
+              <a href="/tags/p6spy-spring-boot-starter/" rel="tag"># p6spy-spring-boot-starter</a>
+              <a href="/tags/Logback/" rel="tag"># Logback</a>
+              <a href="/tags/Hibernate/" rel="tag"># Hibernate</a>
+              <a href="/tags/application-properties/" rel="tag"># application.properties</a>
+              <a href="/tags/application-yml/" rel="tag"># application.yml</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/17/Programming-Language/Golang-Go/Go-1-16-is-released/" rel="prev" title="Go 1.16 is released">
+                  <i class="fa fa-angle-left"></i> Go 1.16 is released
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/20/Programming-Language/Java/Spring/Spring-Boot/Logging-SQL-with-p6spy-spring-boot-starter-in-Spring-Boot/" rel="next" title="[Spring Data JPA Logging] Logging SQL with p6spy-spring-boot-starter in Spring Boot">
+                  [Spring Data JPA Logging] Logging SQL with p6spy-spring-boot-starter in Spring Boot <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"0154ee78eff0375c88ee4ab818dc4ed6"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

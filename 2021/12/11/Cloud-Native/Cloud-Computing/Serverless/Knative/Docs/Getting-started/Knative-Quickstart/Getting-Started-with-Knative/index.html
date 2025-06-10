@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Getting Started with Knative Before you begin  Warning Knative Quickstart Environments are for experimentation use only. For production installation, see our Installing Guide - https:&#x2F;&#x2F;knative.dev&#x2F;doc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Serverless Knative] Knative Docs - Getting Started with Knative">
+<meta property="og:url" content="https://cloudolife.com/2021/12/11/Cloud-Native/Cloud-Computing/Serverless/Knative/Docs/Getting-started/Knative-Quickstart/Getting-Started-with-Knative/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Getting Started with Knative Before you begin  Warning Knative Quickstart Environments are for experimentation use only. For production installation, see our Installing Guide - https:&#x2F;&#x2F;knative.dev&#x2F;doc">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-11T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.910Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Kubernetes (K8S)">
+<meta property="article:tag" content="Cloud Native">
+<meta property="article:tag" content="Cloud Computing">
+<meta property="article:tag" content="K8S">
+<meta property="article:tag" content="Homebrew (brew)">
+<meta property="article:tag" content="Golang (Go)">
+<meta property="article:tag" content="brew">
+<meta property="article:tag" content="Container">
+<meta property="article:tag" content="nip.io">
+<meta property="article:tag" content="kubectl">
+<meta property="article:tag" content="Kind">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="Istio">
+<meta property="article:tag" content="Infrastructureless">
+<meta property="article:tag" content="Serverless">
+<meta property="article:tag" content="Knative">
+<meta property="article:tag" content="Knative Serving">
+<meta property="article:tag" content="Knative Eventing">
+<meta property="article:tag" content="Kourier">
+<meta property="article:tag" content="quickstart">
+<meta property="article:tag" content="kn">
+<meta property="article:tag" content="Minikube">
+<meta property="article:tag" content="ITless">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/12/11/Cloud-Native/Cloud-Computing/Serverless/Knative/Docs/Getting-started/Knative-Quickstart/Getting-Started-with-Knative/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/12/11/Cloud-Native/Cloud-Computing/Serverless/Knative/Docs/Getting-started/Knative-Quickstart/Getting-Started-with-Knative/","path":"2021/12/11/Cloud-Native/Cloud-Computing/Serverless/Knative/Docs/Getting-started/Knative-Quickstart/Getting-Started-with-Knative/","title":"[Serverless Knative] Knative Docs - Getting Started with Knative"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Serverless Knative] Knative Docs - Getting Started with Knative | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Getting Started with Knative</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Before-you-begin"><span class="nav-number">1.1.</span> <span class="nav-text">Before you begin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Warning"><span class="nav-number">1.1.1.</span> <span class="nav-text">Warning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prepare-local-Kubernetes-cluster"><span class="nav-number">1.1.2.</span> <span class="nav-text">Prepare local Kubernetes cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-the-Kubernetes-CLI"><span class="nav-number">1.1.3.</span> <span class="nav-text">Install the Kubernetes CLI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-the-Knative-CLI"><span class="nav-number">1.1.4.</span> <span class="nav-text">Install the Knative CLI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-Homebrew"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Using Homebrew</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Note"><span class="nav-number">1.1.4.1.1.</span> <span class="nav-text">Note</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-a-binary"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Using a binary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-Go"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">Using Go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-a-container-image"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">Using a container image</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Note-2"><span class="nav-number">1.1.4.4.1.</span> <span class="nav-text">Note</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Having-issues-upgrading-kn"><span class="nav-number">1.1.5.</span> <span class="nav-text">Having issues upgrading kn?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-the-Knative-%E2%80%9CQuickstart%E2%80%9D-environment"><span class="nav-number">1.1.6.</span> <span class="nav-text">Install the Knative “Quickstart” environment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Installing-the-quickstart-plugin"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">Installing the quickstart plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Using-Homebrew-2"><span class="nav-number">1.1.6.1.1.</span> <span class="nav-text">Using Homebrew</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Using-a-binary-2"><span class="nav-number">1.1.6.1.2.</span> <span class="nav-text">Using a binary</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Using-Go-2"><span class="nav-number">1.1.6.1.3.</span> <span class="nav-text">Using Go</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Knative-and-Kubernetes-locally"><span class="nav-number">1.1.7.</span> <span class="nav-text">Install Knative and Kubernetes locally</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-kind"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">Using kind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-minikube"><span class="nav-number">1.1.7.2.</span> <span class="nav-text">Using minikube</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.2.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/12/11/Cloud-Native/Cloud-Computing/Serverless/Knative/Docs/Getting-started/Knative-Quickstart/Getting-Started-with-Knative/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Serverless Knative] Knative Docs - Getting Started with Knative | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Serverless Knative] Knative Docs - Getting Started with Knative
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-11 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-11T00:00:00+00:00">2021-12-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/" itemprop="url" rel="index"><span itemprop="name">Cloud Native</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Cloud-Computing/" itemprop="url" rel="index"><span itemprop="name">Cloud Computing</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Cloud-Computing/Serverless/" itemprop="url" rel="index"><span itemprop="name">Serverless</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Cloud-Computing/Serverless/Knative/" itemprop="url" rel="index"><span itemprop="name">Knative</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>4.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Getting Started with Knative</h1>
+<h2 id="Before-you-begin">Before you begin</h2>
+<hr>
+<h3 id="Warning">Warning</h3>
+<p>Knative Quickstart Environments are for experimentation use only. For production installation, see our <a target="_blank" rel="noopener external nofollow noreferrer" href="https://knative.dev/docs/install/">Installing Guide - https://knative.dev/docs/install/</a></p>
+<hr>
+<p>Before you can get started with a Knative Quickstart deployment you must install <code>kind</code>, the Kubernetes CLI <code>kubectl</code>, and the Knative CLI <code>kn</code>.</p>
+<span id="more"></span>
+<h3 id="Prepare-local-Kubernetes-cluster">Prepare local Kubernetes cluster</h3>
+<p>You can use <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kind.sigs.k8s.io/docs/user/quick-start"><code>kind</code> - https://kind.sigs.k8s.io/docs/user/quick-start</a> (Kubernetes in Docker) or <a target="_blank" rel="noopener external nofollow noreferrer" href="https://minikube.sigs.k8s.io/docs/start/"><code>minikube</code> - https://minikube.sigs.k8s.io/docs/start/</a> to run a local Kubernetes cluster with Docker container nodes.</p>
+<h3 id="Install-the-Kubernetes-CLI">Install the Kubernetes CLI</h3>
+<p>The Kubernetes CLI (<code>kubectl</code>), allows you to run commands against Kubernetes clusters. You can use <code>kubectl</code> to deploy applications, inspect and manage cluster resources, and view logs.</p>
+<h3 id="Install-the-Knative-CLI">Install the Knative CLI</h3>
+<p>The Knative CLI (<code>kn</code>) provides a quick and easy interface for creating Knative resources, such as Knative Services and Event Sources, without the need to create or modify YAML files directly.</p>
+<p><code>kn</code> also simplifies completion of otherwise complex procedures such as autoscaling and traffic splitting.</p>
+<p>Installing the <code>kn</code> CLI</p>
+<h4 id="Using-Homebrew">Using Homebrew</h4>
+<p>For <code>macOS</code>, you can install <code>kn</code> by using <code>Homebrew</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install kn</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="Note">Note</h5>
+<p>Quickstart requires <code>kn</code> version 0.25 or later. To upgrade an existing install to the latest version, run <code>brew upgrade kn</code>.</p>
+<hr>
+<h4 id="Using-a-binary">Using a binary</h4>
+<p>You can install <code>kn</code> by downloading the executable binary for your system and placing it in the system path. Note that you will need <code>kn</code> version 0.25 or later.</p>
+<ul>
+<li>
+<ol>
+<li>Download the binary for your system from the <code>kn</code> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/knative/client/releases">release page - https://github.com/knative/client/releases</a>.</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>Rename the binary to <code>kn</code> and make it executable by running the commands:</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mv</span> &lt;path-to-binary-file&gt; kn</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">chmod</span> +x kn</span></span><br></pre></td></tr></table></figure>
+<p>Where <code>&lt;path-to-binary-file&gt; </code>is the path to the binary file you downloaded in the previous step, for example, <code>kn-darwin-amd64</code> or <code>kn-linux-amd64</code>.</p>
+<ul>
+<li>
+<ol start="3">
+<li>Move the executable binary file to a directory on your <code>PATH</code> by running the command:</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mv</span> kn /usr/local/bin</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<ol start="4">
+<li>Verify that the plugin is working by running the command:</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kn version</span></span><br></pre></td></tr></table></figure>
+<h4 id="Using-Go">Using Go</h4>
+<ul>
+<li>
+<ol>
+<li>Check out the <code>kn</code> client repository:</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/knative/client.git</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> client/</span></span><br></pre></td></tr></table></figure>
+<p>Build an executable binary:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hack/build.sh -f</span></span><br></pre></td></tr></table></figure>
+<p>Move kn into your system path, and verify that kn commands are working properly. For example:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kn version</span></span><br></pre></td></tr></table></figure>
+<h4 id="Using-a-container-image">Using a container image</h4>
+<p>Links to images are available here:</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://gcr.io/knative-releases/knative.dev/client/cmd/kn">Latest release - https://gcr.io/knative-releases/knative.dev/client/cmd/kn</a></p>
+<p>You can run <code>kn</code> from a container image. For example:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --<span class="built_in">rm</span> -v <span class="string">&quot;<span class="variable">$HOME</span>/.kube/config:/root/.kube/config&quot;</span> gcr.io/knative-releases/knative.dev/client/cmd/kn:latest service list</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="Note-2">Note</h5>
+<p>Running <code>kn</code> from a container image does not place the binary on a permanent path. This procedure must be repeated each time you want to use <code>kn</code>.</p>
+<hr>
+<h3 id="Having-issues-upgrading-kn">Having issues upgrading kn?</h3>
+<h3 id="Install-the-Knative-“Quickstart”-environment">Install the Knative “Quickstart” environment</h3>
+<p>You can get started with a local deployment of Knative by using the Knative <code>quickstart</code> plugin.</p>
+<h4 id="Installing-the-quickstart-plugin">Installing the quickstart plugin</h4>
+<h5 id="Using-Homebrew-2">Using Homebrew</h5>
+<p>For macOS, you can install the <code>quickstart</code> plugin by using Homebrew.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install knative-sandbox/kn-plugins/quickstart</span></span><br></pre></td></tr></table></figure>
+<h5 id="Using-a-binary-2">Using a binary</h5>
+<p>You can install the <code>quickstart</code> plugin by downloading the executable binary for your system and placing it on your <code>PATH</code> (for example, in <code>/usr/local/bin</code>).</p>
+<p>A link to the latest stable binary release is available on the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/knative-sandbox/kn-plugin-quickstart/releases"><code>quickstart</code> release page - https://github.com/knative-sandbox/kn-plugin-quickstart/releases</a>.</p>
+<h5 id="Using-Go-2">Using Go</h5>
+<ul>
+<li>
+<ol>
+<li>Check out the kn-plugin-quickstart repository:</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/knative-sandbox/kn-plugin-quickstart.git</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> kn-plugin-quickstart/</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<ol start="2">
+<li>Build an executable binary:</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hack/build.sh</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<ol start="3">
+<li>Move the executable binary file to a directory on your <code>PATH</code>:</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mv</span> kn-quickstart /usr/local/bin</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<ol start="4">
+<li>Verify that the plugin is working, for example:</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kn quickstart --<span class="built_in">help</span></span></span><br></pre></td></tr></table></figure>
+<p>The <code>quickstart</code> plugin completes the following functions:</p>
+<ul>
+<li>
+<p><em><strong>Checks if you have the selected Kubernetes instance installed</strong></em>, and creates a cluster called <code>knative</code>.</p>
+</li>
+<li>
+<p><em><strong>Installs <code>Knative Serving</code> with <code>Kourier</code></strong></em> as the default networking layer, and <code>nip.io</code> as the DNS.</p>
+</li>
+<li>
+<p><em><strong>Installs <code>Knative Eventing</code></strong></em> and creates an in-memory Broker and Channel implementation.</p>
+</li>
+</ul>
+<h3 id="Install-Knative-and-Kubernetes-locally">Install Knative and Kubernetes locally</h3>
+<h4 id="Using-kind">Using kind</h4>
+<p>Install Knative and Kubernetes on a local Docker daemon by running:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">kn quickstart kind</span></span><br></pre></td></tr></table></figure>
+<p>After the plugin is finished, verify you have a cluster called <code>knative</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kind get clusters</span></span><br></pre></td></tr></table></figure>
+<h4 id="Using-minikube">Using minikube</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kn quickstart minikube</span></span><br></pre></td></tr></table></figure>
+<p>After the plugin is finished, verify you have a cluster called knative:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">minikube profile list</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://knative.dev/docs/getting-started/">Knative Quickstart - Knative - https://knative.dev/docs/getting-started/</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://knative.dev/docs/">Home - Knative - https://knative.dev/docs/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://knative.dev/docs/install/">Installing Guide - https://knative.dev/docs/install/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kind.sigs.k8s.io/docs/user/quick-start">kind – Quick Start - https://kind.sigs.k8s.io/docs/user/quick-start</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://minikube.sigs.k8s.io/docs/start/">minikube start | minikube - https://minikube.sigs.k8s.io/docs/start/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/docs/reference/kubectl/overview/">Overview of kubectl | Kubernetes - https://kubernetes.io/docs/reference/kubectl/overview/</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://brew.sh/">The Missing Package Manager for macOS (or Linux) — Homebrew - https://brew.sh/</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/knative/client/releases">Releases · knative/client - https://github.com/knative/client/releases</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/knative-sandbox/kn-plugin-quickstart/releases"><code>quickstart</code> release page - https://github.com/knative-sandbox/kn-plugin-quickstart/releases</a></p>
+<p>[10] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/knative-sandbox/net-kourier">knative-sandbox/net-kourier: Purpose-built Knative Ingress implementation using just Envoy with no additional CRDs - https://github.com/knative-sandbox/net-kourier</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Kubernetes-K8S/" rel="tag"># Kubernetes (K8S)</a>
+              <a href="/tags/Cloud-Native/" rel="tag"># Cloud Native</a>
+              <a href="/tags/Cloud-Computing/" rel="tag"># Cloud Computing</a>
+              <a href="/tags/K8S/" rel="tag"># K8S</a>
+              <a href="/tags/Homebrew-brew/" rel="tag"># Homebrew (brew)</a>
+              <a href="/tags/Golang-Go/" rel="tag"># Golang (Go)</a>
+              <a href="/tags/brew/" rel="tag"># brew</a>
+              <a href="/tags/Container/" rel="tag"># Container</a>
+              <a href="/tags/nip-io/" rel="tag"># nip.io</a>
+              <a href="/tags/kubectl/" rel="tag"># kubectl</a>
+              <a href="/tags/Kind/" rel="tag"># Kind</a>
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+              <a href="/tags/Istio/" rel="tag"># Istio</a>
+              <a href="/tags/Infrastructureless/" rel="tag"># Infrastructureless</a>
+              <a href="/tags/Serverless/" rel="tag"># Serverless</a>
+              <a href="/tags/Knative/" rel="tag"># Knative</a>
+              <a href="/tags/Knative-Serving/" rel="tag"># Knative Serving</a>
+              <a href="/tags/Knative-Eventing/" rel="tag"># Knative Eventing</a>
+              <a href="/tags/Kourier/" rel="tag"># Kourier</a>
+              <a href="/tags/quickstart/" rel="tag"># quickstart</a>
+              <a href="/tags/kn/" rel="tag"># kn</a>
+              <a href="/tags/Minikube/" rel="tag"># Minikube</a>
+              <a href="/tags/ITless/" rel="tag"># ITless</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/11/Cloud-Native/Cloud-Computing/Serverless/Knative/Docs/Getting-started/Using-Knative-Serving/Basics-of-Traffic-Splitting/" rel="prev" title="[Serverless Knative] Knative Docs - Basics of Traffic Splitting">
+                  <i class="fa fa-angle-left"></i> [Serverless Knative] Knative Docs - Basics of Traffic Splitting
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/11/Cloud-Native/Cloud-Computing/Network/Service-Mesh/Istio/Documentation/Istio-Getting-Started/" rel="next" title="[Istio Service Mesh] Istio - Getting Started">
+                  [Istio Service Mesh] Istio - Getting Started <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"3c31e6246e7324ac74255363bc52f270"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

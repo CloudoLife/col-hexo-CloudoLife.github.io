@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Nginx Header Security Here’s how to add various HTTP response header to your Nginx site for better website security protection.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Nginx Security] Nginx Header Security">
+<meta property="og:url" content="https://cloudolife.com/2021/06/12/Awesome-Software/Web-Server/Nginx/Nginx-Header-Security/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Nginx Header Security Here’s how to add various HTTP response header to your Nginx site for better website security protection.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-12T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.908Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Security">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="Awesome Software">
+<meta property="article:tag" content="Hypertext Transfer Protocol Secure (HTTPS)">
+<meta property="article:tag" content="Hypertext Transfer Protocol (HTTP)">
+<meta property="article:tag" content="Web Server">
+<meta property="article:tag" content="Hypertext Transfer Protocol version 2 (HTTP&#x2F;2)">
+<meta property="article:tag" content="add_header">
+<meta property="article:tag" content="X-Frame-Options">
+<meta property="article:tag" content="X-XSS-Protection">
+<meta property="article:tag" content="X-Content-Type-Options">
+<meta property="article:tag" content="Strict-Transport-Security">
+<meta property="article:tag" content="Content-Security-Policy">
+<meta property="article:tag" content="Mozilla Developer Network (MDN)">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/06/12/Awesome-Software/Web-Server/Nginx/Nginx-Header-Security/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/06/12/Awesome-Software/Web-Server/Nginx/Nginx-Header-Security/","path":"2021/06/12/Awesome-Software/Web-Server/Nginx/Nginx-Header-Security/","title":"[Nginx Security] Nginx Header Security"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Nginx Security] Nginx Header Security | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Nginx Header Security</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#X-Frame-Options-avoid-click-jacking-attacks"><span class="nav-number">1.1.</span> <span class="nav-text">X-Frame-Options avoid click-jacking attacks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X-Content-Type-Options-blocks-a-request-if-the-request-destination-is-of-type"><span class="nav-number">1.2.</span> <span class="nav-text">X-Content-Type-Options blocks a request if the request destination is of type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X-XSS-Protection-block-pages-from-loading-when-they-detect-reflected-XSS-attacks"><span class="nav-number">1.3.</span> <span class="nav-text">X-XSS-Protection block pages from loading when they detect reflected XSS attacks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Strict-Transport-Security-tell-browsers-should-only-be-accessed-using-HTTPS"><span class="nav-number">1.4.</span> <span class="nav-text">Strict-Transport-Security tell browsers should only be accessed using HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-Security-Policy-control-what-resources-the-user-agent-is-allowed-to-load-for-that-page"><span class="nav-number">1.5.</span> <span class="nav-text">Content-Security-Policy control what resources the user agent is allowed to load for that page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Cookie"><span class="nav-number">1.6.</span> <span class="nav-text">Set-Cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-header-directive"><span class="nav-number">1.7.</span> <span class="nav-text">add_header directive</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/06/12/Awesome-Software/Web-Server/Nginx/Nginx-Header-Security/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Nginx Security] Nginx Header Security | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Nginx Security] Nginx Header Security
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+00:00">2021-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/" itemprop="url" rel="index"><span itemprop="name">Awesome Software</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/Web-Server/" itemprop="url" rel="index"><span itemprop="name">Web Server</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/Web-Server/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>6.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>6 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Nginx Header Security</h1>
+<p>Here’s how to add various HTTP response header to your Nginx site for better website security protection.</p>
+<span id="more"></span>
+<h2 id="X-Frame-Options-avoid-click-jacking-attacks">X-Frame-Options avoid click-jacking attacks</h2>
+<p>The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a <code>&lt;frame&gt;</code>, <code>&lt;iframe&gt;</code>, <code>&lt;embed&gt;</code> or <code>&lt;object&gt;</code>. Sites can use this to avoid <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#click-jacking">click-jacking - https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#click-jacking</a> attacks, by ensuring that their content is not embedded into other sites.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">add_header</span> X-Frame-Options SAMEORIGIN;</span><br></pre></td></tr></table></figure>
+<p>If you specify DENY, not only will attempts to load the page in a frame fail when loaded from other sites, attempts to do so will fail when loaded from the same site. On the other hand, if you specify SAMEORIGIN, you can still use the page in a frame as long as the site including it in a frame is the same as the one serving the page.</p>
+<ul>
+<li>
+<p>DENY</p>
+<p>The page cannot be displayed in a frame, regardless of the site attempting to do so.</p>
+</li>
+<li>
+<p>SAMEORIGIN</p>
+<p>The page can only be displayed in a frame on the same origin as the page itself.</p>
+</li>
+<li>
+<p>(Deprecated) ALLOW-FROM uri</p>
+<p>This is an obsolete directive that no longer works in modern browsers. Don’t use it.</p>
+</li>
+</ul>
+<h2 id="X-Content-Type-Options-blocks-a-request-if-the-request-destination-is-of-type">X-Content-Type-Options blocks a request if the request destination is of type</h2>
+<p>The <code>X-Content-Type-Options</code> response HTTP header is a marker used by the server to indicate that the MIME types advertised in the Content-Type headers should not be changed and be followed. This is a way to opt out of MIME type sniffing, or, in other words, to say that the MIME types are deliberately configured.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Blocks a request if the request destination is of type.</span></span><br><span class="line"><span class="attribute">add_header</span> X-Content-Type-Options nosniff;</span><br></pre></td></tr></table></figure>
+<h2 id="X-XSS-Protection-block-pages-from-loading-when-they-detect-reflected-XSS-attacks">X-XSS-Protection block pages from loading when they detect reflected XSS attacks</h2>
+<p>The HTTP X-XSS-Protection response header is a feature of Internet Explorer, Chrome and Safari that stops pages from loading when they detect reflected cross-site scripting (XSS) attacks.</p>
+<ul>
+<li>
+<p>0</p>
+<p>Disables XSS filtering.</p>
+</li>
+<li>
+<p>1</p>
+<p>Enables XSS filtering (usually default in browsers). If a cross-site scripting attack is detected, the browser will sanitize the page (remove the unsafe parts).</p>
+</li>
+<li>
+<p>1; mode=block</p>
+<p>Enables XSS filtering. Rather than sanitizing the page, the browser will prevent rendering of the page if an attack is detected.</p>
+</li>
+<li>
+<p>1; report=<reporting-URI> (Chromium only)</p>
+<p>Enables XSS filtering. If a cross-site scripting attack is detected, the browser will sanitize the page and report the violation. This uses the functionality of the CSP report-uri directive to send a report.</p>
+</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Block pages from loading when they detect reflected XSS attacks.</span></span><br><span class="line"><span class="attribute">add_header</span> <span class="string">&quot;X-XSS-Protection&quot;</span> <span class="string">&quot;1; mode=block&quot;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Strict-Transport-Security-tell-browsers-should-only-be-accessed-using-HTTPS">Strict-Transport-Security tell browsers should only be accessed using HTTPS</h2>
+<p>The HTTP Strict-Transport-Security response header (often abbreviated as HSTS) lets a web site tell browsers that it should only be accessed using HTTPS, instead of using HTTP.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Tell browsers should only be accessed using HTTPS within 31536000 seconds after the first HTTPS access.</span></span><br><span class="line"><span class="attribute">add_header</span> Strict-Transport-Security <span class="string">&quot;max-age=31536000; includeSubdomains;&quot;</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>max-age=<expire-time></p>
+<p>The time, in seconds, that the browser should remember that a site is only to be accessed using HTTPS.</p>
+</li>
+<li>
+<p>includeSubDomains (Optional)</p>
+<p>If this optional parameter is specified, this rule applies to all of the site’s subdomains as well.</p>
+</li>
+<li>
+<p>preload (Optional)</p>
+<p>See Preloading <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security#preloading_strict_transport_security">Strict Transport Security - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security#preloading_strict_transport_security</a> for details. Not part of the specification.</p>
+</li>
+</ul>
+<p>Google maintains an HSTS preload service. After successfully submitting your domain name according to the following instructions, the browser will never connect to your domain name in an insecure way. Although the service is provided by Google, all browsers have the intention of using this list (or are already using it). However, this is not part of the HSTS standard and should not be regarded as an official content.</p>
+<ul>
+<li>
+<p>HSTS preload list of Chrome &amp; Chromium: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.chromium.org/hsts">HTTP Strict Transport Security - The Chromium Projects - https://www.chromium.org/hsts</a></p>
+</li>
+<li>
+<p>HSTS preload list for Firefox: nsSTSPreloadList.inc</p>
+</li>
+</ul>
+<p>Enter <a href="chrome://net-internals/#hsts" rel="external nofollow noreferrer">chrome://net-internals/#hsts</a> to enter the HSTS management interface, and you can add/delete/query HSTS records.</p>
+<p>Add the website to the preload list: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hstspreload.org/">HSTS Preload List Submission - https://hstspreload.org/</a></p>
+<h2 id="Content-Security-Policy-control-what-resources-the-user-agent-is-allowed-to-load-for-that-page">Content-Security-Policy control what resources the user agent is allowed to load for that page</h2>
+<p>Configuring Content Security Policy involves adding the Content-Security-Policy HTTP header to a web page and giving it values to control what resources the user agent is allowed to load for that page. For example, a page that uploads and displays images could allow images from anywhere, but restrict a form action to a specific endpoint. A properly designed Content Security Policy helps protect a page against a cross site scripting attack. This article explains how to construct such headers properly, and provides examples.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A web site administrator wants all content to come from the site&#x27;s own origin (this excludes subdomains.).</span></span><br><span class="line"><span class="attribute">add_header</span> Content-Security-Policy: default-src <span class="string">&#x27;self&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="attribute">add_header</span> Content-Security-Policy: <span class="string">&quot;default-src &#x27;self&#x27; trusted.com *.trusted.com&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Set-Cookie">Set-Cookie</h2>
+<p>An easy way to set cookie flag as HTTPOnly and Secure in Set-Cookie HTTP response header. Take a backup of the necessary configuration file and add the following in nginx.conf under http block.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">add_header</span> Set-Cookie <span class="string">&quot;Path=/; HttpOnly; Secure&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>Another alternative option is to add the below syntax in <code>ssl.conf</code> or <code>default.conf</code></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">proxy_cookie_path</span> / <span class="string">&quot;/; HTTPOnly; Secure&quot;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="add-header-directive">add_header directive</h2>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	<span class="attribute">add_header</span> name value [always];</span><br><span class="line">Default:	—</span><br><span class="line">Context:	http, server, <span class="section">location</span>, if in <span class="section">location</span></span><br></pre></td></tr></table></figure>
+<p>Adds the specified field to a response header provided that the response code equals 200, 201 (1.3.10), 204, 206, 301, 302, 303, 304, 307 (1.1.16, 1.0.13), or 308 (1.13.0). Parameter value can contain variables.</p>
+<p>There could be several add_header directives. These directives are inherited from the previous configuration level if and only if there are no add_header directives defined on the current level.</p>
+<hr>
+<p>If the always parameter is specified (1.7.5), the header field will be added regardless of the response code.</p>
+<hr>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header">add_header | Module ngx_http_headers_module - https://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header</a></p>
+<h1>References</h1>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header">Module ngx_http_headers_module - https://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://webdock.io/en/docs/how-guides/security-guides/how-to-configure-security-headers-in-nginx-and-apache">How to configure Security Headers in Nginx and Apache - https://webdock.io/en/docs/how-guides/security-guides/how-to-configure-security-headers-in-nginx-and-apache</a></p>
+<p>[3] [NGINX Security Headers, the right way - GetPageSpeed - <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.getpagespeed.com/server-setup/nginx-security-headers-the-right-way">https://www.getpagespeed.com/server-setup/nginx-security-headers-the-right-way</a>][<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.getpagespeed.com/server-setup/nginx-security-headers-the-right-way">https://www.getpagespeed.com/server-setup/nginx-security-headers-the-right-way</a>]</p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">X-Content-Type-Options - HTTP | MDN - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">X-XSS-Protection - HTTP | MDN - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">Strict-Transport-Security - HTTP | MDN - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hstspreload.org/">HSTS Preload List Submission - https://hstspreload.org/</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.chromium.org/hsts">HTTP Strict Transport Security - The Chromium Projects - https://www.chromium.org/hsts</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP) - HTTP | MDN - https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP</a></p>
+<p>[10] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://geekflare.com/httponly-secure-cookie-nginx/">How to Implement HTTPOnly and Secure Cookie in Nginx? - https://geekflare.com/httponly-secure-cookie-nginx/</a></p>
+<!-- [HTTP 安全响应头（Security Response header）配置手册 - sysin - System Inside - https://sysin.org/article/security-headers/#1-Strict-Transport-Security-HSTS](https://sysin.org/article/security-headers/#1-Strict-Transport-Security-HSTS) -->
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Security/" rel="tag"># Security</a>
+              <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+              <a href="/tags/Awesome-Software/" rel="tag"># Awesome Software</a>
+              <a href="/tags/Hypertext-Transfer-Protocol-Secure-HTTPS/" rel="tag"># Hypertext Transfer Protocol Secure (HTTPS)</a>
+              <a href="/tags/Hypertext-Transfer-Protocol-HTTP/" rel="tag"># Hypertext Transfer Protocol (HTTP)</a>
+              <a href="/tags/Web-Server/" rel="tag"># Web Server</a>
+              <a href="/tags/Hypertext-Transfer-Protocol-version-2-HTTP-2/" rel="tag"># Hypertext Transfer Protocol version 2 (HTTP/2)</a>
+              <a href="/tags/add-header/" rel="tag"># add_header</a>
+              <a href="/tags/X-Frame-Options/" rel="tag"># X-Frame-Options</a>
+              <a href="/tags/X-XSS-Protection/" rel="tag"># X-XSS-Protection</a>
+              <a href="/tags/X-Content-Type-Options/" rel="tag"># X-Content-Type-Options</a>
+              <a href="/tags/Strict-Transport-Security/" rel="tag"># Strict-Transport-Security</a>
+              <a href="/tags/Content-Security-Policy/" rel="tag"># Content-Security-Policy</a>
+              <a href="/tags/Mozilla-Developer-Network-MDN/" rel="tag"># Mozilla Developer Network (MDN)</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/12/Programming-Language/Golang-Go/Talking-Golang-Go/Errors/" rel="prev" title="[Talking-Golang (Go)] Errors">
+                  <i class="fa fa-angle-left"></i> [Talking-Golang (Go)] Errors
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/06/19/Infrastructure-as-Code-IaC/Container/Docker/References/Docker-CLI/docker-history/" rel="next" title="[Docker CLI] docker history">
+                  [Docker CLI] docker history <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"36188a2cc53a9f08c169def8b20def25"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

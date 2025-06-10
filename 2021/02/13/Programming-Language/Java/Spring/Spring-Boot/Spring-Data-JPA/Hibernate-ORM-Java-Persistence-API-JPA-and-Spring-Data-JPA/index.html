@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Differents of Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA In this article, we will see what is Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA . At the same time, how r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Spring Data JPA] Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA">
+<meta property="og:url" content="https://cloudolife.com/2021/02/13/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Hibernate-ORM-Java-Persistence-API-JPA-and-Spring-Data-JPA/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Differents of Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA In this article, we will see what is Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA . At the same time, how r">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cloudolife.com/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Hibernate-ORM.png">
+<meta property="og:image" content="https://cloudolife.com/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Architecture-Java-Persistence-API.png">
+<meta property="og:image" content="https://cloudolife.com/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Spring-Data-JPA-Details.jpg">
+<meta property="og:image" content="https://cloudolife.com/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/data-access-jpa-basic-flow.png">
+<meta property="og:image" content="https://cloudolife.com/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Important-Concepts-in-JPA.png">
+<meta property="og:image" content="https://cloudolife.com/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Spring-Data-JPA-Hierarchy.jpg">
+<meta property="article:published_time" content="2021-02-13T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.932Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Java Persistence API (JPA)">
+<meta property="article:tag" content="Spring Data JPA">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="Object-relational Mapping (ORM)">
+<meta property="article:tag" content="Spring JDBC">
+<meta property="article:tag" content="Java Database Connectivity (JDBC)">
+<meta property="article:tag" content="Hibernate">
+<meta property="article:tag" content="Hibernate ORM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cloudolife.com/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Hibernate-ORM.png">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/02/13/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Hibernate-ORM-Java-Persistence-API-JPA-and-Spring-Data-JPA/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/02/13/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Hibernate-ORM-Java-Persistence-API-JPA-and-Spring-Data-JPA/","path":"2021/02/13/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Hibernate-ORM-Java-Persistence-API-JPA-and-Spring-Data-JPA/","title":"[Spring Data JPA] Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Spring Data JPA] Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Differents of Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate-ORM"><span class="nav-number">1.1.</span> <span class="nav-text">Hibernate ORM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-Persistence-API-JPA"><span class="nav-number">1.2.</span> <span class="nav-text">Java Persistence API (JPA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JPA-Architecture"><span class="nav-number">1.2.1.</span> <span class="nav-text">JPA Architecture</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Data-JPA"><span class="nav-number">1.3.</span> <span class="nav-text">Spring Data JPA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Data-JPA-Details"><span class="nav-number">1.3.1.</span> <span class="nav-text">Spring Data JPA Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Spring-Data-JPA-Flow"><span class="nav-number">1.3.2.</span> <span class="nav-text">Basic Spring Data JPA Flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Important-Concepts-in-JPA"><span class="nav-number">1.3.3.</span> <span class="nav-text">Important Concepts in JPA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Data-JPA-Hierarchy"><span class="nav-number">1.3.4.</span> <span class="nav-text">Spring Data JPA Hierarchy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/02/13/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Hibernate-ORM-Java-Persistence-API-JPA-and-Spring-Data-JPA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Spring Data JPA] Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Spring Data JPA] Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-13 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-13T00:00:00+00:00">2021-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/Spring/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/" itemprop="url" rel="index"><span itemprop="name">Spring Data JPA</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Differents of Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA</h1>
+<p>In this article, we will see what is Hibernate ORM, Java Persistence API (JPA) and Spring Data JPA<br>
+. At the same time, how related to each other.</p>
+<span id="more"></span>
+<h2 id="Hibernate-ORM">Hibernate ORM</h2>
+<p>Hibernate ORM (or simply Hibernate) is an object–relational mapping tool for the Java programming language. It provides a framework for mapping an object-oriented domain model to a relational database. Hibernate handles object–relational impedance mismatch problems by replacing direct, persistent database accesses with high-level object handling functions.</p>
+<p><img src="/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Hibernate-ORM.png" alt="Hibernate-ORM.png"></p>
+<h2 id="Java-Persistence-API-JPA">Java Persistence API (JPA)</h2>
+<p>Java Persistence API in short JPA is the set of specifications that tells how to map and persist java objects in the relational database.</p>
+<p>The Java Persistence API was first released as a subset of the EJB 3.0 specification (JSR 220) in Java EE 5. It has since evolved as its own spec, starting with the release of JPA 2.0 in Java EE 6 (JSR 317). At the time of writing this article, JPA 2.2 (JSR 338) is the latest version available.</p>
+<p>JPA handles most of the complexity of JDBC-based database access and object-relational mappings. It defines the set of interfaces to allow mapping of java objects in relational DB in order to persist it and at the same time access the rows data and map it back to java objects.</p>
+<p>The Java Persistence API (JPA) provides an object/relational mapping facility to Java developers for managing relational data in Java applications. Java Persistence consists of three areas:</p>
+<ul>
+<li>
+<p>The Java Persistence API</p>
+</li>
+<li>
+<p>The query language</p>
+</li>
+<li>
+<p>Object/relational mapping metadata</p>
+</li>
+</ul>
+<p>JPA is used for managing, persisting and accessing data between objects and relation database. Hibernate is an ORM (Object Relational Mapping) tool which implements JPA specification.</p>
+<p>JPA is the Sun specification for persisting objects in the enterprise application. It is used as replacement for complex entity beans.</p>
+<p>The implementation of JPA specification are provided by many JPA provider such as: <code>Hibernate</code>, <code>Toplink</code>, <code>iBatis</code>, <code>OpenJPA</code> etc.</p>
+<h3 id="JPA-Architecture">JPA Architecture</h3>
+<p>JPA is a source to store business entities as relational entities. It shows how to define a POJO as an entity and how to manage entities with relation.</p>
+<p>The following figure describes the class-level architecture of JPA that describes the core classes and interfaces of JPA that is defined in the javax persistence package. The JPA architecture contains the following units:</p>
+<ul>
+<li>
+<p>Persistence: It is a class that contains static methods to obtain an EntityManagerFactory instance.</p>
+</li>
+<li>
+<p>EntityManagerFactory: It is a factory class of EntityManager. It creates and manages multiple instances of EntityManager.</p>
+</li>
+<li>
+<p>EntityManager: It is an interface. It controls the persistence operations on objects. It works for the Query instance.</p>
+</li>
+<li>
+<p>Entity: The entities are the persistence objects stores as a record in the database.</p>
+</li>
+<li>
+<p>Persistence Unit: It defines a set of all entity classes. In an application, EntityManager instances manage it. The set of entity classes represents the data contained within a single data store.</p>
+</li>
+<li>
+<p>EntityTransaction: It has a one-to-one relationship with the EntityManager class. For each EntityManager, operations are maintained by EntityTransaction class.</p>
+</li>
+<li>
+<p>Query: It is an interface that is implemented by each JPA vendor to obtain relation objects that meet the criteria.</p>
+</li>
+</ul>
+<p><img src="/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Architecture-Java-Persistence-API.png" alt="Architecture-Java-Persistence-API.png"></p>
+<h2 id="Spring-Data-JPA">Spring Data JPA</h2>
+<p>Spring Data JPA is not a JPA provider but is a specification. It is a library / framework that adds an extra layer of abstraction on the top of our JPA provider. It simply “hides” the Java Persistence API (and the JPA provider) behind its repository abstraction.</p>
+<p>Features provided by Spring Data JPA :</p>
+<ul>
+<li>
+<p>Create and support repositories created with Spring and JPA</p>
+</li>
+<li>
+<p>Support JPA queries</p>
+</li>
+<li>
+<p>Support for batch loading, sorting, dynamical queries</p>
+</li>
+<li>
+<p>Supports XML mapping for entities</p>
+</li>
+<li>
+<p>Reduce code size for generic CRUD operations by using CrudRepository</p>
+</li>
+</ul>
+<p>What Components Do We Need?</p>
+<ul>
+<li>
+<p>The JDBC driver which enables java application to interact with the database.</p>
+</li>
+<li>
+<p>The datasource provides all technical information needed to access data.</p>
+</li>
+<li>
+<p>The JPA Provider implements the Java Persistence API. We use Hibernate because it is the most common JPA provider.</p>
+</li>
+<li>
+<p>Spring Data JPA hides the used JPA provider behind its repository abstraction.</p>
+</li>
+</ul>
+<h3 id="Spring-Data-JPA-Details">Spring Data JPA Details</h3>
+<p><img src="/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Spring-Data-JPA-Details.jpg" alt="Spring-Data-JPA-Details.jpg"></p>
+<h3 id="Basic-Spring-Data-JPA-Flow">Basic Spring Data JPA Flow</h3>
+<p>Once you completed reading above all articles then let’s understand basic flow at the time of accessing the database using Spring Data JPA is shown below.</p>
+<p><img src="/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/data-access-jpa-basic-flow.png" alt="data-access-jpa-basic-flow.png"></p>
+<h3 id="Important-Concepts-in-JPA">Important Concepts in JPA</h3>
+<p><img src="/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Important-Concepts-in-JPA.png" alt="Important-Concepts-in-JPA.png"></p>
+<h3 id="Spring-Data-JPA-Hierarchy">Spring Data JPA Hierarchy</h3>
+<p><img src="/images/Programming-Language/Java/Spring/Spring-Boot/Spring-Data-JPA/Spring-Data-JPA-Hierarchy.jpg" alt="Spring-Data-JPA-Hierarchy.jpg"></p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/RameshMF/spring-data-jpa-tutorial">RameshMF/spring-data-jpa-tutorial: Guide to spring data jpa - https://github.com/RameshMF/spring-data-jpa-tutorial</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://innovationm.co/spring-data-jpa/">Spring Data JPA - InnovationM Blog - https://innovationm.co/spring-data-jpa/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.springboottutorial.com/hibernate-jpa-tutorial-with-spring-boot-starter-jpa">Integrating Hibernate and JPA with Spring Boot – Spring Boot Tutorial - https://www.springboottutorial.com/hibernate-jpa-tutorial-with-spring-boot-starter-jpa</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://stackoverflow.com/questions/16148188/whats-the-difference-between-jpa-and-spring-data-jpa">java - What’s the difference between JPA and Spring Data JPA? - Stack Overflow - https://stackoverflow.com/questions/16148188/whats-the-difference-between-jpa-and-spring-data-jpa</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.netsurfingzone.com/jpa/spring-data-jpa-interview-questions-and-answers/">Spring Data JPA Interview Questions and Answers - NetSurfingZone - https://www.netsurfingzone.com/jpa/spring-data-jpa-interview-questions-and-answers/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dzone.com/articles/what-is-the-difference-between-hibernate-and-sprin-1">Difference Between Hibernate and Spring Data JPA - DZone Java - https://dzone.com/articles/what-is-the-difference-between-hibernate-and-sprin-1</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.javatpoint.com/spring-boot-jpa">Spring Boot JPA - javatpoint - https://www.javatpoint.com/spring-boot-jpa</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://techrocking.com/what-is-jpa-and-spring-data-jpa/">What is jpa and spring data jpa | Introduction to JPA - https://techrocking.com/what-is-jpa-and-spring-data-jpa/</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hibernate.org/">Hibernate. Everything data. - Hibernate - https://hibernate.org/</a></p>
+<p>[10] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.oracle.com/javaee/5/tutorial/doc/bnbpz.html">Introduction to the Java Persistence API - The Java EE 5 Tutorial - https://docs.oracle.com/javaee/5/tutorial/doc/bnbpz.html</a></p>
+<p>[11] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://spring.io/projects/spring-data-jpa">Spring Data JPA - https://spring.io/projects/spring-data-jpa</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Database/" rel="tag"># Database</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/Java-Persistence-API-JPA/" rel="tag"># Java Persistence API (JPA)</a>
+              <a href="/tags/Spring-Data-JPA/" rel="tag"># Spring Data JPA</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+              <a href="/tags/Object-relational-Mapping-ORM/" rel="tag"># Object-relational Mapping (ORM)</a>
+              <a href="/tags/Spring-JDBC/" rel="tag"># Spring JDBC</a>
+              <a href="/tags/Java-Database-Connectivity-JDBC/" rel="tag"># Java Database Connectivity (JDBC)</a>
+              <a href="/tags/Hibernate/" rel="tag"># Hibernate</a>
+              <a href="/tags/Hibernate-ORM/" rel="tag"># Hibernate ORM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/06/macOS/Install-HP-Easy-Start-HP-Printer-Software-and-Driver-on-macOS/" rel="prev" title="[macOS] Install HP Easy Start (HP Printer Software and Driver) on macOS">
+                  <i class="fa fa-angle-left"></i> [macOS] Install HP Easy Start (HP Printer Software and Driver) on macOS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/13/Testing/Automation-Testing/miniprogram-automator/Use-miniprogram-automator-and-Wechat-Devtools-to-test-Miniprogram-automatically/" rel="next" title="[Automation Testing] Use miniprogram-automator and Wechat Devtools to test Miniprogram automatically">
+                  [Automation Testing] Use miniprogram-automator and Wechat Devtools to test Miniprogram automatically <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"abe5e75a4957540ecd4fbc159e68709f"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

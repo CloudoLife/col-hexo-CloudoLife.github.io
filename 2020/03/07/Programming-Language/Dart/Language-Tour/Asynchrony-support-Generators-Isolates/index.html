@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Asynchrony support, Generators, Isolates Asynchrony support Dart libraries are full of functions that return Future - https:&#x2F;&#x2F;api.dart.dev&#x2F;stable&#x2F;dart-async&#x2F;Future-class.html or Stream - https:&#x2F;&#x2F;api.d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Dart Language Tour] Asynchrony support, Generators, Isolates">
+<meta property="og:url" content="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Asynchrony-support-Generators-Isolates/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Asynchrony support, Generators, Isolates Asynchrony support Dart libraries are full of functions that return Future - https:&#x2F;&#x2F;api.dart.dev&#x2F;stable&#x2F;dart-async&#x2F;Future-class.html or Stream - https:&#x2F;&#x2F;api.d">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-07T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.923Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="async">
+<meta property="article:tag" content="Dart">
+<meta property="article:tag" content="Language Tour">
+<meta property="article:tag" content="Future">
+<meta property="article:tag" content="await">
+<meta property="article:tag" content="await for">
+<meta property="article:tag" content="try">
+<meta property="article:tag" content="on">
+<meta property="article:tag" content="catch">
+<meta property="article:tag" content="finally">
+<meta property="article:tag" content="Stream">
+<meta property="article:tag" content="Generator">
+<meta property="article:tag" content="aysnc*">
+<meta property="article:tag" content="yield">
+<meta property="article:tag" content="yield*">
+<meta property="article:tag" content="Isolate">
+<meta property="article:tag" content="span">
+<meta property="article:tag" content="TransferableTypedData">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Asynchrony-support-Generators-Isolates/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Asynchrony-support-Generators-Isolates/","path":"2020/03/07/Programming-Language/Dart/Language-Tour/Asynchrony-support-Generators-Isolates/","title":"[Dart Language Tour] Asynchrony support, Generators, Isolates"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Dart Language Tour] Asynchrony support, Generators, Isolates | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Asynchrony support, Generators, Isolates</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Asynchrony-support"><span class="nav-number">1.1.</span> <span class="nav-text">Asynchrony support</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Handling-Futures"><span class="nav-number">1.1.1.</span> <span class="nav-text">Handling Futures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Declaring-async-functions"><span class="nav-number">1.1.2.</span> <span class="nav-text">Declaring async functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Handling-Streams"><span class="nav-number">1.1.3.</span> <span class="nav-text">Handling Streams</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generators"><span class="nav-number">1.2.</span> <span class="nav-text">Generators</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Isolates"><span class="nav-number">1.3.</span> <span class="nav-text">Isolates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Asynchrony-support-Generators-Isolates/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Dart Language Tour] Asynchrony support, Generators, Isolates | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Dart Language Tour] Asynchrony support, Generators, Isolates
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-03-07 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-07T00:00:00+00:00">2020-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Dart/" itemprop="url" rel="index"><span itemprop="name">Dart</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Dart/Language-Tour/" itemprop="url" rel="index"><span itemprop="name">Language Tour</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>6.5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>6 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Asynchrony support, Generators, Isolates</h1>
+<h2 id="Asynchrony-support">Asynchrony support</h2>
+<p>Dart libraries are full of functions that return <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.dart.dev/stable/dart-async/Future-class.html"><code>Future</code> - https://api.dart.dev/stable/dart-async/Future-class.html</a> or <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.dart.dev/stable/dart-async/Stream-class.html"><code>Stream</code> - https://api.dart.dev/stable/dart-async/Stream-class.html</a> objects. These functions are asynchronous: they return after setting up a possibly time-consuming operation (such as I/O), without waiting for that operation to complete.</p>
+<span id="more"></span>
+<p>The <code>async</code> and <code>await</code> keywords support asynchronous programming, letting you write asynchronous code that looks similar to synchronous code.</p>
+<h3 id="Handling-Futures">Handling Futures</h3>
+<p>When you need the result of a completed Future, you have two options:</p>
+<ul>
+<li>
+<p>Use <code>async</code> and <code>await</code>.</p>
+</li>
+<li>
+<p>Use the <code>Future</code> API, as described in the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/libraries/library-tour#future">library tour - https://dart.dev/guides/libraries/library-tour#future</a>.</p>
+</li>
+</ul>
+<p>Code that uses <code>async</code> and <code>await</code> is asynchronous, but it looks a lot like synchronous code. For example, here’s some code that uses await to wait for the result of an asynchronous function:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> lookUpVersion();</span><br></pre></td></tr></table></figure>
+<p>To use <code>await</code>, code must be in an async function—a function marked as <code>async</code>:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Future checkVersion() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> version = <span class="keyword">await</span> lookUpVersion();</span><br><span class="line">  <span class="comment">// Do something with version</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: Although an <code>async</code> function might perform time-consuming operations, it doesn’t wait for those operations. Instead, the async function executes only until it encounters its first <code>await</code> expression (<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/dart-lang/sdk/blob/master/docs/newsletter/20170915.md#synchronous-async-start">details - https://github.com/dart-lang/sdk/blob/master/docs/newsletter/20170915.md#synchronous-async-start</a>). Then it returns a <code>Future</code> object, resuming execution only after the await expression completes.</p>
+<hr>
+<p>Use <code>try</code>, <code>catch</code>, and <code>finally</code> to handle errors and cleanup in code that uses <code>await</code>:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  version = <span class="keyword">await</span> lookUpVersion();</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="comment">// React to inability to look up the version</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You can use <code>await</code> multiple times in an <code>async</code> function. For example, the following code waits three times for the results of functions:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> entrypoint = <span class="keyword">await</span> findEntrypoint();</span><br><span class="line"><span class="keyword">var</span> exitCode = <span class="keyword">await</span> runExecutable(entrypoint, args);</span><br><span class="line"><span class="keyword">await</span> flushThenExit(exitCode);</span><br></pre></td></tr></table></figure>
+<p>In <code>await</code> expression, the value of expression is usually a <code>Future</code>; if it isn’t, then the value is automatically wrapped in a Future. This Future object indicates a promise to return an object. The value of await expression is that returned object. The await expression makes execution pause until that object is available.</p>
+<p>If you get a compile-time error when using <code>await</code>, make sure await is in an <code>async</code> function. For example, to use <code>await</code> in your app’s <code>main()</code> function, the body of <code>main()</code> must be marked as <code>async</code>:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Future main() <span class="keyword">async</span> &#123;</span><br><span class="line">  checkVersion();</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;In main: version is <span class="subst">$&#123;await lookUpVersion()&#125;</span>&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Declaring-async-functions">Declaring async functions</h3>
+<p>An async function is a function whose body is marked with the <code>async</code> modifier.</p>
+<p>Adding the <code>async</code> keyword to a function makes it return a <code>Future</code>. For example, consider this synchronous function, which returns a <code>String</code>:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> lookUpVersion() =&gt; <span class="string">&#x27;1.0.0&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>If you change it to be an <code>async</code> function—for example, because a future implementation will be time consuming—the returned value is a <code>Future</code>:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">String</span>&gt; lookUpVersion() <span class="keyword">async</span> =&gt; <span class="string">&#x27;1.0.0&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note that the function’s body doesn’t need to use the <code>Future</code> API. Dart creates the <code>Future</code> object if necessary. If your function doesn’t return a useful value, make its return type <code>Future&lt;void&gt;</code>.</p>
+<hr>
+<p>For an interactive introduction to using futures, <code>async</code>, and <code>await</code>, see the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/codelabs/async-await">asynchronous programming codelab - https://dart.dev/codelabs/async-await</a>.</p>
+<h3 id="Handling-Streams">Handling Streams</h3>
+<p>When you need to get values from a <code>Stream</code>, you have two options:</p>
+<ul>
+<li>
+<p>Use async and an asynchronous for loop (<code>await for</code>).</p>
+</li>
+<li>
+<p>Use the Stream API, as described in the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/libraries/library-tour#stream">library tour - https://dart.dev/guides/libraries/library-tour#stream</a>.</p>
+</li>
+</ul>
+<hr>
+<p>Note: Before using <code>await for</code>, be sure that it makes the code clearer and that you really do want to wait for all of the stream’s results. For example, you usually should not use <code>await for</code> for UI event listeners, because UI frameworks send endless streams of events.</p>
+<hr>
+<p>An asynchronous for loop has the following form:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> <span class="keyword">for</span> (varOrType identifier <span class="keyword">in</span> expression) &#123;</span><br><span class="line">  <span class="comment">// Executes each time the stream emits a value.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The value of expression must have type <code>Stream</code>. Execution proceeds as follows:</p>
+<ul>
+<li>
+<p>Wait until the stream emits a value.</p>
+</li>
+<li>
+<p>Execute the body of the for loop, with the variable set to that emitted value.</p>
+</li>
+<li>
+<p>Repeat 1 and 2 until the stream is closed.</p>
+</li>
+</ul>
+<p>To stop listening to the stream, you can use a <code>break</code> or <code>return</code> statement, which breaks out of the for loop and unsubscribes from the stream.</p>
+<p>If you get a compile-time error when implementing an asynchronous for loop, make sure the <code>await for</code> is in an <code>async</code> function. For example, to use an asynchronous for loop in your app’s <code>main()</code> function, the body of <code>main()</code> must be marked as async:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Future main() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">await</span> <span class="keyword">for</span> (<span class="keyword">var</span> request <span class="keyword">in</span> requestServer) &#123;</span><br><span class="line">    handleRequest(request);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>For more information about asynchronous programming, in general, see the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/libraries/library-tour#dartasync---asynchronous-programming"><code>dart:async</code> - https://dart.dev/guides/libraries/library-tour#dartasync—asynchronous-programming</a> section of the library tour.</p>
+<h2 id="Generators">Generators</h2>
+<p>When you need to lazily produce a sequence of values, consider using a generator function. Dart has built-in support for two kinds of generator functions:</p>
+<ul>
+<li>
+<p>Synchronous generator: Returns an <code>Iterable</code> object.</p>
+</li>
+<li>
+<p>Asynchronous generator: Returns a <code>Stream</code> object.</p>
+</li>
+</ul>
+<p>To implement a synchronous generator function, mark the function body as <code>sync*</code>, and use <code>yield</code> statements to deliver values:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Iterable</span>&lt;<span class="built_in">int</span>&gt; naturalsTo(<span class="built_in">int</span> n) <span class="keyword">sync</span>* &#123;</span><br><span class="line">  <span class="built_in">int</span> k = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (k &lt; n) <span class="keyword">yield</span> k++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>To implement an asynchronous generator function, mark the function body as <code>async*</code>, and use <code>yield</code> statements to deliver values:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;<span class="built_in">int</span>&gt; asynchronousNaturalsTo(<span class="built_in">int</span> n) <span class="keyword">async</span>* &#123;</span><br><span class="line">  <span class="built_in">int</span> k = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (k &lt; n) <span class="keyword">yield</span> k++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>If your generator is recursive, you can improve its performance by using <code>yield*</code>:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Iterable</span>&lt;<span class="built_in">int</span>&gt; naturalsDownFrom(<span class="built_in">int</span> n) <span class="keyword">sync</span>* &#123;</span><br><span class="line">  <span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">yield</span> n;</span><br><span class="line">    <span class="keyword">yield</span>* naturalsDownFrom(n - <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Isolates">Isolates</h2>
+<p>Most computers, even on mobile platforms, have multi-core CPUs. To take advantage of all those cores, developers traditionally use shared-memory threads running concurrently. However, shared-state concurrency is error prone and can lead to complicated code.</p>
+<p>Instead of threads, all Dart code runs inside of isolates. Each <code>isolate</code> has its own memory heap, ensuring that no isolate’s state is accessible from any other isolate.</p>
+<p>For more information, see the following:</p>
+<ul>
+<li>
+<p>[Dart asynchronous programming: Isolates and event loops - <a target="_blank" rel="noopener external nofollow noreferrer" href="https://medium.com/dartlang/dart-asynchronous-programming-isolates-and-event-loops-bffc3e296a6a">https://medium.com/dartlang/dart-asynchronous-programming-isolates-and-event-loops-bffc3e296a6a</a>](<a target="_blank" rel="noopener external nofollow noreferrer" href="https://medium.com/dartlang/">https://medium.com/dartlang/</a><br>
+dart-asynchronous-programming-isolates-and-event-loops-bffc3e296a6a)</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.dart.dev/stable/dart-isolate">dart:isolate API reference - https://api.dart.dev/stable/dart-isolate</a>, including <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.dart.dev/stable/dart-isolate/Isolate/spawn.html">Isolate.spawn() - https://api.dart.dev/stable/dart-isolate/Isolate/spawn.html</a>and <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.dart.dev/stable/dart-isolate/TransferableTypedData-class.html">TransferableTypedData - https://api.dart.dev/stable/dart-isolate/TransferableTypedData-class.html</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://flutter.dev/docs/cookbook/networking/background-parsing">Background parsing - https://flutter.dev/docs/cookbook/networking/background-parsing</a> cookbook on the Flutter site</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/flutter/samples/tree/master/isolate_example">Isolate sample app - https://github.com/flutter/samples/tree/master/isolate_example</a></p>
+</li>
+</ul>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/language-tour">Language tour | Dart - https://dart.dev/guides/language/language-tour</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/effective-dart/design">Effective Dart: Design | Dart - https://dart.dev/guides/language/effective-dart/design</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/async/" rel="tag"># async</a>
+              <a href="/tags/Dart/" rel="tag"># Dart</a>
+              <a href="/tags/Language-Tour/" rel="tag"># Language Tour</a>
+              <a href="/tags/Future/" rel="tag"># Future</a>
+              <a href="/tags/await/" rel="tag"># await</a>
+              <a href="/tags/await-for/" rel="tag"># await for</a>
+              <a href="/tags/try/" rel="tag"># try</a>
+              <a href="/tags/on/" rel="tag"># on</a>
+              <a href="/tags/catch/" rel="tag"># catch</a>
+              <a href="/tags/finally/" rel="tag"># finally</a>
+              <a href="/tags/Stream/" rel="tag"># Stream</a>
+              <a href="/tags/Generator/" rel="tag"># Generator</a>
+              <a href="/tags/aysnc/" rel="tag"># aysnc*</a>
+              <a href="/tags/yield/" rel="tag"># yield</a>
+              <a href="/tags/yield/" rel="tag"># yield*</a>
+              <a href="/tags/Isolate/" rel="tag"># Isolate</a>
+              <a href="/tags/span/" rel="tag"># span</a>
+              <a href="/tags/TransferableTypedData/" rel="tag"># TransferableTypedData</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/03/07/Programming-Language/Dart/Language-Tour/Classes-Enums-Callable-Classes-Metadata/" rel="prev" title="[Dart Language Tour] Classes, Enums, Callable Classes, Metadata">
+                  <i class="fa fa-angle-left"></i> [Dart Language Tour] Classes, Enums, Callable Classes, Metadata
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/03/07/Programming-Language/Dart/Language-Tour/A-basic-Dart-program-Important-concepts-Keywords/" rel="next" title="[Dart Language Tour] A basic Dart program, Important concepts, Keywords">
+                  [Dart Language Tour] A basic Dart program, Important concepts, Keywords <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"b68821f42e26deef1b9f65c091c53e8f"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

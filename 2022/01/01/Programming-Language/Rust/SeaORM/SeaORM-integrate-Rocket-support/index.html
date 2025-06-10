@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="sea-orm-rocket sea-orm-rocket is the crate for SeaORM integrate Rocket support. SeaORM is a relational ORM to help you build light weight and concurrent web services in Rust Rocket is a web framework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Rust SeaORM FAQs] SeaORM integrate Rocket support">
+<meta property="og:url" content="https://cloudolife.com/2022/01/01/Programming-Language/Rust/SeaORM/SeaORM-integrate-Rocket-support/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="sea-orm-rocket sea-orm-rocket is the crate for SeaORM integrate Rocket support. SeaORM is a relational ORM to help you build light weight and concurrent web services in Rust Rocket is a web framework">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.943Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Rust">
+<meta property="article:tag" content="mock">
+<meta property="article:tag" content="Clone">
+<meta property="article:tag" content="cargo">
+<meta property="article:tag" content="Awesome Rust">
+<meta property="article:tag" content="ORM">
+<meta property="article:tag" content="Object Relational Mapping">
+<meta property="article:tag" content="Object Relational Mapping (ORM)">
+<meta property="article:tag" content="Rocket">
+<meta property="article:tag" content="sea-orm-rocket">
+<meta property="article:tag" content="DatabaseConnection">
+<meta property="article:tag" content="SeaORM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2022/01/01/Programming-Language/Rust/SeaORM/SeaORM-integrate-Rocket-support/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2022/01/01/Programming-Language/Rust/SeaORM/SeaORM-integrate-Rocket-support/","path":"2022/01/01/Programming-Language/Rust/SeaORM/SeaORM-integrate-Rocket-support/","title":"[Rust SeaORM FAQs] SeaORM integrate Rocket support"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Rust SeaORM FAQs] SeaORM integrate Rocket support | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">sea-orm-rocket</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages"><span class="nav-number">1.1.</span> <span class="nav-text">Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Download"><span class="nav-number">1.1.1.</span> <span class="nav-text">Download</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-Database"><span class="nav-number">1.1.2.</span> <span class="nav-text">Config Database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cargo-Run"><span class="nav-number">1.1.3.</span> <span class="nav-text">Cargo Run</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">1.2.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#perhaps-two-different-versions-of-crate-rocket-are-being-used"><span class="nav-number">1.2.1.</span> <span class="nav-text">perhaps two different versions of crate rocket are being used?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-trait-Clone-is-not-implemented-for-DatabaseConnection"><span class="nav-number">1.2.2.</span> <span class="nav-text">the trait Clone is not implemented for DatabaseConnection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2022/01/01/Programming-Language/Rust/SeaORM/SeaORM-integrate-Rocket-support/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Rust SeaORM FAQs] SeaORM integrate Rocket support | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Rust SeaORM FAQs] SeaORM integrate Rocket support
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2022-01-01T00:00:00+00:00">2022-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/SeaORM/" itemprop="url" rel="index"><span itemprop="name">SeaORM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>3 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>sea-orm-rocket</h1>
+<p><code>sea-orm-rocket</code> is the crate for SeaORM integrate Rocket support.</p>
+<p>SeaORM is a relational ORM to help you build light weight and concurrent web services in Rust</p>
+<p>Rocket is a web framework for Rust. If you’d like, you can think of Rocket as being a more flexible, friendly medley of <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rubyonrails.org/">Rails - https://rubyonrails.org/</a>, <a target="_blank" rel="noopener external nofollow noreferrer" href="https://palletsprojects.com/p/flask/">Flask - https://palletsprojects.com/p/flask/</a>, <a target="_blank" rel="noopener external nofollow noreferrer" href="https://bottlepy.org/docs/dev/index.html">Bottle - https://bottlepy.org/docs/dev/index.html</a>, and <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.yesodweb.com/">Yesod - https://www.yesodweb.com/</a>. We prefer to think of Rocket as something new. Rocket aims to be fast, easy, and flexible while offering guaranteed safety and security where it can. Importantly, Rocket also aims to be fun, and it accomplishes this by ensuring that you write as little code as needed to accomplish your task.</p>
+<span id="more"></span>
+<h2 id="Usages">Usages</h2>
+<h3 id="Download">Download</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> git@github.com:SeaQL/sea-orm.git</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> sea-orm/examples/rocket_example</span></span><br></pre></td></tr></table></figure>
+<h3 id="Config-Database">Config Database</h3>
+<p>Replace <code>url</code> with your prefered Database url.</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Rocket.toml</span><br><span class="line"></span><br><span class="line"><span class="deletion">- url = &quot;postgres://root:root@localhost/rocket_example&quot;</span></span><br><span class="line"><span class="addition">+ # url = &quot;postgres://root:root@localhost/rocket_example&quot;</span></span><br><span class="line"><span class="addition">+ url = &quot;postgres://&lt;Your PostgreSQL User Name&gt;:&lt;Your PostgreSQL Password&gt;@postgres:5432/&lt;Your PostgreSQL Database&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Cargo-Run">Cargo Run</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">cargo run</span></span><br></pre></td></tr></table></figure>
+<p>Then, 🚀 Rocket has launched from <code>http://127.0.0.1:8000</code>.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example">sea-orm/examples/rocket_example at master · SeaQL/sea-orm - https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example</a> to learn more.</p>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="perhaps-two-different-versions-of-crate-rocket-are-being-used">perhaps two different versions of crate <code>rocket</code> are being used?</h3>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">error[E0308]: mismatched types</span><br><span class="line"> -<span class="punctuation">-&gt;</span> src/pool.rs:<span class="number">8</span>:<span class="number">12</span></span><br><span class="line">  |</span><br><span class="line"><span class="number">8</span> | <span class="keyword">pub</span> <span class="keyword">struct</span> <span class="title class_">Db</span>(SeaOrmPool);</span><br><span class="line">  |            ^^ expected <span class="keyword">struct</span> `sea_orm_rocket:<span class="emoji" alias="rocket" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png?v8">&#x1f680;</span>:Rocket`, found <span class="keyword">struct</span> `rocket::Rocket`</span><br><span class="line">  |</span><br><span class="line">  = note: expected reference `&amp;sea_orm_rocket:<span class="emoji" alias="rocket" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png?v8">&#x1f680;</span>:Rocket&lt;_&gt;`</span><br><span class="line">             found reference `&amp;rocket::Rocket&lt;rocket::Ignite&gt;`</span><br><span class="line">  = note: perhaps two different versions of <span class="keyword">crate</span> `rocket` are being used?</span><br></pre></td></tr></table></figure>
+<p>Remember to make <code>rocket</code> and <code>sea-orm</code> compatible.</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cargo.toml</span></span><br><span class="line"></span><br><span class="line"><span class="section">[dependencies.rocket]</span></span><br><span class="line"><span class="attr">version</span> = <span class="string">&quot;0.5.0-rc.1&quot;</span></span><br><span class="line"><span class="comment"># git = &quot;https://github.com/SergioBenitez/Rocket.git&quot;</span></span><br><span class="line"><span class="attr">features</span> = [<span class="string">&quot;json&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Database &amp; Asy`env_logger`nc Runtime | SeaORM - 🐚 An async &amp; dynamic ORM for Rust</span></span><br><span class="line"><span class="comment"># https://www.sea-ql.org/SeaORM/docs/install-and-config/database-and-async-runtime</span></span><br><span class="line"><span class="section">[dependencies.sea-orm]</span></span><br><span class="line"><span class="attr">version</span> = <span class="string">&quot;^0.5.0&quot;</span></span><br><span class="line"><span class="comment"># version = &quot;^0&quot;</span></span><br><span class="line"><span class="comment"># git = &quot;https://github.com/SeaQL/sea-orm&quot;</span></span><br><span class="line"><span class="attr">features</span> = [<span class="string">&quot;debug-print&quot;</span>, <span class="string">&quot;macros&quot;</span>, <span class="string">&quot;sqlx-postgres&quot;</span>, <span class="string">&quot;runtime-tokio-native-tls&quot;</span>]</span><br><span class="line"><span class="attr">default-features</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="section">[dependencies.sea-orm-rocket]</span></span><br><span class="line"><span class="comment"># path = &quot;../../sea-orm-rocket/lib&quot; # remove this line in your own project and use the git line</span></span><br><span class="line"><span class="attr">git</span> = <span class="string">&quot;https://github.com/SeaQL/sea-orm&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="the-trait-Clone-is-not-implemented-for-DatabaseConnection">the trait <code>Clone</code> is not implemented for <code>DatabaseConnection</code></h3>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span>  | <span class="keyword">pub</span> <span class="keyword">struct</span> <span class="title class_">SeaOrmPool</span> &#123;</span><br><span class="line"><span class="number">12</span>  |     <span class="keyword">pub</span> conn: sea_orm::DatabaseConnection,</span><br><span class="line">    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the <span class="keyword">trait</span> `<span class="built_in">Clone</span>` is not implemented <span class="keyword">for</span> `DatabaseConnection`</span><br></pre></td></tr></table></figure>
+<p>Check <code>DatabaseConnection</code> source code:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sea-orm/src/database/db_connection.rs</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#[cfg_attr(not(feature = <span class="string">&quot;mock&quot;</span>), derive(Clone))]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">enum</span> <span class="title class_">DatabaseConnection</span> &#123;</span><br></pre></td></tr></table></figure>
+<p>Remember to disable <code>mock</code> feature to enable <code>derive(Clone)</code> for <code>DatabaseConnection</code>.</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Cargo.toml</span><br><span class="line"></span><br><span class="line">[dependencies.sea-orm]</span><br><span class="line">path = &quot;../../&quot; # remove this line in your own project</span><br><span class="line">version = &quot;^0.5.0&quot;</span><br><span class="line">features = [&quot;macros&quot;, &quot;runtime-async-std-native-tls&quot;, &quot;debug-print&quot;]</span><br><span class="line"><span class="addition">+ default-features = false</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example">sea-orm/examples/rocket_example at master · SeaQL/sea-orm - https://github.com/SeaQL/sea-orm/tree/master/examples/rocket_example</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/SeaQL/sea-orm/tree/master/sea-orm-rocket">sea-orm/sea-orm-rocket at master · SeaQL/sea-orm - https://github.com/SeaQL/sea-orm/tree/master/sea-orm-rocket</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.sea-ql.org/SeaORM/">SeaORM - 🐚 An async &amp; dynamic ORM for Rust - https://www.sea-ql.org/SeaORM/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/SeaQL/sea-orm">SeaQL/sea-orm: 🐚 An async &amp; dynamic ORM for Rust - https://github.com/SeaQL/sea-orm</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rocket.rs/v0.5-rc/guide/getting-started/">Getting Started - Rocket Programming Guide - https://rocket.rs/v0.5-rc/guide/getting-started/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rocket.rs/">Rocket - Simple, Fast, Type-Safe Web Framework for Rust - https://rocket.rs/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Rust/" rel="tag"># Rust</a>
+              <a href="/tags/mock/" rel="tag"># mock</a>
+              <a href="/tags/Clone/" rel="tag"># Clone</a>
+              <a href="/tags/cargo/" rel="tag"># cargo</a>
+              <a href="/tags/Awesome-Rust/" rel="tag"># Awesome Rust</a>
+              <a href="/tags/ORM/" rel="tag"># ORM</a>
+              <a href="/tags/Object-Relational-Mapping/" rel="tag"># Object Relational Mapping</a>
+              <a href="/tags/Object-Relational-Mapping-ORM/" rel="tag"># Object Relational Mapping (ORM)</a>
+              <a href="/tags/Rocket/" rel="tag"># Rocket</a>
+              <a href="/tags/sea-orm-rocket/" rel="tag"># sea-orm-rocket</a>
+              <a href="/tags/DatabaseConnection/" rel="tag"># DatabaseConnection</a>
+              <a href="/tags/SeaORM/" rel="tag"># SeaORM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/01/Programming-Language/Java/Spring/Spring-Boot/FAQs-Spring-Boot/" rel="prev" title="[Java - Spring Boot] Spring Boot FAQs">
+                  <i class="fa fa-angle-left"></i> [Java - Spring Boot] Spring Boot FAQs
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/01/Programming-Language/Rust/Awesome-Rust/jsonapi-Serialize-deserialize-and-work-with-JSON-API-data/" rel="next" title="[Awesome Rust] jsonapi : Serialize, deserialize and work with JSON-API data">
+                  [Awesome Rust] jsonapi : Serialize, deserialize and work with JSON-API data <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"7fa0ae61bffe68cdb16442812d577ba7"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

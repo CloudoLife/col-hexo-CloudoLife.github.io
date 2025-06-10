@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="rails-pg-extras rails-pg-extras is to provide powerful insights into the PostgreSQL database for Ruby on Rails apps that are not using the Heroku PostgreSQL plugin. Included rake tasks and Ruby method">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Ruby Gem] Use rails-pg-extras gem to provide powerful insights into the PostgreSQL database">
+<meta property="og:url" content="https://cloudolife.com/2021/07/17/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rails-pg-extras-gem-to-provide-powerful-insights-into-the-PostgreSQL-database/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="rails-pg-extras rails-pg-extras is to provide powerful insights into the PostgreSQL database for Ruby on Rails apps that are not using the Heroku PostgreSQL plugin. Included rake tasks and Ruby method">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-17T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.937Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="PostgreSQL">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Awesome Ruby Gem">
+<meta property="article:tag" content="rails-pg-extras">
+<meta property="article:tag" content="PostgreSQL Extension">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/07/17/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rails-pg-extras-gem-to-provide-powerful-insights-into-the-PostgreSQL-database/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/07/17/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rails-pg-extras-gem-to-provide-powerful-insights-into-the-PostgreSQL-database/","path":"2021/07/17/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rails-pg-extras-gem-to-provide-powerful-insights-into-the-PostgreSQL-database/","title":"[Awesome Ruby Gem] Use rails-pg-extras gem to provide powerful insights into the PostgreSQL database"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Ruby Gem] Use rails-pg-extras gem to provide powerful insights into the PostgreSQL database | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">rails-pg-extras</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration"><span class="nav-number">1.2.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages"><span class="nav-number">1.3.</span> <span class="nav-text">Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Available-methods"><span class="nav-number">1.3.1.</span> <span class="nav-text">Available methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cache-hit"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">cache_hit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#index-cache-hit"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">index_cache_hit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#table-cache-hit"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">table_cache_hit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#db-settings"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">db_settings</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#index-usage"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">index_usage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#all-locks"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">all_locks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#outliers"><span class="nav-number">1.3.1.7.</span> <span class="nav-text">outliers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#calls"><span class="nav-number">1.3.1.8.</span> <span class="nav-text">calls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#blocking"><span class="nav-number">1.3.1.9.</span> <span class="nav-text">blocking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#total-index-size"><span class="nav-number">1.3.1.10.</span> <span class="nav-text">total_index_size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#index-size"><span class="nav-number">1.3.1.11.</span> <span class="nav-text">index_size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#table-size"><span class="nav-number">1.3.1.12.</span> <span class="nav-text">table_size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#table-indexes-size"><span class="nav-number">1.3.1.13.</span> <span class="nav-text">table_indexes_size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#total-table-size"><span class="nav-number">1.3.1.14.</span> <span class="nav-text">total_table_size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unused-indexes"><span class="nav-number">1.3.1.15.</span> <span class="nav-text">unused_indexes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null-indexes"><span class="nav-number">1.3.1.16.</span> <span class="nav-text">null_indexes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#seq-scans"><span class="nav-number">1.3.1.17.</span> <span class="nav-text">seq_scans</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#long-running-queries"><span class="nav-number">1.3.1.18.</span> <span class="nav-text">long_running_queries</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#records-rank"><span class="nav-number">1.3.1.19.</span> <span class="nav-text">records_rank</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bloat"><span class="nav-number">1.3.1.20.</span> <span class="nav-text">bloat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vacuum-stats"><span class="nav-number">1.3.1.21.</span> <span class="nav-text">vacuum_stats</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kill-all"><span class="nav-number">1.3.1.22.</span> <span class="nav-text">kill_all</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#buffercache-stats"><span class="nav-number">1.3.1.23.</span> <span class="nav-text">buffercache_stats</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#buffercache-usage"><span class="nav-number">1.3.1.24.</span> <span class="nav-text">buffercache_usage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#extensions"><span class="nav-number">1.3.1.25.</span> <span class="nav-text">extensions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mandelbrot"><span class="nav-number">1.3.1.26.</span> <span class="nav-text">mandelbrot</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/07/17/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rails-pg-extras-gem-to-provide-powerful-insights-into-the-PostgreSQL-database/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Ruby Gem] Use rails-pg-extras gem to provide powerful insights into the PostgreSQL database | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Ruby Gem] Use rails-pg-extras gem to provide powerful insights into the PostgreSQL database
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-17 00:00:00" itemprop="dateCreated datePublished" datetime="2021-07-17T00:00:00+00:00">2021-07-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Awesome-Ruby-Gem/" itemprop="url" rel="index"><span itemprop="name">Awesome Ruby Gem</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>17k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>15 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>rails-pg-extras</h1>
+<p>rails-pg-extras is to provide powerful insights into the PostgreSQL database for Ruby on Rails apps that are not using the Heroku PostgreSQL plugin.</p>
+<p>Included rake tasks and Ruby methods can be used to obtain information about a Postgres instance, that may be useful when analyzing performance issues. This includes information about locks, index usage, buffer cache hit ratios and vacuum statistics. Ruby API enables developers to easily integrate the tool into e.g. automatic monitoring tasks.</p>
+<span id="more"></span>
+<h2 id="Installation">Installation</h2>
+<p>You can install it as a gem:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gem install rails-pg-extras</span></span><br></pre></td></tr></table></figure>
+<p>or add it into a Gemfile (Bundler):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># pawurb/rails-pg-extras: Rails PostgreSQL database performance insights. Locks, index usage, buffer cache hit ratios, vacuum stats and more.</span></span><br><span class="line"><span class="comment"># https://github.com/pawurb/rails-pg-extras</span></span><br><span class="line">gem <span class="string">&#x27;rails-pg-extras&#x27;</span>, <span class="string">&#x27;2.0.0&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Then, run <code>bundle install</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle install</span></span><br></pre></td></tr></table></figure>
+<h2 id="Configuration">Configuration</h2>
+<p>Some of the queries (e.g., calls and outliers) require <code>pg_stat_statements</code> extension enabled.</p>
+<p>You can check if it is enabled in your database by running:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.extensions</span><br></pre></td></tr></table></figure>
+<p>You should see the similar line in the output:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| pg_stat_statements  | 1.7  | 1.7 | track execution statistics of all SQL statements executed |</span><br></pre></td></tr></table></figure>
+<h2 id="Usages">Usages</h2>
+<p>Each command can be used as a rake task, or a directly from the Ruby code.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake pg_extras:cache_hit</span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.cache_hit</span><br><span class="line">+----------------+------------------------+</span><br><span class="line">|<span class="params">        Index <span class="keyword">and</span> table hit rate         </span>|</span><br><span class="line">+----------------+------------------------+</span><br><span class="line">|<span class="params"> name           </span>| ratio                  |<span class="params"></span></span><br><span class="line"><span class="params">+----------------+------------------------+</span></span><br><span class="line"><span class="params"></span>| index hit rate |<span class="params"> 0.97796610169491525424 </span>|</span><br><span class="line">|<span class="params"> table hit rate </span>| <span class="number">0.96724294813466787989</span> |<span class="params"></span></span><br><span class="line"><span class="params">+----------------+------------------------+</span></span><br></pre></td></tr></table></figure>
+<p>By default the ASCII table is displayed, to change to format you need to specify the in_format parameter (<code>[:display_table, :hash, :array, :raw]</code> options are available):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.cache_hit(<span class="symbol">in_format:</span> <span class="symbol">:hash</span>) =&gt;</span><br><span class="line"></span><br><span class="line"> [&#123;<span class="string">&quot;name&quot;</span>=&gt;<span class="string">&quot;index hit rate&quot;</span>, <span class="string">&quot;ratio&quot;</span>=&gt;<span class="string">&quot;0.97796610169491525424&quot;</span>&#125;, &#123;<span class="string">&quot;name&quot;</span>=&gt;<span class="string">&quot;table hit rate&quot;</span>, <span class="string">&quot;ratio&quot;</span>=&gt;<span class="string">&quot;0.96724294813466787989&quot;</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="title class_">RailsPGExtras</span>.cache_hit(<span class="symbol">in_format:</span> <span class="symbol">:array</span>) =&gt;</span><br><span class="line"></span><br><span class="line"> [[<span class="string">&quot;index hit rate&quot;</span>, <span class="string">&quot;0.97796610169491525424&quot;</span>], [<span class="string">&quot;table hit rate&quot;</span>, <span class="string">&quot;0.96724294813466787989&quot;</span>]]</span><br><span class="line"></span><br><span class="line"><span class="title class_">RailsPGExtras</span>.cache_hit(<span class="symbol">in_format:</span> <span class="symbol">:raw</span>) =&gt;</span><br><span class="line"></span><br><span class="line"> #&lt;PG::Result:0x00007f75777f7328 status=PGRES_TUPLES_OK ntuples=2 nfields=2 cmd_tuples=2&gt;</span><br></pre></td></tr></table></figure>
+<p>Some methods accept an optional args param allowing you to customize queries:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.long_running_queries(<span class="symbol">args:</span> &#123; <span class="symbol">threshold:</span> <span class="string">&quot;200 milliseconds&quot;</span> &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Available-methods">Available methods</h3>
+<h4 id="cache-hit">cache_hit</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.cache_hit</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:cache_hit</span></span><br><span class="line"></span><br><span class="line">      name      |         ratio</span><br><span class="line">----------------+------------------------</span><br><span class="line"> index hit rate | 0.99957765013541945832</span><br><span class="line"> table hit rate |                   1.00</span><br><span class="line">(2 rows)</span><br></pre></td></tr></table></figure>
+<p>This command provides information on the efficiency of the buffer cache, for both index reads (index hit rate) as well as table reads (table hit rate). A low buffer cache hit ratio can be a sign that the Postgres instance is too small for the workload.</p>
+<h4 id="index-cache-hit">index_cache_hit</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.index_cache_hit</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:index_cache_hit</span></span><br><span class="line"></span><br><span class="line">| name                  | buffer_hits | block_reads | total_read | ratio             |</span><br><span class="line">+-----------------------+-------------+-------------+------------+-------------------+</span><br><span class="line">| teams                 | 187665      | 109         | 187774     | 0.999419514948821 |</span><br><span class="line">| subscriptions         | 5160        | 6           | 5166       | 0.99883855981417  |</span><br><span class="line">| plans                 | 5718        | 9           | 5727       | 0.998428496595076 |</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>The same as cache_hit with each table’s indexes cache hit info displayed separately.</p>
+<h4 id="table-cache-hit">table_cache_hit</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.table_cache_hit</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:table_cache_hit</span></span><br><span class="line"></span><br><span class="line">| name                  | buffer_hits | block_reads | total_read | ratio             |</span><br><span class="line">+-----------------------+-------------+-------------+------------+-------------------+</span><br><span class="line">| plans                 | 32123       | 2           | 32125      | 0.999937743190662 |</span><br><span class="line">| subscriptions         | 95021       | 8           | 95029      | 0.999915815172211 |</span><br><span class="line">| teams                 | 171637      | 200         | 171837     | 0.99883610631005  |</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>The same as cache_hit with each table’s cache hit info displayed seperately.</p>
+<h4 id="db-settings">db_settings</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.db_settings</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:db_settings</span></span><br><span class="line"></span><br><span class="line">             name             | setting | unit |</span><br><span class="line">------------------------------+---------+------+</span><br><span class="line"> checkpoint_completion_target | 0.7     |      |</span><br><span class="line"> default_statistics_target    | 100     |      |</span><br><span class="line"> effective_cache_size         | 1350000 | 8kB  |</span><br><span class="line"> effective_io_concurrency     | 1       |      |</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This method displays values for selected PostgreSQL settings. You can compare them with settings recommended by PGTune and tweak values to improve performance.</p>
+<h4 id="index-usage">index_usage</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.index_usage</span><br></pre></td></tr></table></figure>
+<p>$ rake pg_extras:index_usage</p>
+<pre><code>   relname       | percent_of_times_index_used | rows_in_table
+</code></pre>
+<p>---------------------±----------------------------±--------------<br>
+events              |                          65 |       1217347<br>
+app_infos           |                          74 |        314057<br>
+app_infos_user_info |                           0 |        198848<br>
+user_info           |                           5 |         94545<br>
+delayed_jobs        |                          27 |             0<br>
+(5 rows)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">This command provides information on the efficiency of indexes, represented as what percentage of total scans were index scans. A low percentage can indicate under indexing, or wrong data being indexed.</span><br><span class="line"></span><br><span class="line">#### locks</span><br><span class="line"></span><br><span class="line">```ruby</span><br><span class="line">RailsPGExtras.locks</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:locks</span></span><br><span class="line"></span><br><span class="line"> procpid | relname | transactionid | granted |     query_snippet     | mode             |       age</span><br><span class="line">---------+---------+---------------+---------+-----------------------+-------------------------------------</span><br><span class="line">   31776 |         |               | t       | &lt;IDLE&gt; in transaction | ExclusiveLock    |  00:19:29.837898</span><br><span class="line">   31776 |         |          1294 | t       | &lt;IDLE&gt; in transaction | RowExclusiveLock |  00:19:29.837898</span><br><span class="line">   31912 |         |               | t       | select * from hello;  | ExclusiveLock    |  00:19:17.94259</span><br><span class="line">    3443 |         |               | t       |                      +| ExclusiveLock    |  00:00:00</span><br><span class="line">         |         |               |         |    select            +|                  |</span><br><span class="line">         |         |               |         |      pg_stat_activi   |                  |</span><br><span class="line">(4 rows)</span><br></pre></td></tr></table></figure>
+<p>This command displays queries that have taken out an exclusive lock on a relation. Exclusive locks typically prevent other operations on that relation from taking place, and can be a cause of “hung” queries that are waiting for a lock to be granted.</p>
+<h4 id="all-locks">all_locks</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.all_locks</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:all_locks</span></span><br></pre></td></tr></table></figure>
+<p>This command displays all the current locks, regardless of their type.</p>
+<h4 id="outliers">outliers</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.outliers(<span class="symbol">args:</span> &#123; <span class="symbol">limit:</span> <span class="number">20</span> &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:outliers</span></span><br><span class="line"></span><br><span class="line">                   qry                   |    exec_time     | prop_exec_time |   ncalls    | sync_io_time</span><br><span class="line">-----------------------------------------+------------------+----------------+-------------+--------------</span><br><span class="line"> SELECT * FROM archivable_usage_events.. | 154:39:26.431466 | 72.2%          | 34,211,877  | 00:00:00</span><br><span class="line"> COPY public.archivable_usage_events (.. | 50:38:33.198418  | 23.6%          | 13          | 13:34:21.00108</span><br><span class="line"> COPY public.usage_events (id, reporte.. | 02:32:16.335233  | 1.2%           | 13          | 00:34:19.784318</span><br><span class="line"> INSERT INTO usage_events (id, retaine.. | 01:42:59.436532  | 0.8%           | 12,328,187  | 00:00:00</span><br><span class="line"> SELECT * FROM usage_events WHERE (alp.. | 01:18:10.754354  | 0.6%           | 102,114,301 | 00:00:00</span><br><span class="line"> UPDATE usage_events SET reporter_id =.. | 00:52:35.683254  | 0.4%           | 23,786,348  | 00:00:00</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays statements, obtained from pg_stat_statements, ordered by the amount of time to execute in aggregate. This includes the statement itself, the total execution time for that statement, the proportion of total execution time for all statements that statement has taken up, the number of times that statement has been called, and the amount of time that statement spent on synchronous I/O (reading/writing from the file system).</p>
+<p>Typically, an efficient query will have an appropriate ratio of calls to total execution time, with as little time spent on I/O as possible. Queries that have a high total execution time but low call count should be investigated to improve their performance. Queries that have a high proportion of execution time being spent on synchronous I/O should also be investigated.</p>
+<h4 id="calls">calls</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.calls(<span class="symbol">args:</span> &#123; <span class="symbol">limit:</span> <span class="number">10</span> &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:calls</span></span><br><span class="line"></span><br><span class="line">                   qry                   |    exec_time     | prop_exec_time |   ncalls    | sync_io_time</span><br><span class="line">-----------------------------------------+------------------+----------------+-------------+--------------</span><br><span class="line"> SELECT * FROM usage_events WHERE (alp.. | 01:18:11.073333  | 0.6%           | 102,120,780 | 00:00:00</span><br><span class="line"> BEGIN                                   | 00:00:51.285988  | 0.0%           | 47,288,662  | 00:00:00</span><br><span class="line"> COMMIT                                  | 00:00:52.31724   | 0.0%           | 47,288,615  | 00:00:00</span><br><span class="line"> SELECT * FROM  archivable_usage_event.. | 154:39:26.431466 | 72.2%          | 34,211,877  | 00:00:00</span><br><span class="line"> UPDATE usage_events SET reporter_id =.. | 00:52:35.986167  | 0.4%           | 23,788,388  | 00:00:00</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command is much like pg:outliers, but ordered by the number of times a statement has been called.</p>
+<h4 id="blocking">blocking</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.blocking</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:blocking</span></span><br><span class="line"></span><br><span class="line"> blocked_pid |    blocking_statement    | blocking_duration | blocking_pid |                                        blocked_statement                           | blocked_duration</span><br><span class="line">-------------+--------------------------+-------------------+--------------+------------------------------------------------------------------------------------+------------------</span><br><span class="line">         461 | select count(*) from app | 00:00:03.838314   |        15682 | UPDATE &quot;app&quot; SET &quot;updated_at&quot; = &#x27;2013-03-04 15:07:04.746688&#x27; WHERE &quot;id&quot; = 12823149 | 00:00:03.821826</span><br><span class="line">(1 row)</span><br></pre></td></tr></table></figure>
+<p>This command displays statements that are currently holding locks that other statements are waiting to be released. This can be used in conjunction with pg:locks to determine which statements need to be terminated in order to resolve lock contention.</p>
+<h4 id="total-index-size">total_index_size</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.total_index_size</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:total_index_size</span></span><br><span class="line"></span><br><span class="line">  size</span><br><span class="line">-------</span><br><span class="line"> 28194 MB</span><br><span class="line">(1 row)</span><br></pre></td></tr></table></figure>
+<p>This command displays the total size of all indexes on the database, in MB. It is calculated by taking the number of pages (reported in relpages) and multiplying it by the page size (8192 bytes).</p>
+<h4 id="index-size">index_size</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.index_size</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:index_size</span></span><br><span class="line">                             name                              |  size</span><br><span class="line">---------------------------------------------------------------+---------</span><br><span class="line"> idx_activity_attemptable_and_type_lesson_enrollment           | 5196 MB</span><br><span class="line"> index_enrollment_attemptables_by_attempt_and_last_in_group    | 4045 MB</span><br><span class="line"> index_attempts_on_student_id                                  | 2611 MB</span><br><span class="line"> enrollment_activity_attemptables_pkey                         | 2513 MB</span><br><span class="line"> index_attempts_on_student_id_final_attemptable_type           | 2466 MB</span><br><span class="line"> attempts_pkey                                                 | 2466 MB</span><br><span class="line"> index_attempts_on_response_id                                 | 2404 MB</span><br><span class="line"> index_attempts_on_enrollment_id                               | 1957 MB</span><br><span class="line"> index_enrollment_attemptables_by_enrollment_activity_id       | 1789 MB</span><br><span class="line"> enrollment_activities_pkey                                    |  458 MB</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays the size of each each index in the database, in MB. It is calculated by taking the number of pages (reported in relpages) and multiplying it by the page size (8192 bytes).</p>
+<h4 id="table-size">table_size</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.table_size</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:table_size</span></span><br><span class="line"></span><br><span class="line">                             name                              |  size</span><br><span class="line">---------------------------------------------------------------+---------</span><br><span class="line"> learning_coaches                                              |  196 MB</span><br><span class="line"> states                                                        |  145 MB</span><br><span class="line"> grade_levels                                                  |  111 MB</span><br><span class="line"> charities_customers                                           |   73 MB</span><br><span class="line"> charities                                                     |   66 MB</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays the size of each table and materialized view in the database, in MB. It is calculated by using the system administration function pg_table_size(), which includes the size of the main data fork, free space map, visibility map and TOAST data.</p>
+<h4 id="table-indexes-size">table_indexes_size</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.table_indexes_size</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:table_indexes_size</span></span><br><span class="line"></span><br><span class="line">                             table                             | indexes_size</span><br><span class="line">---------------------------------------------------------------+--------------</span><br><span class="line"> learning_coaches                                              |    153 MB</span><br><span class="line"> states                                                        |    125 MB</span><br><span class="line"> charities_customers                                           |     93 MB</span><br><span class="line"> charities                                                     |     16 MB</span><br><span class="line"> grade_levels                                                  |     11 MB</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays the total size of indexes for each table and materialized view, in MB. It is calculated by using the system administration function pg_indexes_size().</p>
+<h4 id="total-table-size">total_table_size</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.total_table_size</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:total_table_size</span></span><br><span class="line"></span><br><span class="line">                             name                              |  size</span><br><span class="line">---------------------------------------------------------------+---------</span><br><span class="line"> learning_coaches                                              |  349 MB</span><br><span class="line"> states                                                        |  270 MB</span><br><span class="line"> charities_customers                                           |  166 MB</span><br><span class="line"> grade_levels                                                  |  122 MB</span><br><span class="line"> charities                                                     |   82 MB</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays the total size of each table and materialized view in the database, in MB. It is calculated by using the system administration function pg_total_relation_size(), which includes table size, total index size and TOAST data.</p>
+<h4 id="unused-indexes">unused_indexes</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.unused_indexes(<span class="symbol">args:</span> &#123; <span class="symbol">min_scans:</span> <span class="number">20</span> &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:unused_indexes</span></span><br><span class="line"></span><br><span class="line">          table      |                       index                | index_size | index_scans</span><br><span class="line">---------------------+--------------------------------------------+------------+-------------</span><br><span class="line"> public.grade_levels | index_placement_attempts_on_grade_level_id | 97 MB      |           0</span><br><span class="line"> public.observations | observations_attrs_grade_resources         | 33 MB      |           0</span><br><span class="line"> public.messages     | user_resource_id_idx                       | 12 MB      |           0</span><br><span class="line">(3 rows)</span><br></pre></td></tr></table></figure>
+<p>This command displays indexes that have &lt; 50 scans recorded against them, and are greater than 5 pages in size, ordered by size relative to the number of index scans. This command is generally useful for eliminating indexes that are unused, which can impact write performance, as well as read performance should they occupy space in memory.</p>
+<h4 id="null-indexes">null_indexes</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.null_indexes(<span class="symbol">args:</span> &#123; <span class="symbol">min_relation_size_mb:</span> <span class="number">10</span> &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:null_indexes</span></span><br><span class="line"></span><br><span class="line">   oid   |         index      | index_size | unique | indexed_column | null_frac | expected_saving</span><br><span class="line">---------+--------------------+------------+--------+----------------+-----------+-----------------</span><br><span class="line">  183764 | users_reset_token  | 1445 MB    | t      | reset_token    |   97.00%  | 1401 MB</span><br><span class="line">   88732 | plan_cancelled_at  | 539 MB     | f      | cancelled_at   |    8.30%  | 44 MB</span><br><span class="line"> 9827345 | users_email        | 18 MB      | t      | email          |   28.67%  | 5160 kB</span><br></pre></td></tr></table></figure>
+<p>This command displays indexes that contain NULL values. A high ratio of NULL values means that using a partial index excluding them will be beneficial in case they are not used for searching.</p>
+<h4 id="seq-scans">seq_scans</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.seq_scans</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:seq_scans</span></span><br><span class="line"></span><br><span class="line">               name                |  count</span><br><span class="line">-----------------------------------+----------</span><br><span class="line"> learning_coaches                  | 44820063</span><br><span class="line"> states                            | 36794975</span><br><span class="line"> grade_levels                      | 13972293</span><br><span class="line"> charities_customers               |  8615277</span><br><span class="line"> charities                         |  4316276</span><br><span class="line"> messages                          |  3922247</span><br><span class="line"> contests_customers                |  2915972</span><br><span class="line"> classroom_goals                   |  2142014</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays the number of sequential scans recorded against all tables, descending by count of sequential scans. Tables that have very high numbers of sequential scans may be under-indexed, and it may be worth investigating queries that read from these tables.</p>
+<h4 id="long-running-queries">long_running_queries</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.long_running_queries(<span class="symbol">args:</span> &#123; <span class="symbol">threshold:</span> <span class="string">&quot;200 milliseconds&quot;</span> &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:long_running_queries</span></span><br><span class="line"></span><br><span class="line">  pid  |    duration     |                                      query</span><br><span class="line">-------+-----------------+---------------------------------------------------------------------------------------</span><br><span class="line"> 19578 | 02:29:11.200129 | EXPLAIN SELECT  &quot;students&quot;.* FROM &quot;students&quot;  WHERE &quot;students&quot;.&quot;id&quot; = 1450645 LIMIT 1</span><br><span class="line"> 19465 | 02:26:05.542653 | EXPLAIN SELECT  &quot;students&quot;.* FROM &quot;students&quot;  WHERE &quot;students&quot;.&quot;id&quot; = 1889881 LIMIT 1</span><br><span class="line"> 19632 | 02:24:46.962818 | EXPLAIN SELECT  &quot;students&quot;.* FROM &quot;students&quot;  WHERE &quot;students&quot;.&quot;id&quot; = 1581884 LIMIT 1</span><br><span class="line">(truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays currently running queries, that have been running for longer than 5 minutes, descending by duration. Very long running queries can be a source of multiple issues, such as preventing DDL statements completing or vacuum being unable to update relfrozenxid.</p>
+<h4 id="records-rank">records_rank</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.records_rank</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:records_rank</span></span><br><span class="line"></span><br><span class="line">               name                | estimated_count</span><br><span class="line">-----------------------------------+-----------------</span><br><span class="line"> tastypie_apiaccess                |          568891</span><br><span class="line"> notifications_event               |          381227</span><br><span class="line"> core_todo                         |          178614</span><br><span class="line"> core_comment                      |          123969</span><br><span class="line"> notifications_notification        |          102101</span><br><span class="line"> django_session                    |           68078</span><br><span class="line"> (truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays an estimated count of rows per table, descending by estimated count. The estimated count is derived from n_live_tup, which is updated by vacuum operations. Due to the way n_live_tup is populated, sparse vs. dense pages can result in estimations that are significantly out from the real count of rows.</p>
+<h4 id="bloat">bloat</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.bloat</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:bloat</span></span><br><span class="line"></span><br><span class="line"> type  | schemaname |           object_name         | bloat |   waste</span><br><span class="line">-------+------------+-------------------------------+-------+----------</span><br><span class="line"> table | public     | bloated_table                 |   1.1 | 98 MB</span><br><span class="line"> table | public     | other_bloated_table           |   1.1 | 58 MB</span><br><span class="line"> index | public     | bloated_table::bloated_index  |   3.7 | 34 MB</span><br><span class="line"> table | public     | clean_table                   |   0.2 | 3808 kB</span><br><span class="line"> table | public     | other_clean_table             |   0.3 | 1576 kB</span><br><span class="line"> (truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays an estimation of table “bloat” – space allocated to a relation that is full of dead tuples, that has yet to be reclaimed. Tables that have a high bloat ratio, typically 10 or greater, should be investigated to see if vacuuming is aggressive enough, and can be a sign of high table churn.</p>
+<h4 id="vacuum-stats">vacuum_stats</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.vacuum_stats</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:vacuum_stats</span></span><br><span class="line"></span><br><span class="line"> schema |         table         | last_vacuum | last_autovacuum  |    rowcount    | dead_rowcount  | autovacuum_threshold | expect_autovacuum</span><br><span class="line">--------+-----------------------+-------------+------------------+----------------+----------------+----------------------+-------------------</span><br><span class="line"> public | log_table             |             | 2013-04-26 17:37 |         18,030 |              0 |          3,656       |</span><br><span class="line"> public | data_table            |             | 2013-04-26 13:09 |             79 |             28 |             66       |</span><br><span class="line"> public | other_table           |             | 2013-04-26 11:41 |             41 |             47 |             58       |</span><br><span class="line"> public | queue_table           |             | 2013-04-26 17:39 |             12 |          8,228 |             52       | yes</span><br><span class="line"> (truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command displays statistics related to vacuum operations for each table, including an estimation of dead rows, last autovacuum and the current autovacuum threshold. This command can be useful when determining if current vacuum thresholds require adjustments, and to determine when the table was last vacuumed.</p>
+<h4 id="kill-all">kill_all</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.kill_all</span><br></pre></td></tr></table></figure>
+<p>This commands kills all the currently active connections to the database. It can be useful as a last resort when your database is stuck in a deadlock.</p>
+<h4 id="buffercache-stats">buffercache_stats</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.buffercache_stats(<span class="symbol">args:</span> &#123; <span class="symbol">limit:</span> <span class="number">10</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p>This command shows the relations buffered in database share buffer, ordered by percentage taken. It also shows that how much of the whole relation is buffered.</p>
+<h4 id="buffercache-usage">buffercache_usage</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.buffercache_usage(<span class="symbol">args:</span> &#123; <span class="symbol">limit:</span> <span class="number">20</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p>This command calculates how many blocks from which table are currently cached.</p>
+<h4 id="extensions">extensions</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.extensions</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:extensions</span></span><br><span class="line"></span><br><span class="line">| pg_stat_statements | 1.7 | 1.7 | track execution statistics of all SQL statements executed</span><br><span class="line"> (truncated results for brevity)</span><br></pre></td></tr></table></figure>
+<p>This command lists all the currently installed and available PostgreSQL extensions.</p>
+<h4 id="mandelbrot">mandelbrot</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">RailsPGExtras</span>.mandelbrot</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rake pg_extras:mandelbrot</span></span><br></pre></td></tr></table></figure>
+<p>This command outputs the Mandelbrot set, calculated through SQL.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/pawurb/rails-pg-extras">pawurb/rails-pg-extras: Rails PostgreSQL database performance insights. Locks, index usage, buffer cache hit ratios, vacuum stats and more. - https://github.com/pawurb/rails-pg-extras</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rubygems.org/gems/rails-pg-extras">rails-pg-extras | RubyGems.org | your community gem host - https://rubygems.org/gems/rails-pg-extras</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://pawelurbanek.com/postgresql-fix-performance">How to Fix PostgreSQL Performance Issues with PG Extras - https://pawelurbanek.com/postgresql-fix-performance</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.postgresql.org/">PostgreSQL: The world’s most advanced open source database - https://www.postgresql.org/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/PostgreSQL/" rel="tag"># PostgreSQL</a>
+              <a href="/tags/Database/" rel="tag"># Database</a>
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Awesome-Ruby-Gem/" rel="tag"># Awesome Ruby Gem</a>
+              <a href="/tags/rails-pg-extras/" rel="tag"># rails-pg-extras</a>
+              <a href="/tags/PostgreSQL-Extension/" rel="tag"># PostgreSQL Extension</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/17/Programming-Language/Ruby/Installation/Install-multiple-Ruby-versions-on-macOS/" rel="prev" title="[Ruby Installation] Install multiple Ruby versions on macOS">
+                  <i class="fa fa-angle-left"></i> [Ruby Installation] Install multiple Ruby versions on macOS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/17/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rails-patterns-gem-to-providde-lightweight-standardized-rails-oriented-patterns-in-Rails/" rel="next" title="[Awesome Ruby Gem] Use rails-patterns gem to providde lightweight, standardized, rails-oriented patterns in Rails">
+                  [Awesome Ruby Gem] Use rails-patterns gem to providde lightweight, standardized, rails-oriented patterns in Rails <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"2c863cff59d4407a690113f4f7727fbd"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

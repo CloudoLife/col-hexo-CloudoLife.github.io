@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Pallet The Substrate Node Template provides a minimal working runtime which you can use to quickly get started building your own custom blockchain. The Node Template includes a number of components, i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Blockchain Substrate Tutorials] Add a Pallet on Substrate Node Template">
+<meta property="og:url" content="https://cloudolife.com/2021/02/06/Blockchain/Substrate/Tutorials/Add-a-Pallet-on-Substrate-Node-Template/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Pallet The Substrate Node Template provides a minimal working runtime which you can use to quickly get started building your own custom blockchain. The Node Template includes a number of components, i">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://substrate.dev/docs/assets/tutorials/add-a-pallet/set-name.png">
+<meta property="article:published_time" content="2021-02-06T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.908Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Blockchain">
+<meta property="article:tag" content="Pallet">
+<meta property="article:tag" content="FRAME">
+<meta property="article:tag" content="Substrate">
+<meta property="article:tag" content="Tutorials">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://substrate.dev/docs/assets/tutorials/add-a-pallet/set-name.png">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/02/06/Blockchain/Substrate/Tutorials/Add-a-Pallet-on-Substrate-Node-Template/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/02/06/Blockchain/Substrate/Tutorials/Add-a-Pallet-on-Substrate-Node-Template/","path":"2021/02/06/Blockchain/Substrate/Tutorials/Add-a-Pallet-on-Substrate-Node-Template/","title":"[Blockchain Substrate Tutorials] Add a Pallet on Substrate Node Template"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Blockchain Substrate Tutorials] Add a Pallet on Substrate Node Template | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Pallet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-the-Node-Template"><span class="nav-number">1.1.</span> <span class="nav-text">Install the Node Template</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Import-the-Nicks-Pallet"><span class="nav-number">1.2.</span> <span class="nav-text">Import the Nicks Pallet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Importing-a-Pallet-Crate"><span class="nav-number">1.2.1.</span> <span class="nav-text">Importing a Pallet Crate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crate-Features"><span class="nav-number">1.3.</span> <span class="nav-text">Crate Features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-the-Nicks-Pallet"><span class="nav-number">1.3.1.</span> <span class="nav-text">Configure the Nicks Pallet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adding-Nicks-to-the-construct-runtime-Macro"><span class="nav-number">1.3.2.</span> <span class="nav-text">Adding Nicks to the construct_runtime! Macro</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interact-with-the-Nicks-Pallet"><span class="nav-number">1.4.</span> <span class="nav-text">Interact with the Nicks Pallet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Start-the-Front-End"><span class="nav-number">1.4.1.</span> <span class="nav-text">Start the Front-End</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-the-Nicks-Pallet"><span class="nav-number">1.4.2.</span> <span class="nav-text">Use the Nicks Pallet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/02/06/Blockchain/Substrate/Tutorials/Add-a-Pallet-on-Substrate-Node-Template/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Blockchain Substrate Tutorials] Add a Pallet on Substrate Node Template | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Blockchain Substrate Tutorials] Add a Pallet on Substrate Node Template
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-06 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-06T00:00:00+00:00">2021-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Blockchain/" itemprop="url" rel="index"><span itemprop="name">Blockchain</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Blockchain/Substrate/" itemprop="url" rel="index"><span itemprop="name">Substrate</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Blockchain/Substrate/Tutorials/" itemprop="url" rel="index"><span itemprop="name">Tutorials</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>8k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>7 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Pallet</h1>
+<p>The Substrate Node Template provides a minimal working runtime which you can use to quickly get started building your own custom blockchain. The Node Template includes a number of components, including a runtime that is constructed using FRAME runtime development framework. However, in order to remain minimal, it does not include most of the modules (called “pallets”) from Substrate’s set of core FRAME pallets.</p>
+<p>This guide will show you how you can add the Nicks pallet. You can follow similar patterns to add additional FRAME pallets to your runtime, however you should note that each pallet is a little different in terms of the specific configuration settings needed to use it correctly. This tutorial will help you understand what you’ll need to consider when adding a new pallet to your FRAME runtime.</p>
+<span id="more"></span>
+<h2 id="Install-the-Node-Template">Install the Node Template</h2>
+<p>You should already have latest version of the Node Template compiled on your computer from when you completed the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain/">Create Your First Substrate Chain - https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain/</a> tutorial. If you do not, please complete it first.</p>
+<h2 id="Import-the-Nicks-Pallet">Import the Nicks Pallet</h2>
+<p>We will now modify the Substrate Node Template to include the Nicks pallet. This pallet allows blockchain users to pay a deposit to reserve a nickname and associate it with an account they control.</p>
+<p>Open the Node Template in your favorite code editor. We will be editing two files: <code>runtime/src/lib.rs</code>, and <code>runtime/Cargo.toml</code>.</p>
+<h3 id="Importing-a-Pallet-Crate">Importing a Pallet Crate</h3>
+<p>The first thing you need to do to add the Nicks pallet is to import the pallet-nicks crate in your runtime’s <code>Cargo.toml</code> file. If you want a proper primer into Cargo References, please check out their official documentation.</p>
+<p>Open <code>substrate-node-template/runtime/Cargo.toml</code> and you will see a list of all the dependencies your runtime has. For example, it depends on the Balances pallet:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># runtime/Cargo.toml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Substrate dependencies</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="attr">pallet-balances</span> = &#123; default-features = <span class="literal">false</span>, version = <span class="string">&#x27;3.0.0&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="attr">pallet-nicks</span> = &#123; default-features = <span class="literal">false</span>, version = <span class="string">&#x27;3.0.0&#x27;</span> &#125;</span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Crate-Features">Crate Features</h2>
+<p>One important thing we need to call out with importing pallet crates is making sure to set up the crate features correctly. In the code snippet above, you will notice that we set default-features = false. If you explore the Cargo.toml file even closer, you will find something like:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># runtime/Cargo.toml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="section">[features]</span></span><br><span class="line"><span class="attr">default</span> = [<span class="string">&#x27;std&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="attr">std</span> = [</span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">    <span class="string">&#x27;pallet-balances/std&#x27;</span>,</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;pallet-nicks/std&#x27;</span>,</span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>This second line defines the default features of your runtime crate as std. You can imagine, each pallet crate has a similar configuration defining the default feature for the crate. Your feature will determine the features that should be used on downstream dependencies. For example, the snippet above should be read as:</p>
+<hr>
+<p>The default feature for this Substrate runtime is <code>std</code>. When std feature is enabled for the runtime, codec, frame-executive, frame-support, and all the other listed dependencies should use their std feature.</p>
+<hr>
+<p>This is important to enable the Substrate runtime to compile to both native binary, which supports Rust std, and Wasm binary, which do not (see: no_std).</p>
+<p>Before moving on, check that the new dependencies resolve correctly by running:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">cargo check -p node-template-runtime</span></span><br></pre></td></tr></table></figure>
+<h3 id="Configure-the-Nicks-Pallet">Configure the Nicks Pallet</h3>
+<p>Every pallet has a component called Config that is used for configuration. This component is a Rust “trait”; traits in Rust are similar to interfaces in languages such as C++, Java and Go. FRAME developers must implement this trait for each pallet they would like to include in a runtime in order to configure that pallet with the parameters and types that it needs from the outer runtime. For instance, in the template pallet that is included in the Node Template, you will see the following Config configuration trait:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtime/src/lib.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">pallet_balances</span>::Config <span class="keyword">for</span> <span class="title class_">Runtime</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Add this code block to your template for Nicks:</span></span><br><span class="line">parameter_types! &#123;</span><br><span class="line">    <span class="comment">// Choose a fee that incentivizes desireable behavior.</span></span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">const</span> NickReservationFee: <span class="type">u128</span> = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">const</span> MinNickLength: <span class="type">usize</span> = <span class="number">8</span>;</span><br><span class="line">    <span class="comment">// Maximum bounds on storage are important to secure your chain.</span></span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">const</span> MaxNickLength: <span class="type">usize</span> = <span class="number">32</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">pallet_nicks</span>::Config <span class="keyword">for</span> <span class="title class_">Runtime</span> &#123;</span><br><span class="line">    <span class="comment">// The Balances pallet implements the ReservableCurrency trait.</span></span><br><span class="line">    <span class="comment">// `Balances` is defined in `construct_runtimes!` macro. See below.</span></span><br><span class="line">    <span class="comment">// https://substrate.dev/rustdocs/latest/pallet_balances/index.html#implementations-2</span></span><br><span class="line">    <span class="keyword">type</span> <span class="title class_">Currency</span> = Balances;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use the NickReservationFee from the parameter_types block.</span></span><br><span class="line">    <span class="keyword">type</span> <span class="title class_">ReservationFee</span> = NickReservationFee;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// No action is taken when deposits are forfeited.</span></span><br><span class="line">    <span class="keyword">type</span> <span class="title class_">Slashed</span> = ();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Configure the FRAME System Root origin as the Nick pallet admin.</span></span><br><span class="line">    <span class="comment">// https://substrate.dev/rustdocs/latest/frame_system/enum.RawOrigin.html#variant.Root</span></span><br><span class="line">    <span class="keyword">type</span> <span class="title class_">ForceOrigin</span> = frame_system::EnsureRoot&lt;AccountId&gt;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use the MinNickLength from the parameter_types block.</span></span><br><span class="line">    <span class="keyword">type</span> <span class="title class_">MinLength</span> = MinNickLength;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use the MaxNickLength from the parameter_types block.</span></span><br><span class="line">    <span class="keyword">type</span> <span class="title class_">MaxLength</span> = MaxNickLength;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The ubiquitous event type.</span></span><br><span class="line">    <span class="keyword">type</span> <span class="title class_">Event</span> = Event;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Adding-Nicks-to-the-construct-runtime-Macro">Adding Nicks to the construct_runtime! Macro</h3>
+<p>Next, we need to add the Nicks pallet to the construct_runtime! macro. For this, we need to determine the types that the pallet exposes so that we can tell the runtime that they exist. The complete list of possible types can be found in the <code>construct_runtime!</code> macro documentation.</p>
+<p>If we look at the Nicks pallet in detail, we know it has:</p>
+<ul>
+<li>
+<p>Module Storage: Because it uses the #[pallet::storage] macro.</p>
+</li>
+<li>
+<p>Module Events: Because it uses the #[pallet::event] macro. You will notice that in the case of the Nicks pallet, the Event keyword is parameterized with respect to a type, T; this is because at least one of the events defined by the Nicks pallet depends on a type that is configured with the Config configuration trait.</p>
+</li>
+<li>
+<p>Callable Functions: Because it has dispatchable functions in the #[pallet::call] macro.</p>
+</li>
+<li>
+<p>The Pallet type from the #[pallet::pallet] macro.</p>
+</li>
+</ul>
+<p>Thus, when we add the pallet, it will look like this:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtime/src/lib.rs</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Create the runtime by composing the FRAME pallets that were previously configured.</span></span><br><span class="line">construct_runtime!(</span><br><span class="line">	<span class="keyword">pub</span> <span class="keyword">enum</span> <span class="title class_">Runtime</span> <span class="keyword">where</span></span><br><span class="line">		Block = Block,</span><br><span class="line">		NodeBlock = opaque::Block,</span><br><span class="line">		UncheckedExtrinsic = UncheckedExtrinsic</span><br><span class="line">	&#123;</span><br><span class="line">    <span class="comment">// ... </span></span><br><span class="line">		Balances: pallet_balances::&#123;Module, Call, Storage, Config&lt;T&gt;, Event&lt;T&gt;&#125;,</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*** Add This Line ***/</span></span><br><span class="line">		Nicks: pallet_nicks::&#123;Module, Call, Storage, Event&lt;T&gt;&#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ... </span></span><br><span class="line">	&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="Interact-with-the-Nicks-Pallet">Interact with the Nicks Pallet</h2>
+<p>Now you are ready to compile and run your node that has been enhanced with nickname capabilities from the Nicks pallet. Compile the node in release mode with:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">cargo build --release</span></span><br></pre></td></tr></table></figure>
+<p>After the build succeeds, you can start the node:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Run a temporary node <span class="keyword">in</span> development mode</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./target/release/node-template --dev --tmp</span></span><br></pre></td></tr></table></figure>
+<h3 id="Start-the-Front-End">Start the Front-End</h3>
+<p>As in the previous tutorials, this tutorial will use the Substrate Developer Hub Front-End Template to allow you to interact with the Node Template. As long as you have completed the Create Your First Chain and Build a dApp tutorials, you should already be prepared to continue with the rest of this tutorial.</p>
+<p>Refer directly to the front-end setup instructions for the Create Your First Chain Tutorial if necessary.</p>
+<p>To start the Front-End Template, navigate to its directory and run:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yarn start</span></span><br></pre></td></tr></table></figure>
+<h3 id="Use-the-Nicks-Pallet">Use the Nicks Pallet</h3>
+<p>You should already be familiar with using the Front-End Template to interact with a pallet. In this section we will use the Nicks pallet to further illustrate how the Front-End Template can be used to interact with FRAME pallets. We will also learn more about how to use the Front-End Template to invoke privileged functions with the Sudo pallet, which is included by default as part of the Node Template. Finally, you will learn how to interpret the different types of events and errors that FRAME pallets may emit.</p>
+<p>To get started, use the account selector from the Front-End Template to select Alice’s account and then use the Pallet Interactor component to call the setName dispatchable function from the nicks pallet. You can select any name you’d like as long as it is no shorter than the MinNickLength and no longer than the MaxNickLength you configured in the previous step. Use the Signed button to execute the function.</p>
+<p><img src="https://substrate.dev/docs/assets/tutorials/add-a-pallet/set-name.png" alt="Use the Nicks Pallet"></p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://substrate.dev/docs/en/tutorials/add-a-pallet/interact-with-a-pallet">Interact with the Nicks Pallet · Substrate Developer Hub - https://substrate.dev/docs/en/tutorials/add-a-pallet/interact-with-a-pallet</a> to learn more about interacting with the Nicks Pallet</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://substrate.dev/docs/en/tutorials/add-a-pallet/">Introduction · Substrate Developer Hub - https://substrate.dev/docs/en/tutorials/add-a-pallet/</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://substrate.dev/docs/en/knowledgebase/getting-started/">Installation · Substrate Developer Hub - https://substrate.dev/docs/en/knowledgebase/getting-started/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://substrate.dev/">Official Substrate Documentation for Blockchain Developers · Substrate Developer Hub - https://substrate.dev/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/substrate-developer-hub/substrate-node-template">substrate-developer-hub/substrate-node-template: A new FRAME-based Substrate node, ready for hacking. - https://github.com/substrate-developer-hub/substrate-node-template</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Blockchain/" rel="tag"># Blockchain</a>
+              <a href="/tags/Pallet/" rel="tag"># Pallet</a>
+              <a href="/tags/FRAME/" rel="tag"># FRAME</a>
+              <a href="/tags/Substrate/" rel="tag"># Substrate</a>
+              <a href="/tags/Tutorials/" rel="tag"># Tutorials</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/06/Blockchain/Substrate/Tutorials/Install-Substrate-and-run-Substrate-node-on-macOS/" rel="prev" title="[Blockchain Substrate Tutorials] Install Substrate and run Substrate node on macOS">
+                  <i class="fa fa-angle-left"></i> [Blockchain Substrate Tutorials] Install Substrate and run Substrate node on macOS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/06/macOS/Install-HP-Easy-Start-HP-Printer-Software-and-Driver-on-macOS/" rel="next" title="[macOS] Install HP Easy Start (HP Printer Software and Driver) on macOS">
+                  [macOS] Install HP Easy Start (HP Printer Software and Driver) on macOS <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"f31311d2c92892fa279e0cc58e4aecbc"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

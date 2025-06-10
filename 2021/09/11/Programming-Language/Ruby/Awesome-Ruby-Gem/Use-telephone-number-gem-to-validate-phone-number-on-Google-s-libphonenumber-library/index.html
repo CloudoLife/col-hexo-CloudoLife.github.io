@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="TelephoneNumber TelephoneNumber is global phone number validation gem based on Google’s libphonenumber library google&#x2F;libphonenumber: Google’s common Java, C++ and JavaScript library for parsing, form">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Ruby Gem] Use telephone_number gem to validate phone number on Google&#39;s libphonenumber library">
+<meta property="og:url" content="https://cloudolife.com/2021/09/11/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-telephone-number-gem-to-validate-phone-number-on-Google-s-libphonenumber-library/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="TelephoneNumber TelephoneNumber is global phone number validation gem based on Google’s libphonenumber library google&#x2F;libphonenumber: Google’s common Java, C++ and JavaScript library for parsing, form">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-11T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.938Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Awesome Ruby Gem">
+<meta property="article:tag" content="telephone_number">
+<meta property="article:tag" content="Phone Number">
+<meta property="article:tag" content="Validation">
+<meta property="article:tag" content="libphonenumber">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/09/11/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-telephone-number-gem-to-validate-phone-number-on-Google-s-libphonenumber-library/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/09/11/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-telephone-number-gem-to-validate-phone-number-on-Google-s-libphonenumber-library/","path":"2021/09/11/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-telephone-number-gem-to-validate-phone-number-on-Google-s-libphonenumber-library/","title":"[Awesome Ruby Gem] Use telephone_number gem to validate phone number on Google's libphonenumber library"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Ruby Gem] Use telephone_number gem to validate phone number on Google's libphonenumber library | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">TelephoneNumber</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">1.1.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.2.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages"><span class="nav-number">1.3.</span> <span class="nav-text">Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rails-Validation"><span class="nav-number">1.3.1.</span> <span class="nav-text">Rails Validation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Valid-Phone-Types"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Valid Phone Types</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Country"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">Country</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manual-Usage"><span class="nav-number">1.3.2.</span> <span class="nav-text">Manual Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#valid-types"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">valid_types</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#valid"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">valid?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#national-number-formatted-true"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">national_number(formatted: true)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#international-number-formatted-true"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">international_number(formatted: true)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#e164-number-formatted-true"><span class="nav-number">1.3.2.5.</span> <span class="nav-text">e164_number(formatted: true)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#country"><span class="nav-number">1.3.2.6.</span> <span class="nav-text">country</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#location"><span class="nav-number">1.3.2.7.</span> <span class="nav-text">location</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#timezone"><span class="nav-number">1.3.2.8.</span> <span class="nav-text">timezone</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Methods"><span class="nav-number">1.3.3.</span> <span class="nav-text">Class Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#parse"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">parse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#valid-2"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">valid?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#invalid"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">invalid?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration"><span class="nav-number">1.4.</span> <span class="nav-text">Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Override-File"><span class="nav-number">1.4.1.</span> <span class="nav-text">Override File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Default-Number-Pattern"><span class="nav-number">1.4.2.</span> <span class="nav-text">Default Number Pattern</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/09/11/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-telephone-number-gem-to-validate-phone-number-on-Google-s-libphonenumber-library/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Ruby Gem] Use telephone_number gem to validate phone number on Google&#39;s libphonenumber library | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Ruby Gem] Use telephone_number gem to validate phone number on Google's libphonenumber library
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-11 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-11T00:00:00+00:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Awesome-Ruby-Gem/" itemprop="url" rel="index"><span itemprop="name">Awesome Ruby Gem</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>5.3k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>TelephoneNumber</h1>
+<p>TelephoneNumber is global phone number validation gem based on Google’s libphonenumber library <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/google/libphonenumber">google/libphonenumber: Google’s common Java, C++ and JavaScript library for parsing, formatting, and validating international phone numbers. - https://github.com/google/libphonenumber</a>.</p>
+<span id="more"></span>
+<h2 id="Demo">Demo</h2>
+<p>Feel free to check out our demo! <a target="_blank" rel="noopener external nofollow noreferrer" href="http://numberjack.io/">Numberjack - http://numberjack.io/</a></p>
+<h2 id="Installation">Installation</h2>
+<p>You can install it as a gem:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gem install telephone_number</span></span><br></pre></td></tr></table></figure>
+<p>or add it into a Gemfile (Bundler):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># mobi/telephone_number: Phone number validation for Ruby</span></span><br><span class="line"><span class="comment"># https://github.com/mobi/telephone_number</span></span><br><span class="line">gem <span class="string">&#x27;telephone_number&#x27;</span>, <span class="string">&#x27;1.4.12&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Usages">Usages</h2>
+<h3 id="Rails-Validation">Rails Validation</h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">validates <span class="symbol">:my_attribute_name</span>, <span class="symbol">telephone_number:</span> &#123;<span class="symbol">country:</span> <span class="built_in">proc</span>&#123;|<span class="params">record</span>| record.country&#125;, <span class="symbol">types:</span> [<span class="symbol">:fixed_line</span>, <span class="symbol">:mobile</span>, etc]&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Valid-Phone-Types">Valid Phone Types</h4>
+<ul>
+<li>
+<p>:area_code_optional</p>
+</li>
+<li>
+<p>:fixed_line</p>
+</li>
+<li>
+<p>:mobile</p>
+</li>
+<li>
+<p>:no_international_dialling</p>
+</li>
+<li>
+<p>:pager</p>
+</li>
+<li>
+<p>:personal_number</p>
+</li>
+<li>
+<p>:premium_rate</p>
+</li>
+<li>
+<p>:shared_cost</p>
+</li>
+<li>
+<p>:toll_free</p>
+</li>
+<li>
+<p>:uan</p>
+</li>
+<li>
+<p>:voicemail</p>
+</li>
+<li>
+<p>:voip</p>
+</li>
+</ul>
+<h4 id="Country">Country</h4>
+<p>In this example, <code>record.country</code> must yield a valid two letter country code such as <code>:us</code>, <code>:ca</code> or <code>'DE'</code><br>
+You can also just pass a <code>String</code> or <code>Symbol</code> instead of a <code>Proc</code>.</p>
+<h3 id="Manual-Usage">Manual Usage</h3>
+<p>You can obtain a <code>TelephoneNumber</code> object by calling:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">phone_object = <span class="title class_">TelephoneNumber</span>.parse(<span class="string">&quot;3175082237&quot;</span>, <span class="symbol">:us</span>) ==&gt;</span><br><span class="line"></span><br><span class="line">#&lt;TelephoneNumber::Number:0x007fe3bc146cf0</span><br><span class="line">  @country=:US,</span><br><span class="line">  @e164_number=&quot;13175083348&quot;,</span><br><span class="line">  @national_number=&quot;3175083348&quot;,</span><br><span class="line">  @original_number=&quot;3175083348&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>After that you have the following instance methods available to you.</p>
+<h4 id="valid-types">valid_types</h4>
+<p>Returns all types that the number is considered valid for.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_object.valid_types ==&gt; [<span class="symbol">:fixed_line</span>, <span class="symbol">:mobile</span>, <span class="symbol">:toll_free</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="valid">valid?</h4>
+<p>Returns <code>boolean</code> value indicating whether or not <code>valid_types</code> is empty.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_object.valid? ==&gt; <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h4 id="national-number-formatted-true">national_number(formatted: true)</h4>
+<p>Returns the national formatted number including special characters such as parenthesis and dashes. You can omit the special characters by passing formatted: false</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_object.national_number ==&gt; <span class="string">&quot;(317) 508-2237&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="international-number-formatted-true">international_number(formatted: true)</h4>
+<p>Returns the international formatted number including special characters such as parenthesis and dashes. You can omit the special characters by passing formatted: false</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_object.international_number ==&gt; <span class="string">&quot;+1 317-508-2237&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="e164-number-formatted-true">e164_number(formatted: true)</h4>
+<p>Returns the international formatted number including special characters such as parenthesis and dashes. You can omit the special characters by passing formatted: false</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_object.e164_number ==&gt; <span class="string">&quot;+13175082237&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="country">country</h4>
+<p>Returns an object containing data related a the number’s country.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">phone_object.country ===&gt;</span><br><span class="line"> #&lt;TelephoneNumber::Country:0x007fb976267410</span><br><span class="line"> @country_code=&quot;1&quot;,</span><br><span class="line"> @country_id=&quot;US&quot;,</span><br><span class="line"> ...</span><br></pre></td></tr></table></figure>
+<h4 id="location">location</h4>
+<p>Returns the location of the number. Default locale is <code>:en</code></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">phone_object.location ==&gt; <span class="string">&quot;Indiana&quot;</span></span><br><span class="line"></span><br><span class="line">phone_object.location(<span class="symbol">:ja</span>) ==&gt; <span class="string">&quot;ソウル特別市&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="timezone">timezone</h4>
+<p>Returns the time zone of the number.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phone_object.timezone ==&gt; <span class="string">&quot;America/New_York&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Class-Methods">Class Methods</h3>
+<p>You also have the following class methods available to you.</p>
+<h4 id="parse">parse</h4>
+<p>Returns a TelephoneNumber object.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">TelephoneNumber</span>.parse(<span class="string">&quot;3175082237&quot;</span>, <span class="symbol">:US</span>)</span><br></pre></td></tr></table></figure>
+<p>If you pass an <code>E164</code> formatted number, we will determine the country on the fly.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">TelephoneNumber</span>.parse(<span class="string">&quot;+13175082237&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="valid-2">valid?</h4>
+<p>Returns <code>boolean</code> value indicating whether or not a particular number is valid.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">TelephoneNumber</span>.valid?(<span class="string">&quot;3175082237&quot;</span>, <span class="symbol">:US</span>) ==&gt; <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>If you are looking to validate against a specific set of keys, you can pass in an array of keys</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">TelephoneNumber</span>.valid?(<span class="string">&quot;3175082237&quot;</span>, <span class="symbol">:US</span>, [<span class="symbol">:mobile</span>, <span class="symbol">:fixed_line</span>]) ==&gt; <span class="literal">true</span></span><br><span class="line"><span class="title class_">TelephoneNumber</span>.valid?(<span class="string">&quot;3175082237&quot;</span>, <span class="symbol">:US</span>, [<span class="symbol">:toll_free</span>]) ==&gt; <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h4 id="invalid">invalid?</h4>
+<p>Returns <code>boolean</code> value indicating whether or not a particular number is invalid.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">TelephoneNumber</span>.invalid?(<span class="string">&quot;3175082237&quot;</span>, <span class="symbol">:US</span>) ==&gt; <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>If you are looking to invalidate against a specific set of keys, you can pass in an array of keys</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">TelephoneNumber</span>.invalid?(<span class="string">&quot;3175082237&quot;</span>, <span class="symbol">:US</span>, [<span class="symbol">:mobile</span>, <span class="symbol">:fixed_line</span>]) ==&gt; <span class="literal">false</span></span><br><span class="line"><span class="title class_">TelephoneNumber</span>.invalid?(<span class="string">&quot;3175082237&quot;</span>, <span class="symbol">:US</span>, [<span class="symbol">:toll_free</span>]) ==&gt; <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="Configuration">Configuration</h2>
+<h3 id="Override-File">Override File</h3>
+<p>In the event that you need to override the data that Google is providing, you can do so by setting an override file. This file is expected to be in the same format as Google’s as well as serialized using Marshal.</p>
+<p>To generate a serialized override file:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ruby bin/console</span><br><span class="line">TelephoneNumber.generate_override_file(&quot;/path/to/file&quot;)</span><br></pre></td></tr></table></figure>
+<p>In this instance, <code>/path/to/file</code> represents an xml file that has your custom data in the same structure that Google’s data is in.</p>
+<p>You can set the override file with:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">TelephoneNumber</span>.override_file = <span class="string">&quot;/path/to_file.dat&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Default-Number-Pattern">Default Number Pattern</h3>
+<p>If <code>TelephoneNumber</code> is passed an invalid number and then asked to format that number, it will simply return an unformatted string of the originally passed number. This is because formatting rules will not be found for invalid numbers. If this is unacceptable, you can set a <code>default_format_pattern</code> and <code>default_format_string</code> that TelephoneNumber will use attempt to format invalid numbers.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">TelephoneNumber</span>.default_format_pattern = <span class="string">&quot;(\\d&#123;3&#125;)(\\d&#123;3&#125;)(\\d*)&quot;</span></span><br><span class="line"><span class="title class_">TelephoneNumber</span>.default_format_string = <span class="string">&quot;($1) $2-$3&quot;</span></span><br><span class="line"></span><br><span class="line">invalid_number = <span class="string">&quot;1111111111&quot;</span></span><br><span class="line">phone_object = <span class="title class_">TelephoneNumber</span>.parse(invalid_number, <span class="symbol">:US</span>)</span><br><span class="line">phone_object.national_number ==&gt; <span class="string">&quot;(111) 111-1111&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/mobi/telephone_number">mobi/telephone_number: Phone number validation for Ruby - https://github.com/mobi/telephone_number</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rubygems.org/gems/telephone_number/">telephone_number | RubyGems.org | your community gem host - https://rubygems.org/gems/telephone_number/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/google/libphonenumber">google/libphonenumber: Google’s common Java, C++ and JavaScript library for parsing, formatting, and validating international phone numbers. - https://github.com/google/libphonenumber</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="http://numberjack.io/">Numberjack - http://numberjack.io/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Awesome-Ruby-Gem/" rel="tag"># Awesome Ruby Gem</a>
+              <a href="/tags/telephone-number/" rel="tag"># telephone_number</a>
+              <a href="/tags/Phone-Number/" rel="tag"># Phone Number</a>
+              <a href="/tags/Validation/" rel="tag"># Validation</a>
+              <a href="/tags/libphonenumber/" rel="tag"># libphonenumber</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/11/Programming-Language/Java/Spring/Spring-Boot/Visual-Studio-Code-Java-Spring-Spring-Boot-extensions/" rel="prev" title="[Java - Visual Studio Code] Visual Studio Code Java, Spring, Spring Boot extensions">
+                  <i class="fa fa-angle-left"></i> [Java - Visual Studio Code] Visual Studio Code Java, Spring, Spring Boot extensions
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/11/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Elasticsearch/" rel="next" title="[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Elasticsearch">
+                  [Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Elasticsearch <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"a0f88a748e2bb9ae4e23bde546078d8a"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

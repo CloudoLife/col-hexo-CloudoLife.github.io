@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Iris as gRPC-Gateway gRPC is a modern open source high performance Remote Procedure Call framework that can run in any environment. It can efficiently connect services in and across data centers with">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Go, Iris] Use Iris as the gRPC-Gateway which translates a RESTful HTTP API into gRPC">
+<meta property="og:url" content="https://cloudolife.com/2021/03/13/Programming-Language/Golang-Go/Iris/Use-Iris-as-the-gRPC-Gateway-which-translates-a-RESTful-HTTP-API-into-gRPC/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Iris as gRPC-Gateway gRPC is a modern open source high performance Remote Procedure Call framework that can run in any environment. It can efficiently connect services in and across data centers with">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-13T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.928Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="macOS">
+<meta property="article:tag" content="Homebrew (brew)">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Golang (Go)">
+<meta property="article:tag" content="Hypertext Transfer Protocol Secure (HTTPS)">
+<meta property="article:tag" content="Hypertext Transfer Protocol (HTTP)">
+<meta property="article:tag" content="Transport Layer Security (TLS)">
+<meta property="article:tag" content="Awesome Go">
+<meta property="article:tag" content="OpenSSL">
+<meta property="article:tag" content="Gateway">
+<meta property="article:tag" content="Model–view–controller (MVC)">
+<meta property="article:tag" content="Web Framework (WF) &#x2F; Web Application Framework (WAF)">
+<meta property="article:tag" content="Iris">
+<meta property="article:tag" content="gRPC Remote Procedure Calls (gRPC)">
+<meta property="article:tag" content="gRPC-Gateway">
+<meta property="article:tag" content="Protocol Buffers (Protobuf)">
+<meta property="article:tag" content="protoc">
+<meta property="article:tag" content="Representational state transfer (RESTful)">
+<meta property="article:tag" content="Application Programming Interface (API)">
+<meta property="article:tag" content="JavaScript Object Notation (JSON)">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/03/13/Programming-Language/Golang-Go/Iris/Use-Iris-as-the-gRPC-Gateway-which-translates-a-RESTful-HTTP-API-into-gRPC/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/03/13/Programming-Language/Golang-Go/Iris/Use-Iris-as-the-gRPC-Gateway-which-translates-a-RESTful-HTTP-API-into-gRPC/","path":"2021/03/13/Programming-Language/Golang-Go/Iris/Use-Iris-as-the-gRPC-Gateway-which-translates-a-RESTful-HTTP-API-into-gRPC/","title":"[Awesome Go, Iris] Use Iris as the gRPC-Gateway which translates a RESTful HTTP API into gRPC"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Go, Iris] Use Iris as the gRPC-Gateway which translates a RESTful HTTP API into gRPC | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Iris as gRPC-Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-by-step"><span class="nav-number">1.2.</span> <span class="nav-text">Step by step</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise-files"><span class="nav-number">1.3.</span> <span class="nav-text">Exercise files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/03/13/Programming-Language/Golang-Go/Iris/Use-Iris-as-the-gRPC-Gateway-which-translates-a-RESTful-HTTP-API-into-gRPC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Go, Iris] Use Iris as the gRPC-Gateway which translates a RESTful HTTP API into gRPC | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Go, Iris] Use Iris as the gRPC-Gateway which translates a RESTful HTTP API into gRPC
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-13 00:00:00" itemprop="dateCreated datePublished" datetime="2021-03-13T00:00:00+00:00">2021-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Golang-Go/" itemprop="url" rel="index"><span itemprop="name">Golang (Go)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Golang-Go/Awesome-Go/" itemprop="url" rel="index"><span itemprop="name">Awesome Go</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Golang-Go/Awesome-Go/Web-Framework-WF-Web-Application-Framework-WAF/" itemprop="url" rel="index"><span itemprop="name">Web Framework (WF) / Web Application Framework (WAF)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Golang-Go/Awesome-Go/Web-Framework-WF-Web-Application-Framework-WAF/Iris/" itemprop="url" rel="index"><span itemprop="name">Iris</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>5.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Iris as gRPC-Gateway</h1>
+<p>gRPC is a modern open source high performance Remote Procedure Call framework that can run in any environment. It can efficiently connect services in and across data centers with pluggable support for load balancing, tracing, health checking and authentication. It is also applicable in last mile of distributed computing to connect devices, mobile applications and browsers to backend services.</p>
+<p>The gRPC-Gateway is a plugin of the Google protocol buffers compiler protoc. It reads protobuf service definitions and generates a reverse-proxy server which translates a RESTful HTTP API into gRPC. This server is generated according to the google.api.http annotations in your service definitions.</p>
+<p>This article describe how Iris and gRPC integration as a gRPC-Gateway lives inside the mvc package.</p>
+<span id="more"></span>
+<p>Have you ever have difficulties converting your app or parts of it from HTTP to gGRPC or did you ever wish you had decent HTTP framework support as well for your gRPC services?</p>
+<p>Now, with Iris you have the best of two worlds. Without change a bit of your existing gRPC services code, you can register them as Iris HTTP routes through a Controller (your service struct value).</p>
+<h2 id="Prerequisites">Prerequisites</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://golang.org/">The Go Programming Language - https://golang.org/</a></p>
+<p>For installation instructions, see <a target="_blank" rel="noopener external nofollow noreferrer" href="https://golang.org/doc/install">Go’s Getting Started guide - https://golang.org/doc/install</a>.</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/protocol-buffers">Protocol buffer - https://developers.google.com/protocol-buffers</a> compiler, protoc, <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/protocol-buffers/docs/proto3">version 3 - https://developers.google.com/protocol-buffers/docs/proto3</a>.</p>
+<p>For installation instructions, see <a target="_blank" rel="noopener external nofollow noreferrer" href="https://grpc.io/docs/protoc-installation/">Protocol Buffer Compiler Installation - https://grpc.io/docs/protoc-installation/</a>.</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">macOS</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">protobuf — Homebrew Formulae</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://formulae.brew.sh/formula/protobuf</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install protobuf</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Step-by-step">Step by step</h2>
+<p>We will follow the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/grpc/grpc-go/tree/master/examples/helloworld">official helloworld gRPC example - https://github.com/grpc/grpc-go/tree/master/examples/helloworld</a>. If you had already work with gRPC services you can skip 1-5.</p>
+<ol>
+<li>Let’s write our proto schema for request and response.</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line">​</span><br><span class="line">package helloworld;</span><br><span class="line">​</span><br><span class="line">// The greeting service definition.</span><br><span class="line">service Greeter &#123;</span><br><span class="line">  // Sends a greeting</span><br><span class="line">  rpc SayHello (HelloRequest) returns (HelloReply) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">​</span><br><span class="line">// The request message containing the user&#x27;s name.</span><br><span class="line">message HelloRequest &#123;</span><br><span class="line">  string name = 1;</span><br><span class="line">&#125;</span><br><span class="line">​</span><br><span class="line">// The response message containing the greetings</span><br><span class="line">message HelloReply &#123;</span><br><span class="line">  string message = 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Install the protoc Go plugin</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">go get -u google.golang.org/protobuf/cmd/protoc-gen-go \</span></span><br><span class="line"><span class="language-bash">         google.golang.org/grpc/cmd/protoc-gen-go-grpc</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Generate Go file from the helloworld.proto file above</li>
+</ol>
+<p>Before you can use the new service method, you need to recompile the updated <code>.proto</code> file.</p>
+<p>While still in the <code>examples/helloworld</code> directory, run the following command:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">protoc --go_out=. --go_opt=paths=source_relative \</span></span><br><span class="line"><span class="language-bash">    --go-grpc_out=. --go-grpc_opt=paths=source_relative \</span></span><br><span class="line"><span class="language-bash">    helloworld/helloworld.proto</span></span><br></pre></td></tr></table></figure>
+<p>This will regenerate the <code>helloworld/helloworld.pb.go</code> and <code>helloworld/helloworld_grpc.pb.go </code>files, which contain:</p>
+<ul>
+<li>
+<p>Code for populating, serializing, and retrieving HelloRequest and HelloReply message types.</p>
+</li>
+<li>
+<p>Generated client and server code.</p>
+</li>
+</ul>
+<ol start="4">
+<li>Implement a gRPC service as usually, with or without Iris</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="comment">// [...]</span></span><br><span class="line">    pb <span class="string">&quot;myapp/helloworld&quot;</span></span><br><span class="line">    <span class="string">&quot;context&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> Greeter <span class="keyword">struct</span> &#123; &#125;</span><br><span class="line">​</span><br><span class="line"><span class="comment">// SayHello implements helloworld.GreeterServer.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Greeter)</span></span> SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;pb.HelloReply&#123;Message: <span class="string">&quot;Hello &quot;</span> + in.GetName()&#125;, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Iris automatically binds the standard “context” <code>context.Context</code> to <code>iris.Context.Request().Context()</code> and any other structure that is not mapping to a registered dependency as a payload (depending on the request), e.g XML, YAML, Query, Form, JSON, Protobuf.</p>
+<ol start="5">
+<li>Register your service to the gRPC server</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="comment">// [...]</span></span><br><span class="line">    pb <span class="string">&quot;myapp/helloworld&quot;</span></span><br><span class="line">    <span class="string">&quot;google.golang.org/grpc&quot;</span></span><br><span class="line">)</span><br><span class="line">grpcServer := grpc.NewServer()</span><br><span class="line">​</span><br><span class="line">myService := &amp;Greeter&#123;&#125;</span><br><span class="line">pb.RegisterGreeterServer(grpcServer, myService)</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>Register this myService to Iris</li>
+</ol>
+<p>The <code>mvc.New(party).Handle(ctrl, mvc.GRPC&#123;...&#125;)</code> option allows to register gRPC services per-party (without the requirement of a full wrapper) and optionally strict access to gRPC-only clients.</p>
+<p>Register MVC application controller for gRPC services. You can bind as many mvc gRpc services in the same Party or app, as the ServiceName differs.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="comment">// [...]</span></span><br><span class="line">    <span class="string">&quot;github.com/kataras/iris/v12&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/kataras/iris/v12/mvc&quot;</span></span><br><span class="line">)</span><br><span class="line">app := iris.New()</span><br><span class="line">​</span><br><span class="line">rootApp := mvc.New(app)</span><br><span class="line">rootApp.Handle(myService, mvc.GRPC&#123;</span><br><span class="line">    Server:      grpcServer,           <span class="comment">// Required.</span></span><br><span class="line">    ServiceName: <span class="string">&quot;helloworld.Greeter&quot;</span>, <span class="comment">// Required.</span></span><br><span class="line">    Strict:      <span class="literal">false</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>Generate TLS Keys</li>
+</ol>
+<p>The Iris server should ran under TLS (it’s a gRPC requirement).</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">openssl genrsa -out server.key 2048</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">openssl req -new -x509 -sha256 -key server.key -out server.crt -days 3650</span></span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>Listen and Serve</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.Run(iris.TLS(<span class="string">&quot;:443&quot;</span>, <span class="string">&quot;server.crt&quot;</span>, <span class="string">&quot;server.key&quot;</span>))</span><br></pre></td></tr></table></figure>
+<p>Then, POST: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://localhost:443/helloworld.Greeter/SayHello">https://localhost:443/helloworld.Greeter/SayHello</a> with request data: {“name”: “John”} xpected output: {“message”: “Hello John”}.</p>
+<p>Both HTTP Client and gRPC client will be able to communicate with our Iris+gRPC service.</p>
+<h2 id="Exercise-files">Exercise files</h2>
+<p>Full Server, Clients and Testing Code can be found at: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/kataras/iris/tree/master/_examples/mvc/grpc-compatible">https://github.com/kataras/iris/tree/master/_examples/mvc/grpc-compatible</a>.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.iris-go.com/iris/mvc/mvc-grpc">gRPC - Iris - https://docs.iris-go.com/iris/mvc/mvc-grpc</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/kataras/iris/wiki/Grpc">Grpc · kataras/iris Wiki · GitHub - https://github.com/kataras/iris/wiki/Grpc</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/grpc/grpc-go/tree/master/examples/helloworld">grpc-go/examples/helloworld at master · grpc/grpc-go · GitHub - https://github.com/grpc/grpc-go/tree/master/examples/helloworld</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/kataras/iris/tree/master/_examples/mvc/grpc-compatible">iris/_examples/mvc/grpc-compatible at master · kataras/iris · GitHub - https://github.com/kataras/iris/tree/master/_examples/mvc/grpc-compatible</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://grpc.io/docs/languages/go/quickstart/">Quick start | Go | gRPC - https://grpc.io/docs/languages/go/quickstart/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/protocol-buffers">Protocol buffer - https://developers.google.com/protocol-buffers</a> compiler, protoc, <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developers.google.com/protocol-buffers/docs/proto3">version 3 - https://developers.google.com/protocol-buffers/docs/proto3</a>.</p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://golang.org/">The Go Programming Language - https://golang.org/</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.iris-go.com/">Iris - https://www.iris-go.com/</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/grpc-ecosystem/grpc-gateway">GitHub - grpc-ecosystem/grpc-gateway: gRPC to JSON proxy generator following the gRPC HTTP spec - https://github.com/grpc-ecosystem/grpc-gateway</a></p>
+<p>[10] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.openssl.org/">/index.html - https://www.openssl.org/</a></p>
+<p>[11] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://brew.sh/">Homebrew - https://brew.sh/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/macOS/" rel="tag"># macOS</a>
+              <a href="/tags/Homebrew-brew/" rel="tag"># Homebrew (brew)</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Golang-Go/" rel="tag"># Golang (Go)</a>
+              <a href="/tags/Hypertext-Transfer-Protocol-Secure-HTTPS/" rel="tag"># Hypertext Transfer Protocol Secure (HTTPS)</a>
+              <a href="/tags/Hypertext-Transfer-Protocol-HTTP/" rel="tag"># Hypertext Transfer Protocol (HTTP)</a>
+              <a href="/tags/Transport-Layer-Security-TLS/" rel="tag"># Transport Layer Security (TLS)</a>
+              <a href="/tags/Awesome-Go/" rel="tag"># Awesome Go</a>
+              <a href="/tags/OpenSSL/" rel="tag"># OpenSSL</a>
+              <a href="/tags/Gateway/" rel="tag"># Gateway</a>
+              <a href="/tags/Model%E2%80%93view%E2%80%93controller-MVC/" rel="tag"># Model–view–controller (MVC)</a>
+              <a href="/tags/Web-Framework-WF-Web-Application-Framework-WAF/" rel="tag"># Web Framework (WF) / Web Application Framework (WAF)</a>
+              <a href="/tags/Iris/" rel="tag"># Iris</a>
+              <a href="/tags/gRPC-Remote-Procedure-Calls-gRPC/" rel="tag"># gRPC Remote Procedure Calls (gRPC)</a>
+              <a href="/tags/gRPC-Gateway/" rel="tag"># gRPC-Gateway</a>
+              <a href="/tags/Protocol-Buffers-Protobuf/" rel="tag"># Protocol Buffers (Protobuf)</a>
+              <a href="/tags/protoc/" rel="tag"># protoc</a>
+              <a href="/tags/Representational-state-transfer-RESTful/" rel="tag"># Representational state transfer (RESTful)</a>
+              <a href="/tags/Application-Programming-Interface-API/" rel="tag"># Application Programming Interface (API)</a>
+              <a href="/tags/JavaScript-Object-Notation-JSON/" rel="tag"># JavaScript Object Notation (JSON)</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/13/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-bundler-audit-gem-to-find-vulnerable-version-gems-in-your-Gemfile-lock/" rel="prev" title="[Awesome Ruby Gem] Use bundler-audit gem to find vulnerable version gems in your Gemfile.lock">
+                  <i class="fa fa-angle-left"></i> [Awesome Ruby Gem] Use bundler-audit gem to find vulnerable version gems in your Gemfile.lock
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/13/Programming-Language/Golang-Go/Iris/Iris-enable-JSON-Web-Tokens-JWT-middleware-to-authenticate-MCV-resources/" rel="next" title="[Awesome Go, Iris] Iris enable JSON Web Tokens (JWT) middleware to authenticate MCV resources">
+                  [Awesome Go, Iris] Iris enable JSON Web Tokens (JWT) middleware to authenticate MCV resources <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"7f92ff80fd39354061bbbca4843b1370"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

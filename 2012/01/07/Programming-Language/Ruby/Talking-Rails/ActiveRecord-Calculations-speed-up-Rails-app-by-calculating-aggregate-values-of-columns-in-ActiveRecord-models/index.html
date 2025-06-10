@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="ActiveRecord::Calculations speed up Rails app In general scenarios, calculations that can be done at the database level are not recommended to be done at the Rails app level if there are no special re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Talking-Rails] ActiveRecord::Calculations speed up Rails app by calculating aggregate values of columns in ActiveRecord models">
+<meta property="og:url" content="https://cloudolife.com/2012/01/07/Programming-Language/Ruby/Talking-Rails/ActiveRecord-Calculations-speed-up-Rails-app-by-calculating-aggregate-values-of-columns-in-ActiveRecord-models/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="ActiveRecord::Calculations speed up Rails app In general scenarios, calculations that can be done at the database level are not recommended to be done at the Rails app level if there are no special re">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2012-01-07T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.941Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Talking-Ruby">
+<meta property="article:tag" content="Performance Optimization">
+<meta property="article:tag" content="ActiveRecord">
+<meta property="article:tag" content="ActiveRecord::Calculations">
+<meta property="article:tag" content="Calculation">
+<meta property="article:tag" content="average">
+<meta property="article:tag" content="calculate">
+<meta property="article:tag" content="count">
+<meta property="article:tag" content="ids">
+<meta property="article:tag" content="maxinum">
+<meta property="article:tag" content="mininum">
+<meta property="article:tag" content="pick">
+<meta property="article:tag" content="pluck">
+<meta property="article:tag" content="sum">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2012/01/07/Programming-Language/Ruby/Talking-Rails/ActiveRecord-Calculations-speed-up-Rails-app-by-calculating-aggregate-values-of-columns-in-ActiveRecord-models/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2012/01/07/Programming-Language/Ruby/Talking-Rails/ActiveRecord-Calculations-speed-up-Rails-app-by-calculating-aggregate-values-of-columns-in-ActiveRecord-models/","path":"2012/01/07/Programming-Language/Ruby/Talking-Rails/ActiveRecord-Calculations-speed-up-Rails-app-by-calculating-aggregate-values-of-columns-in-ActiveRecord-models/","title":"[Talking-Rails] ActiveRecord::Calculations speed up Rails app by calculating aggregate values of columns in ActiveRecord models"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Talking-Rails] ActiveRecord::Calculations speed up Rails app by calculating aggregate values of columns in ActiveRecord models | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">ActiveRecord::Calculations speed up Rails app</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Instance-Public-methods"><span class="nav-number">1.1.</span> <span class="nav-text">Instance Public methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#average-column-name"><span class="nav-number">1.1.1.</span> <span class="nav-text">average(column_name)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#calculate-operation-column-name"><span class="nav-number">1.1.2.</span> <span class="nav-text">calculate(operation, column_name)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count-column-name-nil"><span class="nav-number">1.1.3.</span> <span class="nav-text">count(column_name &#x3D; nil)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ids"><span class="nav-number">1.1.4.</span> <span class="nav-text">ids()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maximum-column-name"><span class="nav-number">1.1.5.</span> <span class="nav-text">maximum(column_name)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pick-column-names-Link"><span class="nav-number">1.1.6.</span> <span class="nav-text">pick(*column_names)Link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pluck-column-names"><span class="nav-number">1.1.7.</span> <span class="nav-text">pluck(*column_names)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sum-column-name-nil"><span class="nav-number">1.1.8.</span> <span class="nav-text">sum(column_name &#x3D; nil)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance-tips"><span class="nav-number">1.2.</span> <span class="nav-text">Performance tips</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prefer-pluck-instead-of-map"><span class="nav-number">1.2.1.</span> <span class="nav-text">Prefer pluck instead of map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prefer-ActiveRecord-Calculations-sum-instead-of-Enumerable-sum"><span class="nav-number">1.2.2.</span> <span class="nav-text">Prefer ActiveRecord::Calculations#sum instead of Enumerable#sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prefer-ActiveRecord-Calculations-maximum-instead-of-Enumerable-max"><span class="nav-number">1.2.3.</span> <span class="nav-text">Prefer ActiveRecord::Calculations#maximum instead of Enumerable#max</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prefer-ActiveRecord-Calculations-minimum-instead-of-Enumerable-min"><span class="nav-number">1.2.4.</span> <span class="nav-text">Prefer ActiveRecord::Calculations#minimum instead of Enumerable#min</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2012/01/07/Programming-Language/Ruby/Talking-Rails/ActiveRecord-Calculations-speed-up-Rails-app-by-calculating-aggregate-values-of-columns-in-ActiveRecord-models/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Talking-Rails] ActiveRecord::Calculations speed up Rails app by calculating aggregate values of columns in ActiveRecord models | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Talking-Rails] ActiveRecord::Calculations speed up Rails app by calculating aggregate values of columns in ActiveRecord models
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2012-01-07 00:00:00" itemprop="dateCreated datePublished" datetime="2012-01-07T00:00:00+00:00">2012-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Talking-Rails/" itemprop="url" rel="index"><span itemprop="name">Talking-Rails</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>8.3k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>8 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>ActiveRecord::Calculations speed up Rails app</h1>
+<p>In general scenarios, calculations that can be done at the database level are not recommended to be done at the Rails app level if there are no special requirements. Avoid unnecessary time, network and resource consumption</p>
+<p><code>ActiveRecord::Calculations</code> provide methods for calculating aggregate values of columns in <code>ActiveRecord</code> models.</p>
+<span id="more"></span>
+<h2 id="Instance-Public-methods">Instance Public methods</h2>
+<h3 id="average-column-name">average(column_name)</h3>
+<p>Calculates the average value on a given column. Returns <code>nil</code> if there’s no row. See calculate for examples with options.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.average(<span class="symbol">:age</span>) <span class="comment"># =&gt; 35.8</span></span><br></pre></td></tr></table></figure>
+<h3 id="calculate-operation-column-name">calculate(operation, column_name)</h3>
+<p>This calculates aggregate values in the given column. Methods for count, sum, average, minimum, and maximum have been added as shortcuts.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.calculate(<span class="symbol">:count</span>, <span class="symbol">:all</span>) <span class="comment"># The same as Person.count</span></span><br><span class="line"><span class="title class_">Person</span>.average(<span class="symbol">:age</span>) <span class="comment"># SELECT AVG(age) FROM people...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Selects the minimum age for any family without any minors</span></span><br><span class="line"><span class="title class_">Person</span>.group(<span class="symbol">:last_name</span>).having(<span class="string">&quot;min(age) &gt; 17&quot;</span>).minimum(<span class="symbol">:age</span>)</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.sum(<span class="string">&quot;2 * age&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>There are two basic forms of output:</p>
+<ul>
+<li>
+<p>Single aggregate value: The single value is type cast to <code>Integer</code> for COUNT, <code>Float</code> for AVG, and the given column’s type for everything else.</p>
+</li>
+<li>
+<p>Grouped values: This returns an ordered hash of the values and groups them. It takes either a column name, or the name of a belongs_to association.</p>
+</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">values = <span class="title class_">Person</span>.group(<span class="string">&#x27;last_name&#x27;</span>).maximum(<span class="symbol">:age</span>)</span><br><span class="line">puts values[<span class="string">&quot;Drake&quot;</span>]</span><br><span class="line"><span class="comment"># =&gt; 43</span></span><br><span class="line"></span><br><span class="line">drake  = <span class="title class_">Family</span>.find_by(<span class="symbol">last_name:</span> <span class="string">&#x27;Drake&#x27;</span>)</span><br><span class="line">values = <span class="title class_">Person</span>.group(<span class="symbol">:family</span>).maximum(<span class="symbol">:age</span>) <span class="comment"># Person belongs_to :family</span></span><br><span class="line">puts values[drake]</span><br><span class="line"><span class="comment"># =&gt; 43</span></span><br><span class="line"></span><br><span class="line">values.each <span class="keyword">do</span> |<span class="params">family, max_age</span>|</span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="count-column-name-nil">count(column_name = nil)</h3>
+<p>Count the records.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.count</span><br><span class="line"><span class="comment"># =&gt; the total count of all people</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.count(<span class="symbol">:age</span>)</span><br><span class="line"><span class="comment"># =&gt; returns the total count of all people whose age is present in database</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.count(<span class="symbol">:all</span>)</span><br><span class="line"><span class="comment"># =&gt; performs a COUNT(*) (:all is an alias for &#x27;*&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.distinct.count(<span class="symbol">:age</span>)</span><br><span class="line"><span class="comment"># =&gt; counts the number of different age values</span></span><br></pre></td></tr></table></figure>
+<p>If count is used with <code>Relation#group</code>, it returns a Hash whose keys represent the aggregated column, and the values are the respective amounts:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.group(<span class="symbol">:city</span>).count</span><br><span class="line"><span class="comment"># =&gt; &#123; &#x27;Rome&#x27; =&gt; 5, &#x27;Paris&#x27; =&gt; 3 &#125;</span></span><br></pre></td></tr></table></figure>
+<p>If count is used with <code>Relation#group</code> for multiple columns, it returns a Hash whose keys are an array containing the individual values of each column and the value of each key would be the count.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Article</span>.group(<span class="symbol">:status</span>, <span class="symbol">:category</span>).count</span><br><span class="line"><span class="comment"># =&gt;  &#123;[&quot;draft&quot;, &quot;business&quot;]=&gt;10, [&quot;draft&quot;, &quot;technology&quot;]=&gt;4,</span></span><br><span class="line">       [<span class="string">&quot;published&quot;</span>, <span class="string">&quot;business&quot;</span>]=&gt;<span class="number">0</span>, [<span class="string">&quot;published&quot;</span>, <span class="string">&quot;technology&quot;</span>]=&gt;<span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>If count is used with <code>Relation#select</code>, it will count the selected columns:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.select(<span class="symbol">:age</span>).count</span><br><span class="line"><span class="comment"># =&gt; counts the number of different age values</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: not all valid <code>Relation#select</code> expressions are valid count expressions. The specifics differ between databases. In invalid cases, an error from the database is thrown.</p>
+<hr>
+<h3 id="ids">ids()</h3>
+<p>Pluck all the ID’s for the relation using the table’s primary key</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.ids <span class="comment"># SELECT people.id FROM people</span></span><br><span class="line"><span class="title class_">Person</span>.joins(<span class="symbol">:companies</span>).ids <span class="comment"># SELECT people.id FROM people INNER JOIN companies ON companies.person_id = people.id</span></span><br></pre></td></tr></table></figure>
+<h3 id="maximum-column-name">maximum(column_name)</h3>
+<p>Calculates the maximum value on a given column. The value is returned with the same data type of the column, or <code>nil</code> if there’s no row. See calculate for examples with options.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.maximum(<span class="symbol">:age</span>) <span class="comment"># =&gt; 93</span></span><br><span class="line"><span class="string">``</span><span class="string">``</span><span class="string">``</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### minimum(column_name)</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Calculates</span> the minimum value on a given column. <span class="title class_">The</span> value is returned with the same data type of the column, <span class="keyword">or</span> <span class="string">`nil`</span> <span class="keyword">if</span> there<span class="string">&#x27;s no row. See calculate for examples with options.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">```ruby</span></span><br><span class="line"><span class="string">Person.minimum(:age) # =&gt; 7</span></span><br></pre></td></tr></table></figure>
+<h3 id="pick-column-names-Link">pick(*column_names)Link</h3>
+<p>Pick the value(s) from the named column(s) in the current relation. This is short-hand for `relation.limit(1).pluck(*column_names).first1, and is primarily useful when you have a relation that’s already narrowed down to a single row.</p>
+<p>Just like pluck, pick will only load the actual value, not the entire record object, so it’s also more efficient. The value is, again like with pluck, typecast by the column type.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.where(<span class="symbol">id:</span> <span class="number">1</span>).pick(<span class="symbol">:name</span>)</span><br><span class="line"><span class="comment"># SELECT people.name FROM people WHERE id = 1 LIMIT 1</span></span><br><span class="line"><span class="comment"># =&gt; &#x27;David&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.where(<span class="symbol">id:</span> <span class="number">1</span>).pick(<span class="symbol">:name</span>, <span class="symbol">:email_address</span>)</span><br><span class="line"><span class="comment"># SELECT people.name, people.email_address FROM people WHERE id = 1 LIMIT 1</span></span><br><span class="line"><span class="comment"># =&gt; [ &#x27;David&#x27;, &#x27;david<span class="doctag">@loudthinking</span>.com&#x27; ]</span></span><br></pre></td></tr></table></figure>
+<h3 id="pluck-column-names">pluck(*column_names)</h3>
+<p>Use <code>pluck</code> as a shortcut to select one or more attributes without loading a bunch of records just to grab the attributes you want.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.pluck(<span class="symbol">:name</span>)</span><br></pre></td></tr></table></figure>
+<p>instead of</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.all.map(&amp;<span class="symbol">:name</span>)</span><br></pre></td></tr></table></figure>
+<p>Pluck returns an <code>Array</code> of attribute values type-casted to match the plucked column names, if they can be deduced. Plucking an SQL fragment returns String values by default.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.pluck(<span class="symbol">:name</span>)</span><br><span class="line"><span class="comment"># SELECT people.name FROM people</span></span><br><span class="line"><span class="comment"># =&gt; [&#x27;David&#x27;, &#x27;Jeremy&#x27;, &#x27;Jose&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.pluck(<span class="symbol">:id</span>, <span class="symbol">:name</span>)</span><br><span class="line"><span class="comment"># SELECT people.id, people.name FROM people</span></span><br><span class="line"><span class="comment"># =&gt; [[1, &#x27;David&#x27;], [2, &#x27;Jeremy&#x27;], [3, &#x27;Jose&#x27;]]</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.distinct.pluck(<span class="symbol">:role</span>)</span><br><span class="line"><span class="comment"># SELECT DISTINCT role FROM people</span></span><br><span class="line"><span class="comment"># =&gt; [&#x27;admin&#x27;, &#x27;member&#x27;, &#x27;guest&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.where(<span class="symbol">age:</span> <span class="number">21</span>).limit(<span class="number">5</span>).pluck(<span class="symbol">:id</span>)</span><br><span class="line"><span class="comment"># SELECT people.id FROM people WHERE people.age = 21 LIMIT 5</span></span><br><span class="line"><span class="comment"># =&gt; [2, 3]</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.pluck(<span class="title class_">Arel</span>.sql(<span class="string">&#x27;DATEDIFF(updated_at, created_at)&#x27;</span>))</span><br><span class="line"><span class="comment"># SELECT DATEDIFF(updated_at, created_at) FROM people</span></span><br><span class="line"><span class="comment"># =&gt; [&#x27;0&#x27;, &#x27;27761&#x27;, &#x27;173&#x27;]</span></span><br></pre></td></tr></table></figure>
+<p>See also <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.rubyonrails.org/v6.1.4/classes/ActiveRecord/Calculations.html#method-i-ids">ids - https://api.rubyonrails.org/v6.1.4/classes/ActiveRecord/Calculations.html#method-i-ids</a>.</p>
+<h3 id="sum-column-name-nil">sum(column_name = nil)</h3>
+<p>Calculates the sum of values on a given column. The value is returned with the same data type of the column, 0 if there’s no row. See calculate for examples with options.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.sum(<span class="symbol">:age</span>) <span class="comment"># =&gt; 4562</span></span><br></pre></td></tr></table></figure>
+<h2 id="Performance-tips">Performance tips</h2>
+<p>Optimize the performance of a Ruby on Rails app by calculating aggregate values of columns.</p>
+<h3 id="Prefer-pluck-instead-of-map">Prefer pluck instead of map</h3>
+<p>If you are interested in only a few values per row, you should use pluck instead of map.</p>
+<p>For example:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Order</span>.where(<span class="symbol">number:</span> <span class="string">&#x27;R545612547&#x27;</span>).map &amp;<span class="symbol">:id</span></span><br><span class="line"><span class="comment"># Order Load (5.0ms)  SELECT `orders`.* FROM `orders` WHERE `orders`.`number` = &#x27;R545612547&#x27; ORDER BY orders.created_at DESC</span></span><br><span class="line">=&gt; [<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>As with select, map will load the order into memory and it will get the id attribute.</p>
+<p>Using pluck will be faster, because it doesn’t need to load an entire object into memory.</p>
+<p>So this will be much faster:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Order</span>.where(<span class="symbol">number:</span> <span class="string">&#x27;R545612547&#x27;</span>).pluck <span class="symbol">:id</span></span><br><span class="line"><span class="comment"># SQL (0.8ms)  SELECT `orders`.`id` FROM `orders` WHERE `orders`.`number` = &#x27;R545612547&#x27; ORDER BY orders.created_at DESC</span></span><br><span class="line">=&gt; [<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>For this particular case, pluck is six times faster than map.</p>
+<h3 id="Prefer-ActiveRecord-Calculations-sum-instead-of-Enumerable-sum">Prefer ActiveRecord::Calculations#sum instead of Enumerable#sum</h3>
+<p>Usually in Rails applications we find many references to Enumerable::sum for summing values. This is a common mistake because ActiveRecord::Calculations provides a way to do this without loading a bunch of ActiveRecord objects in memory. If you want to perform mathematical operations for a set of records following the Rails way, ActiveRecord::Calculations is the best way to do them in the database.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Benchmark</span>.ips <span class="keyword">do</span> |<span class="params">x</span>|</span><br><span class="line">  x.report(<span class="string">&quot;SQL sum&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="title class_">Loan</span>.sum(<span class="symbol">:balance</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  x.report(<span class="string">&quot;Ruby sum&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="title class_">Loan</span>.sum(&amp;<span class="symbol">:balance</span>)</span><br><span class="line">    <span class="comment"># Same as: Loan.all.map &#123; |loan| loan.balance &#125;.sum</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  x.compare!</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Comparison:</span></span><br><span class="line"><span class="comment">#            SQL sum:        7.89 i/s</span></span><br><span class="line"><span class="comment">#           Ruby sum:        0.03 i/s - 209.85x  slower</span></span><br></pre></td></tr></table></figure>
+<h3 id="Prefer-ActiveRecord-Calculations-maximum-instead-of-Enumerable-max">Prefer ActiveRecord::Calculations#maximum instead of Enumerable#max</h3>
+<p>As we explained above, to perform better with calculations you should use ActiveRecord::Calculations methods whenever is possible.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Benchmark</span>.ips <span class="keyword">do</span> |<span class="params">x</span>|</span><br><span class="line">  x.report(<span class="string">&quot;SQL max&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="title class_">Loan</span>.maximum(<span class="symbol">:amount</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  x.report(<span class="string">&quot;Ruby max&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="title class_">Loan</span>.pluck(<span class="symbol">:amount</span>).max</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  x.compare!</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Comparison:</span></span><br><span class="line"><span class="comment">#              SQL max:      541.9 i/s</span></span><br><span class="line"><span class="comment">#             Ruby max:        0.5 i/s - 1113.47x  slower</span></span><br></pre></td></tr></table></figure>
+<h3 id="Prefer-ActiveRecord-Calculations-minimum-instead-of-Enumerable-min">Prefer ActiveRecord::Calculations#minimum instead of Enumerable#min</h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Benchmark</span>.ips <span class="keyword">do</span> |<span class="params">x</span>|</span><br><span class="line">  x.report(<span class="string">&quot;SQL min&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="title class_">Loan</span>.minimum(<span class="symbol">:amount</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  x.report(<span class="string">&quot;Ruby min&quot;</span>) <span class="keyword">do</span></span><br><span class="line">    <span class="title class_">Loan</span>.pluck(<span class="symbol">:amount</span>).min</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  x.compare!</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Comparison:</span></span><br><span class="line"><span class="comment">#              SQL min:      533.3 i/s</span></span><br><span class="line"><span class="comment">#             Ruby min:        0.5 i/s - 1017.21x  slower</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.rubyonrails.org/v6.1.4/classes/ActiveRecord/Calculations.html">ActiveRecord::Calculations - https://api.rubyonrails.org/v6.1.4/classes/ActiveRecord/Calculations.html</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://medium.com/analytics-vidhya/calculations-methods-used-on-database-records-in-rails-6-f147221dd5f6">Calculations methods used on database records in Rails 6 | by Ajith Kumar | Analytics Vidhya | Medium - https://medium.com/analytics-vidhya/calculations-methods-used-on-database-records-in-rails-6-f147221dd5f6</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.fastruby.io/blog/rails/performance/writing-fast-rails-part-2.html">Tips for Writing Fast Rails: Part 2 - FastRuby.io | Rails Upgrade Service - https://www.fastruby.io/blog/rails/performance/writing-fast-rails-part-2.html</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.fastruby.io/blog/rails/performance/writing-fast-rails-part-3.html">Tips for Writing Fast Rails: Part 3 - FastRuby.io | Rails Upgrade Service - https://www.fastruby.io/blog/rails/performance/writing-fast-rails-part-3.html</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/active_record_querying.html">Active Record Query Interface — Ruby on Rails Guides - https://guides.rubyonrails.org/active_record_querying.html</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/evanphx/benchmark-ips">evanphx/benchmark-ips: Provides iteration per second benchmarking for Ruby - https://github.com/evanphx/benchmark-ips</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://backend.turing.edu/module2/lessons/grouping_and_aggregating">Grouping and Aggregating - Back-End Engineering Curriculum - Turing School of Software and Design - https://backend.turing.edu/module2/lessons/grouping_and_aggregating</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Database/" rel="tag"># Database</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Talking-Ruby/" rel="tag"># Talking-Ruby</a>
+              <a href="/tags/Performance-Optimization/" rel="tag"># Performance Optimization</a>
+              <a href="/tags/ActiveRecord/" rel="tag"># ActiveRecord</a>
+              <a href="/tags/ActiveRecord-Calculations/" rel="tag"># ActiveRecord::Calculations</a>
+              <a href="/tags/Calculation/" rel="tag"># Calculation</a>
+              <a href="/tags/average/" rel="tag"># average</a>
+              <a href="/tags/calculate/" rel="tag"># calculate</a>
+              <a href="/tags/count/" rel="tag"># count</a>
+              <a href="/tags/ids/" rel="tag"># ids</a>
+              <a href="/tags/maxinum/" rel="tag"># maxinum</a>
+              <a href="/tags/mininum/" rel="tag"># mininum</a>
+              <a href="/tags/pick/" rel="tag"># pick</a>
+              <a href="/tags/pluck/" rel="tag"># pluck</a>
+              <a href="/tags/sum/" rel="tag"># sum</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2012/01/07/Programming-Language/Ruby/Talking-Ruby/Double-Pipe-Or-Equals-in-Ruby/" rel="prev" title="[Talking-Ruby] Double Pipe (||) Or Equals (&#x3D;) in Ruby">
+                  <i class="fa fa-angle-left"></i> [Talking-Ruby] Double Pipe (||) Or Equals (=) in Ruby
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2013/08/24/Cloud-Native/Cloud-Computing/Storage/Database/dbeaver-A-Universal-Database-GUI-Tool/" rel="next" title="[Database GUI] dbeaver: A GUI Universal Database Tool">
+                  [Database GUI] dbeaver: A GUI Universal Database Tool <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"ec6b00a96ea6b6c2ceac593e11f9c0fa"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

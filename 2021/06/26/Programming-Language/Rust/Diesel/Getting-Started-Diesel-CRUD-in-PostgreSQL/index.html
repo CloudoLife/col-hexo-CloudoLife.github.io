@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Diesel Diesel is a Safe, Extensible ORM and Query Builder for Rust. Diesel is the most productive way to interact with databases in Rust because of its safe and composable abstractions over queries. F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Rust Diesel] Getting Started - Diesel CRUD in PostgreSQL">
+<meta property="og:url" content="https://cloudolife.com/2021/06/26/Programming-Language/Rust/Diesel/Getting-Started-Diesel-CRUD-in-PostgreSQL/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Diesel Diesel is a Safe, Extensible ORM and Query Builder for Rust. Diesel is the most productive way to interact with databases in Rust because of its safe and composable abstractions over queries. F">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-26T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.942Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="PostgreSQL">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Rust">
+<meta property="article:tag" content="dotenv">
+<meta property="article:tag" content="cargo">
+<meta property="article:tag" content="Awesome Rust">
+<meta property="article:tag" content="ORM">
+<meta property="article:tag" content="Object Relational Mapping">
+<meta property="article:tag" content="Object Relational Mapping (ORM)">
+<meta property="article:tag" content="Diesel">
+<meta property="article:tag" content="Create Read Update Delete (CRUD)">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/06/26/Programming-Language/Rust/Diesel/Getting-Started-Diesel-CRUD-in-PostgreSQL/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/06/26/Programming-Language/Rust/Diesel/Getting-Started-Diesel-CRUD-in-PostgreSQL/","path":"2021/06/26/Programming-Language/Rust/Diesel/Getting-Started-Diesel-CRUD-in-PostgreSQL/","title":"[Rust Diesel] Getting Started - Diesel CRUD in PostgreSQL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Rust Diesel] Getting Started - Diesel CRUD in PostgreSQL | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Diesel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages"><span class="nav-number">1.2.</span> <span class="nav-text">Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Initializing-a-new-project"><span class="nav-number">1.2.1.</span> <span class="nav-text">Initializing a new project</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installing-Diesel-CLI"><span class="nav-number">1.2.2.</span> <span class="nav-text">Installing Diesel CLI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Database"><span class="nav-number">1.2.3.</span> <span class="nav-text">Create Database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup-Diesel-for-your-project"><span class="nav-number">1.2.4.</span> <span class="nav-text">Setup Diesel for your project</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Note-on-Raw-SQL-in-Migrations"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">A Note on Raw SQL in Migrations:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Note-on-Using-Migrations-on-fly"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">A Note on Using Migrations on fly:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Write-Rust"><span class="nav-number">1.2.5.</span> <span class="nav-text">Write Rust</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Note-on-Field-Order"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">A Note on Field Order</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Show-Posts"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">Show Posts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-Post"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">Create Post</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Publish-post"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">Publish post</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">1.3.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cannot-find-macro-table-in-this-scope-cannot-find-derive-macro-Queryable-in-this-scope"><span class="nav-number">1.3.1.</span> <span class="nav-text">cannot find macro table in this scope, cannot find derive macro Queryable in this scope</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/06/26/Programming-Language/Rust/Diesel/Getting-Started-Diesel-CRUD-in-PostgreSQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Rust Diesel] Getting Started - Diesel CRUD in PostgreSQL | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Rust Diesel] Getting Started - Diesel CRUD in PostgreSQL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-26 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-26T00:00:00+00:00">2021-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/Diesel/" itemprop="url" rel="index"><span itemprop="name">Diesel</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>14k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>12 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Diesel</h1>
+<p>Diesel is a Safe, Extensible ORM and Query Builder for Rust.</p>
+<p>Diesel is the most productive way to interact with databases in Rust because of its safe and composable abstractions over queries.</p>
+<p>For this guide, we’re going to walk through some simple examples for each of the pieces of CRUD, which stands for “Create Read Update Delete”. Each step in this guide will build on the previous, and is meant to be followed along.</p>
+<span id="more"></span>
+<h2 id="Prerequisites">Prerequisites</h2>
+<ul>
+<li>
+<p>PostgreSQL</p>
+<p>Make sure you have PostgreSQL installed and running.</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.postgresql.org/download/">PostgreSQL: Downloads - https://www.postgresql.org/download/</a></p>
+</li>
+<li>
+<p>Rust versions</p>
+<p>Diesel requires Rust 1.31 or later. If you’re following along with this guide, make sure you’re using at least<br>
+that version of Rust by running <code>rustup update stable</code>.</p>
+</li>
+</ul>
+<h2 id="Usages">Usages</h2>
+<h3 id="Initializing-a-new-project">Initializing a new project</h3>
+<p>The first thing we need to do is generate our project.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Generate a new project</span></span><br><span class="line">cargo new --lib diesel_demo</span><br><span class="line">cd diesel_demo</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cargo.toml</span></span><br><span class="line"></span><br><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="attr">diesel</span> = &#123; version = <span class="string">&quot;1.4.4&quot;</span>, features = [<span class="string">&quot;postgres&quot;</span>] &#125;</span><br><span class="line"><span class="attr">dotenv</span> = <span class="string">&quot;0.15.0&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Installing-Diesel-CLI">Installing Diesel CLI</h3>
+<p>Diesel provides a separate CLI tool to help manage your project. Since it’s a standalone binary, and doesn’t affect your project’s code directly, we don’t add it to <code>Cargo.toml</code>. Instead, we just install it on our system.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the CLI tool.</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">cargo install diesel_cli</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install diesel_cli only PostgreSQL.</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">$ cargo install diesel_cli --no-default-features --features postgres</span></span><br></pre></td></tr></table></figure>
+<h3 id="Create-Database">Create Database</h3>
+<p>We need to create a database with username and password.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- psql</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> diesel_demo <span class="keyword">WITH</span> PASSWORD <span class="string">&#x27;diesel_demo&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> DATABASE diesel_demo OWNER diesel_demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> DATABASE diesel_demo <span class="keyword">TO</span> diesel_demo;</span><br></pre></td></tr></table></figure>
+<h3 id="Setup-Diesel-for-your-project">Setup Diesel for your project</h3>
+<p>We need to tell Diesel where to find our database. We do this by setting the <code>DATABASE_URL</code> environment variable. On our development machines, we’ll likely have multiple projects going, and we don’t want to pollute our environment. We can put the url in a <code>.env</code> file instead.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> DATABASE_URL=postgres://diesel_demo:diesel_demo@localhost/diesel_demo &gt; .<span class="built_in">env</span></span></span><br></pre></td></tr></table></figure>
+<p>Now Diesel CLI can set everything up for us.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">diesel setup</span></span><br></pre></td></tr></table></figure>
+<p>This will create our database (if it didn’t already exist), and create an empty <code>migrations</code> directory that we can use to manage our schema (more on that later).</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tree migrations</span> </span><br><span class="line">migrations</span><br><span class="line">└── 00000000000000_diesel_initial_setup</span><br><span class="line">    ├── down.sql</span><br><span class="line">    └── up.sql</span><br></pre></td></tr></table></figure>
+<p>The first thing we’re going to need is a table to store our posts. Let’s create a migration.</p>
+<p>Diesel CLI will create two empty files for us in the required structure. You’ll see output that looks something like this:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">diesel migration generate create_posts</span></span><br><span class="line">Creating migrations/20210626133237_create_posts/up.sql</span><br><span class="line">Creating migrations/20210626133237_create_posts/down.sql</span><br></pre></td></tr></table></figure>
+<p>Migrations allow us to evolve the database schema over time. Each migration can be applied (<code>up.sql</code>) or reverted (<code>down.sql</code>). Applying and immediately reverting a migration should leave your database schema unchanged.</p>
+<p>Next, we’ll write the SQL for migrations:</p>
+<p>up.sql</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> posts (</span><br><span class="line">  id SERIAL <span class="keyword">PRIMARY KEY</span>,</span><br><span class="line">  title <span class="type">VARCHAR</span> <span class="keyword">NOT NULL</span>,</span><br><span class="line">  body TEXT <span class="keyword">NOT NULL</span>,</span><br><span class="line">  published <span class="type">BOOLEAN</span> <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;f&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>down.sql</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> posts;</span><br></pre></td></tr></table></figure>
+<p>We can apply our new migration:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">diesel migration run</span></span><br><span class="line">Running migration 2021-06-26-133237_create_posts</span><br></pre></td></tr></table></figure>
+<p>It’s a good idea to make sure that down.sql is correct. You can quickly confirm that your down.sql rolls back your migration correctly by redoing the migration:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">diesel migration redo</span></span><br><span class="line">Rolling back migration 2021-06-26-133237_create_posts</span><br><span class="line">Running migration 2021-06-26-133237_create_posts</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="A-Note-on-Raw-SQL-in-Migrations">A Note on Raw SQL in Migrations:</h4>
+<p>Since migrations are written in raw SQL, they can contain specific features of the database system you use. For example, the <code>CREATE TABLE</code> statement above uses PostgreSQL’s <code>SERIAL</code> type. If you want to use <code>SQLite</code> instead, you need to use <code>INTEGER</code> instead.</p>
+<hr>
+<hr>
+<h4 id="A-Note-on-Using-Migrations-on-fly">A Note on Using Migrations on fly:</h4>
+<p>The diesel_migrations <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.rs/crate/diesel_migrations/1.4.0">diesel_migrations 1.4.0 - Docs.rs - https://docs.rs/crate/diesel_migrations/1.4.0</a> crate provides the <code>embed_migrations!</code> macro, allowing you to embed migration scripts in the final binary. Once your code uses it, you can simply include <code>embedded_migrations::run(&amp;db_conn)</code> at the start of your main function to run migrations every time the application starts.</p>
+<hr>
+<h3 id="Write-Rust">Write Rust</h3>
+<p>We’ll start by writing some code to show the last five published posts. The first thing we need to do is establish a database connection.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/lib.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">mod</span> schema;</span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">mod</span> models;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[macro_use]</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> dotenv;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> diesel::prelude::*;</span><br><span class="line"><span class="keyword">use</span> diesel::pg::PgConnection;</span><br><span class="line"><span class="keyword">use</span> dotenv::dotenv;</span><br><span class="line"><span class="keyword">use</span> std::env;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">establish_connection</span>() <span class="punctuation">-&gt;</span> PgConnection &#123;</span><br><span class="line">    <span class="title function_ invoke__">dotenv</span>().<span class="title function_ invoke__">ok</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">database_url</span> = env::<span class="title function_ invoke__">var</span>(<span class="string">&quot;DATABASE_URL&quot;</span>)</span><br><span class="line">        .<span class="title function_ invoke__">expect</span>(<span class="string">&quot;DATABASE_URL must be set&quot;</span>);</span><br><span class="line">    PgConnection::<span class="title function_ invoke__">establish</span>(&amp;database_url)</span><br><span class="line">        .<span class="title function_ invoke__">expect</span>(&amp;<span class="built_in">format!</span>(<span class="string">&quot;Error connecting to &#123;&#125;&quot;</span>, database_url))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Next we need to create the two modules that we just declared.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/models.rs</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#[derive(Queryable)]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">struct</span> <span class="title class_">Post</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> id: <span class="type">i32</span>,</span><br><span class="line">    <span class="keyword">pub</span> title: <span class="type">String</span>,</span><br><span class="line">    <span class="keyword">pub</span> body: <span class="type">String</span>,</span><br><span class="line">    <span class="keyword">pub</span> published: <span class="type">bool</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>#[derive(Queryable)]</code> will generate all of the code needed to load a <code>Post</code> struct from a SQL query.</p>
+<p>Typically the schema module isn’t created by hand, it gets generated by Diesel. When we ran <code>diesel setup</code>, a file called <code>diesel.toml</code> was created which tells Diesel to maintain a file at <code>src/schema.rs</code> for us. The file should look like this:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/schema.rs</span></span><br><span class="line"></span><br><span class="line">table! &#123;</span><br><span class="line">    <span class="title function_ invoke__">posts</span> (id) &#123;</span><br><span class="line">        id <span class="punctuation">-&gt;</span> Integer,</span><br><span class="line">        title <span class="punctuation">-&gt;</span> Text,</span><br><span class="line">        body <span class="punctuation">-&gt;</span> Text,</span><br><span class="line">        published <span class="punctuation">-&gt;</span> Bool,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The exact output might vary slightly depending on your database, but it should be equivalent.</p>
+<p>The <code>table!</code> macro creates a bunch of code based on the database schema to represent all of the tables and columns. We’ll see how exactly to use that in the next example.</p>
+<p>Any time we run or revert a migration, this file will get automatically updated.</p>
+<hr>
+<h4 id="A-Note-on-Field-Order">A Note on Field Order</h4>
+<p>Using #[derive(Queryable)] assumes that the order of fields on the Post struct matches the columns in the posts table, so make sure to define them in the order seen in the <a target="_blank" rel="noopener external nofollow noreferrer" href="http://schema.rs">schema.rs</a> file.</p>
+<hr>
+<h4 id="Show-Posts">Show Posts</h4>
+<p>Let’s write the code to actually show us our posts.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/bin/show_posts.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel_demo;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> self::diesel_demo::*;</span><br><span class="line"><span class="keyword">use</span> self::models::*;</span><br><span class="line"><span class="keyword">use</span> self::diesel::prelude::*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">use</span> diesel_demo::schema::posts::dsl::*;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">connection</span> = <span class="title function_ invoke__">establish_connection</span>();</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">results</span> = posts.<span class="title function_ invoke__">filter</span>(published.<span class="title function_ invoke__">eq</span>(<span class="literal">true</span>))</span><br><span class="line">        .<span class="title function_ invoke__">limit</span>(<span class="number">5</span>)</span><br><span class="line">        .load::&lt;Post&gt;(&amp;connection)</span><br><span class="line">        .<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Error loading posts&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Displaying &#123;&#125; posts&quot;</span>, results.<span class="title function_ invoke__">len</span>());</span><br><span class="line">    <span class="keyword">for</span> <span class="variable">post</span> <span class="keyword">in</span> results &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, post.title);</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;----------\n&quot;</span>);</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, post.body);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The use <code>diesel_demo::schema::posts::dsl::*</code> line imports a bunch of aliases so that we can say posts instead of <code>posts::table</code>, and published instead of <code>posts::published</code>. It’s useful when we’re only dealing with a single table, but that’s not always what we want.</p>
+<p>We can run our script with <code>cargo run --bin show_posts</code>. Unfortunately, the results won’t be terribly interesting, as we don’t actually have any posts in the database. Still, we’ve written a decent amount of code, so let’s commit.</p>
+<p>The full code for the demo at this point can be found here <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/diesel-rs/diesel/tree/v1.4.4/examples/postgres/getting_started_step_1/">diesel/examples/postgres/getting_started_step_1 at v1.4.4 · diesel-rs/diesel - https://github.com/diesel-rs/diesel/tree/v1.4.4/examples/postgres/getting_started_step_1/</a>.</p>
+<h4 id="Create-Post">Create Post</h4>
+<p>Next, let’s write some code to create a new post.We’ll want a struct to use for inserting a new record.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/models.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> super::schema::posts;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[derive(Insertable)]</span></span><br><span class="line"><span class="meta">#[table_name=<span class="string">&quot;posts&quot;</span>]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">struct</span> <span class="title class_">NewPost</span>&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">pub</span> title: &amp;<span class="symbol">&#x27;a</span> <span class="type">str</span>,</span><br><span class="line">    <span class="keyword">pub</span> body: &amp;<span class="symbol">&#x27;a</span> <span class="type">str</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Now let’s add a function to save a new post.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/lib.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> self::models::&#123;Post, NewPost&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">create_post</span>&lt;<span class="symbol">&#x27;a</span>&gt;(conn: &amp;PgConnection, title: &amp;<span class="symbol">&#x27;a</span> <span class="type">str</span>, body: &amp;<span class="symbol">&#x27;a</span> <span class="type">str</span>) <span class="punctuation">-&gt;</span> Post &#123;</span><br><span class="line">    <span class="keyword">use</span> schema::posts;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">new_post</span> = NewPost &#123;</span><br><span class="line">        title: title,</span><br><span class="line">        body: body,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    diesel::<span class="title function_ invoke__">insert_into</span>(posts::table)</span><br><span class="line">        .<span class="title function_ invoke__">values</span>(&amp;new_post)</span><br><span class="line">        .<span class="title function_ invoke__">get_result</span>(conn)</span><br><span class="line">        .<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Error saving new post&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>When we call <code>.get_result</code> on an insert or update statement, it automatically adds <code>RETURNING *</code> to the end of the query, and lets us load it into any struct that implements Queryable for the right types. Neat!</p>
+<p>Diesel can insert more than one record in a single query. Just pass a Vec or slice to insert, and then call <code>get_results</code> instead of <code>get_result</code>. If you don’t actually want to do anything with the row that was just inserted, call <code>.execute</code> instead. The compiler won’t complain at you, that way. :)</p>
+<p>Now that we’ve got everything set up, we can create a little script to write a new post.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/bin/write_post.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel_demo;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> self::diesel_demo::*;</span><br><span class="line"><span class="keyword">use</span> std::io::&#123;stdin, Read&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">connection</span> = <span class="title function_ invoke__">establish_connection</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;What would you like your title to be?&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">title</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line">    <span class="title function_ invoke__">stdin</span>().<span class="title function_ invoke__">read_line</span>(&amp;<span class="keyword">mut</span> title).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">title</span> = &amp;title[..(title.<span class="title function_ invoke__">len</span>() - <span class="number">1</span>)]; <span class="comment">// Drop the newline character</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;\nOk! Let&#x27;s write &#123;&#125; (Press &#123;&#125; when finished)\n&quot;</span>, title, EOF);</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">body</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line">    <span class="title function_ invoke__">stdin</span>().<span class="title function_ invoke__">read_to_string</span>(&amp;<span class="keyword">mut</span> body).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">post</span> = <span class="title function_ invoke__">create_post</span>(&amp;connection, title, &amp;body);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;\nSaved draft &#123;&#125; with id &#123;&#125;&quot;</span>, title, post.id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[cfg(not(windows))]</span></span><br><span class="line"><span class="keyword">const</span> EOF: &amp;<span class="symbol">&#x27;static</span> <span class="type">str</span> = <span class="string">&quot;CTRL+D&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[cfg(windows)]</span></span><br><span class="line"><span class="keyword">const</span> EOF: &amp;<span class="symbol">&#x27;static</span> <span class="type">str</span> = <span class="string">&quot;CTRL+Z&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>We can run our new script with <code>cargo run --bin write_post</code>. Go ahead and write a blog post. Get creative! Here was mine:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">cargo run --bin write_post</span></span><br><span class="line">   Compiling diesel_demo v0.1.0 (file:///Users/cloudolife/diesel_demo)</span><br><span class="line">     Running `target/debug/write_post`</span><br><span class="line"></span><br><span class="line">What would you like your title to be?</span><br><span class="line">Diesel demo</span><br><span class="line"></span><br><span class="line">Ok! Let&#x27;s write Diesel demo (Press CTRL+D when finished)</span><br><span class="line"></span><br><span class="line">You know, a CLI application probably isn&#x27;t the best interface for a blog demo.</span><br><span class="line">But really I just wanted a semi-simple example, where I could focus on Diesel.</span><br><span class="line">I didn&#x27;t want to get bogged down in some web framework here.</span><br><span class="line">Plus I don&#x27;t really like the Rust web frameworks out there. We might make a</span><br><span class="line">new one, soon.</span><br><span class="line"></span><br><span class="line">Saved draft Diesel demo with id 1</span><br></pre></td></tr></table></figure>
+<p>Unfortunately, running <code>show_posts</code> still won’t display our new post, because we saved it as a draft. If we look back to the code in <code>show_posts</code>, we added <code>.filter(published.eq(true))</code>, and we had published default to false in our migration. We need to publish it! But in order to do that, we’ll need to look at how to update an existing record. First, let’s commit. The code for this demo at this point can be found here.</p>
+<h4 id="Publish-post">Publish post</h4>
+<p>Now that we’ve got create and read out of the way, update is actually relatively simple. Let’s jump right into the script:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/bin/publish_post.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel_demo;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> self::diesel::prelude::*;</span><br><span class="line"><span class="keyword">use</span> self::diesel_demo::*;</span><br><span class="line"><span class="keyword">use</span> self::models::Post;</span><br><span class="line"><span class="keyword">use</span> std::env::args;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">use</span> diesel_demo::schema::posts::dsl::&#123;posts, published&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">id</span> = <span class="title function_ invoke__">args</span>().<span class="title function_ invoke__">nth</span>(<span class="number">1</span>).<span class="title function_ invoke__">expect</span>(<span class="string">&quot;publish_post requires a post id&quot;</span>)</span><br><span class="line">        .parse::&lt;<span class="type">i32</span>&gt;().<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Invalid ID&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">connection</span> = <span class="title function_ invoke__">establish_connection</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">post</span> = diesel::<span class="title function_ invoke__">update</span>(posts.<span class="title function_ invoke__">find</span>(id))</span><br><span class="line">        .<span class="title function_ invoke__">set</span>(published.<span class="title function_ invoke__">eq</span>(<span class="literal">true</span>))</span><br><span class="line">        .get_result::&lt;Post&gt;(&amp;connection)</span><br><span class="line">        .<span class="title function_ invoke__">expect</span>(&amp;<span class="built_in">format!</span>(<span class="string">&quot;Unable to find post &#123;&#125;&quot;</span>, id));</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Published post &#123;&#125;&quot;</span>, post.title);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s it! Let’s try it out with <code>cargo run --bin publish_post 1</code>.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ cargo run --bin publish_post <span class="number">1</span></span><br><span class="line"> Compiling diesel_demo v0.<span class="number">1.0</span> (file:<span class="comment">///Users/cloudolife/diesel_demo)</span></span><br><span class="line">   Running `target/debug/publish_post <span class="number">1</span>`</span><br><span class="line">Published post Diesel demo</span><br><span class="line">And now, finally, we can see our post with cargo run --bin show_posts.</span><br><span class="line"></span><br><span class="line">     Running `target/debug/show_posts`</span><br><span class="line">Displaying <span class="number">1</span> posts</span><br><span class="line">Diesel demo</span><br><span class="line">----------</span><br><span class="line"></span><br><span class="line">You know, a CLI application probably isn<span class="symbol">&#x27;t</span> the best interface <span class="keyword">for</span> <span class="title class_">a</span> blog demo.</span><br><span class="line">But really I just wanted a semi-simple example, <span class="keyword">where</span> I could focus on Diesel.</span><br><span class="line">I didn<span class="symbol">&#x27;t</span> want to get bogged down <span class="keyword">in</span> some web framework here.</span><br><span class="line">Plus I don<span class="symbol">&#x27;t</span> really like the Rust web frameworks out there. We might make a</span><br><span class="line">new one, soon.</span><br></pre></td></tr></table></figure>
+<p>We’ve still only covered three of the four letters of CRUD though. Let’s show how to delete things. Sometimes we write something we really hate, and we don’t have time to look up the ID. So let’s delete based on the title, or even just some words in the title.</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/bin/delete_post.rs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel_demo;</span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> self::diesel::prelude::*;</span><br><span class="line"><span class="keyword">use</span> self::diesel_demo::*;</span><br><span class="line"><span class="keyword">use</span> std::env::args;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">use</span> diesel_demo::schema::posts::dsl::*;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">target</span> = <span class="title function_ invoke__">args</span>().<span class="title function_ invoke__">nth</span>(<span class="number">1</span>).<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Expected a target to match against&quot;</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">pattern</span> = <span class="built_in">format!</span>(<span class="string">&quot;%&#123;&#125;%&quot;</span>, target);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">connection</span> = <span class="title function_ invoke__">establish_connection</span>();</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">num_deleted</span> = diesel::<span class="title function_ invoke__">delete</span>(posts.<span class="title function_ invoke__">filter</span>(title.<span class="title function_ invoke__">like</span>(pattern)))</span><br><span class="line">        .<span class="title function_ invoke__">execute</span>(&amp;connection)</span><br><span class="line">        .<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Error deleting posts&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Deleted &#123;&#125; posts&quot;</span>, num_deleted);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We can run the script with <code>cargo run --bin delete_post</code> demo (at least with the title I chose). Your output should look something like:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">cargo run --bin delete_post</span></span><br><span class="line">   Compiling diesel_demo v0.1.0 (file:///Users/cloudolife/diesel_demo)</span><br><span class="line">     Running `target/debug/delete_post demo`</span><br><span class="line">Deleted 1 posts</span><br></pre></td></tr></table></figure>
+<p>When we try to run <code>cargo run --bin show_posts</code> again, we can see that the post was in fact deleted. This barely scratches the surface of what you can do with Diesel, but hopefully this tutorial has given you a good foundation to build off of. We recommend exploring the API docs to see more. The final code for this tutorial can be found here <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/diesel-rs/diesel/tree/v1.4.4/examples/postgres/getting_started_step_3/">diesel/examples/postgres/getting_started_step_3 at v1.4.4 · diesel-rs/diesel - https://github.com/diesel-rs/diesel/tree/v1.4.4/examples/postgres/getting_started_step_3/</a>.</p>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="cannot-find-macro-table-in-this-scope-cannot-find-derive-macro-Queryable-in-this-scope">cannot find macro <code>table</code> in this scope, cannot find derive macro <code>Queryable</code> in this scope</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">cargo build</span></span><br><span class="line">...</span><br><span class="line">error: cannot find macro `table` in this scope</span><br><span class="line"><span class="meta prompt_"> --&gt; </span><span class="language-bash">src/schema.rs:1:1</span></span><br><span class="line">  |</span><br><span class="line">1 | table! &#123;</span><br><span class="line">  | ^^^^^</span><br><span class="line">  |</span><br><span class="line">  = note: consider importing this macro:</span><br><span class="line">          diesel::table</span><br><span class="line"></span><br><span class="line">error: cannot find derive macro `Queryable` in this scope</span><br><span class="line"><span class="meta prompt_"> --&gt; </span><span class="language-bash">src/models.rs:2:10</span></span><br><span class="line">  |</span><br><span class="line">2 | #[derive(Queryable)]</span><br><span class="line">  |          ^^^^^^^^^</span><br><span class="line"></span><br><span class="line">error: aborting due to 2 previous errors</span><br><span class="line"></span><br><span class="line">error: could not compile `diesel_demo`</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/lib.rs</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Enable use diesel macro</span></span><br><span class="line"><span class="meta">#[macro_use]</span></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">crate</span> diesel;</span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://diesel.rs/guides/getting-started.html">Getting Started - https://diesel.rs/guides/getting-started.html</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://diesel.rs/">Diesel is a Safe, Extensible ORM and Query Builder for Rust - https://diesel.rs/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/diesel-rs/diesel/tree/v1.4.4/examples/postgres/getting_started_step_3/">diesel/examples/postgres/getting_started_step_3 at v1.4.4 · diesel-rs/diesel - https://github.com/diesel-rs/diesel/tree/v1.4.4/examples/postgres/getting_started_step_3/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.diesel.rs/master/diesel/index.html">diesel - Rust - https://docs.diesel.rs/master/diesel/index.html</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rustup.rs/">rustup.rs - The Rust toolchain installer - https://rustup.rs/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.postgresql.org/download/">PostgreSQL: Downloads - https://www.postgresql.org/download/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/PostgreSQL/" rel="tag"># PostgreSQL</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Rust/" rel="tag"># Rust</a>
+              <a href="/tags/dotenv/" rel="tag"># dotenv</a>
+              <a href="/tags/cargo/" rel="tag"># cargo</a>
+              <a href="/tags/Awesome-Rust/" rel="tag"># Awesome Rust</a>
+              <a href="/tags/ORM/" rel="tag"># ORM</a>
+              <a href="/tags/Object-Relational-Mapping/" rel="tag"># Object Relational Mapping</a>
+              <a href="/tags/Object-Relational-Mapping-ORM/" rel="tag"># Object Relational Mapping (ORM)</a>
+              <a href="/tags/Diesel/" rel="tag"># Diesel</a>
+              <a href="/tags/Create-Read-Update-Delete-CRUD/" rel="tag"># Create Read Update Delete (CRUD)</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/19/Infrastructure-as-Code-IaC/Container/Docker/Docker-Frequently-Asked-Questions-FAQs/" rel="prev" title="[Docker Redis] Docker Frequently Asked Questions (FAQs)">
+                  <i class="fa fa-angle-left"></i> [Docker Redis] Docker Frequently Asked Questions (FAQs)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/06/26/Programming-Language/Rust/Awesome-Rust/User-cargo-watch-to-hot-live-reload-for-Cargo-commands/" rel="next" title="[Awesome Rust] Use cargo-watch to hot live reload for Cargo commands">
+                  [Awesome Rust] Use cargo-watch to hot live reload for Cargo commands <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"ec9200df2a014f05746f06315527c0a2"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

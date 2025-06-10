@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Rancher Labs Longhorn Longhorn is a lightweight, reliable and easy-to-use Cloud native distributed block storage system for Kubernetes.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Kubernetes (K8S)] Helm install Rancher Labs Longhorn Cloud Native distributed block storage for Kubernetes (K8S)">
+<meta property="og:url" content="https://cloudolife.com/2020/10/03/Kubernetes-K8S/Helm/Helm-install-Rancher-Labs-Longhorn-Cloud-Native-distributed-block-storage-for-Kubernetes-K8S/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Rancher Labs Longhorn Longhorn is a lightweight, reliable and easy-to-use Cloud native distributed block storage system for Kubernetes.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-03T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.919Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Kubernetes (K8S)">
+<meta property="article:tag" content="Cloud Native">
+<meta property="article:tag" content="Helm">
+<meta property="article:tag" content="Rancher Labs">
+<meta property="article:tag" content="Longhorn">
+<meta property="article:tag" content="Block Storage">
+<meta property="article:tag" content="open-iscsi">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/10/03/Kubernetes-K8S/Helm/Helm-install-Rancher-Labs-Longhorn-Cloud-Native-distributed-block-storage-for-Kubernetes-K8S/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/10/03/Kubernetes-K8S/Helm/Helm-install-Rancher-Labs-Longhorn-Cloud-Native-distributed-block-storage-for-Kubernetes-K8S/","path":"2020/10/03/Kubernetes-K8S/Helm/Helm-install-Rancher-Labs-Longhorn-Cloud-Native-distributed-block-storage-for-Kubernetes-K8S/","title":"[Kubernetes (K8S)] Helm install Rancher Labs Longhorn Cloud Native distributed block storage for Kubernetes (K8S)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Kubernetes (K8S)] Helm install Rancher Labs Longhorn Cloud Native distributed block storage for Kubernetes (K8S) | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Rancher Labs Longhorn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.2.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-by-Helm"><span class="nav-number">1.2.1.</span> <span class="nav-text">Install by Helm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accessing-the-Longhorn-UI"><span class="nav-number">1.3.</span> <span class="nav-text">Accessing the Longhorn UI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Authentication-Secret"><span class="nav-number">1.3.1.</span> <span class="nav-text">Basic Authentication Secret</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ingress"><span class="nav-number">1.3.2.</span> <span class="nav-text">Ingress</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">1.4.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#instance-manager-request-too-much-cpu"><span class="nav-number">1.4.1.</span> <span class="nav-text">instance-manager request too much cpu</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/10/03/Kubernetes-K8S/Helm/Helm-install-Rancher-Labs-Longhorn-Cloud-Native-distributed-block-storage-for-Kubernetes-K8S/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Kubernetes (K8S)] Helm install Rancher Labs Longhorn Cloud Native distributed block storage for Kubernetes (K8S) | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Kubernetes (K8S)] Helm install Rancher Labs Longhorn Cloud Native distributed block storage for Kubernetes (K8S)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-03 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-03T00:00:00+00:00">2020-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/" itemprop="url" rel="index"><span itemprop="name">Cloud Native</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Kubernetes-K8S/" itemprop="url" rel="index"><span itemprop="name">Kubernetes (K8S)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Kubernetes-K8S/Helm/" itemprop="url" rel="index"><span itemprop="name">Helm</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>10 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Rancher Labs Longhorn</h1>
+<p>Longhorn is a lightweight, reliable and easy-to-use Cloud native distributed block storage system for Kubernetes.</p>
+<span id="more"></span>
+<p>Longhorn is free, open source software. Originally developed by Rancher Labs, it is now being developed as a sandbox project of the Cloud Native Computing Foundation.</p>
+<p>With Longhorn, you can:</p>
+<ul>
+<li>
+<p>Use Longhorn volumes as persistent storage for the distributed stateful applications in your Kubernetes cluster</p>
+</li>
+<li>
+<p>Partition your block storage into Longhorn volumes so that you can use Kubernetes volumes with or without a cloud provider<br>
+Replicate block storage across multiple nodes and data centers to increase availability</p>
+</li>
+<li>
+<p>Store backup data in external storage such as NFS or AWS S3</p>
+</li>
+<li>
+<p>Create cross-cluster disaster recovery volumes so that data from a primary Kubernetes cluster can be quickly recovered from backup in a second Kubernetes cluster</p>
+</li>
+<li>
+<p>Schedule recurring snapshots of a volume, and schedule recurring backups to NFS or S3-compatible secondary storage<br>
+Restore volumes from backup</p>
+</li>
+<li>
+<p>Upgrade Longhorn without disrupting persistent volumes</p>
+</li>
+<li>
+<p>Manipulate Longhorn resources with kubectl</p>
+</li>
+</ul>
+<p>This article is about how to use Helm to deploy Longhorn on Kubernetes (K8S).</p>
+<h2 id="Prerequisites">Prerequisites</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/">Kubernetes (K8S)</a><br>
+Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
+<p>For more information about installing and using Kubernetes (K8s), see the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/docs/home/">Kubernetes (K8s) Docs</a>.</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://helm.sh/">Helm</a><br>
+Helm is the best way to find, share, and use software built for Kubernetes.</p>
+<p>For more information about installing and using Helm, see the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://helm.sh/docs/">Helm Docs</a>.</p>
+</li>
+<li>
+<p><code>open-iscsi</code> is installed, and the iscsid daemon is running on all the nodes.<br>
+The Open-iSCSI project provides a high-performance, transport independent, implementation of RFC 3720 iSCSI for Linux.</p>
+<p>You will get an error message without <code>open-iscsi</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">level=error msg=&quot;Failed environment check, please make sure you have iscsiadm/open-iscsi installed on the host&quot;</span><br></pre></td></tr></table></figure>
+<p>For help installing open-iscsi:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">For Debian and Ubuntu, use this <span class="built_in">command</span>:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> apt-get install open-iscsi</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">For RHEL, CentOS, and EKS with EKS Kubernetes Worker AMI with AmazonLinux2 image, use this <span class="built_in">command</span>:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> yum install iscsi-initiator-utils</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">start and <span class="built_in">enable</span> iscsid.service</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> systemctl start iscsid &amp;&amp; <span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> iscsid</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> systemctl status iscsid</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Installation">Installation</h2>
+<h3 id="Install-by-Helm">Install by Helm</h3>
+<p>Helm install longhorn into longhorn-system namespace.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">crate namespace:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl create namespace longhorn-system</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Add the Helm repository:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">helm repo add longhorn https://charts.longhorn.io</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Update your <span class="built_in">local</span> Helm chart repository cache:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">helm repo update</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">To install Helm chart:</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">helm install longhorn longhorn/longhorn --namespace longhorn-system -f values.yaml</span></span><br></pre></td></tr></table></figure>
+<p>See Helm release about longhorn.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">helm list --namespace longhorn-system</span></span><br><span class="line">NAME    	NAMESPACE      	REVISION	UPDATED                               	STATUS  	CHART         	APP VERSION</span><br><span class="line">longhorn	longhorn-system	1       	2020-10-03 14:17:30.890902 +0800 +0800	deployed	longhorn-1.0.2	v1.0.2</span><br></pre></td></tr></table></figure>
+<p>See pods about longhorn.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl get pods -n longhorn-system</span></span><br><span class="line">NAME                                        READY   STATUS              RESTARTS   AGE</span><br><span class="line">csi-attacher-7cb499df6-9rbd4                1/1     Running             8          14d</span><br><span class="line">csi-attacher-7cb499df6-tmmkn                1/1     Running             5          4d5h</span><br><span class="line">csi-attacher-7cb499df6-xk4hp                0/1     Running             5          13d</span><br><span class="line">csi-provisioner-67846b4b55-67c9z            0/1     Running             11         13d</span><br><span class="line">csi-provisioner-67846b4b55-ld5wc            1/1     Running             5          4d5h</span><br><span class="line">csi-provisioner-67846b4b55-vcz2g            1/1     Running             11         14d</span><br><span class="line">csi-resizer-5cb8df7db9-j54t4                1/1     Running             3          4d5h</span><br><span class="line">csi-resizer-5cb8df7db9-jvmsg                0/1     Running             6          13d</span><br><span class="line">csi-resizer-5cb8df7db9-pfwbh                1/1     Running             8          14d</span><br><span class="line">engine-image-ei-ee18f965-2pvzz              1/1     Running             5          10d</span><br><span class="line">engine-image-ei-ee18f965-5v78m              1/1     Running             7          10d</span><br><span class="line">engine-image-ei-ee18f965-kmfp2              0/1     Running             5          14d</span><br><span class="line">instance-manager-e-0ee5547d                 0/1     Running             0          3d22h</span><br><span class="line">instance-manager-e-898a68ba                 1/1     Running             0          2d22h</span><br><span class="line">instance-manager-e-9a24409b                 1/1     Running             0          2d22h</span><br><span class="line">longhorn-csi-plugin-4gfdx                   0/2     Running             13         14d</span><br><span class="line">longhorn-csi-plugin-6dllz                   2/2     Running             16         14d</span><br><span class="line">longhorn-csi-plugin-7x68l                   2/2     Running             22         10d</span><br><span class="line">longhorn-driver-deployer-658fdf45cc-rkh9s   1/1     Running             7          14d</span><br><span class="line">longhorn-manager-7pc2f                      1/1     Running             6          14d</span><br><span class="line">longhorn-manager-cgjtd                      1/1     Running             7          14d</span><br><span class="line">longhorn-manager-dzw5s                      1/1     Running             7          10d</span><br><span class="line">longhorn-ui-7788d4f485-qd9w8                0/1     Running               2          4d5h</span><br></pre></td></tr></table></figure>
+<h2 id="Accessing-the-Longhorn-UI">Accessing the Longhorn UI</h2>
+<p>Remember to replace the content within &lt; &gt; with your info.</p>
+<h3 id="Basic-Authentication-Secret">Basic Authentication Secret</h3>
+<p>First, create a secret for Basic Authentication from <code>shell</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">create ing-auth pass</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">htpasswd -c ./ing-auth admin</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">create secret</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl create secret generic longhorn-auth --from-file ing-auth --namespace=longhorn-system</span></span><br></pre></td></tr></table></figure>
+<p>Or by <code>kubectl apply</code> command.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Secret.longhorn-frontend.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment"># Secrets | Kubernetes</span></span><br><span class="line"><span class="comment"># https://kubernetes.io/docs/concepts/configuration/secret/</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">longhorn-auth</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">longhorn-system</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">Opaque</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">auth:</span> <span class="string">&lt;Your</span> <span class="string">UserName</span> <span class="string">and</span> <span class="string">Password</span> <span class="string">|</span> <span class="string">base64</span> <span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Apply the yaml file.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl apply -f Secret.longhorn-frontend.yaml</span></span><br></pre></td></tr></table></figure>
+<h3 id="Ingress">Ingress</h3>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ingress.longhorn-frontend.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubernetes.io/ingress.class:</span> <span class="string">&quot;nginx&quot;</span></span><br><span class="line">    <span class="attr">kubernetes.io/tls-acme:</span> <span class="string">&quot;true&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Basic Authentication - NGINX Ingress Controller</span></span><br><span class="line">    <span class="comment"># https://kubernetes.github.io/ingress-nginx/examples/auth/basic/</span></span><br><span class="line">    <span class="comment"># type of authentication</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/auth-type:</span> <span class="string">basic</span></span><br><span class="line">    <span class="comment"># name of the secret that contains the user/password definitions</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/auth-secret:</span> <span class="string">longhorn-auth</span></span><br><span class="line">    <span class="comment"># message to display with an appropriate context why the authentication is required</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/auth-realm:</span> <span class="string">&#x27;Authentication Required - foo&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">name:</span> <span class="string">longhorn-frontend</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">longhorn-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">host:</span> <span class="string">&lt;Your</span> <span class="string">longhorn-frontend</span> <span class="string">Host&gt;</span></span><br><span class="line">    <span class="attr">http:</span></span><br><span class="line">      <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">backend:</span></span><br><span class="line">          <span class="attr">serviceName:</span> <span class="string">longhorn-frontend</span></span><br><span class="line">          <span class="attr">servicePort:</span> <span class="number">80</span></span><br><span class="line">  <span class="attr">tls:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">secretName:</span> <span class="string">cert-manager-webhook-dnspod-letsencrypt</span></span><br><span class="line">      <span class="attr">hosts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&lt;Your</span> <span class="string">longhorn-frontend</span> <span class="string">Host&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Apply the yaml file.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl apply -f Ingress.longhorn-frontend.yaml</span></span><br></pre></td></tr></table></figure>
+<p>Then, you can visit Longhorn Front UI with https://<Your Longhorn Host></p>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="instance-manager-request-too-much-cpu">instance-manager request too much cpu</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl describe node node1</span></span><br><span class="line">  longhorn-system                            instance-manager-e-9cc9f3a3                                   456m (12%)    0 (0%)      0 (0%)           0 (0%)         12d</span><br><span class="line">  longhorn-system                            instance-manager-r-18bb467c                                   456m (12%)    0 (0%)      0 (0%)           0 (0%)         12d</span><br></pre></td></tr></table></figure>
+<p>By default <code>instance-manager</code> request 12% CPU on a node. When the number of CPU cores is limit(&lt;=4 cores), the problem of insufficient cpu is prone to occur.</p>
+<p>Change <code>guaranteedEngineManagerCPU</code> and <code>guaranteedReplicaManagerCPU</code> value to set CPU limit.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># values/values.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">defaultSettings:</span></span><br><span class="line">  <span class="attr">guaranteedEngineManagerCPU:</span> <span class="number">5</span> <span class="comment"># 5 means 5% of the total CPU on a node will be allocated to each engine manager pod on this node</span></span><br><span class="line">  <span class="attr">guaranteedReplicaManagerCPU:</span> <span class="number">5</span> <span class="comment"># 5 means 5% of the total CPU on a node will be allocated to each engine manager pod on this node</span></span><br></pre></td></tr></table></figure>
+<p>Or change <code>engineManagerCPURequest</code> and <code>replicaManagerCPURequest</code> on <code>nodes.longhorn.io</code> resources</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl get  nodes.longhorn.io -n longhorn-system</span></span><br><span class="line">NAMESPACE         NAME                 READY   ALLOWSCHEDULING   SCHEDULABLE   AGE</span><br><span class="line">longhorn-system   node1                True    true              True          33d</span><br><span class="line">longhorn-system   node2                True    true              True          33d</span><br><span class="line">longhorn-system   node3                True    true              True          33d</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">node1.nodes.longhorn.io</span></span><br><span class="line"></span><br><span class="line">sepc:</span><br><span class="line">  engineManagerCPURequest: 100m # 100, 0.1 or 100m</span><br><span class="line">  replicaManagerCPURequest: 100m # 100, 0.1 or 100m</span><br></pre></td></tr></table></figure>
+<p>Explanation about <code>guaranteedEngineManagerCPU</code> and <code>guaranteedReplicaManagerCPU</code>.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">variable:</span> <span class="string">defaultSettings.guaranteedEngineManagerCPU</span></span><br><span class="line">  <span class="attr">label:</span> <span class="string">Guaranteed</span> <span class="string">Engine</span> <span class="string">Manager</span> <span class="string">CPU</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">&quot;This integer value indicates how many percentage of the total allocatable CPU on each node will be reserved for each engine manager Pod. For example, 10 means 10% of the total CPU on a node will be allocated to each engine manager pod on this node. This will help maintain engine stability during high node workload.</span></span><br><span class="line"><span class="string">  In order to prevent unexpected volume engine crash as well as guarantee a relative acceptable IO performance, you can use the following formula to calculate a value for this setting:</span></span><br><span class="line"><span class="string">  Guaranteed Engine Manager CPU = The estimated max Longhorn volume engine count on a node * 0.1 / The total allocatable CPUs on the node * 100.</span></span><br><span class="line"><span class="string">  The result of above calculation doesn&#x27;t mean that&#x27;s the maximum CPU resources the Longhorn workloads require. To fully exploit the Longhorn volume I/O performance, you can allocate/guarantee more CPU resources via this setting.</span></span><br><span class="line"><span class="string">  If it&#x27;s hard to estimate the usage now, you can leave it with the default value, which is 12%. Then you can tune it when there is no running workload using Longhorn volumes.</span></span><br><span class="line"><span class="string">  WARNING:</span></span><br><span class="line"><span class="string">    - Value 0 means unsetting CPU requests for engine manager pods.</span></span><br><span class="line"><span class="string">    - Considering the possible new instance manager pods in the further system upgrade, this integer value is range from 0 to 40. And the sum with setting &#x27;Guaranteed Engine Manager CPU&#x27; should not be greater than 40.</span></span><br><span class="line"><span class="string">    - One more set of instance manager pods may need to be deployed when the Longhorn system is upgraded. If current available CPUs of the nodes are not enough for the new instance manager pods, you need to detach the volumes using the oldest instance manager pods so that Longhorn can clean up the old pods automatically and release the CPU resources. And the new pods with the latest instance manager image will be launched then.</span></span><br><span class="line"><span class="string">    - This global setting will be ignored for a node if the field \&quot;EngineManagerCPURequest\&quot; on the node is set.</span></span><br><span class="line"><span class="string">    - After this setting is changed, all engine manager pods using this global setting on all the nodes will be automatically restarted. In other words, DO NOT CHANGE THIS SETTING WITH ATTACHED VOLUMES.&quot;</span></span><br><span class="line">  <span class="attr">group:</span> <span class="string">&quot;Longhorn Default Settings&quot;</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">int</span></span><br><span class="line">  <span class="attr">min:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">max:</span> <span class="number">40</span></span><br><span class="line">  <span class="attr">default:</span> <span class="number">12</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">variable:</span> <span class="string">defaultSettings.guaranteedReplicaManagerCPU</span></span><br><span class="line">  <span class="attr">label:</span> <span class="string">Guaranteed</span> <span class="string">Replica</span> <span class="string">Manager</span> <span class="string">CPU</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">&quot;This integer value indicates how many percentage of the total allocatable CPU on each node will be reserved for each replica manager Pod. 10 means 10% of the total CPU on a node will be allocated to each replica manager pod on this node. This will help maintain replica stability during high node workload.</span></span><br><span class="line"><span class="string">  In order to prevent unexpected volume replica crash as well as guarantee a relative acceptable IO performance, you can use the following formula to calculate a value for this setting:</span></span><br><span class="line"><span class="string">  Guaranteed Replica Manager CPU = The estimated max Longhorn volume replica count on a node * 0.1 / The total allocatable CPUs on the node * 100.</span></span><br><span class="line"><span class="string">  The result of above calculation doesn&#x27;t mean that&#x27;s the maximum CPU resources the Longhorn workloads require. To fully exploit the Longhorn volume I/O performance, you can allocate/guarantee more CPU resources via this setting.</span></span><br><span class="line"><span class="string">  If it&#x27;s hard to estimate the usage now, you can leave it with the default value, which is 12%. Then you can tune it when there is no running workload using Longhorn volumes.</span></span><br><span class="line"><span class="string">  WARNING:</span></span><br><span class="line"><span class="string">    - Value 0 means unsetting CPU requests for replica manager pods.</span></span><br><span class="line"><span class="string">    - Considering the possible new instance manager pods in the further system upgrade, this integer value is range from 0 to 40. And the sum with setting &#x27;Guaranteed Replica Manager CPU&#x27; should not be greater than 40.</span></span><br><span class="line"><span class="string">    - One more set of instance manager pods may need to be deployed when the Longhorn system is upgraded. If current available CPUs of the nodes are not enough for the new instance manager pods, you need to detach the volumes using the oldest instance manager pods so that Longhorn can clean up the old pods automatically and release the CPU resources. And the new pods with the latest instance manager image will be launched then.</span></span><br><span class="line"><span class="string">    - This global setting will be ignored for a node if the field \&quot;ReplicaManagerCPURequest\&quot; on the node is set.</span></span><br><span class="line"><span class="string">    - After this setting is changed, all replica manager pods using this global setting on all the nodes will be automatically restarted. In other words, DO NOT CHANGE THIS SETTING WITH ATTACHED VOLUMES.&quot;</span></span><br><span class="line">  <span class="attr">group:</span> <span class="string">&quot;Longhorn Default Settings&quot;</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">int</span></span><br><span class="line">  <span class="attr">min:</span> <span class="number">0</span></span><br><span class="line">  <span class="attr">max:</span> <span class="number">40</span></span><br><span class="line">  <span class="attr">default:</span> <span class="number">12</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/longhorn/longhorn/blob/e835daf103b121759819caaee6d9cb29483c2f86/chart/questions.yaml"> - https://github.com/longhorn/longhorn/blob/e835daf103b121759819caaee6d9cb29483c2f86/chart/questions.yaml</a> to learn more.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://longhorn.io/docs/1.0.2/deploy/install/install-with-helm/">Install Longhorn with Helm - https://longhorn.io/docs/1.0.2/deploy/install/install-with-helm/</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://longhorn.io/docs/1.0.2/deploy/accessing-the-ui/">Accessing the Longhorn UI - https://longhorn.io/docs/1.0.2/deploy/accessing-the-ui/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://longhorn.io/">Longhorn - Cloud native distributed block storage for Kubernetes - https://longhorn.io/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.open-iscsi.com/">Open-iSCSI by open-iscsi - http://www.open-iscsi.com/</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://helm.sh/">Helm - https://helm.sh/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/">Kubernetes - https://kubernetes.io/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Kubernetes-K8S/" rel="tag"># Kubernetes (K8S)</a>
+              <a href="/tags/Cloud-Native/" rel="tag"># Cloud Native</a>
+              <a href="/tags/Helm/" rel="tag"># Helm</a>
+              <a href="/tags/Rancher-Labs/" rel="tag"># Rancher Labs</a>
+              <a href="/tags/Longhorn/" rel="tag"># Longhorn</a>
+              <a href="/tags/Block-Storage/" rel="tag"># Block Storage</a>
+              <a href="/tags/open-iscsi/" rel="tag"># open-iscsi</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/03/Kubernetes-K8S/Helm/Helm-install-kubernetes-dashboard-for-web-based-UI-for-Kubernetes-K8S/" rel="prev" title="[Kubernetes (K8S)] Helm install kubernetes-dashboard for web-based UI for Kubernetes (K8S)">
+                  <i class="fa fa-angle-left"></i> [Kubernetes (K8S)] Helm install kubernetes-dashboard for web-based UI for Kubernetes (K8S)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/10/03/Kubernetes-K8S/Helm/Helm-install-Rancher-Container-Management-Platform-for-Kubernetes-K8S/" rel="next" title="[Kubernetes (K8S)] Helm install Rancher Container Management Platform for Kubernetes (K8S)">
+                  [Kubernetes (K8S)] Helm install Rancher Container Management Platform for Kubernetes (K8S) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"44a483dbb9ec5bf4addae3bee99cd213"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

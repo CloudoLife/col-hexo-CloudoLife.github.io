@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="minimagick Using MiniMagick the ruby processes memory remains small (it spawns ImageMagick’s command line program mogrify which takes up some memory as well, but is much smaller compared to RMagick).">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Ruby Gem] Use imagemagick library and minimagick gem to process images in Ruby">
+<meta property="og:url" content="https://cloudolife.com/2020/11/07/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-imagemagick-library-and-minimagick-gem-to-process-images-in-Ruby/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="minimagick Using MiniMagick the ruby processes memory remains small (it spawns ImageMagick’s command line program mogrify which takes up some memory as well, but is much smaller compared to RMagick).">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-11-07T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.936Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Awesome Ruby Gem">
+<meta property="article:tag" content="minimagick">
+<meta property="article:tag" content="imagemagick">
+<meta property="article:tag" content="rmagick">
+<meta property="article:tag" content="Image Process">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/11/07/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-imagemagick-library-and-minimagick-gem-to-process-images-in-Ruby/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/11/07/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-imagemagick-library-and-minimagick-gem-to-process-images-in-Ruby/","path":"2020/11/07/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-imagemagick-library-and-minimagick-gem-to-process-images-in-Ruby/","title":"[Awesome Ruby Gem] Use imagemagick library and minimagick gem to process images in Ruby"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Ruby Gem] Use imagemagick library and minimagick gem to process images in Ruby | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">minimagick</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.2.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.3.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Combine-options"><span class="nav-number">1.3.1.</span> <span class="nav-text">Combine options</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attributes"><span class="nav-number">1.3.2.</span> <span class="nav-text">Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pixels"><span class="nav-number">1.3.3.</span> <span class="nav-text">Pixels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pixels-To-Image"><span class="nav-number">1.3.4.</span> <span class="nav-text">Pixels To Image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration"><span class="nav-number">1.3.5.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Composite"><span class="nav-number">1.3.6.</span> <span class="nav-text">Composite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layers-Frames-Pages"><span class="nav-number">1.3.7.</span> <span class="nav-text">Layers&#x2F;Frames&#x2F;Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Image-validation"><span class="nav-number">1.3.8.</span> <span class="nav-text">Image validation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logging"><span class="nav-number">1.3.9.</span> <span class="nav-text">Logging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Switching-CLIs-ImageMagick-GraphicsMagick"><span class="nav-number">1.3.10.</span> <span class="nav-text">Switching CLIs (ImageMagick &lt;&#x3D;&gt; GraphicsMagick)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Metal"><span class="nav-number">1.3.11.</span> <span class="nav-text">Metal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Appending"><span class="nav-number">1.3.12.</span> <span class="nav-text">Appending</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Methods"><span class="nav-number">1.3.13.</span> <span class="nav-text">Methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chaining"><span class="nav-number">1.3.14.</span> <span class="nav-text">Chaining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%9CPlus%E2%80%9D-options"><span class="nav-number">1.3.15.</span> <span class="nav-text">“Plus” options</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stacks"><span class="nav-number">1.3.16.</span> <span class="nav-text">Stacks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STDIN-and-STDOUT"><span class="nav-number">1.3.17.</span> <span class="nav-text">STDIN and STDOUT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Capturing-STDERR"><span class="nav-number">1.3.18.</span> <span class="nav-text">Capturing STDERR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/11/07/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-imagemagick-library-and-minimagick-gem-to-process-images-in-Ruby/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Ruby Gem] Use imagemagick library and minimagick gem to process images in Ruby | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Ruby Gem] Use imagemagick library and minimagick gem to process images in Ruby
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-11-07 00:00:00" itemprop="dateCreated datePublished" datetime="2020-11-07T00:00:00+00:00">2020-11-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Awesome-Ruby-Gem/" itemprop="url" rel="index"><span itemprop="name">Awesome Ruby Gem</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>11 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>minimagick</h1>
+<p>Using MiniMagick the ruby processes memory remains small (it spawns ImageMagick’s command line program mogrify which takes up some memory as well, but is much smaller compared to RMagick).</p>
+<span id="more"></span>
+<h2 id="Prerequisites">Prerequisites</h2>
+<p>These prerequisites are required for the latest version of RMagick.</p>
+<p>On Ubuntu, you can run:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> apt-get install libmagickwand-dev</span></span><br></pre></td></tr></table></figure>
+<p>On Centos, you can run:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> yum install gcc ImageMagick-devel make <span class="built_in">which</span></span></span><br></pre></td></tr></table></figure>
+<p>On Arch Linux, you can run:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pacman -Syy pkg-config imagemagick</span></span><br></pre></td></tr></table></figure>
+<p>On Alpine Linux, you can run:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">apk add pkgconfig imagemagick imagemagick-dev imagemagick-libs</span></span><br></pre></td></tr></table></figure>
+<p>On macOS, you can run:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install pkg-config imagemagick</span></span><br></pre></td></tr></table></figure>
+<h2 id="Installation">Installation</h2>
+<p>You can install it as a gem:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gem install mini_magick</span></span><br></pre></td></tr></table></figure>
+<p>or add it into a Gemfile (Bundler):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># minimagick/minimagick: mini replacement for RMagick </span></span><br><span class="line"><span class="comment"># https://github.com/minimagick/minimagick</span></span><br><span class="line">gem <span class="string">&#x27;mini_magick&#x27;</span>, <span class="string">&#x27;4.11.0&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Then, run <code>bundle install</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle install</span></span><br></pre></td></tr></table></figure>
+<h2 id="Usage">Usage</h2>
+<p>Let’s first see a basic example of resizing an image.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&quot;mini_magick&quot;</span></span><br><span class="line"></span><br><span class="line">image = <span class="title class_">MiniMagick</span><span class="symbol">:</span><span class="symbol">:Image</span>.open(<span class="string">&quot;input.jpg&quot;</span>)</span><br><span class="line">image.path <span class="comment">#=&gt; &quot;/var/folders/k7/6zx6dx6x7ys3rv3srh0nyfj00000gn/T/magick20140921-75881-1yho3zc.jpg&quot;</span></span><br><span class="line">image.resize <span class="string">&quot;100x100&quot;</span></span><br><span class="line">image.format <span class="string">&quot;png&quot;</span></span><br><span class="line">image.write <span class="string">&quot;output.png&quot;</span></span><br></pre></td></tr></table></figure>
+<p><code>MiniMagick::Image.open</code> makes a copy of the image, and further methods modify that copy (the original stays untouched). We then resize the image, and write it to a file. The writing part is necessary because the copy is just temporary, it gets garbage collected when we lose reference to the image.</p>
+<p><code>MiniMagick::Image.open</code> also accepts URLs, and options passed in will be forwarded to open-uri.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image = <span class="title class_">MiniMagick</span><span class="symbol">:</span><span class="symbol">:Image</span>.open(<span class="string">&quot;http://example.com/image.jpg&quot;</span>)</span><br><span class="line">image.contrast</span><br><span class="line">image.write(<span class="string">&quot;from_internets.jpg&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>On the other hand, if we want the original image to actually get modified, we can use <code>MiniMagick::Image.new</code>.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">image = <span class="title class_">MiniMagick::Image</span>.new(<span class="string">&quot;input.jpg&quot;</span>)</span><br><span class="line">image.path <span class="comment">#=&gt; &quot;input.jpg&quot;</span></span><br><span class="line">image.resize <span class="string">&quot;100x100&quot;</span></span><br><span class="line"><span class="comment"># Not calling #write, because it&#x27;s not a copy</span></span><br></pre></td></tr></table></figure>
+<h3 id="Combine-options">Combine options</h3>
+<p>While using methods like <code>#resize</code> directly is convenient, if we use more methods in this way, it quickly becomes inefficient, because it calls the command on each methods call. MiniMagick::Image#combine_options takes multiple options and from them builds one single command.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">image.combine_options <span class="keyword">do</span> |<span class="params">b</span>|</span><br><span class="line">  b.resize <span class="string">&quot;250x200&gt;&quot;</span></span><br><span class="line">  b.rotate <span class="string">&quot;-90&quot;</span></span><br><span class="line">  b.flip</span><br><span class="line"><span class="keyword">end</span> <span class="comment"># the command gets executed</span></span><br></pre></td></tr></table></figure>
+<p>As a handy shortcut, <code>MiniMagick::Image.new</code> also accepts an optional block which is used to combine_options.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">image = <span class="title class_">MiniMagick::Image</span>.new(<span class="string">&quot;input.jpg&quot;</span>) <span class="keyword">do</span> |<span class="params">b</span>|</span><br><span class="line">  b.resize <span class="string">&quot;250x200&gt;&quot;</span></span><br><span class="line">  b.rotate <span class="string">&quot;-90&quot;</span></span><br><span class="line">  b.flip</span><br><span class="line"><span class="keyword">end</span> <span class="comment"># the command gets executed</span></span><br></pre></td></tr></table></figure>
+<p>The yielded builder is an instance of <code>MiniMagick::Tool::Mogrify</code>.</p>
+<h3 id="Attributes">Attributes</h3>
+<p>A <code>MiniMagick::Image</code> has various handy attributes.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">image.type        <span class="comment">#=&gt; &quot;JPEG&quot;</span></span><br><span class="line">image.mime_type   <span class="comment">#=&gt; &quot;image/jpeg&quot;</span></span><br><span class="line">image.width       <span class="comment">#=&gt; 250</span></span><br><span class="line">image.height      <span class="comment">#=&gt; 300</span></span><br><span class="line">image.dimensions  <span class="comment">#=&gt; [250, 300]</span></span><br><span class="line">image.size        <span class="comment">#=&gt; 3451 (in bytes)</span></span><br><span class="line">image.colorspace  <span class="comment">#=&gt; &quot;DirectClass sRGB&quot;</span></span><br><span class="line">image.exif        <span class="comment">#=&gt; &#123;&quot;DateTimeOriginal&quot; =&gt; &quot;2013:09:04 08:03:39&quot;, ...&#125;</span></span><br><span class="line">image.resolution  <span class="comment">#=&gt; [75, 75]</span></span><br><span class="line">image.signature   <span class="comment">#=&gt; &quot;60a7848c4ca6e36b8e2c5dea632ecdc29e9637791d2c59ebf7a54c0c6a74ef7e&quot;</span></span><br></pre></td></tr></table></figure>
+<p>If you need more control, you can also access raw image attributes:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image[<span class="string">&quot;%[gamma]&quot;</span>] <span class="comment"># &quot;0.9&quot;</span></span><br></pre></td></tr></table></figure>
+<p>To get the all information about the image, MiniMagick gives you a handy method which returns the output from identify <code>-verbose</code> in hash format:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">image.data <span class="comment">#=&gt;</span></span><br><span class="line"><span class="comment"># &#123;</span></span><br><span class="line"><span class="comment">#   &quot;format&quot;: &quot;JPEG&quot;,</span></span><br><span class="line"><span class="comment">#   &quot;mimeType&quot;: &quot;image/jpeg&quot;,</span></span><br><span class="line"><span class="comment">#   &quot;class&quot;: &quot;DirectClass&quot;,</span></span><br><span class="line"><span class="comment">#   &quot;geometry&quot;: &#123;</span></span><br><span class="line"><span class="comment">#     &quot;width&quot;: 200,</span></span><br><span class="line"><span class="comment">#     &quot;height&quot;: 276,</span></span><br><span class="line"><span class="comment">#     &quot;x&quot;: 0,</span></span><br><span class="line"><span class="comment">#     &quot;y&quot;: 0</span></span><br><span class="line"><span class="comment">#   &#125;,</span></span><br><span class="line"><span class="comment">#   &quot;resolution&quot;: &#123;</span></span><br><span class="line"><span class="comment">#     &quot;x&quot;: &quot;300&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;y&quot;: &quot;300&quot;</span></span><br><span class="line"><span class="comment">#   &#125;,</span></span><br><span class="line"><span class="comment">#   &quot;colorspace&quot;: &quot;sRGB&quot;,</span></span><br><span class="line"><span class="comment">#   &quot;channelDepth&quot;: &#123;</span></span><br><span class="line"><span class="comment">#     &quot;red&quot;: 8,</span></span><br><span class="line"><span class="comment">#     &quot;green&quot;: 8,</span></span><br><span class="line"><span class="comment">#     &quot;blue&quot;: 8</span></span><br><span class="line"><span class="comment">#   &#125;,</span></span><br><span class="line"><span class="comment">#   &quot;quality&quot;: 92,</span></span><br><span class="line"><span class="comment">#   &quot;properties&quot;: &#123;</span></span><br><span class="line"><span class="comment">#     &quot;date:create&quot;: &quot;2016-07-11T19:17:53+08:00&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;date:modify&quot;: &quot;2016-07-11T19:17:53+08:00&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;exif:ColorSpace&quot;: &quot;1&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;exif:ExifImageLength&quot;: &quot;276&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;exif:ExifImageWidth&quot;: &quot;200&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;exif:ExifOffset&quot;: &quot;90&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;exif:Orientation&quot;: &quot;1&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;exif:ResolutionUnit&quot;: &quot;2&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;exif:XResolution&quot;: &quot;300/1&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;exif:YResolution&quot;: &quot;300/1&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;icc:copyright&quot;: &quot;Copyright (c) 1998 Hewlett-Packard Company&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;icc:description&quot;: &quot;sRGB IEC61966-2.1&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;icc:manufacturer&quot;: &quot;IEC http://www.iec.ch&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;icc:model&quot;: &quot;IEC 61966-2.1 Default RGB colour space - sRGB&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;jpeg:colorspace&quot;: &quot;2&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;jpeg:sampling-factor&quot;: &quot;1x1,1x1,1x1&quot;,</span></span><br><span class="line"><span class="comment">#     &quot;signature&quot;: &quot;1b2336f023e5be4a9f357848df9803527afacd4987ecc18c4295a272403e52c1&quot;</span></span><br><span class="line"><span class="comment">#   &#125;,</span></span><br><span class="line"><span class="comment">#   ...</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br></pre></td></tr></table></figure>
+<p>Note that <code>MiniMagick::Image#data</code> is supported only on ImageMagick 6.8.8-3 or above, for GraphicsMagick or older versions of ImageMagick use <code>MiniMagick::Image#details</code>.</p>
+<h3 id="Pixels">Pixels</h3>
+<p>With MiniMagick you can retrieve a matrix of image pixels, where each member of the matrix is a 3-element array of numbers between 0-255, one for each range of the RGB color channels.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image = <span class="title class_">MiniMagick</span><span class="symbol">:</span><span class="symbol">:Image</span>.open(<span class="string">&quot;image.jpg&quot;</span>)</span><br><span class="line">pixels = image.get_pixels</span><br><span class="line">pixels[<span class="number">3</span>][<span class="number">2</span>][<span class="number">1</span>] <span class="comment"># the green channel value from the 4th-row, 3rd-column pixel</span></span><br></pre></td></tr></table></figure>
+<p>It can also be called after applying transformations:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">image = <span class="title class_">MiniMagick</span><span class="symbol">:</span><span class="symbol">:Image</span>.open(<span class="string">&quot;image.jpg&quot;</span>)</span><br><span class="line">image.crop <span class="string">&quot;20x30+10+5&quot;</span></span><br><span class="line">image.colorspace <span class="string">&quot;Gray&quot;</span></span><br><span class="line">pixels = image.get_pixels</span><br></pre></td></tr></table></figure>
+<h3 id="Pixels-To-Image">Pixels To Image</h3>
+<p>Sometimes when you have pixels and want to create image from pixels, you can do this to form an image:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">image = <span class="title class_">MiniMagick</span><span class="symbol">:</span><span class="symbol">:Image</span>.open(<span class="string">&#x27;/Users/rabin/input.jpg&#x27;</span>)</span><br><span class="line">pixels = image.get_pixels</span><br><span class="line">depth = <span class="number">8</span></span><br><span class="line">dimension = [image.width, image.height]</span><br><span class="line">map = <span class="string">&#x27;rgb&#x27;</span></span><br><span class="line">image = <span class="title class_">MiniMagick</span><span class="symbol">:</span><span class="symbol">:Image</span>.get_image_from_pixels(pixels, dimension, map, depth ,<span class="string">&#x27;jpg&#x27;</span>)</span><br><span class="line">image.write(<span class="string">&#x27;/Users/rabin/output.jpg&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>In this example, the returned pixels should now have equal R, G, and B values.</p>
+<h3 id="Configuration">Configuration</h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick</span>.configure <span class="keyword">do</span> |<span class="params">config</span>|</span><br><span class="line">  config.cli = <span class="symbol">:graphicsmagick</span></span><br><span class="line">  config.timeout = <span class="number">5</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>For a complete list of configuration options, see <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rubydoc.info/github/minimagick/minimagick/MiniMagick/Configuration">Configuration - https://rubydoc.info/github/minimagick/minimagick/MiniMagick/Configuration</a>.</p>
+<h3 id="Composite">Composite</h3>
+<p>MiniMagick also allows you to composite images:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">first_image  = <span class="title class_">MiniMagick::Image</span>.new(<span class="string">&quot;first.jpg&quot;</span>)</span><br><span class="line">second_image = <span class="title class_">MiniMagick::Image</span>.new(<span class="string">&quot;second.jpg&quot;</span>)</span><br><span class="line">result = first_image.composite(second_image) <span class="keyword">do</span> |<span class="params">c</span>|</span><br><span class="line">  c.compose <span class="string">&quot;Over&quot;</span>    <span class="comment"># OverCompositeOp</span></span><br><span class="line">  c.geometry <span class="string">&quot;+20+20&quot;</span> <span class="comment"># copy second_image onto first_image from (20, 20)</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">result.write <span class="string">&quot;output.jpg&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Layers-Frames-Pages">Layers/Frames/Pages</h3>
+<p>For multilayered images you can access its layers.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gif.frames <span class="comment">#=&gt; [...]</span></span><br><span class="line">pdf.pages  <span class="comment">#=&gt; [...]</span></span><br><span class="line">psd.layers <span class="comment">#=&gt; [...]</span></span><br><span class="line"></span><br><span class="line">gif.frames.each_with_index <span class="keyword">do</span> |<span class="params">frame, idx</span>|</span><br><span class="line">  frame.write(<span class="string">&quot;frame<span class="subst">#&#123;idx&#125;</span>.jpg&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="Image-validation">Image validation</h3>
+<p>By default, MiniMagick validates images each time it’s opening them. It validates them by running identify on them, and see if ImageMagick finds them valid. This adds slight overhead to the whole processing. Sometimes it’s safe to assume that all input and output images are valid by default and turn off validation:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick</span>.configure <span class="keyword">do</span> |<span class="params">config</span>|</span><br><span class="line">  config.validate_on_create = <span class="literal">false</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>You can test whether an image is valid:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">image.valid?</span><br><span class="line">image.validate! <span class="comment"># raises MiniMagick::Invalid if image is invalid</span></span><br></pre></td></tr></table></figure>
+<h3 id="Logging">Logging</h3>
+<p>You can choose to log MiniMagick commands and their execution times:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick</span>.logger.level = <span class="title class_">Logger</span><span class="symbol">:</span><span class="symbol">:DEBUG</span></span><br><span class="line">D, [<span class="number">2016</span>-<span class="number">03</span>-19<span class="symbol">T07:</span><span class="number">31</span><span class="symbol">:</span><span class="number">36.755338</span> <span class="comment">#87191] DEBUG -- : [0.01s] identify /var/folders/k7/6zx6dx6x7ys3rv3srh0nyfj00000gn/T/mini_magick20160319-87191-1ve31n1.jpg</span></span><br></pre></td></tr></table></figure>
+<p>In Rails you’ll probably want to set <code>MiniMagick.logger = Rails.logger</code>.</p>
+<h3 id="Switching-CLIs-ImageMagick-GraphicsMagick">Switching CLIs (ImageMagick &lt;=&gt; GraphicsMagick)</h3>
+<p>Default CLI is ImageMagick, but if you want to use GraphicsMagick, you can specify it in configuration:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick</span>.configure <span class="keyword">do</span> |<span class="params">config</span>|</span><br><span class="line">  config.cli = <span class="symbol">:graphicsmagick</span> <span class="comment"># or :imagemagick or :imagemagick7</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>You can also use .with_cli to temporary switch the CLI:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick</span>.with_cli(<span class="symbol">:graphicsmagick</span>) <span class="keyword">do</span></span><br><span class="line">  <span class="comment"># Some processing that GraphicsMagick is better at</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>WARNING: If you’re building a multithreaded web application, you should change the CLI only on application startup. This is because the configuration is global, so if you change it in a controller action, other threads in the same process will also have their CLI changed, which could lead to race conditions.</p>
+<hr>
+<h3 id="Metal">Metal</h3>
+<p>If you want to be close to the metal, you can use ImageMagick’s command-line tools directly.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick::Tool::Magick</span>.new <span class="keyword">do</span> |<span class="params">magick</span>|</span><br><span class="line">  magick &lt;&lt; <span class="string">&quot;input.jpg&quot;</span></span><br><span class="line">  magick.resize(<span class="string">&quot;100x100&quot;</span>)</span><br><span class="line">  magick.negate</span><br><span class="line">  magick &lt;&lt; <span class="string">&quot;output.jpg&quot;</span></span><br><span class="line"><span class="keyword">end</span> <span class="comment">#=&gt; `magick input.jpg -resize 100x100 -negate output.jpg`</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line"></span><br><span class="line">convert = <span class="title class_">MiniMagick</span><span class="symbol">:</span><span class="symbol">:Tool</span><span class="symbol">:</span><span class="symbol">:Convert</span>.new</span><br><span class="line">convert &lt;&lt; <span class="string">&quot;input.jpg&quot;</span></span><br><span class="line">convert.resize(<span class="string">&quot;100x100&quot;</span>)</span><br><span class="line">convert.negate</span><br><span class="line">convert &lt;&lt; <span class="string">&quot;output.jpg&quot;</span></span><br><span class="line">convert.call <span class="comment">#=&gt; `convert input.jpg -resize 100x100 -negate output.jpg`</span></span><br></pre></td></tr></table></figure>
+<p>If you’re on ImageMagick 7, you should probably use <code>MiniMagick::Tool::Magick</code>, though the legacy <code>MiniMagick::Tool::Convert</code> and friends will work too. On ImageMagick 6 <code>MiniMagick::Tool::Magick</code> won’t be available, so you should instead use <code>MiniMagick::Tool::Convert</code> and friends.</p>
+<p>This way of using MiniMagick is highly recommended if you want to maximize performance of your image processing. We will now show the features available.</p>
+<h3 id="Appending">Appending</h3>
+<p>The most basic way of building a command is appending strings:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick::Tool::Convert</span>.new <span class="keyword">do</span> |<span class="params">convert</span>|</span><br><span class="line">  convert &lt;&lt; <span class="string">&quot;input.jpg&quot;</span></span><br><span class="line">  convert.merge! [<span class="string">&quot;-resize&quot;</span>, <span class="string">&quot;500x500&quot;</span>, <span class="string">&quot;-negate&quot;</span>]</span><br><span class="line">  convert &lt;&lt; <span class="string">&quot;output.jpg&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note that it is important that every command you would pass to the command line has to be separated with &lt;&lt;, e.g.:</p>
+<hr>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GOOD</span></span><br><span class="line">convert &lt;&lt; <span class="string">&quot;-resize&quot;</span> &lt;&lt; <span class="string">&quot;500x500&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># BAD</span></span><br><span class="line">convert &lt;&lt; <span class="string">&quot;-resize 500x500&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Shell escaping is also handled for you. If an option has a value that has spaces inside it, just pass it as a regular string.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">convert &lt;&lt; <span class="string">&quot;-distort&quot;</span></span><br><span class="line">convert &lt;&lt; <span class="string">&quot;Perspective&quot;</span></span><br><span class="line">convert &lt;&lt; <span class="string">&quot;0,0,0,0 0,45,0,45 69,0,60,10 69,45,60,35&quot;</span></span><br><span class="line">convert -distort <span class="title class_">Perspective</span> <span class="string">&#x27;0,0,0,0 0,45,0,45 69,0,60,10 69,45,60,35&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Methods">Methods</h3>
+<p>Instead of passing in options directly, you can use Ruby methods:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">convert.resize(<span class="string">&quot;500x500&quot;</span>)</span><br><span class="line">convert.rotate(<span class="number">90</span>)</span><br><span class="line">convert.distort(<span class="string">&quot;Perspective&quot;</span>, <span class="string">&quot;0,0,0,0 0,45,0,45 69,0,60,10 69,45,60,35&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>MiniMagick knows which options each tool has, so you will get an explicit <code>NoMethodError</code> if you happen to have mispelled an option.</p>
+<h3 id="Chaining">Chaining</h3>
+<p>Every method call returns self, so you can chain them to create logical groups.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick::Tool::Convert</span>.new <span class="keyword">do</span> |<span class="params">convert</span>|</span><br><span class="line">  convert &lt;&lt; <span class="string">&quot;input.jpg&quot;</span></span><br><span class="line">  convert.clone(<span class="number">0</span>).background(<span class="string">&#x27;gray&#x27;</span>).shadow(<span class="string">&#x27;80x5+5+5&#x27;</span>)</span><br><span class="line">  convert.negate</span><br><span class="line">  convert &lt;&lt; <span class="string">&quot;output.jpg&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="“Plus”-options">“Plus” options</h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick::Tool::Convert</span>.new <span class="keyword">do</span> |<span class="params">convert</span>|</span><br><span class="line">  convert &lt;&lt; <span class="string">&quot;input.jpg&quot;</span></span><br><span class="line">  convert.repage.+</span><br><span class="line">  convert.distort.+(<span class="string">&quot;Perspective&quot;</span>, <span class="string">&quot;more args&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">convert input.jpg +repage +distort <span class="title class_">Perspective</span> <span class="string">&#x27;more args&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Stacks">Stacks</h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">MiniMagick::Tool::Convert</span>.new <span class="keyword">do</span> |<span class="params">convert</span>|</span><br><span class="line">  convert &lt;&lt; <span class="string">&quot;wand.gif&quot;</span></span><br><span class="line"></span><br><span class="line">  convert.stack <span class="keyword">do</span> |<span class="params">stack</span>|</span><br><span class="line">    stack &lt;&lt; <span class="string">&quot;wand.gif&quot;</span></span><br><span class="line">    stack.rotate(<span class="number">30</span>)</span><br><span class="line">    stack.foo(<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="comment"># or</span></span><br><span class="line">  convert.stack(<span class="string">&quot;wand.gif&quot;</span>, &#123; <span class="symbol">rotate:</span> <span class="number">30</span>, <span class="symbol">foo:</span> [<span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>] &#125;)</span><br><span class="line"></span><br><span class="line">  convert &lt;&lt; <span class="string">&quot;images.gif&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">convert wand.gif \( wand.gif -rotate <span class="number">90</span> -foo bar baz \) images.gif</span><br></pre></td></tr></table></figure>
+<h3 id="STDIN-and-STDOUT">STDIN and STDOUT</h3>
+<p>If you want to pass something to standard input, you can pass the :stdin option to #call:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">identify = <span class="title class_">MiniMagick</span><span class="symbol">:</span><span class="symbol">:Tool</span><span class="symbol">:</span><span class="symbol">:Identify</span>.new</span><br><span class="line">identify.stdin <span class="comment"># alias for &quot;-&quot;</span></span><br><span class="line">identify.call(<span class="symbol">stdin:</span> image_content)</span><br><span class="line"><span class="title class_">MiniMagick</span> also has <span class="comment">#stdout alias for &quot;-&quot; for outputing file contents to standard output:</span></span><br><span class="line"></span><br><span class="line">content = <span class="title class_">MiniMagick::Tool::Convert</span>.new <span class="keyword">do</span> |<span class="params">convert</span>|</span><br><span class="line">  convert &lt;&lt; <span class="string">&quot;input.jpg&quot;</span></span><br><span class="line">  convert.auto_orient</span><br><span class="line">  convert.stdout <span class="comment"># alias for &quot;-&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="Capturing-STDERR">Capturing STDERR</h3>
+<p>Some MiniMagick tools such as compare output the result of the command on standard error, even if the command succeeded. The result of MiniMagick::Tool#call is always the standard output, but if you pass it a block, it will yield the stdout, stderr and exit status of the command:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">compare = <span class="title class_">MiniMagick</span><span class="symbol">:</span><span class="symbol">:Tool</span><span class="symbol">:</span><span class="symbol">:Compare</span>.new</span><br><span class="line"><span class="comment"># build the command</span></span><br><span class="line">compare.call <span class="keyword">do</span> |<span class="params">stdout, stderr, status</span>|</span><br><span class="line">  <span class="comment"># ...</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/minimagick/minimagick">minimagick/minimagick: mini replacement for RMagick - https://github.com/minimagick/minimagick</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rubygems.org/gems/mini_magick">mini_magick | RubyGems.org | your community gem host - https://rubygems.org/gems/mini_magick</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rubydoc.info/github/minimagick/minimagick">File: README — Documentation for minimagick/minimagick (master) - https://rubydoc.info/github/minimagick/minimagick</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Awesome-Ruby-Gem/" rel="tag"># Awesome Ruby Gem</a>
+              <a href="/tags/minimagick/" rel="tag"># minimagick</a>
+              <a href="/tags/imagemagick/" rel="tag"># imagemagick</a>
+              <a href="/tags/rmagick/" rel="tag"># rmagick</a>
+              <a href="/tags/Image-Process/" rel="tag"># Image Process</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/11/07/Testing/Automation-Testing/Playwright/Use-Playwright-to-test-cloudolife-com-automatically/" rel="prev" title="[Automation Testing] Use Playwright to test cloudolife.com automatically">
+                  <i class="fa fa-angle-left"></i> [Automation Testing] Use Playwright to test cloudolife.com automatically
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/11/07/Kubernetes-K8S/Helm/Helm-install-Grafana-Loki-to-deploy-a-log-aggregation-system-within-Kubernetes-K8S/" rel="next" title="[Kubernetes (K8S)] Helm install Grafana Loki to deploy a log aggregation system within Kubernetes (K8S)">
+                  [Kubernetes (K8S)] Helm install Grafana Loki to deploy a log aggregation system within Kubernetes (K8S) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"2f3919a19cca91035119200b864cd22f"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

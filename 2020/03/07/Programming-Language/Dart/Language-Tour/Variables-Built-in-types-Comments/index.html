@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Variables, Built-in types, Comments Variables Here’s an example of creating a variable and initializing it:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Dart Language Tour] Variables, Built-in types, Comments">
+<meta property="og:url" content="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Variables-Built-in-types-Comments/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Variables, Built-in types, Comments Variables Here’s an example of creating a variable and initializing it:">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-07T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.923Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="const">
+<meta property="article:tag" content="final">
+<meta property="article:tag" content="Dart">
+<meta property="article:tag" content="Language Tour">
+<meta property="article:tag" content="Variable">
+<meta property="article:tag" content="var">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Variables-Built-in-types-Comments/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Variables-Built-in-types-Comments/","path":"2020/03/07/Programming-Language/Dart/Language-Tour/Variables-Built-in-types-Comments/","title":"[Dart Language Tour] Variables, Built-in types, Comments"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Dart Language Tour] Variables, Built-in types, Comments | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Variables, Built-in types, Comments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables"><span class="nav-number">1.1.</span> <span class="nav-text">Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Default-value"><span class="nav-number">1.1.1.</span> <span class="nav-text">Default value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Final-and-const"><span class="nav-number">1.1.2.</span> <span class="nav-text">Final and const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Built-in-types"><span class="nav-number">1.2.</span> <span class="nav-text">Built-in types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Numbers"><span class="nav-number">1.2.1.</span> <span class="nav-text">Numbers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#int"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">int</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#double"><span class="nav-number">1.2.2.</span> <span class="nav-text">double</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strings"><span class="nav-number">1.2.3.</span> <span class="nav-text">Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Booleans"><span class="nav-number">1.2.4.</span> <span class="nav-text">Booleans</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lists"><span class="nav-number">1.2.5.</span> <span class="nav-text">Lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sets"><span class="nav-number">1.2.6.</span> <span class="nav-text">Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maps"><span class="nav-number">1.2.7.</span> <span class="nav-text">Maps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runes-and-grapheme-clusters"><span class="nav-number">1.2.8.</span> <span class="nav-text">Runes and grapheme clusters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbols"><span class="nav-number">1.2.9.</span> <span class="nav-text">Symbols</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comments"><span class="nav-number">1.3.</span> <span class="nav-text">Comments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-line-comments"><span class="nav-number">1.4.</span> <span class="nav-text">Single-line comments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-line-comments"><span class="nav-number">1.4.1.</span> <span class="nav-text">Multi-line comments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Documentation-comments"><span class="nav-number">1.4.2.</span> <span class="nav-text">Documentation comments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/03/07/Programming-Language/Dart/Language-Tour/Variables-Built-in-types-Comments/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Dart Language Tour] Variables, Built-in types, Comments | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Dart Language Tour] Variables, Built-in types, Comments
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-03-07 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-07T00:00:00+00:00">2020-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Dart/" itemprop="url" rel="index"><span itemprop="name">Dart</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Dart/Language-Tour/" itemprop="url" rel="index"><span itemprop="name">Language Tour</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>20k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>18 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Variables, Built-in types, Comments</h1>
+<h2 id="Variables">Variables</h2>
+<p>Here’s an example of creating a variable and initializing it:</p>
+<span id="more"></span>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;Bob&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>Variables store references. The variable called name contains a reference to a String object with a value of “Bob”.</p>
+<p>The type of the name variable is inferred to be String, but you can change that type by specifying it. If an object isn’t restricted to a single type, specify the <code>Object</code> or <code>dynamic</code> type, following design guidelines.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dynamic</span> name = <span class="string">&#x27;Bob&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// refer to number type.</span></span><br><span class="line">name = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span> anotherName = <span class="string">&#x27;Bob&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// refer to number type.</span></span><br><span class="line">anotherName = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>Another option is to explicitly declare the type that would be inferred:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// type annotations</span></span><br><span class="line"><span class="built_in">String</span> name = <span class="string">&#x27;Bob&#x27;</span>;</span><br><span class="line"></span><br><span class="line">name = <span class="number">1</span>; <span class="comment">// Error: A value of type &#x27;int&#x27; can&#x27;t be assigned to a variable of type </span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: This page follows the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/effective-dart/design">style guide</a> recommendation of using <code>var</code>, rather than type annotations, for local variables.</p>
+<hr>
+<h3 id="Default-value">Default value</h3>
+<p>Uninitialized variables have an initial value of <code>null</code>. Even variables with numeric types are initially <code>null</code>, because numbers—like everything else in Dart—are objects.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> lineCount;</span><br><span class="line"><span class="keyword">assert</span>(lineCount == <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: Production code ignores the <code>assert()</code> call. During development, on the other hand, <code>assert(condition)</code> throws an exception if condition is false. For details, see Assert.</p>
+<hr>
+<h3 id="Final-and-const">Final and const</h3>
+<p>If you never intend to change a variable, use <code>final</code> or <code>const</code>, either instead of <code>var</code> or in addition to a type. A <code>final</code> variable can be set only once; a <code>const</code> variable is a compile-time constant. (Const variables are implicitly final.) A <code>final</code> top-level or class variable is initialized the first time it’s used.</p>
+<hr>
+<p>Note: Instance variables can be <code>final</code> but not <code>const</code>. Final instance variables must be initialized before the constructor body starts — at the variable declaration, by a constructor parameter, or in the constructor’s initializer list.</p>
+<hr>
+<p>Here’s an example of creating and setting a final variable:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> name = <span class="string">&#x27;Bob&#x27;</span>; <span class="comment">// Without a type annotation</span></span><br><span class="line"><span class="keyword">final</span> <span class="built_in">String</span> nickname = <span class="string">&#x27;Bobby&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>You can’t change the value of a final variable:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&#x27;Alice&#x27;</span>; <span class="comment">// Error: a final variable can only be set once.</span></span><br></pre></td></tr></table></figure>
+<p>Use <code>const</code> for variables that you want to be compile-time constants. If the <code>const</code> variable is at the class level, mark it static const. Where you declare the variable, set the value to a compile-time constant such as a number or string literal, a const variable, or the result of an arithmetic operation on constant numbers:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bar = <span class="number">1000000</span>; <span class="comment">// Unit of pressure (dynes/cm2)</span></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">double</span> atm = <span class="number">1.01325</span> * bar; <span class="comment">// Standard atmosphere</span></span><br></pre></td></tr></table></figure>
+<p>The const keyword isn’t just for declaring constant variables. You can also use it to create constant values, as well as to declare constructors that create constant values. Any variable can have a constant value.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="keyword">const</span> [];</span><br><span class="line"><span class="keyword">final</span> bar = <span class="keyword">const</span> [];</span><br><span class="line"><span class="keyword">const</span> baz = []; <span class="comment">// Equivalent to `const []`</span></span><br></pre></td></tr></table></figure>
+<p>You can omit const from the initializing expression of a const declaration, like for baz above. For details, see DON’T use const redundantly.</p>
+<p>You can change the value of a non-final, non-const variable, even if it used to have a <code>const</code> value:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]; <span class="comment">// Was const []</span></span><br></pre></td></tr></table></figure>
+<p>You can’t change the value of a const variable:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baz = [<span class="number">42</span>]; <span class="comment">// Error: Constant variables can&#x27;t be assigned a value.</span></span><br></pre></td></tr></table></figure>
+<p>You can define constants that use type checks and casts (<code>is</code> and <code>as</code>), collection <code>if</code>, and spread operators (<code>...</code> and <code>...?</code>):</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">Object</span> i = <span class="number">3</span>; <span class="comment">// Where i is a const Object with an int value...</span></span><br><span class="line"><span class="keyword">const</span> list = [i <span class="keyword">as</span> <span class="built_in">int</span>]; <span class="comment">// Use a typecast.</span></span><br><span class="line"><span class="keyword">const</span> map = &#123;<span class="keyword">if</span> (i <span class="keyword">is</span> <span class="built_in">int</span>) i: <span class="string">&quot;int&quot;</span>&#125;; <span class="comment">// Use is and collection if.</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">set</span> = &#123;<span class="keyword">if</span> (list <span class="keyword">is</span> <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt;) ...list&#125;; <span class="comment">// ...and a spread.</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: Although a <code>final</code> object cannot be modified, its fields can be changed. In comparison, a const object and its fields cannot be changed: they’re immutable.</p>
+<hr>
+<p>For more information on using <code>const</code> to create constant values, see Lists, Maps, and Classes.</p>
+<h2 id="Built-in-types">Built-in types</h2>
+<p>The Dart language has special support for the following types:</p>
+<ul>
+<li>
+<p>numbers</p>
+</li>
+<li>
+<p>strings</p>
+</li>
+<li>
+<p>booleans</p>
+</li>
+<li>
+<p>lists (also known as arrays)</p>
+</li>
+<li>
+<p>sets</p>
+</li>
+<li>
+<p>maps</p>
+</li>
+<li>
+<p>runes (for expressing Unicode characters in a string)</p>
+</li>
+<li>
+<p>symbols</p>
+</li>
+</ul>
+<p>You can initialize an object of any of these special types using a literal. For example, <code>'this is a string'</code> is a string literal, and <code>true</code> is a boolean literal.</p>
+<p>Because every variable in Dart refers to an object—an instance of a class—you can usually use constructors to initialize variables. Some of the built-in types have their own constructors. For example, you can use the <code>Map()</code> constructor to create a map.</p>
+<h3 id="Numbers">Numbers</h3>
+<p>Dart numbers come in two flavors:</p>
+<h4 id="int">int</h4>
+<p>Integer values no larger than 64 bits, depending on the platform. On the Dart VM, values can be from -263 to 263 - 1. Dart that’s compiled to JavaScript uses <a target="_blank" rel="noopener external nofollow noreferrer" href="https://stackoverflow.com/questions/2802957/number-of-bits-in-javascript-numbers/2803010#2803010">JavaScript numbers - https://stackoverflow.com/questions/2802957/number-of-bits-in-javascript-numbers/2803010#2803010</a>, allowing values from -253 to 253 - 1.</p>
+<h3 id="double">double</h3>
+<p>64-bit (double-precision) floating-point numbers, as specified by the IEEE 754 standard.</p>
+<p>Both <code>in</code>t and <code>double</code> are subtypes of <code>num</code>. The <code>num</code> type includes basic operators such as <code>+</code>, <code>-</code>, <code>/</code>, and <code>*</code>, and is also where you’ll find <code>abs()</code>, <code>ceil()</code>, and <code>floor()</code>, among other methods. (Bitwise operators, such as <code>&gt;&gt;</code>, are defined in the int class.) If <code>num</code> and its subtypes don’t have what you’re looking for, the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.dart.dev/stable/dart-math"><code>dart:math</code> - https://api.dart.dev/stable/dart-math</a> library might.</p>
+<p>Integers are numbers without a decimal point. Here are some examples of defining integer literals:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> hex = <span class="number">0xDEADBEEF</span>;</span><br></pre></td></tr></table></figure>
+<p>If a number includes a decimal, it is a double. Here are some examples of defining double literals:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> y = <span class="number">1.1</span>;</span><br><span class="line"><span class="keyword">var</span> exponents = <span class="number">1.42e5</span>;</span><br><span class="line">Integer literals are automatically converted to doubles <span class="keyword">when</span> necessary:</span><br><span class="line"></span><br><span class="line"><span class="built_in">double</span> z = <span class="number">1</span>; <span class="comment">// Equivalent to double z = 1.0.</span></span><br></pre></td></tr></table></figure>
+<p>Here’s how you turn a string into a number, or vice versa:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// String -&gt; int</span></span><br><span class="line"><span class="keyword">var</span> one = <span class="built_in">int</span>.parse(<span class="string">&#x27;1&#x27;</span>);</span><br><span class="line"><span class="keyword">assert</span>(one == <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// String -&gt; double</span></span><br><span class="line"><span class="keyword">var</span> onePointOne = <span class="built_in">double</span>.parse(<span class="string">&#x27;1.1&#x27;</span>);</span><br><span class="line"><span class="keyword">assert</span>(onePointOne == <span class="number">1.1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// int -&gt; String</span></span><br><span class="line"><span class="built_in">String</span> oneAsString = <span class="number">1</span>.toString();</span><br><span class="line"><span class="keyword">assert</span>(oneAsString == <span class="string">&#x27;1&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// double -&gt; String</span></span><br><span class="line"><span class="built_in">String</span> piAsString = <span class="number">3.14159</span>.toStringAsFixed(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">assert</span>(piAsString == <span class="string">&#x27;3.14&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>The int type specifies the traditional bitwise shift (<code>&lt;&lt;</code>, <code>&gt;&gt;</code>), AND (<code>&amp;</code>), and OR (<code>|</code>) operators. For example:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span>((<span class="number">3</span> &lt;&lt; <span class="number">1</span>) == <span class="number">6</span>); <span class="comment">// 0011 &lt;&lt; 1 == 0110</span></span><br><span class="line"><span class="keyword">assert</span>((<span class="number">3</span> &gt;&gt; <span class="number">1</span>) == <span class="number">1</span>); <span class="comment">// 0011 &gt;&gt; 1 == 0001</span></span><br><span class="line"><span class="keyword">assert</span>((<span class="number">3</span> | <span class="number">4</span>) == <span class="number">7</span>); <span class="comment">// 0011 | 0100 == 0111</span></span><br></pre></td></tr></table></figure>
+<p>Literal numbers are compile-time constants. Many arithmetic expressions are also compile-time constants, as long as their operands are compile-time constants that evaluate to numbers.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> msPerSecond = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">const</span> secondsUntilRetry = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> msUntilRetry = secondsUntilRetry * msPerSecond;</span><br></pre></td></tr></table></figure>
+<h3 id="Strings">Strings</h3>
+<p>A Dart string is a sequence of UTF-16 code units. You can use either single or double quotes to create a string:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">&#x27;Single quotes work well for string literals.&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">&quot;Double quotes work just as well.&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> s3 = <span class="string">&#x27;It\&#x27;s easy to escape the string delimiter.&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> s4 = <span class="string">&quot;It&#x27;s even easier to use the other delimiter.&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>You can put the value of an expression inside a string by using <code>$&#123;expression&#125;</code>. If the expression is an identifier, you can skip the <code>&#123;&#125;</code>. To get the string corresponding to an object, Dart calls the object’s <code>toString()</code> method.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&#x27;string interpolation&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>(<span class="string">&#x27;Dart has <span class="subst">$s</span>, which is very handy.&#x27;</span> ==</span><br><span class="line">    <span class="string">&#x27;Dart has string interpolation, &#x27;</span> +</span><br><span class="line">        <span class="string">&#x27;which is very handy.&#x27;</span>);</span><br><span class="line"><span class="keyword">assert</span>(<span class="string">&#x27;That deserves all caps. &#x27;</span> +</span><br><span class="line">        <span class="string">&#x27;<span class="subst">$&#123;s.toUpperCase()&#125;</span> is very handy!&#x27;</span> ==</span><br><span class="line">    <span class="string">&#x27;That deserves all caps. &#x27;</span> +</span><br><span class="line">        <span class="string">&#x27;STRING INTERPOLATION is very handy!&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: The <code>== </code>operator tests whether two objects are equivalent. Two strings are equivalent if they contain the same sequence of code units.</p>
+<hr>
+<p>You can concatenate strings using adjacent string literals or the <code>+</code> operator:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">&#x27;String &#x27;</span></span><br><span class="line">    <span class="string">&#x27;concatenation&#x27;</span></span><br><span class="line">    <span class="string">&quot; works even over line breaks.&quot;</span>;</span><br><span class="line"><span class="keyword">assert</span>(s1 ==</span><br><span class="line">    <span class="string">&#x27;String concatenation works even over &#x27;</span></span><br><span class="line">        <span class="string">&#x27;line breaks.&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">&#x27;The + operator &#x27;</span> + <span class="string">&#x27;works, as well.&#x27;</span>;</span><br><span class="line"><span class="keyword">assert</span>(s2 == <span class="string">&#x27;The + operator works, as well.&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>Another way to create a multi-line string: use a triple quote with either single or double quotation marks:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">You can create</span></span><br><span class="line"><span class="string">multi-line strings like this one.</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">&quot;&quot;&quot;This is also a</span></span><br><span class="line"><span class="string">multi-line string.&quot;&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>You can create a “raw” string by prefixing it with r:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">r&#x27;In a raw string, not even \n gets special treatment.&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/language-tour#characters">Runes and grapheme clusters - https://dart.dev/guides/language/language-tour#characters</a> for details on how to express Unicode characters in a string.</p>
+<p>Literal strings are compile-time constants, as long as any interpolated expression is a compile-time constant that evaluates to <code>null</code> or a numeric, string, or boolean value.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// These work in a const string.</span></span><br><span class="line"><span class="keyword">const</span> aConstNum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> aConstBool = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">const</span> aConstString = <span class="string">&#x27;a constant string&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// These do NOT work in a const string.</span></span><br><span class="line"><span class="keyword">var</span> aNum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> aBool = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">var</span> aString = <span class="string">&#x27;a string&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> aConstList = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> validConstString = <span class="string">&#x27;<span class="subst">$aConstNum</span> <span class="subst">$aConstBool</span> <span class="subst">$aConstString</span>&#x27;</span>;</span><br><span class="line"><span class="comment">// const invalidConstString = &#x27;$aNum $aBool $aString $aConstList&#x27;;</span></span><br></pre></td></tr></table></figure>
+<p>For more information on using strings, see <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/libraries/library-tour#strings-and-regular-expressions">Strings and regular expressions - https://dart.dev/guides/libraries/library-tour#strings-and-regular-expressions</a>.</p>
+<h3 id="Booleans">Booleans</h3>
+<p>To represent boolean values, Dart has a type named bool. Only two objects have type <code>bool</code>: the boolean literals <code>true</code> and <code>false</code>, which are both compile-time constants.</p>
+<p>Dart’s type safety means that you can’t use code like <code>if (nonbooleanValue)</code> or <code>assert (nonbooleanValue)</code>. Instead, explicitly check for values, like this:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Check for an empty string.</span></span><br><span class="line"><span class="keyword">var</span> fullName = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">assert</span>(fullName.isEmpty);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Check for zero.</span></span><br><span class="line"><span class="keyword">var</span> hitPoints = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">assert</span>(hitPoints &lt;= <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Check for null.</span></span><br><span class="line"><span class="keyword">var</span> unicorn;</span><br><span class="line"><span class="keyword">assert</span>(unicorn == <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Check for NaN.</span></span><br><span class="line"><span class="keyword">var</span> iMeantToDoThis = <span class="number">0</span> / <span class="number">0</span>;</span><br><span class="line"><span class="keyword">assert</span>(iMeantToDoThis.isNaN);</span><br></pre></td></tr></table></figure>
+<h3 id="Lists">Lists</h3>
+<p>Perhaps the most common collection in nearly every programming language is the array, or ordered group of objects. In Dart, arrays are <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.dart.dev/stable/dart-core/List-class.html"><code>List</code> - https://api.dart.dev/stable/dart-core/List-class.html</a> objects, so most people just call them lists.</p>
+<p>Dart list literals look like JavaScript array literals. Here’s a simple Dart list:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: Dart infers that list has type <code>List&lt;int&gt;</code>. If you try to add non-integer objects to this list, the analyzer or runtime raises an error. For more information, read about <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/type-system#type-inference">type inference - https://dart.dev/guides/language/type-system#type-inference</a>.</p>
+<hr>
+<p>You can add a comma after the last item in a Dart collection literal. This trailing comma doesn’t affect the collection, but it can help prevent copy-paste errors.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = [</span><br><span class="line">  <span class="string">&#x27;Car&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;Boat&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;Plane&#x27;</span>,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<p>Lists use zero-based indexing, where 0 is the index of the first value and list.length - 1 is the index of the last value. You can get a list’s length and refer to list values just as you would in JavaScript:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">assert</span>(list.length == <span class="number">3</span>);</span><br><span class="line"><span class="keyword">assert</span>(list[<span class="number">1</span>] == <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">list[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">assert</span>(list[<span class="number">1</span>] == <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>To create a list that’s a compile-time constant, add const before the list literal:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> constantList = <span class="keyword">const</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="comment">// constantList[1] = 1; // This line will cause an error.</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Dart 2.3 introduced the spread operator (<code>...</code>) and the null-aware spread operator (<code>...?</code>), which provide a concise way to insert multiple values into a collection.</p>
+<hr>
+<p>For example, you can use the spread operator (<code>...</code>) to insert all the values of a list into another list:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> list2 = [<span class="number">0</span>, ...list];</span><br><span class="line"><span class="keyword">assert</span>(list2.length == <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<p>If the expression to the right of the spread operator might be <code>null</code>, you can avoid exceptions by using a null-aware spread operator (<code>...?</code>):</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list;</span><br><span class="line"><span class="keyword">var</span> list2 = [<span class="number">0</span>, ...?list];</span><br><span class="line"><span class="keyword">assert</span>(list2.length == <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>For more details and examples of using the spread operator, see the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/dart-lang/language/blob/master/accepted/2.3/spread-collections/feature-specification.md">spread operator proposal - https://github.com/dart-lang/language/blob/master/accepted/2.3/spread-collections/feature-specification.md</a>.</p>
+<p>Dart also offers collection if and collection for, which you can use to build collections using conditionals (<code>if</code>) and repetition (<code>for</code>).</p>
+<p>Here’s an example of using collection <code>if</code> to create a list with three or four items in it:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> nav = [</span><br><span class="line">  <span class="string">&#x27;Home&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;Furniture&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;Plants&#x27;</span>,</span><br><span class="line">  <span class="keyword">if</span> (promoActive) <span class="string">&#x27;Outlet&#x27;</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<p>Here’s an example of using collection for to manipulate the items of a list before adding them to another list:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> listOfInts = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> listOfStrings = [</span><br><span class="line">  <span class="string">&#x27;#0&#x27;</span>,</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> listOfInts) <span class="string">&#x27;#<span class="subst">$i</span>&#x27;</span></span><br><span class="line">];</span><br><span class="line"><span class="keyword">assert</span>(listOfStrings[<span class="number">1</span>] == <span class="string">&#x27;#1&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>For more details and examples of using collection <code>if</code> and <code>for</code>, see the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/dart-lang/language/blob/master/accepted/2.3/control-flow-collections/feature-specification.md">control flow collections proposal - https://github.com/dart-lang/language/blob/master/accepted/2.3/control-flow-collections/feature-specification.md</a>.</p>
+<p>The List type has many handy methods for manipulating lists. For more information about lists, see <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/language-tour#generics">Generics - https://dart.dev/guides/language/language-tour#generics</a> and <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/libraries/library-tour#collections">Collections - https://dart.dev/guides/libraries/library-tour#collections</a>.</p>
+<h3 id="Sets">Sets</h3>
+<p>A set in Dart is an unordered collection of unique items. Dart support for sets is provided by set literals and the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.dart.dev/stable/dart-core/Set-class.html"><code>Set</code> - https://api.dart.dev/stable/dart-core/Set-class.html</a> type.</p>
+<p>Here is a simple Dart set, created using a set literal:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> halogens = &#123;<span class="string">&#x27;fluorine&#x27;</span>, <span class="string">&#x27;chlorine&#x27;</span>, <span class="string">&#x27;bromine&#x27;</span>, <span class="string">&#x27;iodine&#x27;</span>, <span class="string">&#x27;astatine&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: Dart infers that halogens has the type Set<String>. If you try to add the wrong type of value to the set, the analyzer or runtime raises an error. For more information, read about <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/type-system#type-inference">type inference - https://dart.dev/guides/language/type-system#type-inference</a>.</p>
+<hr>
+<p>To create an empty set, use <code>&#123;&#125;</code> preceded by a type argument, or assign <code>&#123;&#125;</code> to a variable of type Set:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> names = &lt;<span class="built_in">String</span>&gt;&#123;&#125;;</span><br><span class="line"><span class="comment">// Set&lt;String&gt; names = &#123;&#125;; // This works, too.</span></span><br><span class="line"><span class="comment">// var names = &#123;&#125;; // Creates a map, not a set.</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Set or map? The syntax for map literals is similar to that for set literals. Because map literals came first, <code>&#123;&#125;</code> defaults to the <code>Map</code> type. If you forget the type annotation on <code>&#123;&#125;</code> or the variable it’s assigned to, then Dart creates an object of type Map&lt;dynamic, dynamic&gt;.</p>
+<hr>
+<p>Add items to an existing set using the <code>add()</code> or <code>addAll()</code> methods:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elements = &lt;<span class="built_in">String</span>&gt;&#123;&#125;;</span><br><span class="line">elements.add(<span class="string">&#x27;fluorine&#x27;</span>);</span><br><span class="line">elements.addAll(halogens);</span><br><span class="line">Use .length to <span class="keyword">get</span> the number of items <span class="keyword">in</span> the <span class="keyword">set</span>:</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> elements = &lt;<span class="built_in">String</span>&gt;&#123;&#125;;</span><br><span class="line">elements.add(<span class="string">&#x27;fluorine&#x27;</span>);</span><br><span class="line">elements.addAll(halogens);</span><br><span class="line"><span class="keyword">assert</span>(elements.length == <span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+<p>To create a set that’s a compile-time constant, add const before the set literal:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> constantSet = <span class="keyword">const</span> &#123;</span><br><span class="line">  <span class="string">&#x27;fluorine&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;chlorine&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;bromine&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;iodine&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;astatine&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// constantSet.add(&#x27;helium&#x27;); // This line will cause an error.</span></span><br></pre></td></tr></table></figure>
+<p>Sets support spread operators (<code>...</code> and <code>...?</code>) and collection ifs and fors, just like lists do. For more information, see the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/language-tour#spread-operator">list spread operator - https://dart.dev/guides/language/language-tour#spread-operator</a> and list collection operator discussions.</p>
+<p>For more information about sets, see <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/language-tour#generics">Generics - https://dart.dev/guides/language/language-tour#generics</a> and <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/libraries/library-tour#sets">Sets - https://dart.dev/guides/libraries/library-tour#sets</a>.</p>
+<h3 id="Maps">Maps</h3>
+<p>In general, a map is an object that associates keys and values. Both keys and values can be any type of object. Each key occurs only once, but you can use the same value multiple times. Dart support for maps is provided by map literals and the Map type.</p>
+<p>Here are a couple of simple Dart maps, created using map literals:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gifts = &#123;</span><br><span class="line">  <span class="comment">// Key:    Value</span></span><br><span class="line">  <span class="string">&#x27;first&#x27;</span>: <span class="string">&#x27;partridge&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;second&#x27;</span>: <span class="string">&#x27;turtledoves&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;fifth&#x27;</span>: <span class="string">&#x27;golden rings&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> nobleGases = &#123;</span><br><span class="line">  <span class="number">2</span>: <span class="string">&#x27;helium&#x27;</span>,</span><br><span class="line">  <span class="number">10</span>: <span class="string">&#x27;neon&#x27;</span>,</span><br><span class="line">  <span class="number">18</span>: <span class="string">&#x27;argon&#x27;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: Dart infers that gifts has the type <code>Map&lt;String, String&gt;</code> and nobleGases has the type <code>Map&lt;int, String&gt;</code>. If you try to add the wrong type of value to either map, the analyzer or runtime raises an error. For more information, read about type inference.</p>
+<hr>
+<p>You can create the same objects using a <code>Map</code> constructor:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gifts = <span class="built_in">Map</span>();</span><br><span class="line">gifts[<span class="string">&#x27;first&#x27;</span>] = <span class="string">&#x27;partridge&#x27;</span>;</span><br><span class="line">gifts[<span class="string">&#x27;second&#x27;</span>] = <span class="string">&#x27;turtledoves&#x27;</span>;</span><br><span class="line">gifts[<span class="string">&#x27;fifth&#x27;</span>] = <span class="string">&#x27;golden rings&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> nobleGases = <span class="built_in">Map</span>();</span><br><span class="line">nobleGases[<span class="number">2</span>] = <span class="string">&#x27;helium&#x27;</span>;</span><br><span class="line">nobleGases[<span class="number">10</span>] = <span class="string">&#x27;neon&#x27;</span>;</span><br><span class="line">nobleGases[<span class="number">18</span>] = <span class="string">&#x27;argon&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: If you come from a language like C# or Java, you might expect to see new Map() instead of just <code>Map()</code>. In Dart, the new keyword is optional. For details, see Using <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/language-tour#using-constructors">constructors - https://dart.dev/guides/language/language-tour#using-constructors</a>.</p>
+<hr>
+<p>Add a new key-value pair to an existing map just as you would in JavaScript:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gifts = &#123;<span class="string">&#x27;first&#x27;</span>: <span class="string">&#x27;partridge&#x27;</span>&#125;;</span><br><span class="line">gifts[<span class="string">&#x27;fourth&#x27;</span>] = <span class="string">&#x27;calling birds&#x27;</span>; <span class="comment">// Add a key-value pair</span></span><br><span class="line">Retrieve a value from a map the same way you would <span class="keyword">in</span> JavaScript:</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gifts = &#123;<span class="string">&#x27;first&#x27;</span>: <span class="string">&#x27;partridge&#x27;</span>&#125;;</span><br><span class="line"><span class="keyword">assert</span>(gifts[<span class="string">&#x27;first&#x27;</span>] == <span class="string">&#x27;partridge&#x27;</span>);</span><br><span class="line">If you look <span class="keyword">for</span> a key that isn’t <span class="keyword">in</span> a map, you <span class="keyword">get</span> a <span class="keyword">null</span> <span class="keyword">in</span> <span class="keyword">return</span>:</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gifts = &#123;<span class="string">&#x27;first&#x27;</span>: <span class="string">&#x27;partridge&#x27;</span>&#125;;</span><br><span class="line"><span class="keyword">assert</span>(gifts[<span class="string">&#x27;fifth&#x27;</span>] == <span class="keyword">null</span>);</span><br><span class="line">Use .length to <span class="keyword">get</span> the number of key-value pairs <span class="keyword">in</span> the map:</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gifts = &#123;<span class="string">&#x27;first&#x27;</span>: <span class="string">&#x27;partridge&#x27;</span>&#125;;</span><br><span class="line">gifts[<span class="string">&#x27;fourth&#x27;</span>] = <span class="string">&#x27;calling birds&#x27;</span>;</span><br><span class="line"><span class="keyword">assert</span>(gifts.length == <span class="number">2</span>);</span><br><span class="line">To create a map that’s a compile-time constant, add <span class="keyword">const</span> before the map literal:</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> constantMap = <span class="keyword">const</span> &#123;</span><br><span class="line">  <span class="number">2</span>: <span class="string">&#x27;helium&#x27;</span>,</span><br><span class="line">  <span class="number">10</span>: <span class="string">&#x27;neon&#x27;</span>,</span><br><span class="line">  <span class="number">18</span>: <span class="string">&#x27;argon&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// constantMap[2] = &#x27;Helium&#x27;; // This line will cause an error.</span></span><br></pre></td></tr></table></figure>
+<p>Maps support spread operators (<code>...</code> and <code>...?</code>) and collection if and for, just like lists do. For details and examples, see the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/dart-lang/language/blob/master/accepted/2.3/spread-collections/feature-specification.md">spread operator proposal - https://github.com/dart-lang/language/blob/master/accepted/2.3/spread-collections/feature-specification.md</a> and the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/dart-lang/language/blob/master/accepted/2.3/control-flow-collections/feature-specification.md">control flow collections proposal - https://github.com/dart-lang/language/blob/master/accepted/2.3/control-flow-collections/feature-specification.md</a>.</p>
+<p>For more information about maps, see <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/language-tour#generics">Generics - https://dart.dev/guides/language/language-tour#generics</a> and <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/libraries/library-tour#maps">Maps - https://dart.dev/guides/libraries/library-tour#maps</a>.</p>
+<h3 id="Runes-and-grapheme-clusters">Runes and grapheme clusters</h3>
+<p>In Dart, runes expose the Unicode code points of a string. You can use the characters package to view or manipulate user-perceived characters, also known as Unicode (extended) grapheme clusters.</p>
+<p>Unicode defines a unique numeric value for each letter, digit, and symbol used in all of the world’s writing systems. Because a Dart string is a sequence of UTF-16 code units, expressing Unicode code points within a string requires special syntax. The usual way to express a Unicode code point is \uXXXX, where XXXX is a 4-digit hexadecimal value. For example, the heart character (♥) is \u2665. To specify more or less than 4 hex digits, place the value in curly brackets. For example, the laughing emoji (😆) is \u{1f606}.</p>
+<p>If you need to read or write individual Unicode characters, use the characters getter defined on String by the characters package. The returned Characters object is the string as a sequence of grapheme clusters. Here’s an example of using the characters API:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:characters/characters.dart&#x27;</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">var</span> hi = <span class="string">&#x27;Hi 🇩🇰&#x27;</span>;</span><br><span class="line"><span class="built_in">print</span>(hi);</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;The end of the string: <span class="subst">$&#123;hi.substring(hi.length - <span class="number">1</span>)&#125;</span>&#x27;</span>);</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;The last character: <span class="subst">$&#123;hi.characters.last&#125;</span>\n&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>The output, depending on your environment, looks something like this:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> dart bin/main.dart</span><br><span class="line">Hi 🇩🇰</span><br><span class="line">The end of the string: ???</span><br><span class="line">The last character: 🇩🇰</span><br></pre></td></tr></table></figure>
+<p>For details on using the characters package to manipulate strings, see the example and API reference for the characters package.</p>
+<h3 id="Symbols">Symbols</h3>
+<p>A <code>Symbol</code> object represents an operator or identifier declared in a Dart program. You might never need to use symbols, but they’re invaluable for APIs that refer to identifiers by name, because minification changes identifier names but not identifier symbols.</p>
+<p>To get the symbol for an identifier, use a symbol literal, which is just <code>#</code> followed by the identifier:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#radix</span><br><span class="line">#bar</span><br></pre></td></tr></table></figure>
+<p>Symbol literals are compile-time constants.</p>
+<h2 id="Comments">Comments</h2>
+<p>Dart supports single-line comments, multi-line comments, and documentation comments.</p>
+<h2 id="Single-line-comments">Single-line comments</h2>
+<p>A single-line comment begins with <code>//</code>. Everything between <code>//</code> and the end of line is ignored by the Dart compiler.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// <span class="doctag">TODO:</span> refactor into an AbstractLlamaGreetingFactory?</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;Welcome to my Llama farm!&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Multi-line-comments">Multi-line comments</h3>
+<p>A multi-line comment begins with <code>/*</code> and ends with <code>*/</code>. Everything between <code>/*</code> and <code>*/</code> is ignored by the Dart compiler (unless the comment is a documentation comment; see the next section). Multi-line comments can nest.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * This is a lot of work. Consider raising chickens.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  Llama larry = Llama();</span></span><br><span class="line"><span class="comment">  larry.feed();</span></span><br><span class="line"><span class="comment">  larry.exercise();</span></span><br><span class="line"><span class="comment">  larry.clean();</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Documentation-comments">Documentation comments</h3>
+<p>Documentation comments are multi-line or single-line comments that begin with <code>///</code> or <code>/**</code>. Using <code>///</code> on consecutive lines has the same effect as a multi-line doc comment.</p>
+<p>Inside a documentation comment, the Dart compiler ignores all text unless it is enclosed in brackets. Using brackets, you can refer to classes, methods, fields, top-level variables, functions, and parameters. The names in brackets are resolved in the lexical scope of the documented program element.</p>
+<p>Here is an example of documentation comments with references to other classes and arguments:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="language-markdown">A domesticated South American camelid (Lama glama).</span></span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// <span class="language-markdown">Andean cultures have used llamas as meat and pack</span></span></span><br><span class="line"><span class="comment">/// <span class="language-markdown">animals since pre-Hispanic times.</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Llama</span> </span>&#123;</span><br><span class="line">  <span class="built_in">String</span> name;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">Feeds your llama [Food].</span></span></span><br><span class="line">  <span class="comment">///</span></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">The typical llama eats one bale of hay per week.</span></span></span><br><span class="line">  <span class="keyword">void</span> feed(Food food) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">Exercises your llama with an [activity] for</span></span></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">[timeLimit] minutes.</span></span></span><br><span class="line">  <span class="keyword">void</span> exercise(Activity activity, <span class="built_in">int</span> timeLimit) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In the generated documentation, [Food] becomes a link to the API docs for the Food class.</p>
+<p>To parse Dart code and generate HTML documentation, you can use the SDK’s <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/dart-lang/dartdoc#dartdoc">documentation generation tool - https://github.com/dart-lang/dartdoc#dartdoc</a>. For an example of generated documentation, see the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://api.dart.dev/stable">Dart API documentation - https://api.dart.dev/stable</a>. For advice on how to structure your comments, see <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/effective-dart/documentation">Guidelines for Dart Doc Comments - https://dart.dev/guides/language/effective-dart/documentation</a>.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/language-tour">Language tour | Dart - https://dart.dev/guides/language/language-tour</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://dart.dev/guides/language/effective-dart/design">Effective Dart: Design | Dart - https://dart.dev/guides/language/effective-dart/design</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/const/" rel="tag"># const</a>
+              <a href="/tags/final/" rel="tag"># final</a>
+              <a href="/tags/Dart/" rel="tag"># Dart</a>
+              <a href="/tags/Language-Tour/" rel="tag"># Language Tour</a>
+              <a href="/tags/Variable/" rel="tag"># Variable</a>
+              <a href="/tags/var/" rel="tag"># var</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/03/07/Programming-Language/Golang-Go/Awesome-Go/Use-mapstructure-to-decode-generic-map-values-to-structure-in-Golang-Go/" rel="prev" title="[Awesome Go] Use mapstructure to decode generic map values to structure in Golang (Go)">
+                  <i class="fa fa-angle-left"></i> [Awesome Go] Use mapstructure to decode generic map values to structure in Golang (Go)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/03/07/Programming-Language/Dart/Language-Tour/Generics-Libraries-and-visibility/" rel="next" title="[Dart Language Tour] Generics, Libraries and visibility">
+                  [Dart Language Tour] Generics, Libraries and visibility <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"87a142a4c46a3766275c15f4244d3490"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

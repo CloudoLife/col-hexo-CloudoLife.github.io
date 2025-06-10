@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Bitnami Redis with Docker and Docker Compose Bitnami makes it easy to get your favorite open source software up and running on any platform, including your laptop, Kubernetes and all the major clouds.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Docker Redis] Run Redis with Bitnami, Docker and Docker Compose">
+<meta property="og:url" content="https://cloudolife.com/2021/06/19/Infrastructure-as-Code-IaC/Container/Docker/Bitnami/Run-Redis-with-Bitnami-Docker-and-Docker-Compose/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Bitnami Redis with Docker and Docker Compose Bitnami makes it easy to get your favorite open source software up and running on any platform, including your laptop, Kubernetes and all the major clouds.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-19T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.914Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Docker Compose">
+<meta property="article:tag" content="SSL">
+<meta property="article:tag" content="Container">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Secure Sockets Layer">
+<meta property="article:tag" content="Secure Sockets Layer (SSL)">
+<meta property="article:tag" content="TLS">
+<meta property="article:tag" content="Transport Layer Security">
+<meta property="article:tag" content="Transport Layer Security (TLS)">
+<meta property="article:tag" content="Infrastructure-as-Code-IaC">
+<meta property="article:tag" content="Bitnami">
+<meta property="article:tag" content="NoSQL">
+<meta property="article:tag" content="AOF">
+<meta property="article:tag" content="Append Only File">
+<meta property="article:tag" content="Append Only File (AOF)">
+<meta property="article:tag" content="Replication">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/06/19/Infrastructure-as-Code-IaC/Container/Docker/Bitnami/Run-Redis-with-Bitnami-Docker-and-Docker-Compose/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/06/19/Infrastructure-as-Code-IaC/Container/Docker/Bitnami/Run-Redis-with-Bitnami-Docker-and-Docker-Compose/","path":"2021/06/19/Infrastructure-as-Code-IaC/Container/Docker/Bitnami/Run-Redis-with-Bitnami-Docker-and-Docker-Compose/","title":"[Docker Redis] Run Redis with Bitnami, Docker and Docker Compose"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Docker Redis] Run Redis with Bitnami, Docker and Docker Compose | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bitnami-Redis-with-Docker-and-Docker-Compose"><span class="nav-number">1.</span> <span class="nav-text">Bitnami Redis with Docker and Docker Compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">2.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">3.</span> <span class="nav-text">Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">3.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">3.2.</span> <span class="nav-text">Docker Compose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration"><span class="nav-number">4.</span> <span class="nav-text">Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Persisting-your-database"><span class="nav-number">4.1.</span> <span class="nav-text">Persisting your database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disabling-Redis%E2%84%A2-commands"><span class="nav-number">4.2.</span> <span class="nav-text">Disabling Redis™ commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Passing-extra-command-line-flags-to-redis-server-startup"><span class="nav-number">4.3.</span> <span class="nav-text">Passing extra command-line flags to redis-server startup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setting-the-server-password-on-first-run"><span class="nav-number">4.4.</span> <span class="nav-text">Setting the server password on first run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allowing-empty-passwords"><span class="nav-number">4.5.</span> <span class="nav-text">Allowing empty passwords</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disabling-AOF-persistence"><span class="nav-number">4.6.</span> <span class="nav-text">Disabling AOF persistence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setting-up-replication"><span class="nav-number">4.7.</span> <span class="nav-text">Setting up replication</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-1-Create-the-replication-master"><span class="nav-number">4.7.1.</span> <span class="nav-text">Step 1: Create the replication master</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-2-Create-the-replica-node"><span class="nav-number">4.7.2.</span> <span class="nav-text">Step 2: Create the replica node</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Securing-Redis%E2%84%A2-traffic"><span class="nav-number">4.8.</span> <span class="nav-text">Securing Redis™ traffic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration-file"><span class="nav-number">4.9.</span> <span class="nav-text">Configuration file</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">5.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cant-open-the-append-only-file-Permission-Denied"><span class="nav-number">5.1.</span> <span class="nav-text">Cant open the append only file - Permission Denied</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/06/19/Infrastructure-as-Code-IaC/Container/Docker/Bitnami/Run-Redis-with-Bitnami-Docker-and-Docker-Compose/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Docker Redis] Run Redis with Bitnami, Docker and Docker Compose | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Docker Redis] Run Redis with Bitnami, Docker and Docker Compose
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-19 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-19T00:00:00+00:00">2021-06-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/" itemprop="url" rel="index"><span itemprop="name">Infrastructure-as-Code-IaC</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Container/" itemprop="url" rel="index"><span itemprop="name">Container</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Container/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Container/Docker/Docker-Compose/" itemprop="url" rel="index"><span itemprop="name">Docker Compose</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Container/Docker/Docker-Compose/Bitnami/" itemprop="url" rel="index"><span itemprop="name">Bitnami</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>13k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>12 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Bitnami-Redis-with-Docker-and-Docker-Compose">Bitnami Redis with Docker and Docker Compose</h2>
+<p>Bitnami makes it easy to get your favorite open source software up and running on any platform, including your laptop, Kubernetes and all the major clouds. In addition to popular community offerings, Bitnami, now part of VMware, provides IT organizations with an enterprise offering that is secure, compliant, continuously maintained and customizable to your organizational policies.</p>
+<p>Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker. Redis provides data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes, and streams. Redis has built-in replication, Lua scripting, LRU eviction, transactions, and different levels of on-disk persistence, and provides high availability via Redis Sentinel and automatic partitioning with Redis Cluster.</p>
+<span id="more"></span>
+<h2 id="Prerequisites">Prerequisites</h2>
+<ul>
+<li>
+<p>Docker</p>
+<p>Docker is a tool to build safer, share wider, run faster: New updates to our product subscriptions.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.docker.com/">Empowering App Development for Developers | Docker - https://www.docker.com/</a><br>
+to learn more.</p>
+</li>
+<li>
+<p>Docker Compose</p>
+<p>Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.docker.com/compose/">Overview of Docker Compose | Docker Documentation - https://docs.docker.com/compose/</a> to learn more.</p>
+</li>
+</ul>
+<h2 id="Examples">Examples</h2>
+<h3 id="Docker">Docker</h3>
+<p>Run Redis with Docker.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run \</span></span><br><span class="line"><span class="language-bash">    -e ALLOW_EMPTY_PASSWORD=<span class="built_in">yes</span> \</span></span><br><span class="line"><span class="language-bash">    -v <span class="variable">$&#123;PWD&#125;</span>/runtime/bitnami/redis/data:/bitnami/redis/data \</span></span><br><span class="line"><span class="language-bash">    bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<h3 id="Docker-Compose">Docker Compose</h3>
+<p>Create or edit <code>docker-compose.yml</code> file:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.io/bitnami/redis:6.2</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="comment"># ALLOW_EMPTY_PASSWORD is recommended only for development.</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ALLOW_EMPTY_PASSWORD=yes</span></span><br><span class="line">      <span class="comment"># - REDIS_PASSWORD=password123</span></span><br><span class="line">      <span class="comment"># - REDIS_AOF_ENABLED=no</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;6379:6379&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;./runtime/bitnami/redis/data:/bitnami/redis/data&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Run Redis with Docker Compose.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker-compose up</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml">bitnami-docker-redis/docker-compose.yml at master · bitnami/bitnami-docker-redis - https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml</a> to learn more.</p>
+<h2 id="Configuration">Configuration</h2>
+<h3 id="Persisting-your-database">Persisting your database</h3>
+<p>Redis™ provides a different range of persistence options. This contanier uses AOF persistence by default but it is easy to overwrite that configuration in a <code>docker-compose.yaml</code> file with this entry command: <code>/opt/bitnami/scripts/redis/run.sh --appendonly no</code>. Alternatively, you may use the <code>REDIS_AOF_ENABLED</code> env variable as explained in Disabling AOF persistence.</p>
+<p>If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.</p>
+<p>For persistence you should mount a directory at the <code>/bitnami</code> path. If the mounted directory is empty, it will be initialized on the first run.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run \</span></span><br><span class="line"><span class="language-bash">    -e ALLOW_EMPTY_PASSWORD=<span class="built_in">yes</span> \</span></span><br><span class="line"><span class="language-bash">    -v /path/to/redis-persistence:/bitnami/redis/data \</span></span><br><span class="line"><span class="language-bash">    bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<p>You can also do this by modifying the <code>docker-compose.yml</code> file present in this repository:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/path/to/redis-persistence:/bitnami/redis/data</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID <code>1001</code>.</p>
+<hr>
+<h3 id="Disabling-Redis™-commands">Disabling Redis™ commands</h3>
+<p>For security reasons, you may want to disable some commands. You can specify them by using the following environment variable on the first run:</p>
+<ul>
+<li><code>REDIS_DISABLE_COMMANDS</code>: Comma-separated list of Redis™ commands to disable. Defaults to empty.</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --name redis -e REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<p>Alternatively, modify the <code>docker-compose.yml</code> file present in this repository:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<p>As specified in the docker-compose, <code>FLUSHDB</code> and <code>FLUSHALL</code> commands are disabled. Comment out or remove the environment variable if you don’t want to disable any commands:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="comment"># - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<h3 id="Passing-extra-command-line-flags-to-redis-server-startup">Passing extra command-line flags to redis-server startup</h3>
+<p>Passing extra command-line flags to the redis service command is possible by adding them as arguments to <a target="_blank" rel="noopener external nofollow noreferrer" href="http://run.sh">run.sh</a> script:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --name redis -e ALLOW_EMPTY_PASSWORD=<span class="built_in">yes</span> bitnami/redis:latest /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb</span></span><br></pre></td></tr></table></figure>
+<p>Alternatively, modify the <code>docker-compose.yml</code> file present in this repository:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ALLOW_EMPTY_PASSWORD=yes</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">/opt/bitnami/scripts/redis/run.sh</span> <span class="string">--maxmemory</span> <span class="string">100mb</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<p>Refer to the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://redis.io/topics/config#passing-arguments-via-the-command-line">Redis™ documentation - https://redis.io/topics/config#passing-arguments-via-the-command-line</a> for the complete list of arguments.</p>
+<h3 id="Setting-the-server-password-on-first-run">Setting the server password on first run</h3>
+<p>Passing the <code>REDIS_PASSWORD</code> environment variable when running the image for the first time will set the Redis™ server password to the value of <code>REDIS_PASSWORD</code> (or the content of the file specified in <code>REDIS_PASSWORD_FILE</code>).</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<p>Alternatively, modify the <code>docker-compose.yml</code> file present in this repository:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_PASSWORD=password123</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>NOTE: The at sign (@) is not supported for REDIS_PASSWORD.</p>
+<hr>
+<p>Warning The Redis™ database is always configured with remote access enabled. It’s suggested that the <code>REDIS_PASSWORD</code> env variable is always specified to set a password. In case you want to access the database without a password set the environment variable <code>ALLOW_EMPTY_PASSWORD=yes</code>. This is recommended only for development.</p>
+<h3 id="Allowing-empty-passwords">Allowing empty passwords</h3>
+<p>By default the Redis™ image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the <code>ALLOW_EMPTY_PASSWORD=yes</code> env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the <code>REDIS_PASSWORD</code> for any other scenario.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --name redis -e ALLOW_EMPTY_PASSWORD=<span class="built_in">yes</span> bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<p>Alternatively, modify the docker-compose.yml file present in this repository:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ALLOW_EMPTY_PASSWORD=yes</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<h3 id="Disabling-AOF-persistence">Disabling AOF persistence</h3>
+<p>Redis™ offers different options when it comes to persistence. By default, this image is set up to use the AOF (Append Only File) approach. Should you need to change this behaviour, setting the <code>REDIS_AOF_ENABLED=no</code> env variable will disable this feature.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --name redis -e REDIS_AOF_ENABLED=no bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<p>Alternatively, modify the docker-compose.yml file present in this repository:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_AOF_ENABLED=no</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<h3 id="Setting-up-replication">Setting up replication</h3>
+<p>A replication cluster can easily be setup with the Bitnami Redis™ Docker Image using the following environment variables:</p>
+<ul>
+<li>
+<p><code>REDIS_REPLICATION_MODE</code>: The replication mode. Possible values master/slave. No defaults.</p>
+</li>
+<li>
+<p><code>REDIS_REPLICA_IP</code>: The replication announce ip. Defaults to $(get_machine_ip) which return the ip of the container.</p>
+</li>
+<li>
+<p><code>REDIS_REPLICA_PORT</code>: The replication announce port. Defaults to <code>REDIS_MASTER_PORT_NUMBER</code>.</p>
+</li>
+<li>
+<p><code>REDIS_MASTER_HOST</code>: Hostname/IP of replication master (replica node parameter). No defaults.</p>
+</li>
+<li>
+<p><code>REDIS_MASTER_PORT_NUMBER</code>: Server port of the replication master (replica node parameter). Defaults to <code>6379</code>.</p>
+</li>
+<li>
+<p><code>REDIS_MASTER_PASSWORD</code>: Password to authenticate with the master (replica node parameter). No defaults. As an alternative, you can mount a file with the password and set the <code>REDIS_MASTER_PASSWORD_FILE</code> variable.</p>
+</li>
+</ul>
+<p>In a replication cluster you can have one master and zero or more replicas. When replication is enabled the master node is in read-write mode, while the replicas are in read-only mode. For best performance its advisable to limit the reads to the replicas.</p>
+<h4 id="Step-1-Create-the-replication-master">Step 1: Create the replication master</h4>
+<p>The first step is to start the Redis™ master.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --name redis-master \</span></span><br><span class="line"><span class="language-bash">  -e REDIS_REPLICATION_MODE=master \</span></span><br><span class="line"><span class="language-bash">  -e REDIS_PASSWORD=masterpassword123 \</span></span><br><span class="line"><span class="language-bash">  bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<p>In the above command the container is configured as the master using the <code>REDIS_REPLICATION_MODE</code> parameter. The <code>REDIS_PASSWORD</code> parameter enables authentication on the Redis™ master.</p>
+<h4 id="Step-2-Create-the-replica-node">Step 2: Create the replica node</h4>
+<p>Next we start a Redis™ replica container.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --name redis-replica \</span></span><br><span class="line"><span class="language-bash">  --<span class="built_in">link</span> redis-master:master \</span></span><br><span class="line"><span class="language-bash">  -e REDIS_REPLICATION_MODE=slave \</span></span><br><span class="line"><span class="language-bash">  -e REDIS_MASTER_HOST=master \</span></span><br><span class="line"><span class="language-bash">  -e REDIS_MASTER_PORT_NUMBER=6379 \</span></span><br><span class="line"><span class="language-bash">  -e REDIS_MASTER_PASSWORD=masterpassword123 \</span></span><br><span class="line"><span class="language-bash">  -e REDIS_PASSWORD=password123 \</span></span><br><span class="line"><span class="language-bash">  bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<p>In the above command the container is configured as a slave using the <code>REDIS_REPLICATION_MODE</code> parameter. The <code>REDIS_MASTER_HOST</code>, <code>REDIS_MASTER_PORT_NUMBER</code> and <code>REDIS_MASTER_PASSWORD</code> parameters are used connect and authenticate with the Redis™ master. The <code>REDIS_PASSWORD</code> parameter enables authentication on the Redis™ replica.</p>
+<p>You now have a two node Redis™ master/replica replication cluster up and running which can be scaled by adding/removing replicas.</p>
+<p>If the Redis™ master goes down you can reconfigure a replica to become a master using:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker <span class="built_in">exec</span> redis-replica redis-cli -a password123 SLAVEOF NO ONE</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: The configuration of the other replicas in the cluster needs to be updated so that they are aware of the new master. In our example, this would involve restarting the other replicas with <code>--link redis-replica:master</code>.</p>
+<hr>
+<p>With Docker Compose the master/replica mode can be setup using:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis-master:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;bitnami/redis:latest&#x27;</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;6379&#x27;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_REPLICATION_MODE=master</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_PASSWORD=my_master_password</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/path/to/redis-persistence:/bitnami&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">redis-replica:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;bitnami/redis:latest&#x27;</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;6379&#x27;</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis-master</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_REPLICATION_MODE=slave</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_MASTER_HOST=redis-master</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_MASTER_PORT_NUMBER=6379</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_MASTER_PASSWORD=my_master_password</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_PASSWORD=my_replica_password</span></span><br><span class="line"><span class="string">```</span>   </span><br><span class="line"></span><br><span class="line"><span class="attr">Scale the number of replicas using:</span></span><br><span class="line"></span><br><span class="line"><span class="string">```shell</span></span><br><span class="line"><span class="string">$</span> <span class="string">docker-compose</span> <span class="string">up</span> <span class="string">--detach</span> <span class="string">--scale</span> <span class="string">redis-master=1</span> <span class="string">--scale</span> <span class="string">redis-secondary=3</span></span><br></pre></td></tr></table></figure>
+<p>The above command scales up the number of replicas to 3. You can scale down in the same way.</p>
+<hr>
+<p>Note: You should not scale up/down the number of master nodes. Always have only one master node running.</p>
+<hr>
+<h3 id="Securing-Redis™-traffic">Securing Redis™ traffic</h3>
+<p>Starting with version 6, Redis™ adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:</p>
+<ul>
+<li>
+<p><code>REDIS_TLS_ENABLED</code>: Whether to enable TLS for traffic or not. Defaults to no.</p>
+</li>
+<li>
+<p><code>REDIS_TLS_PORT</code>: Port used for TLS secure traffic. Defaults to <code>6379</code>.</p>
+</li>
+<li>
+<p><code>REDIS_TLS_CERT_FILE</code>: File containing the certificate file for the TSL traffic. No defaults.</p>
+</li>
+<li>
+<p><code>REDIS_TLS_KEY_FILE</code>: File containing the key for certificate. No defaults.</p>
+</li>
+<li>
+<p><code>REDIS_TLS_CA_FILE</code>: File containing the CA of the certificate. No defaults.</p>
+</li>
+<li>
+<p><code>REDIS_TLS_DH_PARAMS_FILE</code>: File containing DH params (in order to support DH based ciphers). No defaults.</p>
+</li>
+<li>
+<p><code>REDIS_TLS_AUTH_CLIENTS</code>: Whether to require clients to authenticate or not. Defaults to yes.</p>
+</li>
+</ul>
+<p>When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set <code>REDIS_TLS_PORT</code> to another port different than 0.</p>
+<p>Using docker run</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --name redis \</span></span><br><span class="line"><span class="language-bash">    -v /path/to/certs:/opt/bitnami/redis/certs \</span></span><br><span class="line"><span class="language-bash">    -v /path/to/redis-data-persistence:/bitnami/redis/data \</span></span><br><span class="line"><span class="language-bash">    -e ALLOW_EMPTY_PASSWORD=<span class="built_in">yes</span> \</span></span><br><span class="line"><span class="language-bash">    -e REDIS_TLS_ENABLED=<span class="built_in">yes</span> \</span></span><br><span class="line"><span class="language-bash">    -e REDIS_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt \</span></span><br><span class="line"><span class="language-bash">    -e REDIS_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key \</span></span><br><span class="line"><span class="language-bash">    -e REDIS_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt \</span></span><br><span class="line"><span class="language-bash">    bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<p>Modifying the <code>docker-compose.yml</code> file present in this repository:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="string">...</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_TLS_ENABLED=yes</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/path/to/certs:/opt/bitnami/redis/certs</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/path/to/redis-persistence:/bitnami/redis/data</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<p>Alternatively, you may also provide with this configuration in your custom configuration file.</p>
+<h3 id="Configuration-file">Configuration file</h3>
+<p>The image looks for configurations in <code>/opt/bitnami/redis/mounted-etc/redis.conf</code>. You can overwrite the <code>redis.conf</code> file using your own custom configuration file.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --name redis \</span></span><br><span class="line"><span class="language-bash">    -e ALLOW_EMPTY_PASSWORD=<span class="built_in">yes</span> \</span></span><br><span class="line"><span class="language-bash">    -v /path/to/your_redis.conf:/opt/bitnami/redis/mounted-etc/redis.conf \</span></span><br><span class="line"><span class="language-bash">    -v /path/to/redis-data-persistence:/bitnami/redis/data \</span></span><br><span class="line"><span class="language-bash">    bitnami/redis:latest</span></span><br></pre></td></tr></table></figure>
+<p>Alternatively, modify the <code>docker-compose.yml</code> file present in this repository:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/path/to/your_redis.conf:/opt/bitnami/redis/mounted-etc/redis.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/path/to/redis-persistence:/bitnami/redis/data</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<p>Refer to the <a target="_blank" rel="noopener external nofollow noreferrer" href="http://redis.io/topics/config">Redis™ configuration - http://redis.io/topics/config</a> manual for the complete list of configuration options.</p>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="Cant-open-the-append-only-file-Permission-Denied">Cant open the append only file - Permission Denied</h3>
+<p>Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits.</p>
+<p>As this is a non-root container, the mounted files and directories must have the proper permissions for the UID <code>1001</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">chown</span> -R 1001:1001 ./runtime/bitnami/redis/data</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/bitnami/bitnami-docker-redis/issues/177">Cant open the append only file - Permission Denied - Already owned by (1001) · Issue #177 · bitnami/bitnami-docker-redis - https://github.com/bitnami/bitnami-docker-redis/issues/177</a> to learn more.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/bitnami/bitnami-docker-redis">bitnami/bitnami-docker-redis: Bitnami Redis Docker Image - https://github.com/bitnami/bitnami-docker-redis</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/bitnami/bitnami-docker-redis-cluster">bitnami/bitnami-docker-redis-cluster - https://github.com/bitnami/bitnami-docker-redis-cluster</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster">charts/bitnami/redis-cluster at master · bitnami/charts - https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://redis.io/">Redis - https://redis.io/</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://bitnami.com/">Bitnami: Packaged Applications for Any Platform - Cloud, Container, Virtual Machine - https://bitnami.com/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hub.docker.com/_/redis">Redis - Official Image | Docker Hub - https://hub.docker.com/_/redis</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hub.docker.com/r/bitnami/redis/">bitnami/redis - Docker Image | Docker Hub - https://hub.docker.com/r/bitnami/redis/</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.docker.com/">Empowering App Development for Developers | Docker - https://www.docker.com/</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.docker.com/compose/">Overview of Docker Compose | Docker Documentation - https://docs.docker.com/compose/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/Docker-Compose/" rel="tag"># Docker Compose</a>
+              <a href="/tags/SSL/" rel="tag"># SSL</a>
+              <a href="/tags/Container/" rel="tag"># Container</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/Secure-Sockets-Layer/" rel="tag"># Secure Sockets Layer</a>
+              <a href="/tags/Secure-Sockets-Layer-SSL/" rel="tag"># Secure Sockets Layer (SSL)</a>
+              <a href="/tags/TLS/" rel="tag"># TLS</a>
+              <a href="/tags/Transport-Layer-Security/" rel="tag"># Transport Layer Security</a>
+              <a href="/tags/Transport-Layer-Security-TLS/" rel="tag"># Transport Layer Security (TLS)</a>
+              <a href="/tags/Infrastructure-as-Code-IaC/" rel="tag"># Infrastructure-as-Code-IaC</a>
+              <a href="/tags/Bitnami/" rel="tag"># Bitnami</a>
+              <a href="/tags/NoSQL/" rel="tag"># NoSQL</a>
+              <a href="/tags/AOF/" rel="tag"># AOF</a>
+              <a href="/tags/Append-Only-File/" rel="tag"># Append Only File</a>
+              <a href="/tags/Append-Only-File-AOF/" rel="tag"># Append Only File (AOF)</a>
+              <a href="/tags/Replication/" rel="tag"># Replication</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/19/Infrastructure-as-Code-IaC/Container/Docker/References/Docker-CLI/docker-history/" rel="prev" title="[Docker CLI] docker history">
+                  <i class="fa fa-angle-left"></i> [Docker CLI] docker history
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/06/19/Programming-Language/Rust/Diesel/FAQs-Deisel/" rel="next" title="[Rust Diesel] FAQs - Diesel">
+                  [Rust Diesel] FAQs - Diesel <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"3275c7d5b2c59240eb6470a588c0d656"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

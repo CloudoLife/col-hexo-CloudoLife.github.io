@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Kaniko GitLab Runner is an application that works with GitLab CI&#x2F;CD to run jobs in a pipeline. kaniko is a tool to build container images from a Dockerfile, inside a container or Kubernetes cluster. T">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Infrastructure as Code (IaC)] GitLab Runner, Kubernetes executor and kaniko to build container images from a Dockerfile inside a Kubernetes (K8S)">
+<meta property="og:url" content="https://cloudolife.com/2021/10/09/DevOps/GitLab/GitLab-Runner/GitLab-Runner-Kubernetes-executor-and-kaniko-to-build-container-images-from-a-Dockerfile-inside-a-Kubernetes-K8S/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Kaniko GitLab Runner is an application that works with GitLab CI&#x2F;CD to run jobs in a pipeline. kaniko is a tool to build container images from a Dockerfile, inside a container or Kubernetes cluster. T">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-09T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.913Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Infrastructure as Code (IaC)">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Kubernetes (K8S)">
+<meta property="article:tag" content="GitLab">
+<meta property="article:tag" content="CI">
+<meta property="article:tag" content="Continuous Integration">
+<meta property="article:tag" content="Continuous Integration (CI)">
+<meta property="article:tag" content="Container">
+<meta property="article:tag" content="GitLab Runner">
+<meta property="article:tag" content="CD">
+<meta property="article:tag" content="Continuous Delivery">
+<meta property="article:tag" content="Continuous Delivery (CD)">
+<meta property="article:tag" content="kaniko">
+<meta property="article:tag" content="Kubernetes Executor">
+<meta property="article:tag" content="Docker-in-Docker">
+<meta property="article:tag" content="config.json">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/10/09/DevOps/GitLab/GitLab-Runner/GitLab-Runner-Kubernetes-executor-and-kaniko-to-build-container-images-from-a-Dockerfile-inside-a-Kubernetes-K8S/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/10/09/DevOps/GitLab/GitLab-Runner/GitLab-Runner-Kubernetes-executor-and-kaniko-to-build-container-images-from-a-Dockerfile-inside-a-Kubernetes-K8S/","path":"2021/10/09/DevOps/GitLab/GitLab-Runner/GitLab-Runner-Kubernetes-executor-and-kaniko-to-build-container-images-from-a-Dockerfile-inside-a-Kubernetes-K8S/","title":"[Infrastructure as Code (IaC)] GitLab Runner, Kubernetes executor and kaniko to build container images from a Dockerfile inside a Kubernetes (K8S)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Infrastructure as Code (IaC)] GitLab Runner, Kubernetes executor and kaniko to build container images from a Dockerfile inside a Kubernetes (K8S) | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Kaniko</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Building-a-Docker-image-with-kaniko"><span class="nav-number">1.1.</span> <span class="nav-text">Building a Docker image with kaniko</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Additional-Flags"><span class="nav-number">1.2.</span> <span class="nav-text">Additional Flags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advances"><span class="nav-number">1.3.</span> <span class="nav-text">Advances</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-a-registry-with-a-custom-certificate"><span class="nav-number">1.3.1.</span> <span class="nav-text">Using a registry with a custom certificate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runner-Kubernetes-executor-DNS"><span class="nav-number">1.3.2.</span> <span class="nav-text">Runner Kubernetes executor DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-statically-defined-credentials"><span class="nav-number">1.3.3.</span> <span class="nav-text">Use statically-defined credentials</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">1.4.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variable-value-is-empty"><span class="nav-number">1.4.1.</span> <span class="nav-text">Variable value is empty</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/10/09/DevOps/GitLab/GitLab-Runner/GitLab-Runner-Kubernetes-executor-and-kaniko-to-build-container-images-from-a-Dockerfile-inside-a-Kubernetes-K8S/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Infrastructure as Code (IaC)] GitLab Runner, Kubernetes executor and kaniko to build container images from a Dockerfile inside a Kubernetes (K8S) | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Infrastructure as Code (IaC)] GitLab Runner, Kubernetes executor and kaniko to build container images from a Dockerfile inside a Kubernetes (K8S)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-10-09 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-09T00:00:00+00:00">2021-10-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/" itemprop="url" rel="index"><span itemprop="name">Infrastructure as Code (IaC)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/GitLab/" itemprop="url" rel="index"><span itemprop="name">GitLab</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/GitLab/GitLab-Runner/" itemprop="url" rel="index"><span itemprop="name">GitLab Runner</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>6.5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>6 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Kaniko</h1>
+<p>GitLab Runner is an application that works with GitLab CI/CD to run jobs in a pipeline.</p>
+<p>kaniko is a tool to build container images from a Dockerfile, inside a container or Kubernetes cluster.</p>
+<p>The Kubernetes executor, when used with GitLab CI, connects to the Kubernetes API in the cluster creating a Pod for each GitLab CI Job.</p>
+<span id="more"></span>
+<p>kaniko solves two problems with using the Docker-in-Docker <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-the-docker-executor-with-the-docker-image-docker-in-docker">https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-the-docker-executor-with-the-docker-image-docker-in-docker</a> build method:</p>
+<ul>
+<li>
+<p>Docker-in-Docker requires privileged mode to function, which is a significant security concern.</p>
+</li>
+<li>
+<p>Docker-in-Docker generally incurs a performance penalty and can be quite slow.<br>
+Requirements</p>
+</li>
+</ul>
+<p>To use kaniko with GitLab, a runner with one of the following executors is required:</p>
+<ul>
+<li>Kubernetes <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/runner/executors/kubernetes.html">The Kubernetes executor | GitLab - https://docs.gitlab.com/runner/executors/kubernetes.html</a>.</li>
+</ul>
+<h2 id="Building-a-Docker-image-with-kaniko">Building a Docker image with kaniko</h2>
+<p>When building an image with kaniko and GitLab CI/CD, you should be aware of a few important details:</p>
+<ul>
+<li>
+<p>The kaniko debug image is recommended (<code>gcr.io/kaniko-project/executor:debug</code>) because it has a shell, and a shell is required for an image to be used with GitLab CI/CD.</p>
+</li>
+<li>
+<p>The entrypoint needs to be overridden, otherwise the build script doesn’t run.</p>
+</li>
+<li>
+<p>A Docker <code>config.json</code> file needs to be created with the authentication information for the desired container registry.</p>
+</li>
+</ul>
+<p>In the following example, kaniko is used to:</p>
+<ul>
+<li>
+<p>Build a Docker image.</p>
+</li>
+<li>
+<p>Then push it to GitLab Container Registry.</p>
+</li>
+</ul>
+<p>The job runs only when a tag is pushed. A <code>config.json</code> file is created under <code>/kaniko/.docker</code> and <code>/root/.docker/config.json</code> with the needed GitLab Container Registry credentials taken from the predefined CI/CD variables GitLab CI/CD provides.</p>
+<p>In the last step, kaniko uses the Dockerfile under the root directory of the project, builds the Docker image and pushes it to the project’s Container Registry while tagging it with the Git tag:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">build:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">build</span></span><br><span class="line">  <span class="attr">image:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">gcr.io/kaniko-project/executor:debug</span></span><br><span class="line">    <span class="attr">entrypoint:</span> [<span class="string">&quot;&quot;</span>]</span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">mkdir</span> <span class="string">-p</span> <span class="string">/kaniko/.docker</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;&#123;\&quot;auths\&quot;:&#123;\&quot;$&#123;CI_REGISTRY&#125;\&quot;:&#123;\&quot;auth\&quot;:\&quot;$(printf &quot;</span><span class="string">%s:%s&quot;</span> <span class="string">&quot;$&#123;CI_REGISTRY_USER&#125;&quot;</span> <span class="string">&quot;$&#123;CI_REGISTRY_PASSWORD&#125;&quot;</span> <span class="string">|</span> <span class="string">base64</span> <span class="string">|</span> <span class="string">tr</span> <span class="string">-d</span> <span class="string">&#x27;\n&#x27;</span><span class="string">)\&quot;&#125;&#125;&#125;&quot;</span> <span class="string">&gt;</span> <span class="string">/kaniko/.docker/config.json</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="string">cp</span> <span class="string">/kaniko/.docker/config.json</span> <span class="string">/root/.docker/config.json</span></span><br><span class="line">    </span><br><span class="line">    <span class="bullet">-</span> <span class="string">&gt;-</span></span><br><span class="line"><span class="string">      /kaniko/executor</span></span><br><span class="line"><span class="string">      --context &quot;$&#123;CI_PROJECT_DIR&#125;&quot;</span></span><br><span class="line"><span class="string">      --dockerfile &quot;$&#123;CI_PROJECT_DIR&#125;/Dockerfile&quot;</span></span><br><span class="line"><span class="string">      --destination &quot;$&#123;CI_REGISTRY_IMAGE&#125;:$&#123;CI_COMMIT_TAG&#125;&quot;</span></span><br><span class="line"><span class="string"></span>  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">$CI_COMMIT_TAG</span></span><br></pre></td></tr></table></figure>
+<h2 id="Additional-Flags">Additional Flags</h2>
+<p>–build-arg</p>
+<p>This flag allows you to pass in ARG values at build time, similarly to Docker. You can set it multiple times for multiple arguments.</p>
+<p>–dockerfile</p>
+<p>Path to the dockerfile to be built. (default “Dockerfile”)</p>
+<p>–no-push</p>
+<p>Set this flag if you only want to build the image, without pushing to a registry.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/GoogleContainerTools/kaniko#additional-flags"> - https://github.com/GoogleContainerTools/kaniko#additional-flags</a> to learn more.</p>
+<h2 id="Advances">Advances</h2>
+<h3 id="Using-a-registry-with-a-custom-certificate">Using a registry with a custom certificate</h3>
+<p>When trying to push to a Docker registry that uses a certificate that is signed by a custom CA, you might get the following error:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">/kaniko/executor --context <span class="variable">$CI_PROJECT_DIR</span> --dockerfile <span class="variable">$CI_PROJECT_DIR</span>/Dockerfile --no-push</span></span><br><span class="line">INFO[0000] Downloading base image registry.gitlab.example.com/group/docker-image</span><br><span class="line">error building image: getting stage builder for stage 0: Get https://registry.gitlab.example.com/v2/: x509: certificate signed by unknown authority</span><br></pre></td></tr></table></figure>
+<p>This can be solved by adding your CA’s certificate to the kaniko certificate store:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">before_script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">mkdir</span> <span class="string">-p</span> <span class="string">/kaniko/.docker</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;&#123;\&quot;auths\&quot;:&#123;\&quot;$&#123;CI_REGISTRY&#125;\&quot;:&#123;\&quot;auth\&quot;:\&quot;$(printf &quot;</span><span class="string">%s:%s&quot;</span> <span class="string">&quot;$&#123;CI_REGISTRY_USER&#125;&quot;</span> <span class="string">&quot;$&#123;CI_REGISTRY_PASSWORD&#125;&quot;</span> <span class="string">|</span> <span class="string">base64</span> <span class="string">|</span> <span class="string">tr</span> <span class="string">-d</span> <span class="string">&#x27;\n&#x27;</span><span class="string">)\&quot;&#125;&#125;&#125;&quot;</span> <span class="string">&gt;</span> <span class="string">/kaniko/.docker/config.json</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">|</span></span><br><span class="line"><span class="string">    echo &quot;-----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">    ...</span></span><br><span class="line"><span class="string">    -----END CERTIFICATE-----&quot; &gt;&gt; /kaniko/ssl/certs/additional-ca-cert-bundle.crt</span></span><br></pre></td></tr></table></figure>
+<h3 id="Runner-Kubernetes-executor-DNS">Runner Kubernetes executor DNS</h3>
+<p>Pod’s DNS Config gives users more control on the DNS settings of the created build Pods.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">concurrent</span> <span class="string">=</span> <span class="number">1</span></span><br><span class="line"><span class="string">check_interval</span> <span class="string">=</span> <span class="number">30</span></span><br><span class="line">[[<span class="string">runners</span>]]</span><br><span class="line">  <span class="string">name</span> <span class="string">=</span> <span class="string">&quot;myRunner&quot;</span></span><br><span class="line">  <span class="string">url</span> <span class="string">=</span> <span class="string">&quot;https://gitlab.example.com&quot;</span></span><br><span class="line">  <span class="string">token</span> <span class="string">=</span> <span class="string">&quot;__REDACTED__&quot;</span></span><br><span class="line">  <span class="string">executor</span> <span class="string">=</span> <span class="string">&quot;kubernetes&quot;</span></span><br><span class="line">  [<span class="string">runners.kubernetes</span>]</span><br><span class="line">    <span class="string">image</span> <span class="string">=</span> <span class="string">&quot;alpine:latest&quot;</span></span><br><span class="line">    [<span class="string">runners.kubernetes.dns_config</span>]</span><br><span class="line">      <span class="string">nameservers</span> <span class="string">=</span> [</span><br><span class="line">        <span class="string">&quot;1.2.3.4&quot;</span>,</span><br><span class="line">      ]</span><br><span class="line">      <span class="string">searches</span> <span class="string">=</span> [</span><br><span class="line">        <span class="string">&quot;ns1.svc.cluster-domain.example&quot;</span>,</span><br><span class="line">        <span class="string">&quot;my.dns.search.suffix&quot;</span>,</span><br><span class="line">      ]</span><br><span class="line"></span><br><span class="line">      [[<span class="string">runners.kubernetes.dns_config.options</span>]]</span><br><span class="line">        <span class="string">name</span> <span class="string">=</span> <span class="string">&quot;ndots&quot;</span></span><br><span class="line">        <span class="string">value</span> <span class="string">=</span> <span class="string">&quot;2&quot;</span></span><br><span class="line"></span><br><span class="line">      [[<span class="string">runners.kubernetes.dns_config.options</span>]]</span><br><span class="line">        <span class="string">name</span> <span class="string">=</span> <span class="string">&quot;edns0&quot;</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/runner/executors/kubernetes.html#pods-dns-config">The Kubernetes executor | GitLab - https://docs.gitlab.com/runner/executors/kubernetes.html#pods-dns-config</a> to learn more.</p>
+<p>Or replace <code>/etc/resolv.conf</code> in shell script.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">before_script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&#x27;nameserver 8.8.8.8&#x27;</span> <span class="string">&gt;</span> <span class="string">/etc/resolv.conf</span> <span class="string">&amp;&amp;</span> <span class="string">echo</span> <span class="string">&#x27;nameserver 1.1.1.1&#x27;</span> <span class="string">&gt;&gt;</span> <span class="string">/etc/resolv.conf</span></span><br><span class="line"><span class="comment">#   - cat /etc/resolv.conf </span></span><br></pre></td></tr></table></figure>
+<h3 id="Use-statically-defined-credentials">Use statically-defined credentials</h3>
+<p>There are two approaches that you can take to access a private registry. Both require setting the CI/CD variable DOCKER_AUTH_CONFIG with appropriate authentication information.</p>
+<ul>
+<li>
+<p>Per-job: To configure one job to access a private registry, add <code>DOCKER_AUTH_CONFIG</code> as a CI/CD variable.</p>
+</li>
+<li>
+<p>Per-runner: To configure a runner so all its jobs can access a private registry, add <code>DOCKER_AUTH_CONFIG</code> as an environment variable in the runner’s configuration.</p>
+</li>
+</ul>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#use-statically-defined-credentials">Use statically-defined credentials | Run your CI/CD jobs in Docker containers | GitLab - https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#use-statically-defined-credentials</a></p>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="Variable-value-is-empty">Variable value is empty</h3>
+<p>If the variable is marked as <code>protected</code>, please remember to also mark the corresponding branch as <code>protected</code>, otherwise the obtained variable value is empty.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/ee/ci/docker/using_kaniko.html">Use kaniko to build Docker images | GitLab - https://docs.gitlab.com/ee/ci/docker/using_kaniko.html</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/GoogleContainerTools/kaniko">GoogleContainerTools/kaniko: Build Container Images In Kubernetes - https://github.com/GoogleContainerTools/kaniko</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/runner/executors/kubernetes.html">The Kubernetes executor | GitLab - https://docs.gitlab.com/runner/executors/kubernetes.html</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-the-docker-executor-with-the-docker-image-docker-in-docker">Use Docker to build Docker images | GitLab - https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-the-docker-executor-with-the-docker-image-docker-in-docker</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#use-statically-defined-credentials">Run your CI/CD jobs in Docker containers | GitLab - https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#use-statically-defined-credentials</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/ee/ci/variables/">GitLab CI/CD environment variables | GitLab - https://docs.gitlab.com/ee/ci/variables/</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/ee/ci/yaml/gitlab_ci_yaml.html"> The <code>.gitlab-ci.yml</code> file | GitLab- https://docs.gitlab.com/ee/ci/yaml/gitlab_ci_yaml.html</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/ee/ci/">GitLab CI/CD | GitLab - https://docs.gitlab.com/ee/ci/</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://about.gitlab.com/">Iterate faster, innovate together | GitLab - https://about.gitlab.com/</a></p>
+<p>[10] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://console.cloud.google.com/gcr/images/kaniko-project/GLOBAL/executor">Images – Container Registry – Google Cloud Platform - https://console.cloud.google.com/gcr/images/kaniko-project/GLOBAL/executor</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Infrastructure-as-Code-IaC/" rel="tag"># Infrastructure as Code (IaC)</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/Kubernetes-K8S/" rel="tag"># Kubernetes (K8S)</a>
+              <a href="/tags/GitLab/" rel="tag"># GitLab</a>
+              <a href="/tags/CI/" rel="tag"># CI</a>
+              <a href="/tags/Continuous-Integration/" rel="tag"># Continuous Integration</a>
+              <a href="/tags/Continuous-Integration-CI/" rel="tag"># Continuous Integration (CI)</a>
+              <a href="/tags/Container/" rel="tag"># Container</a>
+              <a href="/tags/GitLab-Runner/" rel="tag"># GitLab Runner</a>
+              <a href="/tags/CD/" rel="tag"># CD</a>
+              <a href="/tags/Continuous-Delivery/" rel="tag"># Continuous Delivery</a>
+              <a href="/tags/Continuous-Delivery-CD/" rel="tag"># Continuous Delivery (CD)</a>
+              <a href="/tags/kaniko/" rel="tag"># kaniko</a>
+              <a href="/tags/Kubernetes-Executor/" rel="tag"># Kubernetes Executor</a>
+              <a href="/tags/Docker-in-Docker/" rel="tag"># Docker-in-Docker</a>
+              <a href="/tags/config-json/" rel="tag"># config.json</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/09/DevOps/GitLab/GitLab-Runner/GitLab-Runner-Kubernetes-executor-and-kubectl-to-deploy-manifest-to-Kubernetes-K8S/" rel="prev" title="[Infrastructure as Code (IaC)] GitLab Runner, Kubernetes executor and kubectl to deploy manifest to Kubernetes (K8S)">
+                  <i class="fa fa-angle-left"></i> [Infrastructure as Code (IaC)] GitLab Runner, Kubernetes executor and kubectl to deploy manifest to Kubernetes (K8S)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/09/Infrastructure-as-Code-IaC/Pulumi/Use-Pulumi-PostgreSQL-provider-TypeScript-SDK-to-manage-PostgreSQL/" rel="next" title="[Pulumi PostgreSQL] Use Pulumi PostgreSQL provider TypeScript SDK to manage PostgreSQL">
+                  [Pulumi PostgreSQL] Use Pulumi PostgreSQL provider TypeScript SDK to manage PostgreSQL <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"5f8ecee132f07698b6e274cb7838ed47"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

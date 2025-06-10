@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="FIO Fio was originally written to save me the hassle of writing special test case programs when I wanted to test a specific workload, either for performance reasons or to find&#x2F;reproduce a bug. The pro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Performance] FIO: Flexible I&#x2F;O tester for disk performance">
+<meta property="og:url" content="https://cloudolife.com/2021/03/13/Awesome-Software/Performance/FIO-Flexible-I-O-tester-for-disk-performance/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="FIO Fio was originally written to save me the hassle of writing special test case programs when I wanted to test a specific workload, either for performance reasons or to find&#x2F;reproduce a bug. The pro">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-13T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.907Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Awesome Software">
+<meta property="article:tag" content="Performance">
+<meta property="article:tag" content="FIO">
+<meta property="article:tag" content="I&#x2F;O">
+<meta property="article:tag" content="Disk">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/03/13/Awesome-Software/Performance/FIO-Flexible-I-O-tester-for-disk-performance/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/03/13/Awesome-Software/Performance/FIO-Flexible-I-O-tester-for-disk-performance/","path":"2021/03/13/Awesome-Software/Performance/FIO-Flexible-I-O-tester-for-disk-performance/","title":"[Awesome Performance] FIO: Flexible I/O tester for disk performance"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Performance] FIO: Flexible I/O tester for disk performance | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">FIO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usages"><span class="nav-number">1.2.</span> <span class="nav-text">Usages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Running-fio"><span class="nav-number">1.2.1.</span> <span class="nav-text">Running fio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interpreting-the-output"><span class="nav-number">1.2.2.</span> <span class="nav-text">Interpreting the output</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-disk-device"><span class="nav-number">1.2.3.</span> <span class="nav-text">Test disk device</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-disk-file"><span class="nav-number">1.2.4.</span> <span class="nav-text">Test disk file</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">1.3.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#you-need-to-specify-size"><span class="nav-number">1.3.1.</span> <span class="nav-text">you need to specify size&#x3D;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/03/13/Awesome-Software/Performance/FIO-Flexible-I-O-tester-for-disk-performance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Performance] FIO: Flexible I&#x2F;O tester for disk performance | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Performance] FIO: Flexible I/O tester for disk performance
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-13 00:00:00" itemprop="dateCreated datePublished" datetime="2021-03-13T00:00:00+00:00">2021-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/" itemprop="url" rel="index"><span itemprop="name">Awesome Software</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/Performance/" itemprop="url" rel="index"><span itemprop="name">Performance</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>17k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>15 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>FIO</h1>
+<p>Fio was originally written to save me the hassle of writing special test case programs when I wanted to test a specific workload, either for performance reasons or to find/reproduce a bug. The process of writing such a test app can be tiresome, especially if you have to do it often. Hence I needed a tool that would be able to simulate a given I/O workload without resorting to writing a tailored test case again and again.</p>
+<p>A test work load is difficult to define, though. There can be any number of processes or threads involved, and they can each be using their own way of generating I/O. You could have someone dirtying large amounts of memory in an memory mapped file, or maybe several threads issuing reads using asynchronous I/O. fio needed to be flexible enough to simulate both of these cases, and many more.</p>
+<p>Fio spawns a number of threads or processes doing a particular type of I/O action as specified by the user. fio takes a number of global parameters, each inherited by the thread unless otherwise parameters given to them overriding that setting is given. The typical use of fio is to write a job file matching the I/O load one wants to simulate.</p>
+<h2 id="Installation">Installation</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">CentOS</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yum install -y fio</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Debian, Ubuntu</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">apt install -y fio</span></span><br></pre></td></tr></table></figure>
+<h2 id="Usages">Usages</h2>
+<h3 id="Running-fio">Running fio</h3>
+<p>Running fio is normally the easiest part - you just give it the job file (or job files) as parameters:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">fio [options] [jobfile] ...</span></span><br></pre></td></tr></table></figure>
+<p>and it will start doing what the jobfile tells it to do. You can give more than one job file on the command line, fio will serialize the running of those files. Internally that is the same as using the stonewall parameter described in the parameter section.</p>
+<p>If the job file contains only one job, you may as well just give the parameters on the command line. The command line parameters are identical to the job parameters, with a few extra that control global parameters. For example, for the job file parameter <code>iodepth=2</code>, the mirror command line option would be <code>--iodepth 2</code> or <code>--iodepth=2</code>. You can also use the command line for giving more than one job entry. For each <code>--name</code> option that fio sees, it will start a new job with that name. Command line entries following a <code>--name</code> entry will apply to that job, until there are no more entries or a new <code>--name</code> entry is seen. This is similar to the job file options, where each option applies to the current job until a new <code>[]</code> job entry is seen.</p>
+<p>fio does not need to run as root, except if the files or devices specified in the job section requires that. Some other options may also be restricted, such as memory locking, I/O scheduler switching, and decreasing the nice value.</p>
+<p>If jobfile is specified as <code>-</code>, the job file will be read from standard input.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fio.readthedocs.io/en/latest/fio_doc.html#how-fio-works">1.9. How fio works | 1. fio - Flexible I/O tester rev. 3.27 — fio 3.27 documentation - https://fio.readthedocs.io/en/latest/fio_doc.html#how-fio-works</a> to learn more.</p>
+<h3 id="Interpreting-the-output">Interpreting the output</h3>
+<p>Some important metrics within the output.</p>
+<ul>
+<li>
+<p>bw</p>
+<p>Bandwidth statistics based on samples. Same names as the xlat stats, but also includes the number of samples taken (samples) and an approximate percentage of total aggregate bandwidth this thread received in its group (per). This last value is only really useful if the threads in this group are on the same disk, since they are then competing for disk access.</p>
+</li>
+<li>
+<p>iops</p>
+<p>IOPS statistics based on samples. Same names as bw.</p>
+</li>
+</ul>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fio.readthedocs.io/en/latest/fio_doc.html#interpreting-the-output">1.14. Interpreting the output | 1. fio - Flexible I/O tester rev. 3.27 — fio 3.27 documentation - https://fio.readthedocs.io/en/latest/fio_doc.html#interpreting-the-output</a> to learn more.</p>
+<h3 id="Test-disk-device">Test disk device</h3>
+<p>Create or edit <code>fio.conf.disk</code> configuration file.</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fio.conf.disk</span></span><br><span class="line"></span><br><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">ioengine</span>=libaio</span><br><span class="line"><span class="attr">iodepth</span>=<span class="number">128</span></span><br><span class="line">time_based</span><br><span class="line"><span class="attr">direct</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">thread</span>=<span class="number">1</span></span><br><span class="line">group_reporting</span><br><span class="line"><span class="attr">randrepeat</span>=<span class="number">0</span></span><br><span class="line">norandommap</span><br><span class="line"><span class="attr">numjobs</span>=<span class="number">32</span></span><br><span class="line"><span class="attr">timeout</span>=<span class="number">6000</span></span><br><span class="line"><span class="attr">runtime</span>=<span class="number">120</span></span><br><span class="line"></span><br><span class="line"><span class="section">[randread-4k]</span></span><br><span class="line"><span class="attr">rw</span>=randread</span><br><span class="line"><span class="attr">bs</span>=<span class="number">4</span>k</span><br><span class="line"><span class="attr">filename</span>=/dev/vdb</span><br><span class="line"><span class="attr">rwmixread</span>=<span class="number">100</span></span><br><span class="line">stonewall</span><br><span class="line"></span><br><span class="line"><span class="section">[randwrite-4k]</span></span><br><span class="line"><span class="attr">rw</span>=randwrite</span><br><span class="line"><span class="attr">bs</span>=<span class="number">4</span>k</span><br><span class="line"><span class="attr">filename</span>=/dev/vdb</span><br><span class="line">stonewall</span><br><span class="line"></span><br><span class="line"><span class="section">[read-512k]</span></span><br><span class="line"><span class="attr">rw</span>=read</span><br><span class="line"><span class="attr">bs</span>=<span class="number">512</span>k</span><br><span class="line"><span class="attr">filename</span>=/dev/vdb</span><br><span class="line">stonewall</span><br><span class="line"></span><br><span class="line"><span class="section">[write-512k]</span></span><br><span class="line"><span class="attr">rw</span>=write</span><br><span class="line"><span class="attr">bs</span>=<span class="number">512</span>k</span><br><span class="line"><span class="attr">filename</span>=/dev/vdb</span><br><span class="line">stonewall</span><br></pre></td></tr></table></figure>
+<p>Run <code>fio fio.conf.disk</code> to test disk performance.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">fio fio.conf.disk</span></span><br><span class="line">randread-4k: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=128</span><br><span class="line">...</span><br><span class="line">randwrite-4k: (g=1): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=128</span><br><span class="line">...</span><br><span class="line">read-512k: (g=2): rw=read, bs=(R) 512KiB-512KiB, (W) 512KiB-512KiB, (T) 512KiB-512KiB, ioengine=libaio, iodepth=128</span><br><span class="line">...</span><br><span class="line">write-512k: (g=3): rw=write, bs=(R) 512KiB-512KiB, (W) 512KiB-512KiB, (T) 512KiB-512KiB, ioengine=libaio, iodepth=128</span><br><span class="line">...</span><br><span class="line">fio-3.19</span><br><span class="line">Starting 128 threads</span><br><span class="line">Jobs: 32 (f=32): [_(96),W(32)][4.0%][w=222MiB/s][w=443 IOPS][eta 03h:12m:00s]</span><br><span class="line">randread-4k: (groupid=0, jobs=32): err= 0: pid=3426725: Wed Nov 17 20:56:13 2021</span><br><span class="line">  read: IOPS=11.9k, BW=46.5MiB/s (48.8MB/s)(5581MiB/120025msec)</span><br><span class="line">    slat (nsec): min=1283, max=228640k, avg=2685615.46, stdev=6012190.22</span><br><span class="line">    clat (msec): min=10, max=1288, avg=341.29, stdev=118.00</span><br><span class="line">     lat (msec): min=10, max=1289, avg=343.98, stdev=118.80</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[   70],  5.00th=[  180], 10.00th=[  211], 20.00th=[  251],</span><br><span class="line">     | 30.00th=[  279], 40.00th=[  300], 50.00th=[  330], 60.00th=[  359],</span><br><span class="line">     | 70.00th=[  388], 80.00th=[  430], 90.00th=[  489], 95.00th=[  550],</span><br><span class="line">     | 99.00th=[  684], 99.50th=[  751], 99.90th=[  919], 99.95th=[ 1003],</span><br><span class="line">     | 99.99th=[ 1133]</span><br><span class="line">   bw (  KiB/s): min=14374, max=118348, per=99.78%, avg=47509.90, stdev=473.74, samples=7648</span><br><span class="line">   iops        : min= 3584, max=29578, avg=11876.11, stdev=118.43, samples=7648</span><br><span class="line">  lat (msec)   : 20=0.01%, 50=0.34%, 100=1.16%, 250=18.68%, 500=70.66%</span><br><span class="line">  lat (msec)   : 750=8.67%, 1000=0.43%, 2000=0.05%</span><br><span class="line">  cpu          : usr=0.06%, sys=0.25%, ctx=1264741, majf=0, minf=4128</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=99.9%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.1%</span><br><span class="line">     issued rwts: total=1428809,0,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=128</span><br><span class="line">randwrite-4k: (groupid=1, jobs=32): err= 0: pid=3433113: Wed Nov 17 20:56:13 2021</span><br><span class="line">  write: IOPS=11.8k, BW=46.2MiB/s (48.4MB/s)(5546MiB/120027msec); 0 zone resets</span><br><span class="line">    slat (nsec): min=1190, max=253603k, avg=2702464.17, stdev=6005163.86</span><br><span class="line">    clat (msec): min=10, max=1312, avg=342.81, stdev=117.60</span><br><span class="line">     lat (msec): min=10, max=1322, avg=345.52, stdev=118.39</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[  110],  5.00th=[  180], 10.00th=[  211], 20.00th=[  251],</span><br><span class="line">     | 30.00th=[  279], 40.00th=[  300], 50.00th=[  330], 60.00th=[  359],</span><br><span class="line">     | 70.00th=[  388], 80.00th=[  430], 90.00th=[  493], 95.00th=[  550],</span><br><span class="line">     | 99.00th=[  684], 99.50th=[  743], 99.90th=[  961], 99.95th=[ 1062],</span><br><span class="line">     | 99.99th=[ 1167]</span><br><span class="line">   bw (  KiB/s): min=14798, max=106798, per=99.86%, avg=47246.76, stdev=464.02, samples=7648</span><br><span class="line">   iops        : min= 3694, max=26697, avg=11809.98, stdev=116.01, samples=7648</span><br><span class="line">  lat (msec)   : 20=0.01%, 50=0.15%, 100=0.68%, 250=19.28%, 500=70.51%</span><br><span class="line">  lat (msec)   : 750=8.90%, 1000=0.40%, 2000=0.08%</span><br><span class="line">  cpu          : usr=0.08%, sys=0.26%, ctx=1269905, majf=0, minf=32</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=99.9%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.1%</span><br><span class="line">     issued rwts: total=0,1419651,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=128</span><br><span class="line">read-512k: (groupid=2, jobs=32): err= 0: pid=3439498: Wed Nov 17 20:56:13 2021</span><br><span class="line">  read: IOPS=443, BW=222MiB/s (233MB/s)(26.1GiB/120314msec)</span><br><span class="line">    slat (usec): min=4, max=1521.5k, avg=71910.72, stdev=86011.65</span><br><span class="line">    clat (msec): min=228, max=15650, avg=8887.05, stdev=1962.66</span><br><span class="line">     lat (msec): min=267, max=15959, avg=8958.96, stdev=1967.34</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[ 1435],  5.00th=[ 5873], 10.00th=[ 7013], 20.00th=[ 7819],</span><br><span class="line">     | 30.00th=[ 8221], 40.00th=[ 8658], 50.00th=[ 8926], 60.00th=[ 9329],</span><br><span class="line">     | 70.00th=[ 9731], 80.00th=[10268], 90.00th=[10939], 95.00th=[11745],</span><br><span class="line">     | 99.00th=[13355], 99.50th=[13892], 99.90th=[14697], 99.95th=[15100],</span><br><span class="line">     | 99.99th=[15368]</span><br><span class="line">   bw (  KiB/s): min=32703, max=648006, per=99.86%, avg=226951.41, stdev=3447.82, samples=7109</span><br><span class="line">   iops        : min=   45, max= 1262, avg=440.60, stdev= 6.74, samples=7109</span><br><span class="line">  lat (msec)   : 250=0.02%, 500=0.23%, 750=0.18%, 1000=0.21%, 2000=0.82%</span><br><span class="line">  lat (msec)   : &gt;=2000=98.53%</span><br><span class="line">  cpu          : usr=0.01%, sys=0.06%, ctx=110802, majf=0, minf=519723</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.2%, 8=0.5%, 16=1.0%, 32=1.9%, &gt;=64=96.2%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=99.9%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.1%</span><br><span class="line">     issued rwts: total=53407,0,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=128</span><br><span class="line">write-512k: (groupid=3, jobs=32): err= 0: pid=3445908: Wed Nov 17 20:56:13 2021</span><br><span class="line">  write: IOPS=443, BW=222MiB/s (232MB/s)(26.0GiB/120361msec); 0 zone resets</span><br><span class="line">    slat (usec): min=16, max=1017.5k, avg=72029.58, stdev=71276.32</span><br><span class="line">    clat (msec): min=34, max=13151, avg=8858.97, stdev=1733.50</span><br><span class="line">     lat (msec): min=34, max=13301, avg=8931.01, stdev=1737.43</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[ 1045],  5.00th=[ 5738], 10.00th=[ 7617], 20.00th=[ 8221],</span><br><span class="line">     | 30.00th=[ 8557], 40.00th=[ 8792], 50.00th=[ 9060], 60.00th=[ 9329],</span><br><span class="line">     | 70.00th=[ 9597], 80.00th=[ 9866], 90.00th=[10402], 95.00th=[10805],</span><br><span class="line">     | 99.00th=[11745], 99.50th=[11879], 99.90th=[12684], 99.95th=[12953],</span><br><span class="line">     | 99.99th=[13087]</span><br><span class="line">   bw (  KiB/s): min=36806, max=606274, per=100.00%, avg=227128.25, stdev=2963.38, samples=7087</span><br><span class="line">   iops        : min=   60, max= 1177, avg=438.87, stdev= 5.80, samples=7087</span><br><span class="line">  lat (msec)   : 50=0.04%, 100=0.08%, 250=0.11%, 500=0.28%, 750=0.23%</span><br><span class="line">  lat (msec)   : 1000=0.22%, 2000=0.82%, &gt;=2000=98.22%</span><br><span class="line">  cpu          : usr=0.06%, sys=0.05%, ctx=118979, majf=0, minf=32</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.2%, 8=0.5%, 16=1.0%, 32=1.9%, &gt;=64=96.2%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=99.9%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.1%</span><br><span class="line">     issued rwts: total=0,53323,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=128</span><br><span class="line"></span><br><span class="line">Run status group 0 (all jobs):</span><br><span class="line">   READ: bw=46.5MiB/s (48.8MB/s), 46.5MiB/s-46.5MiB/s (48.8MB/s-48.8MB/s), io=5581MiB (5852MB), run=120025-120025msec</span><br><span class="line"></span><br><span class="line">Run status group 1 (all jobs):</span><br><span class="line">  WRITE: bw=46.2MiB/s (48.4MB/s), 46.2MiB/s-46.2MiB/s (48.4MB/s-48.4MB/s), io=5546MiB (5815MB), run=120027-120027msec</span><br><span class="line"></span><br><span class="line">Run status group 2 (all jobs):</span><br><span class="line">   READ: bw=222MiB/s (233MB/s), 222MiB/s-222MiB/s (233MB/s-233MB/s), io=26.1GiB (28.0GB), run=120314-120314msec</span><br><span class="line"></span><br><span class="line">Run status group 3 (all jobs):</span><br><span class="line">  WRITE: bw=222MiB/s (232MB/s), 222MiB/s-222MiB/s (232MB/s-232MB/s), io=26.0GiB (27.0GB), run=120361-120361msec</span><br><span class="line"></span><br><span class="line">Disk stats (read/write):</span><br><span class="line">  vdb: ios=1554368/1554036, merge=2825/305, ticks=60894783/60980848, in_queue=121875631, util=99.56%</span><br></pre></td></tr></table></figure>
+<h3 id="Test-disk-file">Test disk file</h3>
+<p>Create or edit <code>fio.conf.file</code> configuration file.</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fio.conf.file</span></span><br><span class="line"></span><br><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">ioengine</span>=libaio</span><br><span class="line"><span class="attr">iodepth</span>=<span class="number">128</span></span><br><span class="line">time_based</span><br><span class="line"><span class="attr">direct</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">thread</span>=<span class="number">1</span></span><br><span class="line">group_reporting</span><br><span class="line"><span class="attr">randrepeat</span>=<span class="number">0</span></span><br><span class="line">norandommap</span><br><span class="line"><span class="attr">numjobs</span>=<span class="number">32</span></span><br><span class="line"><span class="attr">timeout</span>=<span class="number">6000</span></span><br><span class="line"><span class="attr">runtime</span>=<span class="number">120</span></span><br><span class="line"><span class="attr">size</span>=<span class="number">5</span>G</span><br><span class="line"></span><br><span class="line"><span class="section">[randread-4k]</span></span><br><span class="line"><span class="attr">rw</span>=randread</span><br><span class="line"><span class="attr">bs</span>=<span class="number">4</span>k</span><br><span class="line"><span class="attr">filename</span>=/root/test.img</span><br><span class="line"><span class="attr">rwmixread</span>=<span class="number">100</span></span><br><span class="line">stonewall</span><br><span class="line"></span><br><span class="line"><span class="section">[randwrite-4k]</span></span><br><span class="line"><span class="attr">rw</span>=randwrite</span><br><span class="line"><span class="attr">bs</span>=<span class="number">4</span>k</span><br><span class="line"><span class="attr">filename</span>=/root/test.img</span><br><span class="line">stonewall</span><br><span class="line"></span><br><span class="line"><span class="section">[read-512k]</span></span><br><span class="line"><span class="attr">rw</span>=read</span><br><span class="line"><span class="attr">bs</span>=<span class="number">512</span>k</span><br><span class="line"><span class="attr">filename</span>=/root/test.img</span><br><span class="line">stonewall</span><br><span class="line"></span><br><span class="line"><span class="section">[write-512k]</span></span><br><span class="line"><span class="attr">rw</span>=write</span><br><span class="line"><span class="attr">bs</span>=<span class="number">512</span>k</span><br><span class="line"><span class="attr">filename</span>=/root/test.img</span><br><span class="line">stonewall</span><br></pre></td></tr></table></figure>
+<p>Run <code>fio fio.conf.file</code> to test disk performace.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">fio fio.conf.file</span></span><br><span class="line">randread-4k: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=128</span><br><span class="line">...</span><br><span class="line">randwrite-4k: (g=1): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=128</span><br><span class="line">...</span><br><span class="line">read-512k: (g=2): rw=read, bs=(R) 512KiB-512KiB, (W) 512KiB-512KiB, (T) 512KiB-512KiB, ioengine=libaio, iodepth=128</span><br><span class="line">...</span><br><span class="line">write-512k: (g=3): rw=write, bs=(R) 512KiB-512KiB, (W) 512KiB-512KiB, (T) 512KiB-512KiB, ioengine=libaio, iodepth=128</span><br><span class="line">...</span><br><span class="line">fio-3.19</span><br><span class="line">Starting 128 threads</span><br><span class="line">randread-4k: Laying out IO file (1 file / 5120MiB)</span><br><span class="line">Jobs: 30 (f=30): [_(96),W(12),_(1),W(6),_(1),W(12)][37.3%][w=360MiB/s][w=720 IOPS][eta 13m:30s]</span><br><span class="line">randread-4k: (groupid=0, jobs=32): err= 0: pid=1535608: Thu Nov 18 09:11:15 2021</span><br><span class="line">  read: IOPS=11.9k, BW=46.4MiB/s (48.6MB/s)(5564MiB/120025msec)</span><br><span class="line">    slat (nsec): min=1534, max=168704k, avg=2694411.30, stdev=4645972.12</span><br><span class="line">    clat (msec): min=10, max=1069, avg=342.33, stdev=74.36</span><br><span class="line">     lat (msec): min=17, max=1118, avg=345.03, stdev=74.85</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[  107],  5.00th=[  241], 10.00th=[  262], 20.00th=[  288],</span><br><span class="line">     | 30.00th=[  309], 40.00th=[  321], 50.00th=[  342], 60.00th=[  359],</span><br><span class="line">     | 70.00th=[  380], 80.00th=[  401], 90.00th=[  430], 95.00th=[  460],</span><br><span class="line">     | 99.00th=[  531], 99.50th=[  567], 99.90th=[  718], 99.95th=[  776],</span><br><span class="line">     | 99.99th=[  902]</span><br><span class="line">   bw (  KiB/s): min=24114, max=117969, per=99.85%, avg=47395.97, stdev=305.48, samples=7648</span><br><span class="line">   iops        : min= 6026, max=29481, avg=11848.53, stdev=76.36, samples=7648</span><br><span class="line">  lat (msec)   : 20=0.01%, 50=0.04%, 100=0.89%, 250=5.86%, 500=91.40%</span><br><span class="line">  lat (msec)   : 750=1.73%, 1000=0.07%, 2000=0.01%</span><br><span class="line">  cpu          : usr=0.06%, sys=0.27%, ctx=1296227, majf=0, minf=4128</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=99.9%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.1%</span><br><span class="line">     issued rwts: total=1424347,0,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=128</span><br><span class="line">randwrite-4k: (groupid=1, jobs=32): err= 0: pid=1541968: Thu Nov 18 09:11:15 2021</span><br><span class="line">  write: IOPS=11.8k, BW=46.0MiB/s (48.3MB/s)(5527MiB/120027msec); 0 zone resets</span><br><span class="line">    slat (nsec): min=1603, max=169727k, avg=2712193.76, stdev=4974963.08</span><br><span class="line">    clat (usec): min=501, max=921119, avg=344609.13, stdev=67128.86</span><br><span class="line">     lat (usec): min=504, max=929592, avg=347321.59, stdev=67565.75</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[  178],  5.00th=[  249], 10.00th=[  271], 20.00th=[  292],</span><br><span class="line">     | 30.00th=[  309], 40.00th=[  330], 50.00th=[  342], 60.00th=[  359],</span><br><span class="line">     | 70.00th=[  380], 80.00th=[  401], 90.00th=[  430], 95.00th=[  451],</span><br><span class="line">     | 99.00th=[  510], 99.50th=[  542], 99.90th=[  676], 99.95th=[  751],</span><br><span class="line">     | 99.99th=[  852]</span><br><span class="line">   bw (  KiB/s): min=25024, max=86996, per=99.89%, avg=47100.88, stdev=261.59, samples=7648</span><br><span class="line">   iops        : min= 6255, max=21748, avg=11775.01, stdev=65.40, samples=7648</span><br><span class="line">  lat (usec)   : 750=0.01%</span><br><span class="line">  lat (msec)   : 2=0.01%, 4=0.01%, 10=0.01%, 20=0.01%, 50=0.09%</span><br><span class="line">  lat (msec)   : 100=0.23%, 250=4.98%, 500=93.49%, 750=1.14%, 1000=0.05%</span><br><span class="line">  cpu          : usr=0.07%, sys=0.28%, ctx=1285046, majf=0, minf=32</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=99.9%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.1%</span><br><span class="line">     issued rwts: total=0,1414991,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=128</span><br><span class="line">read-512k: (groupid=2, jobs=32): err= 0: pid=1548302: Thu Nov 18 09:11:15 2021</span><br><span class="line">  read: IOPS=443, BW=222MiB/s (233MB/s)(26.1GiB/120317msec)</span><br><span class="line">    slat (usec): min=9, max=930894, avg=71954.82, stdev=63916.45</span><br><span class="line">    clat (msec): min=121, max=13298, avg=8889.65, stdev=1711.42</span><br><span class="line">     lat (msec): min=259, max=13401, avg=8961.61, stdev=1714.61</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[ 1401],  5.00th=[ 6141], 10.00th=[ 7483], 20.00th=[ 8154],</span><br><span class="line">     | 30.00th=[ 8490], 40.00th=[ 8792], 50.00th=[ 9060], 60.00th=[ 9329],</span><br><span class="line">     | 70.00th=[ 9597], 80.00th=[10000], 90.00th=[10537], 95.00th=[11073],</span><br><span class="line">     | 99.00th=[11745], 99.50th=[12013], 99.90th=[12818], 99.95th=[12953],</span><br><span class="line">     | 99.99th=[13221]</span><br><span class="line">   bw (  KiB/s): min=35829, max=499679, per=99.12%, avg=225160.35, stdev=2695.71, samples=7169</span><br><span class="line">   iops        : min=   67, max=  975, avg=438.92, stdev= 5.27, samples=7169</span><br><span class="line">  lat (msec)   : 250=0.03%, 500=0.21%, 750=0.22%, 1000=0.19%, 2000=0.84%</span><br><span class="line">  lat (msec)   : &gt;=2000=98.51%</span><br><span class="line">  cpu          : usr=0.01%, sys=0.07%, ctx=121043, majf=0, minf=524320</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.2%, 8=0.5%, 16=1.0%, 32=1.9%, &gt;=64=96.2%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=99.9%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.1%</span><br><span class="line">     issued rwts: total=53381,0,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=128</span><br><span class="line">write-512k: (groupid=3, jobs=32): err= 0: pid=1550227: Thu Nov 18 09:11:15 2021</span><br><span class="line">  write: IOPS=442, BW=221MiB/s (232MB/s)(26.0GiB/120384msec); 0 zone resets</span><br><span class="line">    slat (usec): min=16, max=1135.3k, avg=72030.60, stdev=59737.86</span><br><span class="line">    clat (msec): min=79, max=14388, avg=8853.39, stdev=1881.03</span><br><span class="line">     lat (msec): min=79, max=14496, avg=8925.42, stdev=1887.27</span><br><span class="line">    clat percentiles (msec):</span><br><span class="line">     |  1.00th=[ 1003],  5.00th=[ 5537], 10.00th=[ 7416], 20.00th=[ 8020],</span><br><span class="line">     | 30.00th=[ 8423], 40.00th=[ 8792], 50.00th=[ 9060], 60.00th=[ 9329],</span><br><span class="line">     | 70.00th=[ 9597], 80.00th=[10000], 90.00th=[10671], 95.00th=[11208],</span><br><span class="line">     | 99.00th=[13221], 99.50th=[13624], 99.90th=[14160], 99.95th=[14160],</span><br><span class="line">     | 99.99th=[14295]</span><br><span class="line">   bw (  KiB/s): min=40950, max=624837, per=99.90%, avg=226555.80, stdev=2902.55, samples=7107</span><br><span class="line">   iops        : min=   78, max= 1219, avg=441.72, stdev= 5.67, samples=7107</span><br><span class="line">  lat (msec)   : 100=0.05%, 250=0.16%, 500=0.33%, 750=0.25%, 1000=0.22%</span><br><span class="line">  lat (msec)   : 2000=0.84%, &gt;=2000=98.16%</span><br><span class="line">  cpu          : usr=0.06%, sys=0.05%, ctx=122810, majf=0, minf=32</span><br><span class="line">  IO depths    : 1=0.1%, 2=0.1%, 4=0.2%, 8=0.5%, 16=1.0%, 32=1.9%, &gt;=64=96.2%</span><br><span class="line">     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.0%</span><br><span class="line">     complete  : 0=0.0%, 4=99.9%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, &gt;=64=0.1%</span><br><span class="line">     issued rwts: total=0,53322,0,0 short=0,0,0,0 dropped=0,0,0,0</span><br><span class="line">     latency   : target=0, window=0, percentile=100.00%, depth=128</span><br><span class="line"></span><br><span class="line">Run status group 0 (all jobs):</span><br><span class="line">   READ: bw=46.4MiB/s (48.6MB/s), 46.4MiB/s-46.4MiB/s (48.6MB/s-48.6MB/s), io=5564MiB (5834MB), run=120025-120025msec</span><br><span class="line"></span><br><span class="line">Run status group 1 (all jobs):</span><br><span class="line">  WRITE: bw=46.0MiB/s (48.3MB/s), 46.0MiB/s-46.0MiB/s (48.3MB/s-48.3MB/s), io=5527MiB (5796MB), run=120027-120027msec</span><br><span class="line"></span><br><span class="line">Run status group 2 (all jobs):</span><br><span class="line">   READ: bw=222MiB/s (233MB/s), 222MiB/s-222MiB/s (233MB/s-233MB/s), io=26.1GiB (27.0GB), run=120317-120317msec</span><br><span class="line"></span><br><span class="line">Run status group 3 (all jobs):</span><br><span class="line">  WRITE: bw=221MiB/s (232MB/s), 221MiB/s-221MiB/s (232MB/s-232MB/s), io=26.0GiB (27.0GB), run=120384-120384msec</span><br><span class="line"></span><br><span class="line">Disk stats (read/write):</span><br><span class="line">  vda: ios=1560424/1561420, merge=620/2869, ticks=60567966/61121545, in_queue=121689511, util=99.22%</span><br></pre></td></tr></table></figure>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="you-need-to-specify-size">you need to specify size=</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write-512k: you need to specify size=</span><br><span class="line">fio: pid=0, err=22/file:filesetup.c:1057, func=total_file_size, error=Invalid argument</span><br></pre></td></tr></table></figure>
+<p>Specify <code>size</code> in the configuration file to fix that issue.</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="attr">size</span>=<span class="number">5</span>G</span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/axboe/fio">axboe/fio: Flexible I/O Tester - https://github.com/axboe/fio</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fio.readthedocs.io/en/latest/index.html">Welcome to FIO’s documentation! — fio 3.27 documentation - https://fio.readthedocs.io/en/latest/index.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Awesome-Software/" rel="tag"># Awesome Software</a>
+              <a href="/tags/Performance/" rel="tag"># Performance</a>
+              <a href="/tags/FIO/" rel="tag"># FIO</a>
+              <a href="/tags/I-O/" rel="tag"># I/O</a>
+              <a href="/tags/Disk/" rel="tag"># Disk</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/13/Awesome-Software/Remote/rsync-a-fast-versatile-remote-and-local-file-copying-tool/" rel="prev" title="[Awesome Remote] rsync -- a fast, versatile, remote (and local) file-copying tool">
+                  <i class="fa fa-angle-left"></i> [Awesome Remote] rsync -- a fast, versatile, remote (and local) file-copying tool
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/13/Awesome-Software/Monitoring/Use-ctop-to-monitor-real-time-metrics-for-multiple-containers/" rel="next" title="Use ctop to monitor real-time metrics for multiple containers">
+                  Use ctop to monitor real-time metrics for multiple containers <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"7cf096cdb8cdb7e50189c315eb50d4de"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

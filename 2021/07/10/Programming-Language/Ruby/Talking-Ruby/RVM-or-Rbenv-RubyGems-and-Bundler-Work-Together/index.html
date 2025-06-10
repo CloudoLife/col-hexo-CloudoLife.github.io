@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="RVM( or Rbenv), RubyGems and Bundler RVM( or Rbenv), RubyGems, and Bundler work together to give us a lot of control over our code’s environment. If you know how they work, you’ll be better prepared t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Talking-Ruby] RVM( or Rbenv), RubyGems and Bundler Work Together">
+<meta property="og:url" content="https://cloudolife.com/2021/07/10/Programming-Language/Ruby/Talking-Ruby/RVM-or-Rbenv-RubyGems-and-Bundler-Work-Together/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="RVM( or Rbenv), RubyGems and Bundler RVM( or Rbenv), RubyGems, and Bundler work together to give us a lot of control over our code’s environment. If you know how they work, you’ll be better prepared t">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-10T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.941Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Ruby enVironment Manager (RVM)">
+<meta property="article:tag" content="Talking-Ruby">
+<meta property="article:tag" content="Gemfile">
+<meta property="article:tag" content="Gem">
+<meta property="article:tag" content="RubyGems.org">
+<meta property="article:tag" content="Bundler">
+<meta property="article:tag" content="rbenv">
+<meta property="article:tag" content="Gemfile.lock">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/07/10/Programming-Language/Ruby/Talking-Ruby/RVM-or-Rbenv-RubyGems-and-Bundler-Work-Together/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/07/10/Programming-Language/Ruby/Talking-Ruby/RVM-or-Rbenv-RubyGems-and-Bundler-Work-Together/","path":"2021/07/10/Programming-Language/Ruby/Talking-Ruby/RVM-or-Rbenv-RubyGems-and-Bundler-Work-Together/","title":"[Talking-Ruby] RVM( or Rbenv), RubyGems and Bundler Work Together"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Talking-Ruby] RVM( or Rbenv), RubyGems and Bundler Work Together | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">RVM( or Rbenv), RubyGems and Bundler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-Code-Loading"><span class="nav-number">1.1.</span> <span class="nav-text">Ruby Code Loading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ruby-Version-Management-RVM-Rbenv-chruby"><span class="nav-number">1.2.</span> <span class="nav-text">Ruby Version Management (RVM, Rbenv, chruby)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shims-and-Rehashing"><span class="nav-number">1.2.1.</span> <span class="nav-text">Shims and Rehashing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RubyGems"><span class="nav-number">1.3.</span> <span class="nav-text">RubyGems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bundle"><span class="nav-number">1.4.</span> <span class="nav-text">Bundle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bundler-resolves-dependencies-and-generates-a-lockfile-Gemfile-lock"><span class="nav-number">1.4.1.</span> <span class="nav-text">Bundler resolves dependencies and generates a lockfile Gemfile.lock:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bundler-resolves-compatibility-among-dependencies"><span class="nav-number">1.4.2.</span> <span class="nav-text">Bundler resolves compatibility among dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bundler-restricts-access-to-gems-installed-but-not-specified-in-our-Gemfile"><span class="nav-number">1.4.3.</span> <span class="nav-text">Bundler restricts access to gems installed but not specified in our Gemfile</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/07/10/Programming-Language/Ruby/Talking-Ruby/RVM-or-Rbenv-RubyGems-and-Bundler-Work-Together/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Talking-Ruby] RVM( or Rbenv), RubyGems and Bundler Work Together | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Talking-Ruby] RVM( or Rbenv), RubyGems and Bundler Work Together
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-10 00:00:00" itemprop="dateCreated datePublished" datetime="2021-07-10T00:00:00+00:00">2021-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Talking-Ruby/" itemprop="url" rel="index"><span itemprop="name">Talking-Ruby</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>9.3k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>8 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>RVM( or Rbenv), RubyGems and Bundler</h1>
+<p>RVM( or Rbenv), RubyGems, and Bundler work together to give us a lot of control over our code’s environment. If you know how they work, you’ll be better prepared to troubleshoot any problems you encounter.</p>
+<span id="more"></span>
+<h2 id="Ruby-Code-Loading">Ruby Code Loading</h2>
+<p>By default, the Ruby language provides two major methods for loading code defined elsewhere: load &amp; require.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">load <span class="string">&#x27;json.rb&#x27;</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;json.rb&#x27;</span></span><br><span class="line">require_relative <span class="string">&#x27;json.rb&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Both loading methods accept both absolute and relative paths as arguments. However, there are two differentiating factors:</p>
+<ul>
+<li>
+<p>Multiple calls to load will re-execute the file, whereas multiple calls to require will not re-execute the file; instead, it will return <code>false</code>.</p>
+</li>
+<li>
+<p>Calls to load resolves only to absolute and relative paths. Calls to require checks up on the <code>$LOAD_PATH </code>when the path doesn’t resolve to an absolute path.</p>
+</li>
+<li>
+<p>A third variant is <code>require_relative</code>, which uses relative paths to require code relative to the current file’s location rather than the Ruby process’ working directory.</p>
+</li>
+</ul>
+<h2 id="Ruby-Version-Management-RVM-Rbenv-chruby">Ruby Version Management (RVM, Rbenv, chruby)</h2>
+<p>A version manager is a tool used to manage and easily switch between versions of our interpreter (in this case, Ruby) and specify the location to find respective gems for our project. Version managers are largely language agnostic tools, and various languages have their respective implementations, such as Nvm, n for Node.js, pyenv for Python, and Rbenv, rvm, and chruby for Ruby. Now, let’s take rbenv for a spin, shall we?</p>
+<h3 id="Shims-and-Rehashing">Shims and Rehashing</h3>
+<p>These two concepts need to be properly understood to be able to debug Ruby Version Management effectively.</p>
+<p>Shims are lightweight bash scripts that exist in your <code>PATH</code> to intercept commands and route them to the appropriate version for execution. On a high level, every command (e.g., <code>rspec</code>) is translated into <code>rvm exec rspec</code>(or <code>rbenv exec rspec</code>). See the details below.</p>
+<p>First, rvm or rbenv creates a shim for all commands (<code>rspec</code>, <code>bundle</code>, etc.) across all installed Ruby versions to intercept calls to the CLI regardless of the version.</p>
+<p>Shims on your <code>PATH</code> must be prepended; this ensures they’re the first point of contact for your Ruby executables and can properly intercept. The best way I found to understand your <code>PATH</code> setup and know whether your shims are intercepting properly is as follows:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">which</span> -a bundle</span></span><br><span class="line"></span><br><span class="line">/path/to/home/.rbenv/shims/bundle</span><br><span class="line">/usr/bin/bundle</span><br></pre></td></tr></table></figure>
+<p><code>which -a bundle</code>: this naively looks through your <code>PATH</code> and prints out in the order which it is found, locations where bundle can be found.</p>
+<p>Rehashing is the process of creating shims. When you newly install a Ruby gem that provides an executable, such as <code>rspec</code>, you need to run rbenv rehash to create the shim so that subsequent calls to <code>rspec</code> can be intercepted by rbenv and passed on to the appropriate Ruby version.</p>
+<h2 id="RubyGems">RubyGems</h2>
+<p>Next is RubyGems. It is available from the official Ruby site. RubyGems is a Ruby packaging system designed to facilitate the creation, sharing, and installation of libraries; in some ways, it is a distribution packaging system similar to, say, apt-get, but targeted at Ruby software. RubyGems is the de-facto method for sharing gems. They are usually installed at <code>~/.rvm/gems/&#123;ruby-number&#125;[@&#123;gemset-name&#125;]/gems</code> on rvm (or <code>~/.rbenv/versions/&#123;version-number&#125;/lib/ruby/gems/&#123;minor-version&#125;/</code> on rbenv), or its variant, depending on which version manager is used. Ruby’s default required method <code>Kernel.require</code> doesn’t provide any mechanism to load gems from the Gems installation directory. RubyGems monkey-patches <code>Kernel.require</code> to</p>
+<ul>
+<li>
+<p>First, search for gems in the <code>$LOAD_PATH</code>.</p>
+</li>
+<li>
+<p>If not found, search for gems in the GEMS INSTALLATION DIRECTORY.</p>
+<ul>
+<li>Once found, add the path to <code>$LOAD_PATH</code>.</li>
+</ul>
+</li>
+</ul>
+<p>This works “natively” because Ruby has come with RubyGems by default since version 1.9; previous Ruby versions required RubyGems to be installed manually. Although this works natively, it is also important to know this difference when debugging.</p>
+<p>A gem is a bunch of related code used to solve a specific problem. Install a gem and get information about the gem environment as follows:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gem install gemname</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gem <span class="built_in">env</span></span></span><br><span class="line"></span><br><span class="line">RubyGems Environment: </span><br><span class="line">    - RUBYGEMS VERSION: 3.1.2 </span><br><span class="line">    - RUBY VERSION: 2.7.1 (2020-03-31 patchlevel 83) [x86_64-darwin20] </span><br><span class="line">    - INSTALLATION DIRECTORY: /path/to/home/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0 </span><br><span class="line">    - USER INSTALLATION DIRECTORY: /path/to/home/.gem/ruby/2.7.0 </span><br><span class="line">    - RUBY EXECUTABLE: /path/to/home/.rbenv/versions/2.7.1/bin/ruby </span><br><span class="line">    - GIT EXECUTABLE: /usr/bin/git </span><br><span class="line">    - EXECUTABLE DIRECTORY: /path/to/home/.rbenv/versions/2.7.1/bin </span><br><span class="line">    - SPEC CACHE DIRECTORY: /path/to/home/.gem/specs </span><br><span class="line">    - SYSTEM CONFIGURATION DIRECTORY: /path/to/home/.rbenv/versions/2.7.1/etc </span><br><span class="line">    - RUBYGEMS PLATFORMS:   </span><br><span class="line">        - ruby   </span><br><span class="line">        - x86_64-darwin-20 </span><br><span class="line">    - GEM PATHS:    </span><br><span class="line">        - /path/to/home/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0    </span><br><span class="line">        - /path/to/home/.gem/ruby/2.7.0 </span><br><span class="line">    - GEM CONFIGURATION:    </span><br><span class="line">        ...</span><br><span class="line">    - REMOTE SOURCES:    </span><br><span class="line">        - https://rubygems.org/ </span><br><span class="line">    - SHELL PATH:    </span><br><span class="line">        - /path/to/home/.rbenv/versions/2.7.1/bin</span><br></pre></td></tr></table></figure>
+<p>How does RubyGems solve this problem? It monkey patches the Kernel’s require system with its own require method. With this in-place, when require honeybadger is called, it searches through the gems folder for honeybadger.rb and activates the gem when found.</p>
+<p>For example, <code>require 'honeybadger'</code> produces something similar to the following:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spec = <span class="title class_">Gem</span><span class="symbol">:</span><span class="symbol">:Specification</span>.find_by_path(<span class="string">&#x27;honeybadger&#x27;</span>)</span><br><span class="line">spec.activate</span><br></pre></td></tr></table></figure>
+<p>Activating a gem simply means putting it in the <code>$LOAD_PATH</code>. RubyGems also helps download all of a gem’s dependencies before downloading the gem itself.</p>
+<p>Also, Rubygems ships with a nice feature that enables you to open the associated gem’s directory with <code>gem open &lt;gem-name&gt;</code>.</p>
+<p>This allows us to easily find/trace the specific version of the gem our app is referencing.</p>
+<h2 id="Bundle">Bundle</h2>
+<p>At this layer, Bundler helps us easily specify all our project dependencies and optionally specify a version for each. Then, it resolves our gems, as well as installs it and its dependencies. Building real-world applications pre-bundler came with a myriad of challenges, such as the following:</p>
+<ul>
+<li>
+<p>Our applications exist with numerous dependencies, and these dependencies have various other dependencies and their respective versions. Installing the wrong version of one gem will easily break our app, and fixing this problem involved lots of tears.</p>
+</li>
+<li>
+<p>Also, two(2) of our dependencies can refer to the same third-level dependency. Finding compatibility was an issue, and if there was any, it was a problem.</p>
+</li>
+<li>
+<p>Where we have multiple applications on the same machine, with various dependencies, our application can access any gems installed on the machine, which goes against the principle of least privilege and exposes our application to all gems installed on the machine, regardless of whether they’re malicious.</p>
+</li>
+</ul>
+<p>Bundler solves all three problems and gives us a sane way to manage our app dependencies by doing the following.</p>
+<h3 id="Bundler-resolves-dependencies-and-generates-a-lockfile-Gemfile-lock">Bundler resolves dependencies and generates a lockfile <code>Gemfile.lock</code>:</h3>
+<p>Given a <code>Gemfile</code>.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line">gem <span class="string">&#x27;httparty&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>If we run <code>bundle</code> or <code>bundle install</code>, it will generate the lockfile <code>Gemfile.lock</code>:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile.lock</span></span><br><span class="line"></span><br><span class="line"><span class="variable constant_">GEM</span></span><br><span class="line">  <span class="symbol">specs:</span></span><br><span class="line">    httparty (<span class="number">0.18</span>.<span class="number">1</span>)</span><br><span class="line">      mime-types (~&gt; <span class="number">3.0</span>)</span><br><span class="line">      multi_xml (&gt;= <span class="number">0.5</span>.<span class="number">2</span>)</span><br><span class="line">    mime-types (<span class="number">3.3</span>.<span class="number">1</span>)</span><br><span class="line">      mime-types-data (~&gt; <span class="number">3.2015</span>)</span><br><span class="line">    mime-types-data (<span class="number">3.2020</span>.<span class="number">1104</span>)</span><br><span class="line">    multi_xml (<span class="number">0.6</span>.<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">PLATFORMS</span></span><br><span class="line">  ruby</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">DEPENDENCIES</span></span><br><span class="line">  httparty</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">BUNDLED</span> <span class="variable constant_">WITH</span></span><br><span class="line">   <span class="number">2.1</span>.<span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>From the above, the bundler generates the version of <code>httparty</code> to be installed, as well as its own dependencies in the Gemfile.lock. This file is the blueprint of our app dependencies and should be checked into version control. It ensures that our project dependencies are consistent across environments (development, staging, or production).</p>
+<h3 id="Bundler-resolves-compatibility-among-dependencies">Bundler resolves compatibility among dependencies</h3>
+<p>It resolves the dependencies for <code>httparty</code> by finding a suitable version for its dependencies and specifying them. Bundler also tries to resolve dependencies between gems. For example,</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line">gem <span class="string">&#x27;httparty&#x27;</span> <span class="comment"># That relies on gem &#x27;mime-types&#x27;, &#x27;&gt;= 3.0.1, &lt; 4.0.1&#x27;</span></span><br><span class="line">gem <span class="string">&#x27;rest-client&#x27;</span> <span class="comment"># That relies on gem &#x27;mime-types&#x27;, &#x27;&gt;= 2.0.1, &lt; 3.0&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>The example above is arbitrary and will result in an error, such as the following:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Bundler could not find compatible versions for gem &quot;mime-types&quot;:</span><br><span class="line">In Gemfile:</span><br><span class="line">    httparty was resolved to 0.18.1, which depends on</span><br><span class="line">        mime-types (&#x27;&gt;= 3.0.1, &lt; 4.0.1&#x27;)</span><br><span class="line"></span><br><span class="line">    rest-client was resolved to 2.0.4, which depends on</span><br><span class="line">        mime-types (&#x27;&gt;= 2.0.1, &lt; 3.0&#x27;)</span><br></pre></td></tr></table></figure>
+<p>This is because two gems have dependencies that are not compatible and cannot be automatically resolved.</p>
+<h3 id="Bundler-restricts-access-to-gems-installed-but-not-specified-in-our-Gemfile">Bundler restricts access to gems installed but not specified in our Gemfile</h3>
+<p>In a sample gemfile like the following,</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line">gem <span class="string">&#x27;httparty&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="language-shell"># irb
+require 'rest-client'
+
+# raises
+LoadError (cannot load such file -- rest-client)
+it ensures that only the dependencies specified in our Gemfile can be required by our project.
+
+### Bundle exec
+
+When you run `rspec` in a project directory, there is a possibility of running a different version other than what was specified in the `Gemfile`. This is because the most recent version will be selected to run versus the version specified in the `Gemfile`. 
+
+`bundle exec rspec` ensures rspec is run in the context of that project (i.e., The gems specified in the `Gemfile`).
+
+### Bundle binstubs
+
+Often, we read articles where we run commands like `./bin/rails`; this command is similar to `bundle exec rails`. Binstubs are wrappers around Ruby executables to ease the usage of `bundle exec`.
+
+To generate a binstub run, use `bundle binstubs gem-name`. This creates a binstub in the `./bin` folder but can be configured with the `--path` directory if set.
+
+## References
+
+[1] [Understanding How Rbenv, RubyGems And Bundler Work Together - Honeybadger Developer Blog - https://www.honeybadger.io/blog/rbenv-rubygems-bundler-path/](https://www.honeybadger.io/blog/rbenv-rubygems-bundler-path/)
+
+[2] [RubyGems.org | your community gem host - https://rubygems.org/](https://rubygems.org/)
+
+[3] [RVM: Ruby Version Manager - RVM Ruby Version Manager - Documentation - https://rvm.io/](https://rvm.io/)
+
+[4] [rbenv/rbenv: Groom your app’s Ruby environment - https://github.com/rbenv/rbenv](https://github.com/rbenv/rbenv)
+
+[5] [Bundler: The best way to manage a Ruby application's gems - https://bundler.io/](https://bundler.io/)
+
+[6] [How do gems work? - Justin Weiss - https://www.justinweiss.com/articles/how-do-gems-work/](https://www.justinweiss.com/articles/how-do-gems-work/)
+
+[7] [postmodern/chruby: Changes the current Ruby - https://github.com/postmodern/chruby](https://github.com/postmodern/chruby)</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Ruby-enVironment-Manager-RVM/" rel="tag"># Ruby enVironment Manager (RVM)</a>
+              <a href="/tags/Talking-Ruby/" rel="tag"># Talking-Ruby</a>
+              <a href="/tags/Gemfile/" rel="tag"># Gemfile</a>
+              <a href="/tags/Gem/" rel="tag"># Gem</a>
+              <a href="/tags/RubyGems-org/" rel="tag"># RubyGems.org</a>
+              <a href="/tags/Bundler/" rel="tag"># Bundler</a>
+              <a href="/tags/rbenv/" rel="tag"># rbenv</a>
+              <a href="/tags/Gemfile-lock/" rel="tag"># Gemfile.lock</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/03/macOS/Use-Homebrew-brew-to-install-Docker-Desktop-and-K8s-on-macOS/" rel="prev" title="[macOS] Use Homebrew (brew) to install Docker Desktop, Docker Compose and Kubernetes (K8S) on macOS">
+                  <i class="fa fa-angle-left"></i> [macOS] Use Homebrew (brew) to install Docker Desktop, Docker Compose and Kubernetes (K8S) on macOS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/10/Programming-Language/Ruby/FAQs/Exception-Zlib-DataError-unknown-compression-method-when-use-rest-client-to-post-data-to-WeChat-Pay-Unifiedorder-API/" rel="next" title="[Ruby FAQs] Exception: Zlib::DataError: unknown compression method when use rest-client post data to WeChat Pay Unifiedorder API">
+                  [Ruby FAQs] Exception: Zlib::DataError: unknown compression method when use rest-client post data to WeChat Pay Unifiedorder API <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"6e32e0383d73142204daa45fabf4b23d"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

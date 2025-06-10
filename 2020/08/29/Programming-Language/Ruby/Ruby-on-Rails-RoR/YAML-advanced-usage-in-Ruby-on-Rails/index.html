@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="YAML Welcome to the Yaml Cookbook for Ruby. This version of the Yaml Cookbook focuses on the Ruby implementation of Yaml by comparing Yaml documents with their Ruby counterparts. YAML™ is a readable t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Best practices] YAML usage in Ruby on Rails">
+<meta property="og:url" content="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/YAML-advanced-usage-in-Ruby-on-Rails/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="YAML Welcome to the Yaml Cookbook for Ruby. This version of the Yaml Cookbook focuses on the Ruby implementation of Yaml by comparing Yaml documents with their Ruby counterparts. YAML™ is a readable t">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-29T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.941Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Rails &#x2F; Ruby on Rails (RoR)">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Ain&#39;t Markup Language (YAML)">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/YAML-advanced-usage-in-Ruby-on-Rails/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/YAML-advanced-usage-in-Ruby-on-Rails/","path":"2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/YAML-advanced-usage-in-Ruby-on-Rails/","title":"[Best practices] YAML usage in Ruby on Rails"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Best practices] YAML usage in Ruby on Rails | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">YAML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Collections"><span class="nav-number">1.1.</span> <span class="nav-text">Collections</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-Sequences"><span class="nav-number">1.1.1.</span> <span class="nav-text">Nested Sequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inline-Collections"><span class="nav-number">1.1.2.</span> <span class="nav-text">Inline Collections</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Simple-Inline-Array"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Simple Inline Array</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Simple-Inline-Hash"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Simple Inline Hash</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-line-Inline-Collections"><span class="nav-number">1.1.3.</span> <span class="nav-text">Multi-line Inline Collections</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Types"><span class="nav-number">1.2.</span> <span class="nav-text">Basic Types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Strings"><span class="nav-number">1.2.1.</span> <span class="nav-text">Strings</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Forcing-Strings"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Forcing Strings</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Single-quoted-Strings"><span class="nav-number">1.2.2.</span> <span class="nav-text">Single-quoted Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Double-quoted-Strings"><span class="nav-number">1.2.3.</span> <span class="nav-text">Double-quoted Strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Null"><span class="nav-number">1.2.4.</span> <span class="nav-text">Null</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YAML-For-Ruby"><span class="nav-number">1.3.</span> <span class="nav-text">YAML For Ruby</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbols"><span class="nav-number">1.3.1.</span> <span class="nav-text">Symbols</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ranges"><span class="nav-number">1.3.2.</span> <span class="nav-text">Ranges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Perl-Regexps"><span class="nav-number">1.3.3.</span> <span class="nav-text">Perl Regexps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Struct-class"><span class="nav-number">1.3.4.</span> <span class="nav-text">Struct class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-Structs"><span class="nav-number">1.3.5.</span> <span class="nav-text">Nested Structs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Objects"><span class="nav-number">1.3.6.</span> <span class="nav-text">Objects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extending-Kernel-Array"><span class="nav-number">1.3.7.</span> <span class="nav-text">Extending Kernel::Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extending-Kernel-Hash"><span class="nav-number">1.3.8.</span> <span class="nav-text">Extending Kernel::Hash</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reuse-config-when-possible"><span class="nav-number">1.4.</span> <span class="nav-text">Reuse config when possible</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extends"><span class="nav-number">1.5.</span> <span class="nav-text">extends</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic-Code"><span class="nav-number">1.6.</span> <span class="nav-text">Dynamic Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.7.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/YAML-advanced-usage-in-Ruby-on-Rails/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Best practices] YAML usage in Ruby on Rails | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Best practices] YAML usage in Ruby on Rails
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-29 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-29T00:00:00+00:00">2020-08-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Rails-Ruby-on-Rails-RoR/" itemprop="url" rel="index"><span itemprop="name">Rails / Ruby on Rails (RoR)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Rails-Ruby-on-Rails-RoR/Best-Practices/" itemprop="url" rel="index"><span itemprop="name">Best Practices</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>9.1k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>8 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>YAML</h1>
+<p>Welcome to the Yaml Cookbook for Ruby. This version of the Yaml Cookbook focuses on the Ruby implementation of Yaml by comparing Yaml documents with their Ruby counterparts.</p>
+<p>YAML™ is a readable text format for data structures. As you’ll see below, YAML can handle many common data types and structures. And what YAML can’t handle natively can be supported through flexible type families. For example, YAML for Ruby uses type families to support storage of regular expressions, ranges and object instances.</p>
+<span id="more"></span>
+<h2 id="Collections">Collections</h2>
+<h3 id="Nested-Sequences">Nested Sequences</h3>
+<p>You can include a sequence within another sequence by giving the sequence an empty dash, followed by an indented list.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> </span><br><span class="line"> <span class="bullet">-</span> <span class="string">foo</span> </span><br><span class="line"> <span class="bullet">-</span> <span class="string">bar</span> </span><br><span class="line"> <span class="bullet">-</span> <span class="string">baz</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>, <span class="string">&#x27;baz&#x27;</span>]] </span><br></pre></td></tr></table></figure>
+<h3 id="Inline-Collections">Inline Collections</h3>
+<h4 id="Simple-Inline-Array">Simple Inline Array</h4>
+<p>Sequences can be contained on a single line, using the inline syntax. Separate each entry with commas and enclose in square brackets.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">seq:</span> [ <span class="string">a</span>, <span class="string">b</span>, <span class="string">c</span> ] </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">&#x27;seq&#x27;</span> =&gt; [ <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span> ] &#125; </span><br></pre></td></tr></table></figure>
+<h4 id="Simple-Inline-Hash">Simple Inline Hash</h4>
+<p>Mapping can also be contained on a single line, using the inline syntax. Each key-value pair is separated by a colon, with a comma between each entry in the mapping. Enclose with curly braces.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hash:</span> &#123; <span class="attr">name:</span> <span class="string">Steve</span>, <span class="attr">foo:</span> <span class="string">bar</span> &#125; </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">&#x27;hash&#x27;</span> =&gt; &#123; <span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;Steve&#x27;</span>, <span class="string">&#x27;foo&#x27;</span> =&gt; <span class="string">&#x27;bar&#x27;</span> &#125; &#125; </span><br></pre></td></tr></table></figure>
+<h3 id="Multi-line-Inline-Collections">Multi-line Inline Collections</h3>
+<p>Both inline sequences and inline mappings can span multiple lines, provided that you indent the additional lines.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">languages:</span> [ <span class="string">Ruby</span>, </span><br><span class="line">             <span class="string">Perl</span>, </span><br><span class="line">             <span class="string">Python</span> ] </span><br><span class="line"><span class="attr">websites:</span> &#123; <span class="attr">YAML:</span> <span class="string">yaml.org</span>, </span><br><span class="line">            <span class="attr">Ruby:</span> <span class="string">ruby-lang.org</span>, </span><br><span class="line">            <span class="attr">Python:</span> <span class="string">python.org</span>, </span><br><span class="line">            <span class="attr">Perl:</span> <span class="string">use.perl.org</span> &#125; </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">&#x27;languages&#x27;</span> =&gt; [ <span class="string">&#x27;Ruby&#x27;</span>, <span class="string">&#x27;Perl&#x27;</span>, <span class="string">&#x27;Python&#x27;</span> ], </span><br><span class="line">  <span class="string">&#x27;websites&#x27;</span> =&gt; &#123; </span><br><span class="line">    <span class="string">&#x27;YAML&#x27;</span> =&gt; <span class="string">&#x27;yaml.org&#x27;</span>, </span><br><span class="line">    <span class="string">&#x27;Ruby&#x27;</span> =&gt; <span class="string">&#x27;ruby-lang.org&#x27;</span>, </span><br><span class="line">    <span class="string">&#x27;Python&#x27;</span> =&gt; <span class="string">&#x27;python.org&#x27;</span>, </span><br><span class="line">    <span class="string">&#x27;Perl&#x27;</span> =&gt; <span class="string">&#x27;use.perl.org&#x27;</span>  </span><br><span class="line">  &#125; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h2 id="Basic-Types">Basic Types</h2>
+<h3 id="Strings">Strings</h3>
+<h4 id="Forcing-Strings">Forcing Strings</h4>
+<p>Any YAML type can be forced into a string using the explicit !str method.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">date string:</span> <span class="type">!str</span> <span class="number">2001-08-01</span> </span><br><span class="line"><span class="attr">number string:</span> <span class="type">!str</span> <span class="number">192</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">  <span class="string">&#x27;date string&#x27;</span> =&gt; <span class="string">&#x27;2001-08-01&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;number string&#x27;</span> =&gt; <span class="string">&#x27;192&#x27;</span> </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h3 id="Single-quoted-Strings">Single-quoted Strings</h3>
+<p>You can also enclose your strings within single quotes, which allows use of slashes, colons, and other indicators freely. Inside single quotes, you can represent a single quote in your string by using two single quotes next to each other.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">all my favorite symbols:</span> <span class="string">&#x27;#:!/%.)&#x27;</span> </span><br><span class="line"><span class="attr">a few i hate:</span> <span class="string">&#x27;&amp;(*&#x27;</span> </span><br><span class="line"><span class="string">why</span> <span class="string">do</span> <span class="string">i</span> <span class="string">hate</span> <span class="string">them?:</span> <span class="string">&#x27;it<span class="char escape_">&#x27;&#x27;</span>s very hard to explain&#x27;</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">  <span class="string">&#x27;all my favorite symbols&#x27;</span> =&gt; <span class="string">&#x27;#:!/%.)&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;a few i hate&#x27;</span> =&gt; <span class="string">&#x27;&amp;(*&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;why do i hate them?&#x27;</span> =&gt; <span class="string">&#x27;it\&#x27;s very hard to explain&#x27;</span> </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h3 id="Double-quoted-Strings">Double-quoted Strings</h3>
+<p>Enclosing strings in double quotes allows you to use escapings to represent ASCII and Unicode characters.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">i know where i want my line breaks:</span> <span class="string">&quot;one here\nand another here\n&quot;</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">  <span class="string">&#x27;i know where i want my line breaks&#x27;</span> =&gt; <span class="string">&quot;one here\nand another here\n&quot;</span> </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h3 id="Null">Null</h3>
+<p>You can use the tilde ‘~’ character for a null value.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Mr.</span> <span class="string">Show</span> </span><br><span class="line"><span class="attr">hosted by:</span> <span class="string">Bob</span> <span class="string">and</span> <span class="string">David</span> </span><br><span class="line"><span class="attr">date of next season:</span> <span class="string">~</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">  <span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;Mr. Show&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;hosted by&#x27;</span> =&gt; <span class="string">&#x27;Bob and David&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;date of next season&#x27;</span> =&gt; <span class="literal">nil</span> </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h2 id="YAML-For-Ruby">YAML For Ruby</h2>
+<h3 id="Symbols">Symbols</h3>
+<p>Ruby Symbols can be simply serialized using the !ruby/symbol transfer method, or the abbreviated !ruby/sym.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">simple symbol:</span> <span class="type">!ruby/symbol</span> <span class="string">Simple</span> </span><br><span class="line"><span class="attr">shortcut syntax:</span> <span class="type">!ruby/sym</span> <span class="string">Simple</span> </span><br><span class="line"><span class="attr">symbols in seqs:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="type">!ruby/symbol</span> <span class="string">ValOne</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="type">!ruby/symbol</span> <span class="string">ValTwo</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="type">!ruby/symbol</span> <span class="string">ValThree</span> </span><br><span class="line"><span class="attr">symbols in maps:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="type">!ruby/symbol</span> <span class="attr">MapKey:</span> <span class="type">!ruby/symbol</span> <span class="string">MapValue</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">&#x27;simple symbol&#x27;</span> =&gt; <span class="symbol">:Simple</span>, </span><br><span class="line">  <span class="string">&#x27;shortcut syntax&#x27;</span> =&gt; <span class="symbol">:Simple</span>, </span><br><span class="line">  <span class="string">&#x27;symbols in seqs&#x27;</span> =&gt; [ <span class="symbol">:ValOne</span>, <span class="symbol">:ValTwo</span>, <span class="symbol">:ValThree</span> ], </span><br><span class="line">  <span class="string">&#x27;symbols in maps&#x27;</span> =&gt; [ &#123; <span class="symbol">:MapKey</span> =&gt; <span class="symbol">:MapValue</span> &#125; ]</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h3 id="Ranges">Ranges</h3>
+<p>Ranges are serialized with the !ruby/range type family.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">normal range:</span> <span class="type">!ruby/range</span> <span class="number">10</span><span class="string">..20</span> </span><br><span class="line"><span class="attr">exclusive range:</span> <span class="type">!ruby/range</span> <span class="number">11</span><span class="string">...20</span> </span><br><span class="line"><span class="attr">negative range:</span> <span class="type">!ruby/range</span> <span class="number">-1</span><span class="string">..-5</span> </span><br><span class="line"><span class="string">?</span> <span class="type">!ruby/range</span> <span class="number">0</span><span class="string">..40</span> </span><br><span class="line"><span class="string">:</span> <span class="string">range</span> <span class="string">as</span> <span class="string">a</span> <span class="string">map</span> <span class="string">key</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">&#x27;normal range&#x27;</span> =&gt; (<span class="number">10</span>..<span class="number">20</span>), </span><br><span class="line">  <span class="string">&#x27;exclusive range&#x27;</span> =&gt; (<span class="number">11</span>...<span class="number">20</span>), </span><br><span class="line">  <span class="string">&#x27;negative range&#x27;</span> =&gt; (-<span class="number">1</span>..-<span class="number">5</span>), </span><br><span class="line">  (<span class="number">0</span>..<span class="number">40</span>) =&gt; <span class="string">&#x27;range as a map key&#x27;</span> </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">### Regexps</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Regexps</span> may be serialized to <span class="variable constant_">YAML</span>, both its syntax <span class="keyword">and</span> any modifiers.</span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">`yaml</span></span><br><span class="line"><span class="string">case-insensitive: !ruby/regexp &quot;/George McFly/i&quot; </span></span><br><span class="line"><span class="string">complex: !ruby/regexp &quot;/\\A\&quot;((?:[^\&quot;]|\\\&quot;)+)\&quot;/&quot; </span></span><br><span class="line"><span class="string">simple: !ruby/regexp &#x27;/a.b/&#x27; </span></span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">&#x27;simple&#x27;</span> =&gt; <span class="regexp">/a.b/</span>, <span class="string">&#x27;complex&#x27;</span> =&gt; <span class="regexp">/\A&quot;((?:[^&quot;]|\&quot;)+)&quot;/</span>, </span><br><span class="line">  <span class="string">&#x27;case-insensitive&#x27;</span> =&gt; <span class="regexp">/George McFly/i</span> &#125; </span><br></pre></td></tr></table></figure>
+<h3 id="Perl-Regexps">Perl Regexps</h3>
+<p>Regexps may also be imported from serialized Perl.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">---</span> <span class="type">!perl/regexp:</span> </span><br><span class="line">  <span class="attr">REGEXP:</span> <span class="string">&quot;R[Uu][Bb][Yy]$&quot;</span> </span><br><span class="line">  <span class="attr">MODIFIERS:</span> <span class="string">i</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/R[<span class="title class_">Uu</span>][<span class="title class_">Bb</span>][<span class="title class_">Yy</span>]<span class="variable">$/</span>i </span><br></pre></td></tr></table></figure>
+<h3 id="Struct-class">Struct class</h3>
+<p>The Ruby Struct class is registered as a YAML builtin type through Ruby, so it can safely be serialized. To use it, first make sure you define your Struct with Struct::new. Then, you are able to serialize with Struct#to_yaml and unserialize from a YAML stream.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">---</span> <span class="type">!ruby/struct:BookStruct</span> </span><br><span class="line">  <span class="attr">author:</span> <span class="string">Yukihiro</span> <span class="string">Matsumoto</span> </span><br><span class="line">  <span class="attr">title:</span> <span class="string">Ruby</span> <span class="string">in</span> <span class="string">a</span> <span class="string">Nutshell</span> </span><br><span class="line">  <span class="attr">year:</span> <span class="number">2002</span> </span><br><span class="line">  <span class="attr">isbn:</span> <span class="number">0</span><span class="number">-596</span><span class="number">-00214</span><span class="number">-9</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book_struct = <span class="title class_">Struct</span><span class="symbol">:</span><span class="symbol">:new</span>( <span class="string">&quot;BookStruct&quot;</span>, <span class="symbol">:author</span>, <span class="symbol">:title</span>, <span class="symbol">:year</span>, <span class="symbol">:isbn</span> ) </span><br><span class="line">book_struct.new( <span class="string">&quot;Yukihiro Matsumoto&quot;</span>, <span class="string">&quot;Ruby in a Nutshell&quot;</span>, <span class="number">2002</span>, <span class="string">&quot;0-596-00214-9&quot;</span> ) </span><br></pre></td></tr></table></figure>
+<h3 id="Nested-Structs">Nested Structs</h3>
+<p>As with other YAML builtins, you may nest the Struct inside of other Structs or other data types.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="type">!ruby/struct:FoodStruct</span> </span><br><span class="line">  <span class="attr">name:</span> <span class="string">Nachos</span> </span><br><span class="line">  <span class="attr">ingredients:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">Mission</span> <span class="string">Chips</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="type">!ruby/struct:FoodStruct</span> </span><br><span class="line">      <span class="attr">name:</span> <span class="string">Tostitos</span> <span class="string">Nacho</span> <span class="string">Cheese</span> </span><br><span class="line">      <span class="attr">ingredients:</span> </span><br><span class="line">        <span class="bullet">-</span> <span class="string">Milk</span> <span class="string">and</span> <span class="string">Enzymes</span> </span><br><span class="line">        <span class="bullet">-</span> <span class="string">Jack</span> <span class="string">Cheese</span> </span><br><span class="line">        <span class="bullet">-</span> <span class="string">Some</span> <span class="string">Volatile</span> <span class="string">Chemicals</span> </span><br><span class="line">      <span class="attr">taste:</span> <span class="string">Angelic</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">Sour</span> <span class="string">Cream</span> </span><br><span class="line">  <span class="attr">taste:</span> <span class="string">Zesty</span> </span><br><span class="line"><span class="bullet">-</span> <span class="type">!ruby/struct:FoodStruct</span> </span><br><span class="line">  <span class="attr">name:</span> <span class="string">Banana</span> <span class="string">Cream</span> <span class="string">Pie</span> </span><br><span class="line">  <span class="attr">ingredients:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">Bananas</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">Creamy</span> <span class="string">Stuff</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">And</span> <span class="string">Such</span> </span><br><span class="line">  <span class="attr">taste:</span> <span class="string">Puffy</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">food_struct = <span class="title class_">Struct</span><span class="symbol">:</span><span class="symbol">:new</span>( <span class="string">&quot;FoodStruct&quot;</span>, <span class="symbol">:name</span>, <span class="symbol">:ingredients</span>, <span class="symbol">:taste</span> ) </span><br><span class="line">[ </span><br><span class="line">  food_struct.new( <span class="string">&#x27;Nachos&#x27;</span>, [ <span class="string">&#x27;Mission Chips&#x27;</span>, </span><br><span class="line">    food_struct.new( <span class="string">&#x27;Tostitos Nacho Cheese&#x27;</span>, [ <span class="string">&#x27;Milk and Enzymes&#x27;</span>, <span class="string">&#x27;Jack Cheese&#x27;</span>, <span class="string">&#x27;Some Volatile Chemicals&#x27;</span> ], <span class="string">&#x27;Angelic&#x27;</span> ), </span><br><span class="line">    <span class="string">&#x27;Sour Cream&#x27;</span> ], <span class="string">&#x27;Zesty&#x27;</span> ), </span><br><span class="line">  food_struct.new( <span class="string">&#x27;Banana Cream Pie&#x27;</span>, [ <span class="string">&#x27;Bananas&#x27;</span>, <span class="string">&#x27;Creamy Stuff&#x27;</span>, <span class="string">&#x27;And Such&#x27;</span> ], <span class="string">&#x27;Puffy&#x27;</span> ) </span><br><span class="line">] </span><br></pre></td></tr></table></figure>
+<h3 id="Objects">Objects</h3>
+<p>YAML has generic support for serializing objects from any class available in Ruby. If using the generic object serialization, no extra code is needed.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">---</span> <span class="type">!ruby/object:YAML::Zoolander</span> </span><br><span class="line">  <span class="attr">name:</span> <span class="string">Derek</span> </span><br><span class="line">  <span class="attr">look:</span> <span class="string">Blue</span> <span class="string">Steel</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Zoolander</span> </span><br><span class="line">  <span class="built_in">attr_accessor</span> <span class="symbol">:name</span>, <span class="symbol">:look</span> </span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params"> look </span>) </span><br><span class="line">    <span class="variable">@name</span> = <span class="string">&quot;Derek&quot;</span> </span><br><span class="line">    <span class="variable">@look</span> = look </span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">==</span>(<span class="params"> z </span>) </span><br><span class="line">    <span class="variable language_">self</span>.name == z.name <span class="keyword">and</span> <span class="variable language_">self</span>.look == z.look </span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"><span class="title class_">Zoolander</span>.new( <span class="string">&quot;Blue Steel&quot;</span> ) </span><br></pre></td></tr></table></figure>
+<h3 id="Extending-Kernel-Array">Extending Kernel::Array</h3>
+<p>When extending the Array class, your instances of such a class will dump as YAML sequences, tagged with a class name.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">---</span> <span class="type">!ruby/array:YAML::MyArray</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">jacket</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">sweater</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">windbreaker</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyArray</span> &lt; <span class="title class_ inherited__">Kernel::Array</span>; <span class="keyword">end</span> </span><br><span class="line">outerwear = <span class="title class_">MyArray</span>.new </span><br><span class="line">outerwear &lt;&lt; <span class="string">&#x27;jacket&#x27;</span> </span><br><span class="line">outerwear &lt;&lt; <span class="string">&#x27;sweater&#x27;</span> </span><br><span class="line">outerwear &lt;&lt; <span class="string">&#x27;windbreaker&#x27;</span> </span><br><span class="line">outerwear </span><br></pre></td></tr></table></figure>
+<h3 id="Extending-Kernel-Hash">Extending Kernel::Hash</h3>
+<p>When extending the Hash class, your instances of such a class will dump as YAML maps, tagged with a class name.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">---</span> <span class="type">!ruby/hash:YAML::MyHash</span> </span><br><span class="line"><span class="attr">Black Francis:</span> <span class="string">Frank</span> <span class="string">Black</span> </span><br><span class="line"><span class="attr">Kim Deal:</span> <span class="string">Breeders</span> </span><br><span class="line"><span class="attr">Joey Santiago:</span> <span class="string">Martinis</span> </span><br></pre></td></tr></table></figure>
+<p>Ruby code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Note that the <span class="doctag">@me</span> attribute isn&#x27;t dumped </span></span><br><span class="line"><span class="comment"># because the default to_yaml is trained </span></span><br><span class="line"><span class="comment"># to dump as a regular Hash. </span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyHash</span> &lt; <span class="title class_ inherited__">Kernel::Hash</span> </span><br><span class="line">  <span class="built_in">attr_accessor</span> <span class="symbol">:me</span> </span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span> </span><br><span class="line">    <span class="variable">@me</span> = <span class="string">&quot;Why&quot;</span> </span><br><span class="line">  <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line">pixies = <span class="title class_">MyHash</span>.new </span><br><span class="line">pixies[<span class="string">&#x27;Black Francis&#x27;</span>] = <span class="string">&#x27;Frank Black&#x27;</span> </span><br><span class="line">pixies[<span class="string">&#x27;Kim Deal&#x27;</span>] = <span class="string">&#x27;Breeders&#x27;</span> </span><br><span class="line">pixies[<span class="string">&#x27;Joey Santiago&#x27;</span>] = <span class="string">&#x27;Martinis&#x27;</span> </span><br><span class="line">pixies </span><br></pre></td></tr></table></figure>
+<h2 id="Reuse-config-when-possible">Reuse config when possible</h2>
+<h2 id="extends">extends</h2>
+<p><code>extends</code> is a great way to reuse some YAML config in multiple places, for example:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">.image_template:</span></span><br><span class="line">  <span class="attr">image:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">centos:latest</span></span><br><span class="line"></span><br><span class="line"><span class="attr">test:</span></span><br><span class="line">  <span class="attr">extends:</span> <span class="string">.image_template</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;Testing&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">extends:</span> <span class="string">.image_template</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">echo</span> <span class="string">&quot;Deploying&quot;</span></span><br><span class="line"><span class="string">```</span>    </span><br><span class="line"></span><br><span class="line"><span class="string">YAML</span> <span class="string">has</span> <span class="string">a</span> <span class="string">handy</span> <span class="string">feature</span> <span class="string">called</span> <span class="string">anchors,</span> <span class="string">which</span> <span class="string">lets</span> <span class="string">you</span> <span class="string">easily</span> <span class="string">duplicate</span> <span class="string">content</span> <span class="string">across</span> <span class="string">your</span> <span class="string">document.</span> <span class="string">Anchors</span> <span class="string">can</span> <span class="string">be</span> <span class="string">used</span> <span class="string">to</span> <span class="string">duplicate/inherit</span> <span class="string">properties,</span> <span class="string">and</span> <span class="string">is</span> <span class="string">a</span> <span class="string">perfect</span> <span class="string">example</span> <span class="string">to</span> <span class="string">be</span> <span class="string">used</span> <span class="string">with</span> <span class="string">hidden</span> <span class="string">jobs</span> <span class="string">to</span> <span class="string">provide</span> <span class="string">templates</span> <span class="string">for</span> <span class="string">your</span> <span class="string">jobs.</span> <span class="string">When</span> <span class="string">there</span> <span class="string">is</span> <span class="string">duplicate</span> <span class="string">keys,</span> <span class="string">GitLab</span> <span class="string">will</span> <span class="string">perform</span> <span class="string">a</span> <span class="string">reverse</span> <span class="string">deep</span> <span class="string">merge</span> <span class="string">based</span> <span class="string">on</span> <span class="string">the</span> <span class="string">keys.</span></span><br><span class="line"></span><br><span class="line"><span class="string">```yaml</span></span><br><span class="line"><span class="string">.job_template:</span> <span class="string">&amp;job_definition</span>  <span class="comment"># Hidden key that defines an anchor named &#x27;job_definition&#x27;</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">ruby:2.6</span></span><br><span class="line">  <span class="attr">services:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">postgres</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">redis</span></span><br><span class="line"></span><br><span class="line"><span class="attr">test1:</span></span><br><span class="line">  <span class="string">&lt;&lt;:</span> <span class="string">*job_definition</span>           <span class="comment"># Merge the contents of the &#x27;job_definition&#x27; alias</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">test1</span> <span class="string">project</span></span><br><span class="line"></span><br><span class="line"><span class="attr">test2:</span></span><br><span class="line">  <span class="string">&lt;&lt;:</span> <span class="string">*job_definition</span>           <span class="comment"># Merge the contents of the &#x27;job_definition&#x27; alias</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">test2</span> <span class="string">project</span></span><br></pre></td></tr></table></figure>
+<h2 id="Dynamic-Code">Dynamic Code</h2>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">development:</span></span><br><span class="line">  <span class="attr">dialect:</span> <span class="string">postgres</span></span><br><span class="line">  <span class="attr">database:</span> <span class="string">postgres</span></span><br><span class="line">  <span class="attr">user:</span> &lt;%=<span class="language-ruby"> <span class="variable constant_">ENV</span>[<span class="string">&quot;DEVELOPMENT_DATABASE_USER&quot;</span>] </span>%&gt;</span><br><span class="line">  <span class="attr">password:</span> &lt;%=<span class="language-ruby"> <span class="variable constant_">ENV</span>[<span class="string">&quot;DEVELOPMENT_DATABASE_PASSWORD&quot;</span>] </span>%&gt;</span><br><span class="line">  <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">  <span class="attr">pool:</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://yaml.org/YAML_for_ruby.html">YAML.rb is YAML for Ruby | Cookbook - https://yaml.org/YAML_for_ruby.html</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://about.gitlab.com/blog/2020/10/01/three-yaml-tips-better-pipelines/">3 YAML tips for better pipelines | GitLab - https://about.gitlab.com/blog/2020/10/01/three-yaml-tips-better-pipelines/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://stackoverflow.com/questions/5866015/rails-3-how-use-an-env-config-vars-in-a-settings-yml-file">yaml - rails 3, how use an ENV config vars in a Settings.yml file? - Stack Overflow - https://stackoverflow.com/questions/5866015/rails-3-how-use-an-env-config-vars-in-a-settings-yml-file</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.gitlab.com/ce/ci/yaml/#anchors">GitLab CI/CD pipeline configuration reference | GitLab -  - https://docs.gitlab.com/ce/ci/yaml/#anchors</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://yaml.org/spec/1.2/spec.html">YAML Ain’t Markup Language (YAML™) Version 1.2 - https://yaml.org/spec/1.2/spec.html</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://yaml.org/">The Official YAML Web Site - https://yaml.org/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Rails-Ruby-on-Rails-RoR/" rel="tag"># Rails / Ruby on Rails (RoR)</a>
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Ain-t-Markup-Language-YAML/" rel="tag"># Ain't Markup Language (YAML)</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/29/Thinking/Career/Work/How-to-raise-a-salary-to-the-Boss/" rel="prev" title="[Thinking] How to raise a salary to the Boss">
+                  <i class="fa fa-angle-left"></i> [Thinking] How to raise a salary to the Boss
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL/" rel="next" title="[Ruby on Rails (RoR)] Use rails jbuilder to generate JSON objects with a Builder-style DSL ">
+                  [Ruby on Rails (RoR)] Use rails jbuilder to generate JSON objects with a Builder-style DSL  <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"f410715f17b5f6255f2600b191320e63"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

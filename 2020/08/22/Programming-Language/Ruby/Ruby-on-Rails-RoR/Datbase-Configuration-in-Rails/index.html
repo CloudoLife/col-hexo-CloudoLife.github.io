@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Database Configuration in Rails Since there are two ways to configure your connection (using config&#x2F;database.yml or using an environment variable ENV[&#39;DATABASE_URL&#39;]) it is important to understand how">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Ruby on Rails (RoR)] Datbase Configuration in Rails">
+<meta property="og:url" content="https://cloudolife.com/2020/08/22/Programming-Language/Ruby/Ruby-on-Rails-RoR/Datbase-Configuration-in-Rails/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Database Configuration in Rails Since there are two ways to configure your connection (using config&#x2F;database.yml or using an environment variable ENV[&#39;DATABASE_URL&#39;]) it is important to understand how">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-22T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.939Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="PostgreSQL">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="Rails &#x2F; Ruby on Rails (RoR)">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="Relational Database">
+<meta property="article:tag" content="Relational Database Management System (RMDS)">
+<meta property="article:tag" content="SQLite">
+<meta property="article:tag" content="mysql2">
+<meta property="article:tag" content="pg">
+<meta property="article:tag" content="MariaDB">
+<meta property="article:tag" content="sqlite3">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/08/22/Programming-Language/Ruby/Ruby-on-Rails-RoR/Datbase-Configuration-in-Rails/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/08/22/Programming-Language/Ruby/Ruby-on-Rails-RoR/Datbase-Configuration-in-Rails/","path":"2020/08/22/Programming-Language/Ruby/Ruby-on-Rails-RoR/Datbase-Configuration-in-Rails/","title":"[Ruby on Rails (RoR)] Datbase Configuration in Rails"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Ruby on Rails (RoR)] Datbase Configuration in Rails | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Database Configuration in Rails</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Print-Configuration"><span class="nav-number">1.1.</span> <span class="nav-text">Print Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Connection-Preference"><span class="nav-number">1.2.</span> <span class="nav-text">Connection Preference</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommended-Embed-ENV-%E2%80%98DATABASE-URL%E2%80%99-in-config-database-yml"><span class="nav-number">1.2.1.</span> <span class="nav-text">(Recommended) Embed ENV[‘DATABASE_URL’] in config&#x2F;database.yml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Connection-Options"><span class="nav-number">1.3.</span> <span class="nav-text">Connection Options</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL"><span class="nav-number">1.3.1.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostgreSQL"><span class="nav-number">1.3.2.</span> <span class="nav-text">PostgreSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuring-an-SQLite3-Database"><span class="nav-number">1.3.3.</span> <span class="nav-text">Configuring an SQLite3 Database</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-Database-Support"><span class="nav-number">1.4.</span> <span class="nav-text">Multi Database Support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-Database-Support"><span class="nav-number">1.5.</span> <span class="nav-text">Change Database Support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.6.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/08/22/Programming-Language/Ruby/Ruby-on-Rails-RoR/Datbase-Configuration-in-Rails/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Ruby on Rails (RoR)] Datbase Configuration in Rails | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Ruby on Rails (RoR)] Datbase Configuration in Rails
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-22 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-22T00:00:00+00:00">2020-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Rails-Ruby-on-Rails-RoR/" itemprop="url" rel="index"><span itemprop="name">Rails / Ruby on Rails (RoR)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Rails-Ruby-on-Rails-RoR/Best-Practices/" itemprop="url" rel="index"><span itemprop="name">Best Practices</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>10 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Database Configuration in Rails</h1>
+<p>Since there are two ways to configure your connection (using <code>config/database.yml</code> or using an environment variable <code>ENV['DATABASE_URL']</code>) it is important to understand how they can interact.</p>
+<p>If you look at the options of the application generator, you will see that one of the options is named <code>--database</code>. This option allows you to choose an adapter from a list of the most used relational databases. You can even run the generator repeatedly:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> .. &amp;&amp; rails new blog --database=mysql</span></span><br></pre></td></tr></table></figure>
+<p>When you confirm the overwriting of the <code>config/database.yml</code> file, your application will be configured for MySQL instead of SQLite. Detailed examples of the common database connections are below.</p>
+<h2 id="Print-Configuration">Print Configuration</h2>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Current database configuration</span></span><br><span class="line">&gt; <span class="title class_">ActiveRecord</span><span class="symbol">:</span><span class="symbol">:Base</span>.connection_db_config</span><br><span class="line"></span><br><span class="line"><span class="comment"># DEPRECATION WARNING: connection_config is deprecated and will be removed from Rails 6.2 (Use connection_db_config instead)</span></span><br><span class="line"><span class="comment"># &gt; ActiveRecord::Base.connection_config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Current database configuration</span></span><br><span class="line">&gt; <span class="title class_">Rails</span>.configuration.database_configuration[<span class="title class_">Rails</span>.env]</span><br><span class="line"></span><br><span class="line"><span class="comment"># All database configuration</span></span><br><span class="line">&gt; <span class="title class_">Rails</span>.configuration.database_configuration</span><br></pre></td></tr></table></figure>
+<h2 id="Connection-Preference">Connection Preference</h2>
+<ul>
+<li>
+<p>If you have an empty <code>config/database.yml</code> file but your <code>ENV['DATABASE_URL']</code> is present, then Rails will connect to the database via your environment variable <code>ENV['DATABASE_URL']</code>.</p>
+</li>
+<li>
+<p>If you have a <code>config/database.yml</code> but no <code>ENV['DATABASE_URL']</code> then this file will be used to connect to your database:</p>
+</li>
+<li>
+<p>If you have both <code>config/database.yml</code> and <code>ENV['DATABASE_URL']</code> set then Rails will merge the configuration together. To better understand this we must see some examples.</p>
+<ul>
+<li>
+<p>When duplicate connection information is provided the environment variable will take precedence</p>
+</li>
+<li>
+<p>If non-duplicate information is provided you will get all unique values, environment variable still takes precedence in cases of any conflicts.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>The only way to explicitly not use the connection information in <code>ENV['DATABASE_URL']</code> is to specify an explicit URL connection using the <code>url</code> sub key:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> config/database.yml</span></span><br><span class="line">development:</span><br><span class="line">  url: sqlite3:NOT_my_database</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$DATABASE_URL</span></span></span><br><span class="line">postgresql://localhost/my_database</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bin/rails runner <span class="string">&#x27;puts ActiveRecord::Base.configurations&#x27;</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">&lt;ActiveRecord::DatabaseConfigurations:0x00007fd50e209a28&gt;</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bin/rails runner <span class="string">&#x27;puts ActiveRecord::Base.configurations.inspect&#x27;</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">&lt;ActiveRecord::DatabaseConfigurations:0x00007fc8eab02880 @configurations=[</span></span><br><span class="line"><span class="meta prompt_">  #</span><span class="language-bash">&lt;ActiveRecord::DatabaseConfigurations::UrlConfig:0x00007fc8eab020b0</span></span><br><span class="line">    @env_name=&quot;development&quot;, @spec_name=&quot;primary&quot;,</span><br><span class="line">    @config=&#123;&quot;adapter&quot;=&gt;&quot;sqlite3&quot;, &quot;database&quot;=&gt;&quot;NOT_my_database&quot;&#125;</span><br><span class="line">    @url=&quot;sqlite3:NOT_my_database&quot;&gt;</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+<p>Here the connection information in <code>ENV['DATABASE_URL']</code> is ignored, note the different adapter and database name.</p>
+<h3 id="Recommended-Embed-ENV-‘DATABASE-URL’-in-config-database-yml">(Recommended) Embed ENV[‘DATABASE_URL’] in config/database.yml</h3>
+<p>Since it is possible to embed ERB in your <code>config/database.yml</code> it is best practice to explicitly show you are using the <code>ENV['DATABASE_URL']</code> to connect to your database. This is especially useful in production since you should not commit secrets like your database password into your source control (such as Git).</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> config/database.yml</span></span><br><span class="line">production:</span><br><span class="line">  url: &lt;%= ENV[&#x27;DATABASE_URL&#x27;] %&gt;</span><br></pre></td></tr></table></figure>
+<p>Now the behavior is clear, that we are only using the connection information in <code>ENV['DATABASE_URL']</code>.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/configuring.html#connection-preference">3.19 Connection Preference - https://guides.rubyonrails.org/configuring.html#connection-preference</a> to learen more.</p>
+<h2 id="Connection-Options">Connection Options</h2>
+<h3 id="MySQL">MySQL</h3>
+<p>If you choose to use MySQL or MariaDB instead of the shipped SQLite3 database, your <code>config/database.yml</code> will look a little different. Here’s the development section:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">development:</span></span><br><span class="line">  <span class="attr">adapter:</span> <span class="string">mysql2</span></span><br><span class="line">  <span class="attr">encoding:</span> <span class="string">utf8mb4</span></span><br><span class="line">  <span class="attr">database:</span> <span class="string">blog_development</span></span><br><span class="line">  <span class="attr">pool:</span> <span class="number">5</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">password:</span></span><br><span class="line">  <span class="attr">socket:</span> <span class="string">/tmp/mysql.sock</span></span><br></pre></td></tr></table></figure>
+<p>If your development database has a root user with an empty password, this configuration should work for you. Otherwise, change the username and password in the development section as appropriate.</p>
+<p>If your MySQL version is 5.5 or 5.6 and want to use the <code>utf8mb4</code> character set by default, please configure your MySQL server to support the longer key prefix by enabling <code>innodb_large_prefix</code> system variable.</p>
+<p>Advisory Locks are enabled by default on MySQL and are used to make database migrations concurrent safe. You can disable advisory locks by setting <code>advisory_locks</code> to false:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">production:</span></span><br><span class="line">  <span class="attr">adapter:</span> <span class="string">mysql2</span></span><br><span class="line">  <span class="attr">advisory_locks:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>You can see MySQL connection options from <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/brianmario/mysql2#connection-options">brianmario/mysql2: A modern, simple and very fast Mysql library for Ruby - binding to libmysql - https://github.com/brianmario/mysql2#connection-options</a>.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Mysql2::Client</span>.new(</span><br><span class="line">  <span class="symbol">:host</span>,</span><br><span class="line">  <span class="symbol">:username</span>,</span><br><span class="line">  <span class="symbol">:password</span>,</span><br><span class="line">  <span class="symbol">:port</span>,</span><br><span class="line">  <span class="symbol">:database</span>,</span><br><span class="line">  <span class="symbol">:socket</span> = <span class="string">&#x27;/path/to/mysql.sock&#x27;</span>,</span><br><span class="line">  <span class="symbol">:flags</span> = <span class="variable constant_">REMEMBER_OPTIONS</span> |<span class="params"> LONG_PASSWORD </span>| <span class="variable constant_">LONG_FLAG</span> |<span class="params"> TRANSACTIONS </span>| <span class="variable constant_">PROTOCOL_41</span> |<span class="params"> SECURE_CONNECTION </span>| <span class="variable constant_">MULTI_STATEMENTS</span>,</span><br><span class="line">  <span class="symbol">:encoding</span> = <span class="string">&#x27;utf8&#x27;</span>,</span><br><span class="line">  <span class="symbol">:read_timeout</span> = seconds,</span><br><span class="line">  <span class="symbol">:write_timeout</span> = seconds,</span><br><span class="line">  <span class="symbol">:connect_timeout</span> = seconds,</span><br><span class="line">  <span class="symbol">:connect_attrs</span> = &#123;<span class="symbol">:program_name</span> =&gt; <span class="variable">$PROGRAM_NAME</span>, ...&#125;,</span><br><span class="line">  <span class="symbol">:reconnect</span> = <span class="literal">true</span>/<span class="literal">false</span>,</span><br><span class="line">  <span class="symbol">:local_infile</span> = <span class="literal">true</span>/<span class="literal">false</span>,</span><br><span class="line">  <span class="symbol">:secure_auth</span> = <span class="literal">true</span>/<span class="literal">false</span>,</span><br><span class="line">  <span class="symbol">:ssl_mode</span> = <span class="symbol">:disabled</span> / <span class="symbol">:preferred</span> / <span class="symbol">:required</span> / <span class="symbol">:verify_ca</span> / <span class="symbol">:verify_identity</span>,</span><br><span class="line">  <span class="symbol">:default_file</span> = <span class="string">&#x27;/path/to/my.cfg&#x27;</span>,</span><br><span class="line">  <span class="symbol">:default_group</span> = <span class="string">&#x27;my.cfg section&#x27;</span>,</span><br><span class="line">  <span class="symbol">:default_auth</span> = <span class="string">&#x27;authentication_windows_client&#x27;</span></span><br><span class="line">  <span class="symbol">:init_command</span> =&gt; sql</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<h3 id="PostgreSQL">PostgreSQL</h3>
+<p>If you choose to use PostgreSQL, your <code>config/database.yml</code> will be customized to use PostgreSQL databases:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">development:</span></span><br><span class="line">  <span class="attr">adapter:</span> <span class="string">postgresql</span></span><br><span class="line">  <span class="attr">encoding:</span> <span class="string">unicode</span></span><br><span class="line">  <span class="attr">database:</span> <span class="string">blog_development</span></span><br><span class="line">  <span class="attr">pool:</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>By default Active Record uses database features like prepared statements and advisory locks. You might need to disable those features if you’re using an external connection pooler like PgBouncer:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">production:</span></span><br><span class="line">  <span class="attr">adapter:</span> <span class="string">postgresql</span></span><br><span class="line">  <span class="attr">prepared_statements:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">advisory_locks:</span> <span class="literal">false</span></span><br><span class="line"><span class="string">```</span>  </span><br><span class="line"></span><br><span class="line"><span class="string">If</span> <span class="string">enabled,</span> <span class="string">Active</span> <span class="string">Record</span> <span class="string">will</span> <span class="string">create</span> <span class="string">up</span> <span class="string">to</span> <span class="number">1000 </span><span class="string">prepared</span> <span class="string">statements</span> <span class="string">per</span> <span class="string">database</span> <span class="string">connection</span> <span class="string">by</span> <span class="string">default.</span> <span class="string">To</span> <span class="string">modify</span> <span class="string">this</span> <span class="string">behavior</span> <span class="string">you</span> <span class="string">can</span> <span class="string">set</span> <span class="string">`statement_limit`</span> <span class="attr">to a different value:</span></span><br><span class="line"></span><br><span class="line"><span class="string">```yaml</span></span><br><span class="line"><span class="attr">production:</span></span><br><span class="line">  <span class="attr">adapter:</span> <span class="string">postgresql</span></span><br><span class="line">  <span class="attr">statement_limit:</span> <span class="number">200</span></span><br></pre></td></tr></table></figure>
+<p>The more prepared statements in use: the more memory your database will require. If your PostgreSQL database is hitting memory limits, try lowering <code>statement_limit</code> or disabling prepared statements.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The PostgreSQL adapter works with the native C (https://github.com/ged/ruby-pg) driver.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Options:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:host&lt;/tt&gt; - Defaults to a Unix-domain socket in /tmp. On machines without Unix-domain sockets,</span></span><br><span class="line"><span class="comment">#   the default is to connect to localhost.</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:port&lt;/tt&gt; - Defaults to 5432.</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:username&lt;/tt&gt; - Defaults to be the same as the operating system name of the user running the application.</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:password&lt;/tt&gt; - Password to be used if the server demands password authentication.</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:database&lt;/tt&gt; - Defaults to be the same as the username.</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:schema_search_path&lt;/tt&gt; - An optional schema search path for the connection given</span></span><br><span class="line"><span class="comment">#   as a string of comma-separated schema names. This is backward-compatible with the &lt;tt&gt;:schema_order&lt;/tt&gt; option.</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:encoding&lt;/tt&gt; - An optional client encoding that is used in a &lt;tt&gt;SET client_encoding TO</span></span><br><span class="line"><span class="comment">#   &lt;encoding&gt;&lt;/tt&gt; call on the connection.</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:min_messages&lt;/tt&gt; - An optional client min messages that is used in a</span></span><br><span class="line"><span class="comment">#   &lt;tt&gt;SET client_min_messages TO &lt;min_messages&gt;&lt;/tt&gt; call on the connection.</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:variables&lt;/tt&gt; - An optional hash of additional parameters that</span></span><br><span class="line"><span class="comment">#   will be used in &lt;tt&gt;SET SESSION key = val&lt;/tt&gt; calls on the connection.</span></span><br><span class="line"><span class="comment"># * &lt;tt&gt;:insert_returning&lt;/tt&gt; - An optional boolean to control the use of &lt;tt&gt;RETURNING&lt;/tt&gt; for &lt;tt&gt;INSERT&lt;/tt&gt; statements</span></span><br><span class="line"><span class="comment">#   defaults to true.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any further options are used as connection parameters to libpq. See</span></span><br><span class="line"><span class="comment"># https://www.postgresql.org/docs/current/static/libpq-connect.html for the</span></span><br><span class="line"><span class="comment"># list of parameters.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In addition, default connection parameters of libpq can be set per environment variables.</span></span><br><span class="line"><span class="comment"># See https://www.postgresql.org/docs/current/static/libpq-envars.html .</span></span><br></pre></td></tr></table></figure>
+<h3 id="Configuring-an-SQLite3-Database">Configuring an SQLite3 Database</h3>
+<p>Rails comes with built-in support for SQLite3, which is a lightweight serverless database application. While a busy production environment may overload SQLite, it works well for development and testing. Rails defaults to using an SQLite database when creating a new project, but you can always change it later.</p>
+<p>Here’s the section of the default configuration file (<code>config/database.yml</code>) with connection information for the development environment:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">development:</span></span><br><span class="line">  <span class="attr">adapter:</span> <span class="string">sqlite3</span></span><br><span class="line">  <span class="attr">database:</span> <span class="string">db/development.sqlite3</span></span><br><span class="line">  <span class="attr">pool:</span> <span class="number">5</span></span><br><span class="line">  <span class="attr">timeout:</span> <span class="number">5000</span></span><br></pre></td></tr></table></figure>
+<p>Rails uses an SQLite3 database for data storage by default because it is a zero configuration database that just works. Rails also supports MySQL (including MariaDB) and PostgreSQL “out of the box”, and has plugins for many database systems. If you are using a database in a production environment Rails most likely has an adapter for it.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://gist.github.com/jwo/4512764">Sample config/database.yml from Rails. Postgres, MySQL, and SQLite - https://gist.github.com/jwo/4512764</a> and [Rails Database yml examples for postgres sqlite and mysql - <a target="_blank" rel="noopener external nofollow noreferrer" href="https://gist.github.com/datt/e12fa0da294e7a8f3ac96abee346a098">https://gist.github.com/datt/e12fa0da294e7a8f3ac96abee346a098</a>](<a target="_blank" rel="noopener external nofollow noreferrer" href="https://gist.github.com/datt/">https://gist.github.com/datt/</a> e12fa0da294e7a8f3ac96abee346a098) to learn more exmaples.</p>
+<h2 id="Multi-Database-Support">Multi Database Support</h2>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/active_record_multiple_databases.html">Multiple Databases with Active Record — Ruby on Rails Guides - https://guides.rubyonrails.org/active_record_multiple_databases.html</a><br>
+to learn more.</p>
+<h2 id="Change-Database-Support">Change Database Support</h2>
+<p>Rails 6 provide a command has been added to change database adapter automatically.</p>
+<p>Let’s say our app has started with SQLite and now we have to switch to MySQL.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rails db:system:change --to=mysql</span></span><br><span class="line">    conflict  config/database.yml</span><br><span class="line">Overwrite /Users/cloudolife/example_app/config/database.yml? (enter &quot;h&quot; for help) [Ynaqdhm] Y</span><br><span class="line">       force  config/database.yml</span><br><span class="line">        gsub  Gemfile</span><br><span class="line">        gsub  Gemfile</span><br></pre></td></tr></table></figure>
+<p>Our <code>database.yml</code> is now changed to contain the configuration for MySQL database and the Gemfile also gets updated automatically with addition of <code>mysql2</code> gem in place of <code>sqlite3</code>.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/configuring.html#configuring-a-database">Configuring Rails Applications — Ruby on Rails Guides - https://guides.rubyonrails.org/configuring.html#configuring-a-database</a>(<a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/configuring.html#configuring-a-database">https://guides.rubyonrails.org/configuring.html#configuring-a-database</a>)</p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/getting_started.html">Getting Started with Rails — Ruby on Rails Guides - https://guides.rubyonrails.org/getting_started.html</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/configuring.html#database-pooling">Configuring Rails Applications — Ruby on Rails Guides - https://guides.rubyonrails.org/configuring.html#database-pooling</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/active_record_multiple_databases.html">Multiple Databases with Active Record — Ruby on Rails Guides - https://guides.rubyonrails.org/active_record_multiple_databases.html</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.bigbinary.com/learn-rubyonrails-book/configure-and-connect-to-database">Configuring and connecting to a database | BigBinary - https://www.bigbinary.com/learn-rubyonrails-book/configure-and-connect-to-database</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://gist.github.com/jwo/4512764">Sample config/database.yml from Rails. Postgres, MySQL, and SQLite - https://gist.github.com/jwo/4512764</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://gist.github.com/datt/e12fa0da294e7a8f3ac96abee346a098">Rails Database yml examples for postgres sqlite and mysql - https://gist.github.com/datt/e12fa0da294e7a8f3ac96abee346a098</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.bigbinary.com/blog/rails-6-has-added-a-way-to-change-the-database-of-the-app">Rails 6 has added a way to change the database of the app | BigBinary Blog - https://www.bigbinary.com/blog/rails-6-has-added-a-way-to-change-the-database-of-the-app</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rails/rails/pull/34832">Add rails db:system:change command by gmcgibbon · Pull Request #34832 · rails/rails - https://github.com/rails/rails/pull/34832</a></p>
+<p>[10] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rails/rails/pull/33637">Part 2: Multi-db improvements, Refactor Active Record configurations by eileencodes · Pull Request #33637 · rails/rails - https://github.com/rails/rails/pull/33637</a></p>
+<p>[11] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rails/rails/blob/main/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb">rails/postgresql_adapter.rb at main · rails/rails - https://github.com/rails/rails/blob/main/activerecord/lib/active_record/connection_adapters/postgresql_adapter.rb</a></p>
+<p>[12] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ged/ruby-pg">ged/ruby-pg: A PostgreSQL client library for Ruby - https://github.com/ged/ruby-pg</a></p>
+<p>[13] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/brianmario/mysql2#connection-options">brianmario/mysql2: A modern, simple and very fast Mysql library for Ruby - binding to libmysql - https://github.com/brianmario/mysql2#connection-options</a></p>
+<p>[14] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/brianmario/mysql2">brianmario/mysql2: A modern, simple and very fast Mysql library for Ruby - binding to libmysql - https://github.com/brianmario/mysql2</a></p>
+<p>[15] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/sparklemotion/sqlite3-ruby">sparklemotion/sqlite3-ruby: Ruby bindings for the SQLite3 embedded database - https://github.com/sparklemotion/sqlite3-ruby</a></p>
+<p>[16] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.sqlite.org/index.html">SQLite Home Page - https://www.sqlite.org/index.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/PostgreSQL/" rel="tag"># PostgreSQL</a>
+              <a href="/tags/Database/" rel="tag"># Database</a>
+              <a href="/tags/Rails-Ruby-on-Rails-RoR/" rel="tag"># Rails / Ruby on Rails (RoR)</a>
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/Relational-Database/" rel="tag"># Relational Database</a>
+              <a href="/tags/Relational-Database-Management-System-RMDS/" rel="tag"># Relational Database Management System (RMDS)</a>
+              <a href="/tags/SQLite/" rel="tag"># SQLite</a>
+              <a href="/tags/mysql2/" rel="tag"># mysql2</a>
+              <a href="/tags/pg/" rel="tag"># pg</a>
+              <a href="/tags/MariaDB/" rel="tag"># MariaDB</a>
+              <a href="/tags/sqlite3/" rel="tag"># sqlite3</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/22/Cloud-Native/Cloud-Computing/Storage/Disk/Use-parted-and-xfs-growfs-to-resize-XFS-disk-partition-size/" rel="prev" title="[Storage Disk] Use parted and xfs_growfs to resize XFS disk partition size">
+                  <i class="fa fa-angle-left"></i> [Storage Disk] Use parted and xfs_growfs to resize XFS disk partition size
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/22/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-marginalia-gem-to-attach-comments-to-your-Rails-ActiveRecord-queries/" rel="next" title="[Awesome Ruby Gem] Use marginalia gem to attach comments to your Rails ActiveRecord queries">
+                  [Awesome Ruby Gem] Use marginalia gem to attach comments to your Rails ActiveRecord queries <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"8bcae329c6b9fb65e7d872cd4cdffba8"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

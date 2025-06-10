@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="How to Enable Git LFS for a Repository and Track Large Files Git Large File Storage (LFS) is an extension for Git that allows efficient handling of large binary files by storing them outside the main">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Git FAQs] How to Enable Git LFS for a Repository and Track Large Files">
+<meta property="og:url" content="https://cloudolife.com/2025/01/31/DevOps/Git/git-faqs-how-to-enable-git-lfs-for-a-repository-and-track-large-files/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="How to Enable Git LFS for a Repository and Track Large Files Git Large File Storage (LFS) is an extension for Git that allows efficient handling of large binary files by storing them outside the main">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-01-31T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.913Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Git Large File Storage (LFS)">
+<meta property="article:tag" content="DevOps">
+<meta property="article:tag" content="git lfs">
+<meta property="article:tag" content=".gitignore">
+<meta property="article:tag" content=".gitattributes">
+<meta property="article:tag" content="Git Large File Storage">
+<meta property="article:tag" content="LFS">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2025/01/31/DevOps/Git/git-faqs-how-to-enable-git-lfs-for-a-repository-and-track-large-files/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2025/01/31/DevOps/Git/git-faqs-how-to-enable-git-lfs-for-a-repository-and-track-large-files/","path":"2025/01/31/DevOps/Git/git-faqs-how-to-enable-git-lfs-for-a-repository-and-track-large-files/","title":"[Git FAQs] How to Enable Git LFS for a Repository and Track Large Files"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Git FAQs] How to Enable Git LFS for a Repository and Track Large Files | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">How to Enable Git LFS for a Repository and Track Large Files</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Enabling-Git-LFS-in-a-Repository"><span class="nav-number">1.1.</span> <span class="nav-text">1. Enabling Git LFS in a Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-1-Install-Git-LFS-if-not-already-installed"><span class="nav-number">1.1.1.</span> <span class="nav-text">Step 1: Install Git LFS (if not already installed)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#For-macOS-Homebrew"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">For macOS (Homebrew)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#For-Ubuntu-Debian"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">For Ubuntu&#x2F;Debian</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#For-Windows-via-Chocolatey"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">For Windows (via Chocolatey)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-2-Initialize-Git-LFS-in-Your-Repository"><span class="nav-number">1.1.2.</span> <span class="nav-text">Step 2: Initialize Git LFS in Your Repository</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Tracking-Large-File-Types-in-Git-LFS"><span class="nav-number">1.2.</span> <span class="nav-text">2. Tracking Large File Types in Git LFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-3-Add-Common-Large-File-Types-to-Git-LFS"><span class="nav-number">1.2.1.</span> <span class="nav-text">Step 3: Add Common Large File Types to Git LFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%EF%B8%8F%E2%83%A3-Images"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">1️⃣ Images</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%EF%B8%8F%E2%83%A3-Videos"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">2️⃣ Videos</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%EF%B8%8F%E2%83%A3-Audio-Files"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">3️⃣ Audio Files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%EF%B8%8F%E2%83%A3-Archives-Compressed-Files"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">4️⃣ Archives &amp; Compressed Files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%EF%B8%8F%E2%83%A3-Executables-Installers"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">5️⃣ Executables &amp; Installers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6%EF%B8%8F%E2%83%A3-Machine-Learning-Data-Files"><span class="nav-number">1.2.1.6.</span> <span class="nav-text">6️⃣ Machine Learning &amp; Data Files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7%EF%B8%8F%E2%83%A3-Office-Documents-Word-Excel-PowerPoint-PDF"><span class="nav-number">1.2.1.7.</span> <span class="nav-text">7️⃣ Office Documents (Word, Excel, PowerPoint, PDF)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8%EF%B8%8F%E2%83%A3-Design-3D-Files"><span class="nav-number">1.2.1.8.</span> <span class="nav-text">8️⃣ Design &amp; 3D Files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9%EF%B8%8F%E2%83%A3-Game-Development-Fonts"><span class="nav-number">1.2.1.9.</span> <span class="nav-text">9️⃣ Game Development &amp; Fonts</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-4-Commit-and-Push-Changes"><span class="nav-number">1.2.2.</span> <span class="nav-text">Step 4: Commit and Push Changes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-5-Verify-Git-LFS-Tracking"><span class="nav-number">1.2.3.</span> <span class="nav-text">Step 5: Verify Git LFS Tracking</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Handling-Existing-Large-Files-in-a-Git-Repository"><span class="nav-number">1.3.</span> <span class="nav-text">3. Handling Existing Large Files in a Git Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-6-Remove-Previously-Committed-Large-Files"><span class="nav-number">1.3.1.</span> <span class="nav-text">Step 6: Remove Previously Committed Large Files</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Prevent-Unwanted-Files-from-Being-Tracked"><span class="nav-number">1.4.</span> <span class="nav-text">4. Prevent Unwanted Files from Being Tracked</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-7-Ignore-Unwanted-Files"><span class="nav-number">1.4.1.</span> <span class="nav-text">Step 7: Ignore Unwanted Files</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Summary-Best-Practices"><span class="nav-number">1.5.</span> <span class="nav-text">5. Summary &amp; Best Practices</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Takeaways"><span class="nav-number">1.5.1.</span> <span class="nav-text">Key Takeaways</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.6.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2025/01/31/DevOps/Git/git-faqs-how-to-enable-git-lfs-for-a-repository-and-track-large-files/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Git FAQs] How to Enable Git LFS for a Repository and Track Large Files | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Git FAQs] How to Enable Git LFS for a Repository and Track Large Files
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-01-31 00:00:00" itemprop="dateCreated datePublished" datetime="2025-01-31T00:00:00+00:00">2025-01-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DevOps/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>5.2k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>How to Enable Git LFS for a Repository and Track Large Files</h1>
+<p>Git Large File Storage (LFS) is an extension for Git that allows efficient handling of large binary files by storing them outside the main Git repository while keeping lightweight pointers in place. This helps prevent repository bloat and improves performance when working with large files.</p>
+<p>In this guide, we’ll cover:</p>
+<ol>
+<li><strong>How to enable Git LFS in a repository</strong></li>
+<li><strong>How to track common large file types using Git LFS</strong></li>
+</ol>
+<span id="more"></span>
+<h2 id="1-Enabling-Git-LFS-in-a-Repository"><strong>1. Enabling Git LFS in a Repository</strong></h2>
+<p>Before you start tracking large files, you need to initialize Git LFS in your repository. Follow these steps:</p>
+<h3 id="Step-1-Install-Git-LFS-if-not-already-installed"><strong>Step 1: Install Git LFS (if not already installed)</strong></h3>
+<p>If Git LFS is not installed, install it using the following command:</p>
+<h4 id="For-macOS-Homebrew"><strong>For macOS (Homebrew)</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install git-lfs</span><br></pre></td></tr></table></figure>
+<h4 id="For-Ubuntu-Debian"><strong>For Ubuntu/Debian</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install git-lfs</span><br></pre></td></tr></table></figure>
+<h4 id="For-Windows-via-Chocolatey"><strong>For Windows (via Chocolatey)</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install git-lfs</span><br></pre></td></tr></table></figure>
+<h3 id="Step-2-Initialize-Git-LFS-in-Your-Repository"><strong>Step 2: Initialize Git LFS in Your Repository</strong></h3>
+<p>Navigate to your Git repository and run:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs install</span><br></pre></td></tr></table></figure>
+<p>This initializes Git LFS for your system. If you want to make it default for all repositories, use:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs install --global</span><br></pre></td></tr></table></figure>
+<h2 id="2-Tracking-Large-File-Types-in-Git-LFS"><strong>2. Tracking Large File Types in Git LFS</strong></h2>
+<p>Once Git LFS is installed and initialized, you can start tracking large files. Below are some common file types that should be stored in Git LFS instead of the main Git repository.</p>
+<h3 id="Step-3-Add-Common-Large-File-Types-to-Git-LFS"><strong>Step 3: Add Common Large File Types to Git LFS</strong></h3>
+<p>Run the following commands to track different types of large files:</p>
+<h4 id="1️⃣-Images"><strong>1️⃣ Images</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs track <span class="string">&quot;*.png&quot;</span> <span class="string">&quot;*.jpg&quot;</span> <span class="string">&quot;*.jpeg&quot;</span> <span class="string">&quot;*.gif&quot;</span> <span class="string">&quot;*.svg&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="2️⃣-Videos"><strong>2️⃣ Videos</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs track <span class="string">&quot;*.mp4&quot;</span> <span class="string">&quot;*.avi&quot;</span> <span class="string">&quot;*.mov&quot;</span> <span class="string">&quot;*.mkv&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3️⃣-Audio-Files"><strong>3️⃣ Audio Files</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs track <span class="string">&quot;*.mp3&quot;</span> <span class="string">&quot;*.wav&quot;</span> <span class="string">&quot;*.flac&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="4️⃣-Archives-Compressed-Files"><strong>4️⃣ Archives &amp; Compressed Files</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs track <span class="string">&quot;*.zip&quot;</span> <span class="string">&quot;*.tar&quot;</span> <span class="string">&quot;*.gz&quot;</span> <span class="string">&quot;*.rar&quot;</span> <span class="string">&quot;*.7z&quot;</span> <span class="string">&quot;*.bz2&quot;</span> <span class="string">&quot;*.iso&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="5️⃣-Executables-Installers"><strong>5️⃣ Executables &amp; Installers</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs track <span class="string">&quot;*.exe&quot;</span> <span class="string">&quot;*.dll&quot;</span> <span class="string">&quot;*.dmg&quot;</span> <span class="string">&quot;*.apk&quot;</span> <span class="string">&quot;*.ipa&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="6️⃣-Machine-Learning-Data-Files"><strong>6️⃣ Machine Learning &amp; Data Files</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs track <span class="string">&quot;*.h5&quot;</span> <span class="string">&quot;*.hdf5&quot;</span> <span class="string">&quot;*.pth&quot;</span> <span class="string">&quot;*.pb&quot;</span> <span class="string">&quot;*.onnx&quot;</span> <span class="string">&quot;*.npy&quot;</span> <span class="string">&quot;*.npz&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="7️⃣-Office-Documents-Word-Excel-PowerPoint-PDF"><strong>7️⃣ Office Documents (Word, Excel, PowerPoint, PDF)</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git lfs track <span class="string">&quot;*.doc&quot;</span> <span class="string">&quot;*.docx&quot;</span> <span class="string">&quot;*.odt&quot;</span></span><br><span class="line">git lfs track <span class="string">&quot;*.xls&quot;</span> <span class="string">&quot;*.xlsx&quot;</span> <span class="string">&quot;*.ods&quot;</span> <span class="string">&quot;*.csv&quot;</span></span><br><span class="line">git lfs track <span class="string">&quot;*.ppt&quot;</span> <span class="string">&quot;*.pptx&quot;</span> <span class="string">&quot;*.odp&quot;</span></span><br><span class="line">git lfs track <span class="string">&quot;*.pdf&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="8️⃣-Design-3D-Files"><strong>8️⃣ Design &amp; 3D Files</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git lfs track <span class="string">&quot;*.psd&quot;</span> <span class="string">&quot;*.ai&quot;</span> <span class="string">&quot;*.sketch&quot;</span> <span class="string">&quot;*.blend&quot;</span></span><br><span class="line">git lfs track <span class="string">&quot;*.fbx&quot;</span> <span class="string">&quot;*.obj&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="9️⃣-Game-Development-Fonts"><strong>9️⃣ Game Development &amp; Fonts</strong></h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git lfs track <span class="string">&quot;*.unitypackage&quot;</span> <span class="string">&quot;*.pak&quot;</span> <span class="string">&quot;*.uasset&quot;</span> <span class="string">&quot;*.umap&quot;</span></span><br><span class="line">git lfs track <span class="string">&quot;*.ttf&quot;</span> <span class="string">&quot;*.otf&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Step-4-Commit-and-Push-Changes"><strong>Step 4: Commit and Push Changes</strong></h3>
+<p>Once tracking rules are added, Git LFS updates a <code>.gitattributes</code> file in your repository. Commit and push the changes:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .gitattributes</span><br><span class="line">git commit -m <span class="string">&quot;Add Git LFS tracking for large files&quot;</span></span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+<h3 id="Step-5-Verify-Git-LFS-Tracking"><strong>Step 5: Verify Git LFS Tracking</strong></h3>
+<p>To confirm that Git LFS is tracking the files, run:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs ls-files</span><br></pre></td></tr></table></figure>
+<p>This command lists all files currently tracked by Git LFS.</p>
+<h2 id="3-Handling-Existing-Large-Files-in-a-Git-Repository"><strong>3. Handling Existing Large Files in a Git Repository</strong></h2>
+<p>If large files were already committed before enabling Git LFS, you should remove them from Git history and re-add them using LFS.</p>
+<h3 id="Step-6-Remove-Previously-Committed-Large-Files"><strong>Step 6: Remove Previously Committed Large Files</strong></h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> --cached &lt;large-file&gt;</span><br><span class="line">git commit -m <span class="string">&quot;Remove large file from repository&quot;</span></span><br><span class="line">git lfs track <span class="string">&quot;&lt;large-file&gt;&quot;</span></span><br><span class="line">git add &lt;large-file&gt;</span><br><span class="line">git commit -m <span class="string">&quot;Re-add file to LFS&quot;</span></span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+<p>If multiple large files were previously committed, use the <strong>Git LFS migrate tool</strong>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git lfs migrate import --include=<span class="string">&quot;*.mp4,*.zip,*.exe&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-Prevent-Unwanted-Files-from-Being-Tracked"><strong>4. Prevent Unwanted Files from Being Tracked</strong></h2>
+<p>To prevent unnecessary files (like macOS system files) from being tracked in Git, add them to <code>.gitignore</code>.</p>
+<h3 id="Step-7-Ignore-Unwanted-Files"><strong>Step 7: Ignore Unwanted Files</strong></h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;.DS_Store&quot;</span> &gt;&gt; .gitignore</span><br><span class="line">git add .gitignore</span><br><span class="line">git commit -m <span class="string">&quot;Ignore .DS_Store files&quot;</span></span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+<p>This ensures that <code>.DS_Store</code> and similar system files are never included in commits.</p>
+<h2 id="5-Summary-Best-Practices"><strong>5. Summary &amp; Best Practices</strong></h2>
+<table>
+<thead>
+<tr>
+<th>File Type</th>
+<th>Should Use LFS?</th>
+<th>Example Extensions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Images</strong></td>
+<td>✅ Yes</td>
+<td><code>.png</code>, <code>.jpg</code>, <code>.gif</code></td>
+</tr>
+<tr>
+<td><strong>Videos</strong></td>
+<td>✅ Yes</td>
+<td><code>.mp4</code>, <code>.avi</code>, <code>.mov</code></td>
+</tr>
+<tr>
+<td><strong>Audio</strong></td>
+<td>✅ Yes</td>
+<td><code>.mp3</code>, <code>.wav</code>, <code>.flac</code></td>
+</tr>
+<tr>
+<td><strong>Archives</strong></td>
+<td>✅ Yes</td>
+<td><code>.zip</code>, <code>.tar</code>, <code>.rar</code></td>
+</tr>
+<tr>
+<td><strong>Executables</strong></td>
+<td>✅ Yes</td>
+<td><code>.exe</code>, <code>.dmg</code>, <code>.apk</code></td>
+</tr>
+<tr>
+<td><strong>ML/Data Files</strong></td>
+<td>✅ Yes</td>
+<td><code>.h5</code>, <code>.onnx</code>, <code>.npy</code></td>
+</tr>
+<tr>
+<td><strong>Office Docs</strong></td>
+<td>✅ Yes</td>
+<td><code>.docx</code>, <code>.xlsx</code>, <code>.pptx</code></td>
+</tr>
+<tr>
+<td><strong>Design/3D Files</strong></td>
+<td>✅ Yes</td>
+<td><code>.psd</code>, <code>.ai</code>, <code>.blend</code></td>
+</tr>
+<tr>
+<td><strong>Game Assets</strong></td>
+<td>✅ Yes</td>
+<td><code>.uasset</code>, <code>.unitypackage</code></td>
+</tr>
+<tr>
+<td><strong>Source Code</strong></td>
+<td>❌ No</td>
+<td><code>.py</code>, <code>.js</code>, <code>.java</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="Key-Takeaways"><strong>Key Takeaways</strong></h3>
+<p>✔️ Use <code>git lfs install</code> to enable LFS.<br>
+✔️ Use <code>git lfs track &quot;&lt;pattern&gt;&quot;</code> to specify which files to track.<br>
+✔️ Commit and push <code>.gitattributes</code> to apply LFS settings across the team.<br>
+✔️ Use <code>git lfs migrate import</code> to retroactively move large files to LFS.<br>
+✔️ Add <code>.gitignore</code> rules to exclude unnecessary files like <code>.DS_Store</code>.</p>
+<p>By setting up Git LFS properly, you can <strong>keep your repository lightweight, improve performance, and avoid unnecessary bloating caused by large files</strong>. 🚀</p>
+<p>Happy coding! 🎯</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://git-lfs.github.com">Git LFS Official Documentation - https://git-lfs.github.com</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.github.com/en/github/managing-large-files">GitHub Docs: Managing Large Files - https://docs.github.com/en/github/managing-large-files</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.atlassian.com/git/tutorials/git-lfs">Git LFS Tutorial by Atlassian - https://www.atlassian.com/git/tutorials/git-lfs</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.git-tower.com/learn/git/cheat-sheet/git-lfs">Git LFS Cheat Sheet - https://www.git-tower.com/learn/git/cheat-sheet/git-lfs</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/git-lfs/git-lfs/wiki/Tutorial">Git LFS FAQ - https://github.com/git-lfs/git-lfs/wiki/Tutorial</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.gitkraken.com/learn/git/git-lfs">How to Migrate Existing Repositories to Git LFS - https://www.gitkraken.com/learn/git/git-lfs</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://support.atlassian.com/bitbucket-cloud/docs/use-git-lfs-with-bitbucket/">Using Git LFS with Bitbucket - https://support.atlassian.com/bitbucket-cloud/docs/use-git-lfs-with-bitbucket/</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs.md">Git LFS Commands List - https://github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs.md</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Git-Large-File-Storage-LFS/" rel="tag"># Git Large File Storage (LFS)</a>
+              <a href="/tags/DevOps/" rel="tag"># DevOps</a>
+              <a href="/tags/git-lfs/" rel="tag"># git lfs</a>
+              <a href="/tags/gitignore/" rel="tag"># .gitignore</a>
+              <a href="/tags/gitattributes/" rel="tag"># .gitattributes</a>
+              <a href="/tags/Git-Large-File-Storage/" rel="tag"># Git Large File Storage</a>
+              <a href="/tags/LFS/" rel="tag"># LFS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/24/Cloud-Native/Cloud-Computing/Alibaba-Cloud/troubleshooting-access-denied-errors-in-alibaba-cloud-oss/" rel="prev" title="[Alibaba Cloud] Troubleshooting Access Denied Errors in Alibaba Cloud OSS">
+                  <i class="fa fa-angle-left"></i> [Alibaba Cloud] Troubleshooting Access Denied Errors in Alibaba Cloud OSS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/02/01/Awesome-Software/Development/Observability/Sentry/sentry-reset-admin-password-createuser/" rel="next" title="[Sentry FAQs] Locked Out? Reset Your Sentry Admin Password with createuser">
+                  [Sentry FAQs] Locked Out? Reset Your Sentry Admin Password with createuser <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"76cde6468b029dd08a71b9fc0bcf5c0f"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

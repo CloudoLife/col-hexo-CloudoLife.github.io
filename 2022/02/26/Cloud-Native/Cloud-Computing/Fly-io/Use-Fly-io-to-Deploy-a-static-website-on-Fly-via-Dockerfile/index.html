@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Deploy a static website on Fly via Dockerfile Fly.io is a global application distribution platform. We run your code in Firecracker microVMs around the world.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Fly.io] Use Fly.io to Deploy a static website on Fly via Dockerfile">
+<meta property="og:url" content="https://cloudolife.com/2022/02/26/Cloud-Native/Cloud-Computing/Fly-io/Use-Fly-io-to-Deploy-a-static-website-on-Fly-via-Dockerfile/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Deploy a static website on Fly via Dockerfile Fly.io is a global application distribution platform. We run your code in Firecracker microVMs around the world.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-26T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.909Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="macOS">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Cloud Native">
+<meta property="article:tag" content="Cloud Computing">
+<meta property="article:tag" content="Virtual Machine">
+<meta property="article:tag" content="Fly.io">
+<meta property="article:tag" content="flyctl">
+<meta property="article:tag" content="Infrastructure">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="Dockerfile">
+<meta property="article:tag" content="goStatic">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2022/02/26/Cloud-Native/Cloud-Computing/Fly-io/Use-Fly-io-to-Deploy-a-static-website-on-Fly-via-Dockerfile/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2022/02/26/Cloud-Native/Cloud-Computing/Fly-io/Use-Fly-io-to-Deploy-a-static-website-on-Fly-via-Dockerfile/","path":"2022/02/26/Cloud-Native/Cloud-Computing/Fly-io/Use-Fly-io-to-Deploy-a-static-website-on-Fly-via-Dockerfile/","title":"[Fly.io] Use Fly.io to Deploy a static website on Fly via Dockerfile"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Fly.io] Use Fly.io to Deploy a static website on Fly via Dockerfile | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Deploy-a-static-website-on-Fly-via-Dockerfile"><span class="nav-number">1.</span> <span class="nav-text">Deploy a static website on Fly via Dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Flyctl-and-Login"><span class="nav-number">2.</span> <span class="nav-text">Install Flyctl and Login</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Putting-the-App-Together"><span class="nav-number">3.</span> <span class="nav-text">Putting the App Together</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Site"><span class="nav-number">3.1.</span> <span class="nav-text">The Site</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Dockerfile"><span class="nav-number">3.2.</span> <span class="nav-text">The Dockerfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuring-the-App-for-Fly-io"><span class="nav-number">3.3.</span> <span class="nav-text">Configuring the App for Fly.io</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Viewing-Your-Static-Site"><span class="nav-number">4.</span> <span class="nav-text">Viewing Your Static Site</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2022/02/26/Cloud-Native/Cloud-Computing/Fly-io/Use-Fly-io-to-Deploy-a-static-website-on-Fly-via-Dockerfile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Fly.io] Use Fly.io to Deploy a static website on Fly via Dockerfile | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Fly.io] Use Fly.io to Deploy a static website on Fly via Dockerfile
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-02-26 00:00:00" itemprop="dateCreated datePublished" datetime="2022-02-26T00:00:00+00:00">2022-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/" itemprop="url" rel="index"><span itemprop="name">Cloud Native</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Cloud-Computing/" itemprop="url" rel="index"><span itemprop="name">Cloud Computing</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Cloud-Native/Cloud-Computing/Fly-io/" itemprop="url" rel="index"><span itemprop="name">Fly.io</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>5.5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Deploy-a-static-website-on-Fly-via-Dockerfile">Deploy a static website on Fly via Dockerfile</h2>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://Fly.io">Fly.io</a> is a global application distribution platform. We run your code in Firecracker microVMs around the world.</p>
+<span id="more"></span>
+<p>Getting an application running on Fly is essentially working out how to package it as a deployable image. Once packaged it can be deployed to the Fly infrastructure to run on the global application platform.</p>
+<p>In this guide we’ll learn how to deploy a static site on Fly.</p>
+<p>To be fair, a static site isn’t an app. So we’re really talking about deploying an app to serve some static content.</p>
+<p>In this demonstration, we’ll use <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hub.docker.com/r/pierrezemb/gostatic">goStatic - https://hub.docker.com/r/pierrezemb/gostatic</a>, a tiny web server written in Go that lets us serve static files with very little configuration. We’ll provide a Dockerfile and our content for Fly to transmogrify into a web server running in a VM.</p>
+<p>You can clone all the files needed for this example from the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fly-apps/hello-static"><code>hello-static</code> Github repository - https://github.com/fly-apps/hello-static</a> to a local directory:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/fly-apps/hello-static</span><br></pre></td></tr></table></figure>
+<p>Alternatively, you can create all the files manually as you work through this guide.</p>
+<h2 id="Install-Flyctl-and-Login">Install Flyctl and Login</h2>
+<p>To configure our application and deploy it on <a target="_blank" rel="noopener external nofollow noreferrer" href="http://Fly.io">Fly.io</a>, we need <code>flyctl</code>, our CLI app for managing apps on Fly. If you’ve already installed it, carry on. If not, hop over to <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fly.io/docs/getting-started/installing-flyctl/">our installation guide - https://fly.io/docs/getting-started/installing-flyctl/</a>. Once that’s installed you’ll want to log in to Fly.</p>
+<h2 id="Putting-the-App-Together">Putting the App Together</h2>
+<p>At this point, if you have a local clone of the <code>hello-static</code> repository, you could go ahead and run <code>fly launch</code> from its root directory and get the static site deployed without further ado. But that wouldn’t be very illuminating. Let’s go through what’s included in the example repository and why.</p>
+<p>If you cloned the repository, your new app already has its own directory. Otherwise, create one. This isn’t just for tidiness, or for letting <code>flyctl</code> detect your app by the <code>fly.toml</code> in the working directory (although these are good reasons). It also ensures that no extra files get included in the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.docker.com/engine/reference/commandline/build/">build context - https://docs.docker.com/engine/reference/commandline/build/</a> when the Docker image gets built.</p>
+<p>We’ll do everything from within this directory:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd hello-static</span><br></pre></td></tr></table></figure>
+<h3 id="The-Site">The Site</h3>
+<p>Our example will be a simple static site. That can be as trivial as a single <code>index.html</code> file. Let’s make it only slightly more complicated by writing two html files and having them link to each other.</p>
+<p>Put these html files into a subdirectory of their own, called <code>public</code>. Files in this directory are the ones our <code>goStatic</code> server will serve. Create the <code>hello-static/public</code> directory if needed.</p>
+<p>Here’s index.html, which is the landing page:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span></span><br><span class="line">      Hello from Fly</span><br><span class="line">    <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello from Fly with a static web site<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Or <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;goodbye.html&quot;</span>&gt;</span>goodbye.<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Here’s goodbye.html.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span></span><br><span class="line">      Still Hello from Fly</span><br><span class="line">    <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>You say goodbye<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>But I say <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;index.html&quot;</span>&gt;</span>hello.<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="The-Dockerfile">The Dockerfile</h3>
+<p>goStatic is designed to run in a container, and the image is available at Docker Hub. This is super convenient for us, because Fly apps need container images too!</p>
+<p>We can use the goStatic image as a base image. We just have to copy our site’s files to /srv/http/ in the image.</p>
+<p>Here’s our Dockerfile to do that:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> pierrezemb/gostatic</span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> ./public/ /srv/http/</span></span><br></pre></td></tr></table></figure>
+<p>The Dockerfile should be placed in the working directory (here, hello-static).</p>
+<h3 id="Configuring-the-App-for-Fly-io">Configuring the App for <a target="_blank" rel="noopener external nofollow noreferrer" href="http://Fly.io">Fly.io</a></h3>
+<p>We set the initial configuration for the app by running flyctl launch. This takes care of setting the app name, the <a target="_blank" rel="noopener external nofollow noreferrer" href="http://Fly.io">Fly.io</a> organization it belongs to, and a region to deploy to. It also generates a fly.toml file with more configuration settings.</p>
+<p>The hello-static repository contains a fly.toml that will be detected by flyctl launch; you can use it to configure your app. Otherwise, a new fly.toml will be generated with flyctl launch, and we can edit it.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">flyctl launch</span><br><span class="line"></span><br><span class="line">Creating app in /Users/chris/trystatic/hello-static</span><br><span class="line">Scanning source code</span><br><span class="line">Detected a Dockerfile app</span><br><span class="line">? App Name (leave blank to use an auto-generated name): gostatic-example</span><br><span class="line">Automatically selected personal organization: Chris Nicoll</span><br><span class="line">? Select region: ewr (Secaucus, NJ (US))</span><br><span class="line">Created app gostatic-example in organization personal</span><br><span class="line">Wrote config file fly.toml</span><br><span class="line">? Would you like to setup a Postgresql database now? No</span><br><span class="line">? Would you like to deploy now? No</span><br><span class="line">Your app is ready. Deploy with `flyctl deploy`</span><br></pre></td></tr></table></figure>
+<p>This has configured the app with some default parameters, and generated a fly.toml configuration file for us.</p>
+<p>Before deploying, we need to do one more thing. goStatic listens on port 8043 by default, but the default fly.toml assumes port 8080. Edit internal_port in the services section to reflect this:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[[services]]</span></span><br><span class="line">  <span class="attr">http_checks</span> = []</span><br><span class="line">  <span class="attr">internal_port</span> = <span class="number">8043</span></span><br><span class="line">  <span class="attr">processes</span> = [<span class="string">&quot;app&quot;</span>]</span><br><span class="line">  <span class="attr">protocol</span> = <span class="string">&quot;tcp&quot;</span></span><br><span class="line">  <span class="attr">script_checks</span> = []</span><br></pre></td></tr></table></figure>
+<p>Now we’re ready to deploy:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flyctl deploy</span><br></pre></td></tr></table></figure>
+<p>The output should end something like this, if everything has gone well:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">==&gt; Monitoring deployment</span><br><span class="line"></span><br><span class="line"> 1 desired, 1 placed, 1 healthy, 0 unhealthy [health checks: 1 total, 1 passing]</span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">v0 deployed successfully</span></span><br></pre></td></tr></table></figure>
+<h2 id="Viewing-Your-Static-Site">Viewing Your Static Site</h2>
+<p>The quickest way to browse your newly deployed application is with the flyctl open command.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flyctl open</span><br><span class="line"></span><br><span class="line">opening http://gostatic-example.fly.dev ...</span><br></pre></td></tr></table></figure>
+<p>Your browser will be sent to the displayed URL. Fly will auto-upgrade this URL to an HTTPS secured URL.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fly.io/docs/getting-started/static/"> - https://fly.io/docs/getting-started/static/</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fly.io/">Deploy app servers close to your users · Fly - https://fly.io/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fly.io/docs/hands-on/start/">Hands-on with Fly - https://fly.io/docs/hands-on/start/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fly.io/docs/getting-started/dockerfile/">Deploy Your Application via Dockerfile - https://fly.io/docs/getting-started/dockerfile/</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fly.io/docs/getting-started/installing-flyctl/">Installing flyctl - https://fly.io/docs/getting-started/installing-flyctl/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fly-apps/hello-static">fly-apps/hello-static: Create a static website with Fly - HTML from the example - https://github.com/fly-apps/hello-static</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.docker.com/engine/reference/commandline/build/">docker build | Docker Documentation - https://docs.docker.com/engine/reference/commandline/build/</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hub.docker.com/r/pierrezemb/gostatic">pierrezemb/gostatic - Docker Image | Docker Hub - https://hub.docker.com/r/pierrezemb/gostatic</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/macOS/" rel="tag"># macOS</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Cloud-Native/" rel="tag"># Cloud Native</a>
+              <a href="/tags/Cloud-Computing/" rel="tag"># Cloud Computing</a>
+              <a href="/tags/Virtual-Machine/" rel="tag"># Virtual Machine</a>
+              <a href="/tags/Fly-io/" rel="tag"># Fly.io</a>
+              <a href="/tags/flyctl/" rel="tag"># flyctl</a>
+              <a href="/tags/Infrastructure/" rel="tag"># Infrastructure</a>
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+              <a href="/tags/Dockerfile/" rel="tag"># Dockerfile</a>
+              <a href="/tags/goStatic/" rel="tag"># goStatic</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/29/Programming-Language/Golang-Go/Module/FAQs-go-mod/" rel="prev" title="[Golang (Go)] FAQs Go Module">
+                  <i class="fa fa-angle-left"></i> [Golang (Go)] FAQs Go Module
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/02/26/Cloud-Native/Cloud-Computing/Fly-io/Use-Fly-io-to-Deploy-Your-Application-via-Dockerfile/" rel="next" title="[Fly.io] Use Fly.io to Deploy Your Application via Dockerfile">
+                  [Fly.io] Use Fly.io to Deploy Your Application via Dockerfile <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"b7f8339b17c9a68c22a6160854e5d24a"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Configuring Gzip &amp; Brotli Compression for Nginx Configuring Gzip &amp; Brotli compression on an Nginx web server running in Linux. Gzip &amp; Brotli are the most popular compression algorithms sup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Nginx Best Practices] Gzip &amp; Brotli Compression for Nginx">
+<meta property="og:url" content="https://cloudolife.com/2019/06/28/Awesome-Software/Web-Server/Nginx/Gzip-Brotli-Compression-for-Nginx/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Configuring Gzip &amp; Brotli Compression for Nginx Configuring Gzip &amp; Brotli compression on an Nginx web server running in Linux. Gzip &amp; Brotli are the most popular compression algorithms sup">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-06-28T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.908Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="Awesome Software">
+<meta property="article:tag" content="gzip">
+<meta property="article:tag" content="brotli">
+<meta property="article:tag" content="Compression">
+<meta property="article:tag" content="Web Server">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2019/06/28/Awesome-Software/Web-Server/Nginx/Gzip-Brotli-Compression-for-Nginx/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2019/06/28/Awesome-Software/Web-Server/Nginx/Gzip-Brotli-Compression-for-Nginx/","path":"2019/06/28/Awesome-Software/Web-Server/Nginx/Gzip-Brotli-Compression-for-Nginx/","title":"[Nginx Best Practices] Gzip & Brotli Compression for Nginx"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Nginx Best Practices] Gzip & Brotli Compression for Nginx | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Configuring Gzip &amp; Brotli Compression for Nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gzip"><span class="nav-number">1.1.</span> <span class="nav-text">Gzip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">1.1.1.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gzip"><span class="nav-number">1.1.2.</span> <span class="nav-text">gzip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gzip-buffers"><span class="nav-number">1.1.3.</span> <span class="nav-text">gzip_buffers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gzip-comp-level"><span class="nav-number">1.1.4.</span> <span class="nav-text">gzip_comp_level</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">gzip_min_length</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gzip-types"><span class="nav-number">2.0.1.</span> <span class="nav-text">gzip_types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gzip-vary"><span class="nav-number">2.0.2.</span> <span class="nav-text">gzip_vary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gzip-static-Sending-Compressed-Files"><span class="nav-number">2.0.3.</span> <span class="nav-text">gzip_static Sending Compressed Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gzip-ratio"><span class="nav-number">2.0.4.</span> <span class="nav-text">$gzip_ratio</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Brotli"><span class="nav-number">2.1.</span> <span class="nav-text">Brotli</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Brotli"><span class="nav-number">2.1.1.</span> <span class="nav-text">Install Brotli</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-2"><span class="nav-number">2.1.2.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Suggested-MIME-type"><span class="nav-number">2.2.</span> <span class="nav-text">Suggested MIME type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">2.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2019/06/28/Awesome-Software/Web-Server/Nginx/Gzip-Brotli-Compression-for-Nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Nginx Best Practices] Gzip &amp; Brotli Compression for Nginx | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Nginx Best Practices] Gzip & Brotli Compression for Nginx
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-06-28 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-28T00:00:00+00:00">2019-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/" itemprop="url" rel="index"><span itemprop="name">Awesome Software</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/Web-Server/" itemprop="url" rel="index"><span itemprop="name">Web Server</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Awesome-Software/Web-Server/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>7.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>7 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Configuring Gzip &amp; Brotli Compression for Nginx</h1>
+<p>Configuring Gzip &amp; Brotli compression on an Nginx web server running in Linux. Gzip &amp; Brotli are the most popular compression algorithms supported by major web browsers.</p>
+<span id="more"></span>
+<ul>
+<li>Gzip compression Algorithm</li>
+</ul>
+<p>Gzip provides a lossless compression, this means the original data can be recovered when decompressing it. It is based on the DEFLATE algorithm, which is a combination of LZ77 and Huffman coding.</p>
+<ul>
+<li>Brotli compression Algorithm</li>
+</ul>
+<p>Just like gzip, brotli is a lossless compression algorithm widely supported across many browsers. It is developed by Google and is best suited for compression of text-based static resources, like json, js,css, and html. We will use NGINX module for Brotli compression in this setup.</p>
+<h2 id="Gzip">Gzip</h2>
+<h3 id="Example">Example</h3>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gzip</span></span><br><span class="line"><span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">gzip_vary</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">gzip_proxied</span> any;</span><br><span class="line"><span class="attribute">gzip_comp_level</span> <span class="number">6</span>;</span><br><span class="line"><span class="attribute">gzip_min_length</span> <span class="number">2000</span>;</span><br><span class="line"><span class="attribute">gzip_types</span> text/plain</span><br><span class="line">           application/json </span><br><span class="line">           application/javascript </span><br><span class="line">           application/x-javascript </span><br><span class="line">           text/css </span><br><span class="line">           application/xml </span><br><span class="line">           text/javascript </span><br><span class="line">           application/x-httpd-php </span><br><span class="line">           image/jpeg </span><br><span class="line">           image/gif </span><br><span class="line">           image/png;</span><br></pre></td></tr></table></figure>
+<h3 id="gzip">gzip</h3>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	<span class="attribute">gzip</span> <span class="literal">on</span> | <span class="literal">off</span>;</span><br><span class="line">Default:	</span><br><span class="line"><span class="attribute">gzip</span> <span class="literal">off</span>;</span><br><span class="line">Context:	http, server, <span class="section">location</span>, if in <span class="section">location</span></span><br></pre></td></tr></table></figure>
+<p>Enables or disables gzipping of responses.</p>
+<h3 id="gzip-buffers">gzip_buffers</h3>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	<span class="attribute">gzip_buffers</span> number size;</span><br><span class="line">Default:	</span><br><span class="line"><span class="attribute">gzip_buffers</span> <span class="number">32</span> <span class="number">4k</span>|<span class="number">16</span> <span class="number">8k</span>;</span><br><span class="line">Context:	http, server, <span class="section">location</span></span><br></pre></td></tr></table></figure>
+<p>Sets the number and size of buffers used to compress a response. By default, the buffer size is equal to one memory page. This is either 4K or 8K, depending on a platform.</p>
+<h3 id="gzip-comp-level">gzip_comp_level</h3>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	<span class="attribute">gzip_comp_level</span> level;</span><br><span class="line">Default:	</span><br><span class="line"><span class="attribute">gzip_comp_level</span> <span class="number">1</span>;</span><br><span class="line">Context:	http, server, <span class="section">location</span></span><br></pre></td></tr></table></figure>
+<p>Sets a gzip compression level of a response. Acceptable values are in the range from 1 to 9.</p>
+<h1>gzip_min_length</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	gzip_min_length length;</span><br><span class="line">Default:	</span><br><span class="line">gzip_min_length 20;</span><br><span class="line">Context:	http, server, location</span><br></pre></td></tr></table></figure>
+<p>Sets the minimum length of a response that will be gzipped. The length is determined only from the “Content-Length” response header field.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	<span class="attribute">gzip_proxied</span> <span class="literal">off</span> | expired | <span class="literal">no</span>-cache | <span class="literal">no</span>-store | private | no_last_modified | no_etag | auth | any ...;</span><br><span class="line">Default:	</span><br><span class="line"><span class="attribute">gzip_proxied</span> <span class="literal">off</span>;</span><br><span class="line">Context:	http, server, <span class="section">location</span></span><br></pre></td></tr></table></figure>
+<p>Enables or disables gzipping of responses for proxied requests depending on the request and response. The fact that the request is proxied is determined by the presence of the “Via” request header field. The directive accepts multiple parameters:</p>
+<ul>
+<li>
+<p>off</p>
+<p>disables compression for all proxied requests, ignoring other parameters;</p>
+</li>
+<li>
+<p>expired</p>
+<p>enables compression if a response header includes the “Expires” field with a value that disables caching;</p>
+</li>
+<li>
+<p>no-cache</p>
+<p>enables compression if a response header includes the “Cache-Control” field with the “no-cache” parameter;</p>
+</li>
+<li>
+<p>no-store</p>
+<p>enables compression if a response header includes the “Cache-Control” field with the “no-store” parameter;</p>
+</li>
+<li>
+<p>private</p>
+<p>enables compression if a response header includes the “Cache-Control” field with the “private” parameter;</p>
+</li>
+<li>
+<p>no_last_modified</p>
+<p>enables compression if a response header does not include the “Last-Modified” field;</p>
+</li>
+<li>
+<p>no_etag</p>
+<p>enables compression if a response header does not include the “ETag” field;</p>
+</li>
+<li>
+<p>auth</p>
+<p>enables compression if a request header includes the “Authorization” field;</p>
+</li>
+<li>
+<p>any</p>
+<p>enables compression for all proxied requests.</p>
+</li>
+</ul>
+<h3 id="gzip-types">gzip_types</h3>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	<span class="attribute">gzip_types</span> mime-type ...;</span><br><span class="line">Default:	</span><br><span class="line"><span class="attribute">gzip_types</span> text/html;</span><br><span class="line">Context:	http, server, <span class="section">location</span></span><br></pre></td></tr></table></figure>
+<p>Enables gzipping of responses for the specified MIME types in addition to “text/html”. The special value “*” matches any MIME type (0.8.29). Responses with the “text/html” type are always compressed.</p>
+<h3 id="gzip-vary">gzip_vary</h3>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	<span class="attribute">gzip_vary</span> <span class="literal">on</span> | <span class="literal">off</span>;</span><br><span class="line">Default:	</span><br><span class="line"><span class="attribute">gzip_vary</span> <span class="literal">off</span>;</span><br><span class="line">Context:	http, server, <span class="section">location</span></span><br></pre></td></tr></table></figure>
+<p>Enables or disables inserting the “Vary: Accept-Encoding” response header field if the directives gzip, gzip_static, or gunzip are active.</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html">Module ngx_http_gzip_module - http://nginx.org/en/docs/http/ngx_http_gzip_module.html</a></p>
+<h3 id="gzip-static-Sending-Compressed-Files">gzip_static Sending Compressed Files</h3>
+<p>To send a compressed version of a file to the client instead of the regular one, set the gzip_static directive to on within the appropriate context.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">gzip_static</span> <span class="literal">on</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In this case, to service a request for /path/to/file, NGINX tries to find and send the file /path/to/file.gz. If the file doesn’t exist, or the client does not support gzip, NGINX sends the uncompressed version of the file.</p>
+<p>Note that the gzip_static directive does not enable on-the-fly compression. It merely uses a file compressed beforehand by any compression tool. To compress content (and not only static content) at runtime, use the gzip directive.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	<span class="attribute">gzip_static</span> <span class="literal">on</span> | <span class="literal">off</span> | always;</span><br><span class="line">Default:	</span><br><span class="line"><span class="attribute">gzip_static</span> <span class="literal">off</span>;</span><br><span class="line">Context:	http, server, <span class="section">location</span></span><br></pre></td></tr></table></figure>
+<p>Enables (“on”) or disables (“off”) checking the existence of precompressed files. The following directives are also taken into account: <code>gzip_http_version</code>, <code>gzip_proxied</code>, <code>gzip_disable</code>, and <code>gzip_vary</code>.</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://nginx.org/en/docs/http/ngx_http_gzip_static_module.html">Module ngx_http_gzip_static_module - http://nginx.org/en/docs/http/ngx_http_gzip_static_module.html</a></p>
+<h3 id="gzip-ratio">$gzip_ratio</h3>
+<p>achieved compression ratio, computed as the ratio between the original and compressed response sizes.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">log_format</span> compression <span class="string">&#x27;<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &#x27;</span></span><br><span class="line">                   <span class="string">&#x27;&quot;<span class="variable">$request</span>&quot; <span class="variable">$status</span> <span class="variable">$bytes_sent</span> &#x27;</span></span><br><span class="line">                   <span class="string">&#x27;&quot;<span class="variable">$http_referer</span>&quot; &quot;<span class="variable">$http_user_agent</span>&quot; &quot;<span class="variable">$gzip_ratio</span>&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="attribute">access_log</span> /spool/logs/nginx-access.log compression buffer=<span class="number">32k</span>;</span><br></pre></td></tr></table></figure>
+<p>Remember to Reload NGINX to enable:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">nginx -t &amp;&amp; nginx -s reload</span></span><br></pre></td></tr></table></figure>
+<h2 id="Brotli">Brotli</h2>
+<h3 id="Install-Brotli">Install Brotli</h3>
+<p>Install the Brotli module.</p>
+<p>For CentOS 8.x, Oracle Linux 8.x, and RHEL 8.x:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> yum install nginx-plus-module-brotli</span></span><br></pre></td></tr></table></figure>
+<p>For CentOS 6.x and 7.x:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> yum -y install https://extras.getpagespeed.com/release-latest.rpm</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> yum -y install nginx nginx-module-nbr</span></span><br></pre></td></tr></table></figure>
+<p>For Debian 10 and Ubuntu::</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> apt-get install nginx-plus-module-brotli</span></span><br></pre></td></tr></table></figure>
+<p>For SLES 15:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> zypper install nginx-plus-module-brotli</span></span><br></pre></td></tr></table></figure>
+<p>Put the <code>load_module</code> directives in the top‑level (“main”) context of NGINX Plus configuration file, nginx.conf:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/nginx/nginx.conf</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">load_module</span> modules/ngx_http_brotli_filter_module.so;</span><br><span class="line"><span class="attribute">load_module</span> modules/ngx_http_brotli_static_module.so;</span><br></pre></td></tr></table></figure>
+<p>Remember to Reload NGINX to enable the module:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">nginx -t &amp;&amp; nginx -s reload</span></span><br></pre></td></tr></table></figure>
+<h3 id="Example-2">Example</h3>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># brotli</span></span><br><span class="line"><span class="attribute">brotli</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">brotli_comp_level</span> <span class="number">6</span>;</span><br><span class="line"><span class="attribute">brotli_min_length</span> <span class="number">1k</span>;</span><br><span class="line"><span class="attribute">brotli_types</span> text/xml</span><br><span class="line">             image/svg+xml </span><br><span class="line">             application/x-font-ttf </span><br><span class="line">             image/vnd.microsoft.icon </span><br><span class="line">             application/x-font-opentype </span><br><span class="line">             application/json </span><br><span class="line">             font/eot </span><br><span class="line">             application/vnd.ms-fontobject </span><br><span class="line">             application/javascript </span><br><span class="line">             font/otf </span><br><span class="line">             application/xml </span><br><span class="line">             application/xhtml+xml </span><br><span class="line">             text/javascript </span><br><span class="line">             application/x-javascript </span><br><span class="line">             text/plain </span><br><span class="line">             application/x-font-truetype </span><br><span class="line">             application/xml+rss </span><br><span class="line">             image/x-icon </span><br><span class="line">             font/opentype </span><br><span class="line">             text/css </span><br><span class="line">             image/x-win-bitmap;</span><br></pre></td></tr></table></figure>
+<h2 id="Suggested-MIME-type">Suggested MIME type</h2>
+<p>A more complete MIME type list has been suggested here:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">application/atom+<span class="attribute">xml</span></span><br><span class="line">application/geo+json</span><br><span class="line">application/javascript</span><br><span class="line">application/json</span><br><span class="line">application/ld+json</span><br><span class="line">application/manifest+json</span><br><span class="line">application/rdf+xml</span><br><span class="line">application/rss+xml</span><br><span class="line">application/vnd.ms-fontobject</span><br><span class="line">application/wasm</span><br><span class="line">application/x-font-opentype</span><br><span class="line">application/x-font-truetype</span><br><span class="line">application/x-font-ttf</span><br><span class="line">application/x-javascript</span><br><span class="line">application/x-web-app-manifest+json</span><br><span class="line">application/xhtml+xml</span><br><span class="line">application/xml</span><br><span class="line">application/xml+rss</span><br><span class="line">font/eot</span><br><span class="line">font/opentype</span><br><span class="line">font/otf</span><br><span class="line">image/bmp</span><br><span class="line">image/svg+xml</span><br><span class="line">image/vnd.microsoft.icon</span><br><span class="line">image/x-icon</span><br><span class="line">image/x-win-bitmap</span><br><span class="line">text/cache-manifest</span><br><span class="line">text/calendar</span><br><span class="line">text/css</span><br><span class="line">text/javascript</span><br><span class="line">text/markdown</span><br><span class="line">text/plain</span><br><span class="line">text/vcard</span><br><span class="line">text/vnd.rim.location.xloc</span><br><span class="line">text/vtt</span><br><span class="line">text/x-component</span><br><span class="line">text/x-cross-domain-policy</span><br><span class="line">text/xml</span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html">Module ngx_http_gzip_module - http://nginx.org/en/docs/http/ngx_http_gzip_module.html</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.gzip.org/">The gzip home page - https://www.gzip.org/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="http://nginx.org/en/docs/http/ngx_http_gzip_static_module.html">Module ngx_http_gzip_static_module - http://nginx.org/en/docs/http/ngx_http_gzip_static_module.html</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/google/brotli">GitHub - google/brotli: Brotli compression format - https://github.com/google/brotli</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/google/ngx_brotli">GitHub - google/ngx_brotli: NGINX module for Brotli compression - https://github.com/google/ngx_brotli</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://computingforgeeks.com/how-to-enable-gzip-brotli-compression-for-nginx-on-linux/">How To Enable GZIP &amp; Brotli Compression for Nginx on Linux | ComputingForGeeks - https://computingforgeeks.com/how-to-enable-gzip-brotli-compression-for-nginx-on-linux/</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.nginx.com/nginx/admin-guide/dynamic-modules/brotli/">NGINX Docs | Brotli - https://docs.nginx.com/nginx/admin-guide/dynamic-modules/brotli/</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.nginx.com/nginx/admin-guide/web-server/compression/">NGINX Docs | Compression and Decompression - https://docs.nginx.com/nginx/admin-guide/web-server/compression/</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://medium.com/@getpagespeed/install-nginx-with-brotli-module-in-centos-redhat-7-82782f2e329f">How to install NGINX Brotli module in CentOS/RedHat 6, 7 or 8 | by Danila Vershinin | Medium - https://medium.com/@getpagespeed/install-nginx-with-brotli-module-in-centos-redhat-7-82782f2e329f</a></p>
+<p>[10] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/eustas/ngx_brotli/issues/32#issuecomment-502964122">Supported file types list · Issue #32 · eustas/ngx_brotli · GitHub - https://github.com/eustas/ngx_brotli/issues/32#issuecomment-502964122</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+              <a href="/tags/Awesome-Software/" rel="tag"># Awesome Software</a>
+              <a href="/tags/gzip/" rel="tag"># gzip</a>
+              <a href="/tags/brotli/" rel="tag"># brotli</a>
+              <a href="/tags/Compression/" rel="tag"># Compression</a>
+              <a href="/tags/Web-Server/" rel="tag"># Web Server</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/06/21/Awesome-Software/Web-Server/Nginx/Nginx-webSocket-proxying/" rel="prev" title="[Nginx Best Practices] Nginx WebSocket proxying">
+                  <i class="fa fa-angle-left"></i> [Nginx Best Practices] Nginx WebSocket proxying
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/06/Programming-Language/Ruby/Ruby-on-Rails-RoR/Guides/Active-Record-Query-Interface/" rel="next" title="[Ruby on Rails Guides] Active Record Query Interface — Ruby on Rails Guides">
+                  [Ruby on Rails Guides] Active Record Query Interface — Ruby on Rails Guides <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"dadf96c070f60b038dd4ae820fd4e1c6"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

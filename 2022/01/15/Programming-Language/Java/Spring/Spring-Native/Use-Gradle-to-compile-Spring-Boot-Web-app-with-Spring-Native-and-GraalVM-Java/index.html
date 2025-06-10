@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Gradle, Spring Native and GraalVM Java Spring Native provides support for compiling Spring applications to native executables using the GraalVM native-image compiler. Compared to the Java Virtual Mach">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Java - Spring Native] Use Gradle to compile Spring Boot Web app with Spring Native and GraalVM Java">
+<meta property="og:url" content="https://cloudolife.com/2022/01/15/Programming-Language/Java/Spring/Spring-Native/Use-Gradle-to-compile-Spring-Boot-Web-app-with-Spring-Native-and-GraalVM-Java/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Gradle, Spring Native and GraalVM Java Spring Native provides support for compiling Spring applications to native executables using the GraalVM native-image compiler. Compared to the Java Virtual Mach">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-15T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.932Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Docker Compose">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Gradle">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="GraalVM">
+<meta property="article:tag" content="GraalVM Java">
+<meta property="article:tag" content="Build">
+<meta property="article:tag" content="Spring Native">
+<meta property="article:tag" content="bootBuildImage">
+<meta property="article:tag" content="nativeCompile">
+<meta property="article:tag" content="Native">
+<meta property="article:tag" content="Compile">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2022/01/15/Programming-Language/Java/Spring/Spring-Native/Use-Gradle-to-compile-Spring-Boot-Web-app-with-Spring-Native-and-GraalVM-Java/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2022/01/15/Programming-Language/Java/Spring/Spring-Native/Use-Gradle-to-compile-Spring-Boot-Web-app-with-Spring-Native-and-GraalVM-Java/","path":"2022/01/15/Programming-Language/Java/Spring/Spring-Native/Use-Gradle-to-compile-Spring-Boot-Web-app-with-Spring-Native-and-GraalVM-Java/","title":"[Java - Spring Native] Use Gradle to compile Spring Boot Web app with Spring Native and GraalVM Java"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Java - Spring Native] Use Gradle to compile Spring Boot Web app with Spring Native and GraalVM Java | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Gradle, Spring Native and GraalVM Java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Project-Setup"><span class="nav-number">1.1.</span> <span class="nav-text">Sample Project Setup</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Validate-Spring-Boot-version"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">Validate Spring Boot version</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-the-Spring-AOT-plugin"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">Add the Spring AOT plugin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Enable-native-image-support"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">Enable native image support</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Freeze-GraalVM-version"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">Freeze GraalVM version</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maven-Repository"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">Maven Repository</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Build-the-native-application"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">Build the native application</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-the-native-application"><span class="nav-number">1.1.1.</span> <span class="nav-text">Run the native application</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FAQs"><span class="nav-number">1.2.</span> <span class="nav-text">FAQs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%98gu%E2%80%99-tool-wasn%E2%80%99t-found-This-probably-means-that-JDK-at-isn%E2%80%99t-a-GraalVM-distribution"><span class="nav-number">1.2.1.</span> <span class="nav-text">‘gu’ tool wasn’t found. This probably means that JDK at isn’t a GraalVM distribution.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Native-reflection-configuration-for-org-hibernate-dialect-PostgreSQLDialect-is-missing"><span class="nav-number">1.2.2.</span> <span class="nav-text">Native reflection configuration for org.hibernate.dialect.PostgreSQLDialect is missing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2022/01/15/Programming-Language/Java/Spring/Spring-Native/Use-Gradle-to-compile-Spring-Boot-Web-app-with-Spring-Native-and-GraalVM-Java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Java - Spring Native] Use Gradle to compile Spring Boot Web app with Spring Native and GraalVM Java | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Java - Spring Native] Use Gradle to compile Spring Boot Web app with Spring Native and GraalVM Java
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-15 00:00:00" itemprop="dateCreated datePublished" datetime="2022-01-15T00:00:00+00:00">2022-01-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/Gradle/" itemprop="url" rel="index"><span itemprop="name">Gradle</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>7.4k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>7 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Gradle, Spring Native and GraalVM Java</h1>
+<p>Spring Native provides support for compiling Spring applications to native executables using the GraalVM native-image compiler.</p>
+<p>Compared to the Java Virtual Machine, native images can enable cheaper and more sustainable hosting for many types of workloads. These include microservices, function workloads, well suited to containers, and Kubernetes</p>
+<p>Gradle is an open-source build automation tool focused on flexibility and performance. Gradle build scripts are written using a <a target="_blank" rel="noopener external nofollow noreferrer" href="https://groovy-lang.org/">Groovy - https://groovy-lang.org/</a> or <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kotlinlang.org/">Kotlin - https://kotlinlang.org/</a> DSL. Read about <a target="_blank" rel="noopener external nofollow noreferrer" href="https://gradle.org/features/">Gradle features - https://gradle.org/features/</a> to learn what is possible with Gradle.</p>
+<span id="more"></span>
+<h2 id="Sample-Project-Setup">Sample Project Setup</h2>
+<p>The completed “RESTful Web Service” guide can be retrieved using the following commands:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/spring-guides/gs-rest-service</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> gs-rest-service/complete</span></span><br></pre></td></tr></table></figure>
+<h4 id="Validate-Spring-Boot-version">Validate Spring Boot version</h4>
+<p>Spring Native 0.11.1 only supports Spring Boot 2.6.2, so change the version if necessary.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// build.gradle</span></span><br><span class="line"></span><br><span class="line">plugins &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    id <span class="string">&#x27;org.springframework.boot&#x27;</span> version <span class="string">&#x27;2.6.2&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Add-the-Spring-AOT-plugin">Add the Spring AOT plugin</h4>
+<p>The Spring AOT plugin performs ahead-of-time transformations required to improve native image compatibility and footprint.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// build.gradle</span></span><br><span class="line"></span><br><span class="line">plugins &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    id <span class="string">&#x27;org.springframework.experimental.aot&#x27;</span> version <span class="string">&#x27;0.11.1&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The plugin provides a number of options to customize the transformations, see <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#spring-aot-configuration">spring-aot-configuration - https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#spring-aot-configuration</a> for more details.</p>
+<h4 id="Enable-native-image-support">Enable native image support</h4>
+<p>Spring Boot’s <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.spring.io/spring-boot/docs/2.6.2/reference/html/spring-boot-features.html#boot-features-container-images-buildpacks">Cloud Native Buildpacks - https://docs.spring.io/spring-boot/docs/2.6.2/reference/html/spring-boot-features.html#boot-features-container-images-buildpacks</a> support lets you build a container for your Spring Boot application. The <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/paketo-buildpacks/native-image">native image buildpack - https://github.com/paketo-buildpacks/native-image</a> can be enabled using the <code>BP_NATIVE_IMAGE</code> environment variable as follows:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// build.gradle</span></span><br><span class="line"></span><br><span class="line">bootBuildImage &#123;</span><br><span class="line">    builder = <span class="string">&quot;paketobuildpacks/builder:tiny&quot;</span></span><br><span class="line">    environment = [</span><br><span class="line">        <span class="string">&quot;BP_NATIVE_IMAGE&quot;</span> : <span class="string">&quot;true&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><code>tiny</code> builder allows small footprint and reduced surface attack, you can also use base (the default) or full builders to have more tools available in the image for an improved developer experience.<br>
+Additional native-image arguments can be added using the <code>BP_NATIVE_IMAGE_BUILD_ARGUMENTS</code> environment variable.</p>
+<hr>
+<h4 id="Freeze-GraalVM-version">Freeze GraalVM version</h4>
+<p>By default, GraalVM versions will be upgraded automatically by Buildpacks to the latest release. You can explicitly configure Spring Boot Maven or Gradle plugins with a specific version of java-native-image buildpack which will freeze GraalVM version, see related versions mapping. For example, if you want to force using GraalVM 21.3.0, you can configure:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// build.gradle</span></span><br><span class="line"></span><br><span class="line">bootBuildImage &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    buildpacks = [<span class="string">&quot;gcr.io/paketo-buildpacks/java-native-image:7.1.0&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Maven-Repository">Maven Repository</h4>
+<p>Configure your build to include the required repository for the spring-native dependency, as follows:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// build.gradle</span></span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    maven &#123; url <span class="string">&#x27;https://repo.spring.io/release&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The Spring AOT plugin also requires a dedicated plugin repository in the pom.xml file for Maven and in the in the <code>settings.gradle(.kts)</code> for Gradle.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// build.gradle</span></span><br><span class="line"></span><br><span class="line">pluginManagement &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        maven &#123; url <span class="string">&#x27;https://repo.spring.io/release&#x27;</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Build-the-native-application">Build the native application</h4>
+<hr>
+<p>On MacOS, it is recommended to increase the memory allocated to Docker to at least <code>8GB</code> with allocation to more CPU core. On Microsoft Windows make sure to enable the Docker WSL 2 backend for better performance.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://stackoverflow.com/questions/44533319/how-to-assign-more-memory-to-docker-container/44533437#44533437">How to assign more memory to docker container - Stack Overflow - https://stackoverflow.com/questions/44533319/how-to-assign-more-memory-to-docker-container/44533437#44533437</a> to learn more.</p>
+<hr>
+<p>The native application can be built as follows:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gradle nativeCompile</span></span><br></pre></td></tr></table></figure>
+<p>This creates a executable file <code>rest-service-complete</code> in <code>build/native/nativeCompile/</code> directory.</p>
+<p>Or</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gradle bootBuildImage</span></span><br></pre></td></tr></table></figure>
+<p>This creates a Linux container to build the native application using the GraalVM native image compiler. By default, the container image is installed locally.</p>
+<h3 id="Run-the-native-application">Run the native application</h3>
+<p>To run the application</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">build/native/nativeCompile/rest-service-complete</span></span><br></pre></td></tr></table></figure>
+<p>Or you can use docker the usual way as shown in the following example:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --<span class="built_in">rm</span> -p 8080:8080 rest-service-complete:0.0.1-SNAPSHOT</span></span><br></pre></td></tr></table></figure>
+<p>If you prefer docker-compose, you can write a <code>docker-compose.yml</code> at the root of the project with the following content:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.1&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">rest-service:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">rest-service-complete:0.0.1-SNAPSHOT</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8080:8080&quot;</span></span><br></pre></td></tr></table></figure>
+<p>And then run</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker-compose up</span></span><br></pre></td></tr></table></figure>
+<p>The startup time should be less than 100ms, compared to the roughly 1500ms when starting the application on the JVM.</p>
+<p>Now that the service is up, visit <code>http://localhost:8080/greeting</code>, where you should see:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span><span class="number">1</span><span class="punctuation">,</span><span class="attr">&quot;content&quot;</span><span class="punctuation">:</span><span class="string">&quot;Hello, World!&quot;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="FAQs">FAQs</h2>
+<h3 id="‘gu’-tool-wasn’t-found-This-probably-means-that-JDK-at-isn’t-a-GraalVM-distribution">‘gu’ tool wasn’t found. This probably means that JDK at isn’t a GraalVM distribution.</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gradle nativeCompile</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">Task :generateResourcesConfigFile</span></span><br><span class="line">[native-image-plugin] Resources configuration written into /Users/blogbin/WorkSpaces/Benjamin/CloudoLife/col-services/col-common-configuration-service/col-common-configuration-service-java/build/native/generated/generateResourcesConfigFile/resource-config.json</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">Task :nativeCompile FAILED</span></span><br><span class="line">Toolchain detection is disabled, will use GraalVM from /usr/local/opt/openjdk/libexec/openjdk.jdk/Contents/Home.</span><br><span class="line"></span><br><span class="line">FAILURE: Build failed with an exception.</span><br><span class="line"></span><br><span class="line">* What went wrong:</span><br><span class="line">Execution failed for task &#x27;:nativeCompile&#x27;.</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">Determining GraalVM installation failed with message: <span class="string">&#x27;gu&#x27;</span> tool wasn<span class="string">&#x27;t found. This probably means that JDK at isn&#x27;</span>t a GraalVM distribution.</span></span><br><span class="line"></span><br><span class="line">  Make sure to declare the GRAALVM_HOME environment variable or install GraalVM with native-image in a standard location recognized by Gradle Java toolchain support</span><br></pre></td></tr></table></figure>
+<p>Specify <code>JAVA_HOME</code> env to GraalVM directory before run <code>gradle nativeCompile</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">export</span> JAVA_HOME=/Users/cloudolife/.asdf/installs/java/graalvm-21.3.0+java17</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gradle nativeCompile</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://stackoverflow.com/questions/18487406/how-do-i-tell-gradle-to-use-specific-jdk-version">java - How do I tell Gradle to use specific JDK version? - Stack Overflow - https://stackoverflow.com/questions/18487406/how-do-i-tell-gradle-to-use-specific-jdk-version</a></p>
+<h3 id="Native-reflection-configuration-for-org-hibernate-dialect-PostgreSQLDialect-is-missing">Native reflection configuration for org.hibernate.dialect.PostgreSQLDialect is missing</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">org.hibernate.boot.registry.selector.spi.StrategySelectionException: Unable to resolve name [org.hibernate.dialect.PostgreSQLDialect] as strategy [org.hibernate.dialect.Dialect]</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">java.lang.ClassNotFoundException: org.hibernate.dialect.PostgreSQLDialect</span><br><span class="line"></span><br><span class="line">***************************</span><br><span class="line">APPLICATION FAILED TO START</span><br><span class="line">***************************</span><br><span class="line"></span><br><span class="line">Description:</span><br><span class="line"></span><br><span class="line">Native reflection configuration for org.hibernate.dialect.PostgreSQLDialect is missing.</span><br><span class="line"></span><br><span class="line">Action:</span><br><span class="line"></span><br><span class="line">Native configuration for a class accessed reflectively is likely missing.</span><br><span class="line">You can try to configure native hints in order to specify it explicitly.</span><br><span class="line">See https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#native-hints for more details.</span><br></pre></td></tr></table></figure>
+<p>TODO</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.graalvm.org/">GraalVM - https://www.graalvm.org/</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.spring.io/spring-native/docs/current/reference/htmlsingle">Spring Native documentation - https://docs.spring.io/spring-native/docs/current/reference/htmlsingle</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.thomasvitale.com/spring-native-graalvm-getting-started/">Spring Native: Getting started with GraalVM native images - https://www.thomasvitale.com/spring-native-graalvm-getting-started/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/ThomasVitale/spring-native-graalvm-demo/blob/main/build.gradle">spring-native-graalvm-demo/build.gradle at main · ThomasVitale/spring-native-graalvm-demo - https://github.com/ThomasVitale/spring-native-graalvm-demo/blob/main/build.gradle</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://groovy-lang.org/">The Apache Groovy programming language - https://groovy-lang.org/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kotlinlang.org/">Kotlin Programming Language - https://kotlinlang.org/</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://gradle.org/features/">Gradle | Gradle Features - https://gradle.org/features/</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.docker.com/get-started">Get Started with Docker | Docker - https://www.docker.com/get-started</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.docker.com/compose/">Overview of Docker Compose | Docker Documentation - https://docs.docker.com/compose/</a></p>
+<p>[10] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.graalvm.org/reference-manual/native-image/Reflection/">Reflection Use in Native Images | GraalVM - https://www.graalvm.org/reference-manual/native-image/Reflection/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/Docker-Compose/" rel="tag"># Docker Compose</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/Gradle/" rel="tag"># Gradle</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+              <a href="/tags/GraalVM/" rel="tag"># GraalVM</a>
+              <a href="/tags/GraalVM-Java/" rel="tag"># GraalVM Java</a>
+              <a href="/tags/Build/" rel="tag"># Build</a>
+              <a href="/tags/Spring-Native/" rel="tag"># Spring Native</a>
+              <a href="/tags/bootBuildImage/" rel="tag"># bootBuildImage</a>
+              <a href="/tags/nativeCompile/" rel="tag"># nativeCompile</a>
+              <a href="/tags/Native/" rel="tag"># Native</a>
+              <a href="/tags/Compile/" rel="tag"># Compile</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/08/Programming-Language/Java/Crnk/Crnk-Spring-Boot-JPA-to-expose-JPA-entities-as-JSON-API-repositories/" rel="prev" title="[Java - Crnk] Crnk Spring Boot JPA example to expose JPA entities as JSON:API repositories">
+                  <i class="fa fa-angle-left"></i> [Java - Crnk] Crnk Spring Boot JPA example to expose JPA entities as JSON:API repositories
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/15/Programming-Language/Rust/Rocket/Docker-build-and-run-Rust-Rocket-Web-app-with-multi-stage-builds/" rel="next" title="[Rust - Docker] Docker build and run Rust Rocket Web app with multi-stage builds">
+                  [Rust - Docker] Docker build and run Rust Rocket Web app with multi-stage builds <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"2d98c063a6a204a69b6e3ec15ca04949"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

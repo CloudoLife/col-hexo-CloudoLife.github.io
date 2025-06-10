@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="rack-attack rack-attack is a Rack middleware for blocking &amp; throttling abusive requests Protect your Rails and Rack apps from bad clients. Rack::Attack lets you easily decide when to allow, block">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Ruby Gem] Use rack-attack gem to protect your Rails and Rack apps from bad clients">
+<meta property="og:url" content="https://cloudolife.com/2021/02/13/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rack-attack-gem-to-protect-your-Rails-and-Rack-apps-from-bad-clients/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="rack-attack rack-attack is a Rack middleware for blocking &amp; throttling abusive requests Protect your Rails and Rack apps from bad clients. Rack::Attack lets you easily decide when to allow, block">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-13T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.937Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Awesome Ruby Gem">
+<meta property="article:tag" content="rack-attack">
+<meta property="article:tag" content="Throttle">
+<meta property="article:tag" content="allow2ban">
+<meta property="article:tag" content="fail2ban">
+<meta property="article:tag" content="Rack">
+<meta property="article:tag" content="Rack middleware">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/02/13/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rack-attack-gem-to-protect-your-Rails-and-Rack-apps-from-bad-clients/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/02/13/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rack-attack-gem-to-protect-your-Rails-and-Rack-apps-from-bad-clients/","path":"2021/02/13/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rack-attack-gem-to-protect-your-Rails-and-Rack-apps-from-bad-clients/","title":"[Awesome Ruby Gem] Use rack-attack gem to protect your Rails and Rack apps from bad clients"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Ruby Gem] Use rack-attack gem to protect your Rails and Rack apps from bad clients | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">rack-attack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration"><span class="nav-number">1.2.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.3.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Safelisting"><span class="nav-number">1.3.1.</span> <span class="nav-text">Safelisting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Blocking"><span class="nav-number">1.3.2.</span> <span class="nav-text">Blocking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fail2Ban"><span class="nav-number">1.3.3.</span> <span class="nav-text">Fail2Ban</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allow2Ban"><span class="nav-number">1.3.4.</span> <span class="nav-text">Allow2Ban</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Throttling"><span class="nav-number">1.3.5.</span> <span class="nav-text">Throttling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tracks"><span class="nav-number">1.3.6.</span> <span class="nav-text">Tracks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-store-configuration"><span class="nav-number">1.3.7.</span> <span class="nav-text">Cache store configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Customizing-responses"><span class="nav-number">1.3.8.</span> <span class="nav-text">Customizing responses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RateLimit-headers-for-well-behaved-clients"><span class="nav-number">1.3.9.</span> <span class="nav-text">RateLimit headers for well-behaved clients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logging-Instrumentation"><span class="nav-number">1.3.10.</span> <span class="nav-text">Logging &amp; Instrumentation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing"><span class="nav-number">1.3.11.</span> <span class="nav-text">Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Disabling"><span class="nav-number">1.3.11.1.</span> <span class="nav-text">Disabling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-case-isolation"><span class="nav-number">1.3.11.2.</span> <span class="nav-text">Test case isolation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#About-Tracks"><span class="nav-number">1.3.12.</span> <span class="nav-text">About Tracks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.4.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/02/13/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-rack-attack-gem-to-protect-your-Rails-and-Rack-apps-from-bad-clients/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Ruby Gem] Use rack-attack gem to protect your Rails and Rack apps from bad clients | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Ruby Gem] Use rack-attack gem to protect your Rails and Rack apps from bad clients
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-13 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-13T00:00:00+00:00">2021-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Awesome-Ruby-Gem/" itemprop="url" rel="index"><span itemprop="name">Awesome Ruby Gem</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>11 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>rack-attack</h1>
+<p>rack-attack is a Rack middleware for blocking &amp; throttling abusive requests</p>
+<p>Protect your Rails and Rack apps from bad clients. Rack::Attack lets you easily decide when to allow, block and throttle based on properties of the request.</p>
+<span id="more"></span>
+<h2 id="Installation">Installation</h2>
+<p>You can install it as a gem:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gem install rack-attack</span></span><br></pre></td></tr></table></figure>
+<p>or add it into a Gemfile (Bundler):</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line">gem <span class="string">&#x27;rack-attack&#x27;</span>, <span class="string">`6.5.0&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Then, run <code>bundle install</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">bundle install</span></span><br></pre></td></tr></table></figure>
+<h2 id="Configuration">Configuration</h2>
+<p>Then tell your ruby web application to use rack-attack as a middleware.</p>
+<ul>
+<li>a) For rails applications it is used by default.</li>
+</ul>
+<p>You can disable it permanently (like for specific environment) or temporarily (can be useful for specific test cases) by writing:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.enabled = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>b) For rack applications:</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In config.ru</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">&quot;rack/attack&quot;</span></span><br><span class="line">use <span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>IMPORTANT: By default, rack-attack won’t perform any blocking or throttling, until you specifically tell it what to protect against by configuring some rules.</p>
+<hr>
+<h2 id="Usage">Usage</h2>
+<hr>
+<p>Tip: If you just want to get going asap, then you can take our <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rack/rack-attack/blob/master/docs/example_configuration.md">example configuration - https://github.com/rack/rack-attack/blob/master/docs/example_configuration.md</a> and tailor it to your needs, or check out the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rack/rack-attack/blob/master/docs/advanced_configuration.md">advanced configuration - https://github.com/rack/rack-attack/blob/master/docs/advanced_configuration.md</a> examples.</p>
+<hr>
+<p>Define rules by calling <code>Rack::Attack</code> public methods, in any file that runs when your application is being initialized. For rails applications this means creating a new file named <code>config/initializers/rack_attack.rb</code> and writing your rules there.</p>
+<h3 id="Safelisting">Safelisting</h3>
+<p>Safelists have the most precedence, so any request matching a safelist would be allowed despite matching any number of blocklists or throttles.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">safelist_ip(ip_address_string)</span><br></pre></td></tr></table></figure>
+<p>E.g.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/initializers/rack_attack.rb (for rails app)</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.safelist_ip(<span class="string">&quot;5.6.7.8&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>safelist_ip(ip_subnet_string)</code></p>
+<p>E.g.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/initializers/rack_attack.rb (for rails app)</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.safelist_ip(<span class="string">&quot;5.6.7.0/24&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>safelist(name, &amp;block)</code></p>
+<p>Name your custom safelist and make your ruby-block argument return a truthy value if you want the request to be allowed, and falsy otherwise.</p>
+<p>The request object is a <code>Rack::Request</code>.</p>
+<p>E.g.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/initializers/rack_attack.rb (for rails apps)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Provided that trusted users use an HTTP request header named APIKey</span></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.safelist(<span class="string">&quot;mark any authenticated access safe&quot;</span>) <span class="keyword">do</span> |<span class="params">request</span>|</span><br><span class="line">  <span class="comment"># Requests are allowed if the return value is truthy</span></span><br><span class="line">  request.env[<span class="string">&quot;HTTP_APIKEY&quot;</span>] == <span class="string">&quot;secret-string&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Always allow requests from localhost</span></span><br><span class="line"><span class="comment"># (blocklist &amp; throttles are skipped)</span></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.safelist(<span class="string">&#x27;allow from localhost&#x27;</span>) <span class="keyword">do</span> |<span class="params">req</span>|</span><br><span class="line">  <span class="comment"># Requests are allowed if the return value is truthy</span></span><br><span class="line">  <span class="string">&#x27;127.0.0.1&#x27;</span> == req.ip |<span class="params"></span>| <span class="string">&#x27;::1&#x27;</span> == req.ip</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="Blocking">Blocking</h3>
+<p><code>blocklist_ip(ip_address_string)</code></p>
+<p>E.g.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/initializers/rack_attack.rb (for rails apps)</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.blocklist_ip(<span class="string">&quot;1.2.3.4&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>blocklist_ip(ip_subnet_string)</code></p>
+<p>E.g.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/initializers/rack_attack.rb (for rails apps)</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.blocklist_ip(<span class="string">&quot;1.2.0.0/16&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>blocklist(name, &amp;block)</code></p>
+<p>Name your custom blocklist and make your ruby-block argument return a truthy value if you want the request to be blocked, and falsy otherwise.</p>
+<p>The request object is a <code>Rack::Request</code>.</p>
+<p>E.g.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/initializers/rack_attack.rb (for rails apps)</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.blocklist(<span class="string">&quot;block all access to admin&quot;</span>) <span class="keyword">do</span> |<span class="params">request</span>|</span><br><span class="line">  <span class="comment"># Requests are blocked if the return value is truthy</span></span><br><span class="line">  request.path.start_with?(<span class="string">&quot;/admin&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.blocklist(<span class="string">&#x27;block bad UA logins&#x27;</span>) <span class="keyword">do</span> |<span class="params">req</span>|</span><br><span class="line">  req.path == <span class="string">&#x27;/login&#x27;</span> &amp;&amp; req.post? &amp;&amp; req.user_agent == <span class="string">&#x27;BadUA&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="Fail2Ban">Fail2Ban</h3>
+<p><code>Fail2Ban.filter</code> can be used within a blocklist to block all requests from misbehaving clients. This pattern is inspired by fail2ban. See the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.fail2ban.org/wiki/index.php/MANUAL_0_8#Jail_Options">fail2ban documentation - https://www.fail2ban.org/wiki/index.php/MANUAL_0_8#Jail_Options</a> for more details on how the parameters work. For multiple filters, be sure to put each filter in a separate blocklist and use a unique discriminator for each fail2ban filter.</p>
+<p>Fail2ban state is stored in a configurable cache (which defaults to <code>Rails.cache</code> if present).</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Block suspicious requests for &#x27;/etc/password&#x27; or wordpress specific paths.</span></span><br><span class="line"><span class="comment"># After 3 blocked requests in 10 minutes, block all requests from that IP for 5 minutes.</span></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.blocklist(<span class="string">&#x27;fail2ban pentesters&#x27;</span>) <span class="keyword">do</span> |<span class="params">req</span>|</span><br><span class="line">  <span class="comment"># `filter` returns truthy value if request fails, or if it&#x27;s from a previously banned IP</span></span><br><span class="line">  <span class="comment"># so the request is blocked</span></span><br><span class="line">  <span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span><span class="symbol">:</span><span class="symbol">:Fail2Ban</span>.filter(<span class="string">&quot;pentesters-<span class="subst">#&#123;req.ip&#125;</span>&quot;</span>, <span class="symbol">maxretry:</span> <span class="number">3</span>, <span class="symbol">findtime:</span> <span class="number">10</span>.minutes, <span class="symbol">bantime:</span> <span class="number">5</span>.minutes) <span class="keyword">do</span></span><br><span class="line">    <span class="comment"># The count for the IP is incremented if the return value is truthy</span></span><br><span class="line">    <span class="variable constant_">CGI</span>.unescape(req.query_string) =~ <span class="regexp">%r&#123;/etc/passwd&#125;</span> |<span class="params"></span>|</span><br><span class="line">    req.path.<span class="keyword">include</span>?(<span class="string">&#x27;/etc/passwd&#x27;</span>) |<span class="params"></span>|</span><br><span class="line">    req.path.<span class="keyword">include</span>?(<span class="string">&#x27;wp-admin&#x27;</span>) |<span class="params"></span>|</span><br><span class="line">    req.path.<span class="keyword">include</span>?(<span class="string">&#x27;wp-login&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note that Fail2Ban filters are not automatically scoped to the blocklist, so when using multiple filters in an application the scoping must be added to the discriminator e.g. “pentest:#{req.ip}”.</p>
+<hr>
+<h3 id="Allow2Ban">Allow2Ban</h3>
+<p><code>Allow2Ban.filter</code> works the same way as the <code>Fail2Ban.filter</code> except that it allows requests from misbehaving clients until such time as they reach maxretry at which they are cut off as per normal.</p>
+<p>Allow2ban state is stored in a configurable cache (which defaults to <code>Rails.cache</code> if present).</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Lockout IP addresses that are hammering your login page.</span></span><br><span class="line"><span class="comment"># After 20 requests in 1 minute, block all requests from that IP for 1 hour.</span></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.blocklist(<span class="string">&#x27;allow2ban login scrapers&#x27;</span>) <span class="keyword">do</span> |<span class="params">req</span>|</span><br><span class="line">  <span class="comment"># `filter` returns false value if request is to your login page (but still</span></span><br><span class="line">  <span class="comment"># increments the count) so request below the limit are not blocked until</span></span><br><span class="line">  <span class="comment"># they hit the limit.  At that point, filter will return true and block.</span></span><br><span class="line">  <span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span><span class="symbol">:</span><span class="symbol">:Allow2Ban</span>.filter(req.ip, <span class="symbol">maxretry:</span> <span class="number">20</span>, <span class="symbol">findtime:</span> <span class="number">1</span>.minute, <span class="symbol">bantime:</span> <span class="number">1</span>.hour) <span class="keyword">do</span></span><br><span class="line">    <span class="comment"># The count for the IP is incremented if the return value is truthy.</span></span><br><span class="line">    req.path == <span class="string">&#x27;/login&#x27;</span> <span class="keyword">and</span> req.post?</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="Throttling">Throttling</h3>
+<p>Throttle state is stored in a configurable cache (which defaults to <code>Rails.cache</code> if present).</p>
+<p><code>throttle(name, options, &amp;block)</code></p>
+<p>Name your custom throttle, provide limit and period as options, and make your ruby-block argument return the discriminator. This discriminator is how you tell rack-attack whether you’re limiting per IP address, per user email or any other.</p>
+<p>The request object is a <code>Rack::Request</code>.</p>
+<p>E.g.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/initializers/rack_attack.rb (for rails apps)</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.throttle(<span class="string">&quot;requests by ip&quot;</span>, <span class="symbol">limit:</span> <span class="number">5</span>, <span class="symbol">period:</span> <span class="number">2</span>) <span class="keyword">do</span> |<span class="params">request</span>|</span><br><span class="line">  request.ip</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Throttle login attempts for a given email parameter to 6 reqs/minute</span></span><br><span class="line"><span class="comment"># Return the *normalized* email as a discriminator on POST /login requests</span></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.throttle(<span class="string">&#x27;limit logins per email&#x27;</span>, <span class="symbol">limit:</span> <span class="number">6</span>, <span class="symbol">period:</span> <span class="number">60</span>) <span class="keyword">do</span> |<span class="params">req</span>|</span><br><span class="line">  <span class="keyword">if</span> req.path == <span class="string">&#x27;/login&#x27;</span> &amp;&amp; req.post?</span><br><span class="line">    <span class="comment"># Normalize the email, using the same logic as your authentication process, to</span></span><br><span class="line">    <span class="comment"># protect against rate limit bypasses.</span></span><br><span class="line">    req.params[<span class="string">&#x27;email&#x27;</span>].to_s.downcase.gsub(<span class="regexp">/\s+/</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># You can also set a limit and period using a proc. For instance, after</span></span><br><span class="line"><span class="comment"># Rack::Auth::Basic has authenticated the user:</span></span><br><span class="line">limit_proc = <span class="built_in">proc</span> &#123; |<span class="params">req</span>| req.env[<span class="string">&quot;REMOTE_USER&quot;</span>] == <span class="string">&quot;admin&quot;</span> ? <span class="number">100</span> : <span class="number">1</span> &#125;</span><br><span class="line">period_proc = <span class="built_in">proc</span> &#123; |<span class="params">req</span>| req.env[<span class="string">&quot;REMOTE_USER&quot;</span>] == <span class="string">&quot;admin&quot;</span> ? <span class="number">1</span> : <span class="number">60</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.throttle(<span class="string">&#x27;request per ip&#x27;</span>, <span class="symbol">limit:</span> limit_proc, <span class="symbol">period:</span> period_proc) <span class="keyword">do</span> |<span class="params">request</span>|</span><br><span class="line">  request.ip</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="Tracks">Tracks</h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Track requests from a special user agent.</span></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.track(<span class="string">&quot;special_agent&quot;</span>) <span class="keyword">do</span> |<span class="params">req</span>|</span><br><span class="line">  req.user_agent == <span class="string">&quot;SpecialAgent&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Supports optional limit and period, triggers the notification only when the limit is reached.</span></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.track(<span class="string">&quot;special_agent&quot;</span>, <span class="symbol">limit:</span> <span class="number">6</span>, <span class="symbol">period:</span> <span class="number">60</span>) <span class="keyword">do</span> |<span class="params">req</span>|</span><br><span class="line">  req.user_agent == <span class="string">&quot;SpecialAgent&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Track it using ActiveSupport::Notification</span></span><br><span class="line"><span class="title class_">ActiveSupport</span><span class="symbol">:</span><span class="symbol">:Notifications</span>.subscribe(<span class="string">&quot;track.rack_attack&quot;</span>) <span class="keyword">do</span> |<span class="params">name, start, finish, request_id, payload</span>|</span><br><span class="line">  req = payload[<span class="symbol">:request</span>]</span><br><span class="line">  <span class="keyword">if</span> req.env[<span class="string">&#x27;rack.attack.matched&#x27;</span>] == <span class="string">&quot;special_agent&quot;</span></span><br><span class="line">    <span class="title class_">Rails</span>.logger.info <span class="string">&quot;special_agent: <span class="subst">#&#123;req.path&#125;</span>&quot;</span></span><br><span class="line">    <span class="variable constant_">STATSD</span>.increment(<span class="string">&quot;special_agent&quot;</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="Cache-store-configuration">Cache store configuration</h3>
+<p>Throttle, allow2ban and fail2ban state is stored in a configurable cache (which defaults to Rails.cache if present), presumably backed by memcached or redis (at least gem v3.0.0).</p>
+<p>Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new # defaults to Rails.cache<br>
+Note that Rack::Attack.cache is only used for throttling, allow2ban and fail2ban filtering; not blocklisting and safelisting. Your cache store must implement increment and write like <code>ActiveSupport::Cache::Store</code>.</p>
+<h3 id="Customizing-responses">Customizing responses</h3>
+<p>Customize the response of blocklisted and throttled requests using an object that adheres to the Rack app interface.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.blocklisted_callback = <span class="built_in">lambda</span> <span class="keyword">do</span> |<span class="params">request</span>|</span><br><span class="line">  <span class="comment"># Using 503 because it may make attacker think that they have successfully</span></span><br><span class="line">  <span class="comment"># DOSed the site. Rack::Attack returns 403 for blocklists by default</span></span><br><span class="line">  [ <span class="number">503</span>, &#123;&#125;, [<span class="string">&#x27;Blocked&#x27;</span>]]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.throttled_callback = <span class="built_in">lambda</span> <span class="keyword">do</span> |<span class="params">request</span>|</span><br><span class="line">  <span class="comment"># NB: you have access to the name and other data about the matched throttle</span></span><br><span class="line">  <span class="comment">#  request.env[&#x27;rack.attack.matched&#x27;],</span></span><br><span class="line">  <span class="comment">#  request.env[&#x27;rack.attack.match_type&#x27;],</span></span><br><span class="line">  <span class="comment">#  request.env[&#x27;rack.attack.match_data&#x27;],</span></span><br><span class="line">  <span class="comment">#  request.env[&#x27;rack.attack.match_discriminator&#x27;]</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Using 503 because it may make attacker think that they have successfully</span></span><br><span class="line">  <span class="comment"># DOSed the site. Rack::Attack returns 429 for throttling by default</span></span><br><span class="line">  [ <span class="number">503</span>, &#123;&#125;, [<span class="string">&quot;Server Error\n&quot;</span>]]</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="RateLimit-headers-for-well-behaved-clients">RateLimit headers for well-behaved clients</h3>
+<p>While Rack::Attack’s primary focus is minimizing harm from abusive clients, it can also be used to return rate limit data that’s helpful for well-behaved clients.</p>
+<p>If you want to return to user how many seconds to wait until they can start sending requests again, this can be done through enabling Retry-After header:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.throttled_response_retry_after_header = <span class="literal">true</span></span><br><span class="line"><span class="title class_">Here</span><span class="string">&#x27;s an example response that includes conventional RateLimit-* headers:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Rack::Attack.throttled_response = lambda do |env|</span></span><br><span class="line"><span class="string">  match_data = env[&#x27;</span>rack.attack.match_data<span class="string">&#x27;]</span></span><br><span class="line"><span class="string">  now = match_data[:epoch_time]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  headers = &#123;</span></span><br><span class="line"><span class="string">    &#x27;</span><span class="title class_">RateLimit</span>-<span class="title class_">Limit</span><span class="string">&#x27; =&gt; match_data[:limit].to_s,</span></span><br><span class="line"><span class="string">    &#x27;</span><span class="title class_">RateLimit</span>-<span class="title class_">Remaining</span><span class="string">&#x27; =&gt; &#x27;</span><span class="number">0</span><span class="string">&#x27;,</span></span><br><span class="line"><span class="string">    &#x27;</span><span class="title class_">RateLimit</span>-<span class="title class_">Reset</span><span class="string">&#x27; =&gt; (now + (match_data[:period] - now % match_data[:period])).to_s</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  [ 429, headers, [&quot;Throttled\n&quot;]]</span></span><br><span class="line"><span class="string">end</span></span><br></pre></td></tr></table></figure>
+<p>For responses that did not exceed a throttle limit, Rack::Attack annotates the env with match data:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.env[<span class="string">&#x27;rack.attack.throttle_data&#x27;</span>][name] <span class="comment"># =&gt; &#123; discriminator: d, count: n, period: p, limit: l, epoch_time: t &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Logging-Instrumentation">Logging &amp; Instrumentation</h3>
+<p><code>Rack::Attack</code> uses the <code>ActiveSupport::Notifications</code> API if available.</p>
+<p>You can subscribe to rack_attack events and log it, graph it, etc.</p>
+<p>To get notified about specific type of events, subscribe to the event name followed by the <code>rack_attack</code> namespace. E.g. for throttles use:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ActiveSupport</span><span class="symbol">:</span><span class="symbol">:Notifications</span>.subscribe(<span class="string">&quot;throttle.rack_attack&quot;</span>) <span class="keyword">do</span> |<span class="params">name, start, finish, request_id, payload</span>|</span><br><span class="line">  <span class="comment"># request object available in payload[:request]</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Your code here</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>If you want to subscribe to every rack_attack event, use:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">ActiveSupport</span><span class="symbol">:</span><span class="symbol">:Notifications</span>.subscribe(<span class="regexp">/rack_attack/</span>) <span class="keyword">do</span> |<span class="params">name, start, finish, request_id, payload</span>|</span><br><span class="line">  <span class="comment"># request object available in payload[:request]</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Your code here</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="Testing">Testing</h3>
+<p>A note on developing and testing apps using Rack::Attack - if you are using throttling in particular, you will need to enable the cache in your development environment. See Caching with Rails for more on how to do this.</p>
+<h4 id="Disabling">Disabling</h4>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span>.enabled = <span class="literal">false</span> can be used to either completely disable <span class="title class_">Rack</span><span class="symbol">:</span><span class="symbol">:Attack</span> <span class="keyword">in</span> your tests, <span class="keyword">or</span> to disable/enable <span class="keyword">for</span> specific test cases only.</span><br></pre></td></tr></table></figure>
+<h4 id="Test-case-isolation">Test case isolation</h4>
+<p>Rack::Attack.reset! can be used in your test suite to clear any Rack::Attack state between different test cases.</p>
+<p>How it works<br>
+The Rack::Attack middleware compares each request against safelists, blocklists, throttles, and tracks that you define. There are none by default.</p>
+<p>If the request matches any safelist, it is allowed.<br>
+Otherwise, if the request matches any blocklist, it is blocked.<br>
+Otherwise, if the request matches any throttle, a counter is incremented in the Rack::Attack.cache. If any throttle’s limit is exceeded, the request is blocked.<br>
+Otherwise, all tracks are checked, and the request is allowed.<br>
+The algorithm is actually more concise in code: See Rack::Attack.call:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">env</span>)</span><br><span class="line">  req = <span class="title class_">Rack::Attack::Request</span>.new(env)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> safelisted?(req)</span><br><span class="line">    <span class="variable">@app</span>.call(env)</span><br><span class="line">  <span class="keyword">elsif</span> blocklisted?(req)</span><br><span class="line">    <span class="variable language_">self</span>.<span class="keyword">class</span>.blocklisted_callback.call(req)</span><br><span class="line">  <span class="keyword">elsif</span> throttled?(req)</span><br><span class="line">    <span class="variable language_">self</span>.<span class="keyword">class</span>.throttled_response.call(env)</span><br><span class="line">    <span class="variable language_">self</span>.<span class="keyword">class</span>.throttled_callback.call(req)</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    tracked?(req)</span><br><span class="line">    <span class="variable">@app</span>.call(env)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Note: Rack::Attack::Request is just a subclass of Rack::Request so that you can cleanly monkey patch helper methods onto the request object.</p>
+<hr>
+<h3 id="About-Tracks">About Tracks</h3>
+<p>Rack::Attack.track doesn’t affect request processing. Tracks are an easy way to log and measure requests matching arbitrary attributes.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rack/rack-attack">GitHub - rack/rack-attack: Rack middleware for blocking &amp; throttling - https://github.com/rack/rack-attack</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://rubygems.org/gems/rack-attack/">rack-attack | RubyGems.org | your community gem host - https://rubygems.org/gems/rack-attack/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rack/rack-attack/blob/master/docs/example_configuration.md">example configuration - https://github.com/rack/rack-attack/blob/master/docs/example_configuration.md</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rack/rack-attack/blob/master/docs/advanced_configuration.md">advanced configuration - https://github.com/rack/rack-attack/blob/master/docs/advanced_configuration.md</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.fail2ban.org/">Fail2ban - https://www.fail2ban.org/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Awesome-Ruby-Gem/" rel="tag"># Awesome Ruby Gem</a>
+              <a href="/tags/rack-attack/" rel="tag"># rack-attack</a>
+              <a href="/tags/Throttle/" rel="tag"># Throttle</a>
+              <a href="/tags/allow2ban/" rel="tag"># allow2ban</a>
+              <a href="/tags/fail2ban/" rel="tag"># fail2ban</a>
+              <a href="/tags/Rack/" rel="tag"># Rack</a>
+              <a href="/tags/Rack-middleware/" rel="tag"># Rack middleware</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/13/Testing/Automation-Testing/miniprogram-automator/Use-miniprogram-automator-and-Wechat-Devtools-to-test-Miniprogram-automatically/" rel="prev" title="[Automation Testing] Use miniprogram-automator and Wechat Devtools to test Miniprogram automatically">
+                  <i class="fa fa-angle-left"></i> [Automation Testing] Use miniprogram-automator and Wechat Devtools to test Miniprogram automatically
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/13/Programming-Language/Ruby/Awesome-Ruby-Gem/Use-dry-configurable-gem-to-add-thread-safe-configuration-behaviour-to-your-Ruby-classes/" rel="next" title="[Awesome Ruby Gem] Use dry-configurable gem to add thread-safe configuration behaviour to your Ruby classes">
+                  [Awesome Ruby Gem] Use dry-configurable gem to add thread-safe configuration behaviour to your Ruby classes <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"214f37dd961a59783b255a9748007632"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

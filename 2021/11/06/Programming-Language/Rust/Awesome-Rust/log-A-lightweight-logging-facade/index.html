@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="log log is a lightweight logging facade. The log crate provides a single logging API that abstracts over the actual logging implementation. Libraries can use the logging API provided by this crate, an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Awesome Rust] log : A lightweight logging facade">
+<meta property="og:url" content="https://cloudolife.com/2021/11/06/Programming-Language/Rust/Awesome-Rust/log-A-lightweight-logging-facade/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="log log is a lightweight logging facade. The log crate provides a single logging API that abstracts over the actual logging implementation. Libraries can use the logging API provided by this crate, an">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-06T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.942Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Rust">
+<meta property="article:tag" content="Logger">
+<meta property="article:tag" content="cargo">
+<meta property="article:tag" content="Awesome Rust">
+<meta property="article:tag" content="Log">
+<meta property="article:tag" content="Console">
+<meta property="article:tag" content="File">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/11/06/Programming-Language/Rust/Awesome-Rust/log-A-lightweight-logging-facade/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/11/06/Programming-Language/Rust/Awesome-Rust/log-A-lightweight-logging-facade/","path":"2021/11/06/Programming-Language/Rust/Awesome-Rust/log-A-lightweight-logging-facade/","title":"[Awesome Rust] log : A lightweight logging facade"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Awesome Rust] log : A lightweight logging facade | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">log</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dependencies"><span class="nav-number">1.1.</span> <span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use"><span class="nav-number">1.2.</span> <span class="nav-text">Use</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Warning"><span class="nav-number">1.2.1.</span> <span class="nav-text">Warning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Available-logging-implementations"><span class="nav-number">1.2.2.</span> <span class="nav-text">Available logging implementations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-a-Logger"><span class="nav-number">1.2.3.</span> <span class="nav-text">Implementing a Logger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-with-std"><span class="nav-number">1.2.4.</span> <span class="nav-text">Use with std</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-time-filters"><span class="nav-number">1.3.</span> <span class="nav-text">Compile time filters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crate-Feature-Flags"><span class="nav-number">1.4.</span> <span class="nav-text">Crate Feature Flags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.5.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/11/06/Programming-Language/Rust/Awesome-Rust/log-A-lightweight-logging-facade/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Awesome Rust] log : A lightweight logging facade | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Awesome Rust] log : A lightweight logging facade
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-06 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-06T00:00:00+00:00">2021-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/" itemprop="url" rel="index"><span itemprop="name">Rust</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Rust/Awesome-Rust/" itemprop="url" rel="index"><span itemprop="name">Awesome Rust</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>5.1k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>5 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>log</h1>
+<p>log is a lightweight logging facade.</p>
+<p>The log crate provides a single logging API that abstracts over the actual logging implementation. Libraries can use the logging API provided by this crate, and the consumer of those libraries can choose the logging implementation that is most suitable for its use case.</p>
+<hr>
+<p>If no logging implementation is selected, the facade falls back to a “noop” implementation that ignores all log messages. The overhead in this case is very small - just an integer load, comparison and jump.</p>
+<hr>
+<p>A log request consists of a target, a level, and a body. A target is a string which defaults to the module path of the location of the log request, though that default may be overridden. Logger implementations typically use the target to filter requests based on some user configuration.</p>
+<span id="more"></span>
+<h2 id="Dependencies">Dependencies</h2>
+<p>By default, env_logger can be depended on with:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Cargo.toml</span></span><br><span class="line"></span><br><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="attr">log</span> = <span class="string">&quot;0.4.0&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Use">Use</h2>
+<p>The basic use of the log crate is through the five logging macros: <code>error!</code>, <code>warn!</code>, <code>info!</code>, <code>debug!</code> and <code>trace!</code> where <code>error!</code> represents the highest-priority log messages and <code>trace!</code> the lowest. The log messages are filtered by configuring the log level to exclude messages with a lower priority. Each of these macros accept format strings similarly to <code>println!</code>.</p>
+<p>Executables should choose a logging implementation and initialize it early in the runtime of the program. Logging implementations will typically include a function to do this. Any log messages generated before the implementation is initialized will be ignored.</p>
+<p>The executable itself may use the log crate to log as well.</p>
+<hr>
+<h3 id="Warning">Warning</h3>
+<p>The logging system may only be initialized once.</p>
+<hr>
+<h3 id="Available-logging-implementations">Available logging implementations</h3>
+<p>In order to produce log output executables have to use a logger implementation compatible with the facade. There are many available implementations to choose from, here are some of the most popular ones:</p>
+<ul>
+<li>
+<p>Simple minimal loggers:</p>
+<ul>
+<li>
+<p>env_logger</p>
+</li>
+<li>
+<p>simple_logger</p>
+</li>
+<li>
+<p>simplelog</p>
+</li>
+<li>
+<p>pretty_env_logger</p>
+</li>
+<li>
+<p>stderrlog</p>
+</li>
+<li>
+<p>flexi_logger</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Complex configurable frameworks:</p>
+<ul>
+<li>
+<p>log4rs</p>
+</li>
+<li>
+<p>fern</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Adaptors for other facilities:</p>
+<ul>
+<li>
+<p>syslog</p>
+</li>
+<li>
+<p>slog-stdlog</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Implementing-a-Logger">Implementing a Logger</h3>
+<p>Loggers implement the <code>Log</code> trait. Here’s a very basic example that simply logs all messages at the <code>Error</code>, <code>Warn</code> or <code>Info</code> levels to <code>stdout</code>:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> log::&#123;Record, Level, Metadata&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SimpleLogger</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">log</span>::Log <span class="keyword">for</span> <span class="title class_">SimpleLogger</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">enabled</span>(&amp;<span class="keyword">self</span>, metadata: &amp;Metadata) <span class="punctuation">-&gt;</span> <span class="type">bool</span> &#123;</span><br><span class="line">        metadata.<span class="title function_ invoke__">level</span>() &lt;= Level::Info</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">log</span>(&amp;<span class="keyword">self</span>, record: &amp;Record) &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">self</span>.<span class="title function_ invoke__">enabled</span>(record.<span class="title function_ invoke__">metadata</span>()) &#123;</span><br><span class="line">            <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125; - &#123;&#125;&quot;</span>, record.<span class="title function_ invoke__">level</span>(), record.<span class="title function_ invoke__">args</span>());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">flush</span>(&amp;<span class="keyword">self</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Loggers are installed by calling the <code>set_logger</code> function. The maximum log level also needs to be adjusted via the <code>set_max_level</code> function. The logging facade uses this as an optimization to improve performance of log messages at levels that are disabled. It’s important to set it, as it defaults to <code>Off</code>, so no log messages will ever be captured! In the case of our example logger, we’ll want to set the maximum log level to <code>Info</code>, since we ignore any <code>Debug</code> or <code>Trace</code> level log messages. A logging implementation should provide a function that wraps a call to <code>set_logger</code> and <code>set_max_level</code>, handling initialization of the logger:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> log::&#123;SetLoggerError, LevelFilter&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> LOGGER: SimpleLogger = SimpleLogger;</span><br><span class="line"></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">init</span>() <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;(), SetLoggerError&gt; &#123;</span><br><span class="line">    log::<span class="title function_ invoke__">set_logger</span>(&amp;LOGGER)</span><br><span class="line">        .<span class="title function_ invoke__">map</span>(|()| log::<span class="title function_ invoke__">set_max_level</span>(LevelFilter::Info))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Implementations that adjust their configurations at runtime should take care to adjust the maximum log level as well.</p>
+<h3 id="Use-with-std">Use with std</h3>
+<p>set_logger requires you to provide a <code>&amp;'static</code> Log, which can be hard to obtain if your logger depends on some runtime configuration. The <code>set_boxed_logger</code> function is available with the std Cargo feature. It is identical to <code>set_logger</code> except that it takes a <code>Box&lt;Log&gt;</code> rather than a <code>&amp;'static</code> Log:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">init</span>() <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;(), SetLoggerError&gt; &#123;</span><br><span class="line">    log::<span class="title function_ invoke__">set_boxed_logger</span>(<span class="type">Box</span>::<span class="title function_ invoke__">new</span>(SimpleLogger))</span><br><span class="line">        .<span class="title function_ invoke__">map</span>(|()| log::<span class="title function_ invoke__">set_max_level</span>(LevelFilter::Info))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Compile-time-filters">Compile time filters</h2>
+<p>Log levels can be statically disabled at compile time via Cargo features. Log invocations at disabled levels will be skipped and will not even be present in the resulting binary. This level is configured separately for release and debug builds. The features are:</p>
+<ul>
+<li>
+<p>max_level_off</p>
+</li>
+<li>
+<p>max_level_error</p>
+</li>
+<li>
+<p>max_level_warn</p>
+</li>
+<li>
+<p>max_level_info</p>
+</li>
+<li>
+<p>max_level_debug</p>
+</li>
+<li>
+<p>max_level_trace</p>
+</li>
+<li>
+<p>release_max_level_off</p>
+</li>
+<li>
+<p>release_max_level_error</p>
+</li>
+<li>
+<p>release_max_level_warn</p>
+</li>
+<li>
+<p>release_max_level_info</p>
+</li>
+<li>
+<p>release_max_level_debug</p>
+</li>
+<li>
+<p>release_max_level_trace</p>
+</li>
+</ul>
+<p>These features control the value of the <code>STATIC_MAX_LEVEL</code> constant. The logging macros check this value before logging a message. By default, no levels are disabled.</p>
+<p>Libraries should avoid using the max level features because they’re global and can’t be changed once they’re set.</p>
+<p>For example, a crate can disable trace level logs in debug builds and trace, debug, and info level logs in release builds with the following configuration:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="attr">log</span> = &#123; version = <span class="string">&quot;0.4&quot;</span>, features = [<span class="string">&quot;max_level_debug&quot;</span>, <span class="string">&quot;release_max_level_warn&quot;</span>] &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Crate-Feature-Flags">Crate Feature Flags</h2>
+<p>The following crate feature flags are available in addition to the filters. They are configured in your Cargo.toml.</p>
+<p>std allows use of std crate instead of the default core. Enables using std::error and set_boxed_logger functionality.<br>
+serde enables support for serialization and deserialization of Level and LevelFilter.</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="attr">log</span> = &#123; version = <span class="string">&quot;0.4&quot;</span>, features = [<span class="string">&quot;std&quot;</span>, <span class="string">&quot;serde&quot;</span>] &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rust-lang/log">rust-lang/log: Logging implementation for Rust - https://github.com/rust-lang/log</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://crates.io/crates/log">log - crates.io: Rust Package Registry - https://crates.io/crates/log</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.rs/log/0.4.14/log/">log - Rust - https://docs.rs/log/0.4.14/log/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Rust/" rel="tag"># Rust</a>
+              <a href="/tags/Logger/" rel="tag"># Logger</a>
+              <a href="/tags/cargo/" rel="tag"># cargo</a>
+              <a href="/tags/Awesome-Rust/" rel="tag"># Awesome Rust</a>
+              <a href="/tags/Log/" rel="tag"># Log</a>
+              <a href="/tags/Console/" rel="tag"># Console</a>
+              <a href="/tags/File/" rel="tag"># File</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/06/Programming-Language/Rust/Awesome-Rust/log4rs-A-highly-configurable-logging-framework-modeled-after-Java-s-Logback-and-log4j-libraries/" rel="prev" title="[Awesome Rust] log4rs : A highly configurable logging framework modeled after Java&#39;s Logback and log4j libraries">
+                  <i class="fa fa-angle-left"></i> [Awesome Rust] log4rs : A highly configurable logging framework modeled after Java's Logback and log4j libraries
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/11/06/Programming-Language/Rust/Awesome-Rust/env-logger--A-simple-logger-that-can-be-configured-via-environment-variables/" rel="next" title="[Awesome Rust] env_logger : A simple logger that can be configured via environment variables">
+                  [Awesome Rust] env_logger : A simple logger that can be configured via environment variables <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"8488e1d17d849d6f6df71afcf40d1d24"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="f-Strings: A New and Improved Way to String Interpolation in Python Also called “formatted string literals,” f-strings are string literals that have an f at the beginning and curly braces containing e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Python String] f-Strings: A New and Improved Way to String Interpolation in Python">
+<meta property="og:url" content="https://cloudolife.com/2019/02/09/Programming-Language/Python/f-Strings-A-New-and-Improved-Way-to-String-Interpolation-in-Python/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="f-Strings: A New and Improved Way to String Interpolation in Python Also called “formatted string literals,” f-strings are string literals that have an f at the beginning and curly braces containing e">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-02-09T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.933Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="String Interpolation">
+<meta property="article:tag" content="Template String">
+<meta property="article:tag" content="str.format">
+<meta property="article:tag" content="String">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2019/02/09/Programming-Language/Python/f-Strings-A-New-and-Improved-Way-to-String-Interpolation-in-Python/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2019/02/09/Programming-Language/Python/f-Strings-A-New-and-Improved-Way-to-String-Interpolation-in-Python/","path":"2019/02/09/Programming-Language/Python/f-Strings-A-New-and-Improved-Way-to-String-Interpolation-in-Python/","title":"[Python String] f-Strings: A New and Improved Way to String Interpolation in Python"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Python String] f-Strings: A New and Improved Way to String Interpolation in Python | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">f-Strings: A New and Improved Way to String Interpolation in Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Simple-Syntax"><span class="nav-number">1.1.</span> <span class="nav-text">Simple Syntax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arbitrary-Expressions"><span class="nav-number">1.2.</span> <span class="nav-text">Arbitrary Expressions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiline-f-Strings"><span class="nav-number">1.3.</span> <span class="nav-text">Multiline f-Strings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Speed"><span class="nav-number">1.4.</span> <span class="nav-text">Speed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Pesky-Details"><span class="nav-number">1.5.</span> <span class="nav-text">The Pesky Details</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Quotation-Marks"><span class="nav-number">1.5.1.</span> <span class="nav-text">Quotation Marks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dictionaries"><span class="nav-number">1.5.2.</span> <span class="nav-text">Dictionaries</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Braces"><span class="nav-number">1.5.3.</span> <span class="nav-text">Braces</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backslashes"><span class="nav-number">1.5.4.</span> <span class="nav-text">Backslashes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inline-Comments"><span class="nav-number">1.5.5.</span> <span class="nav-text">Inline Comments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Format-String"><span class="nav-number">1.6.</span> <span class="nav-text">Format String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Format-datetime"><span class="nav-number">1.6.1.</span> <span class="nav-text">Format datetime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Format-floats"><span class="nav-number">1.6.2.</span> <span class="nav-text">Format floats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Format-width"><span class="nav-number">1.6.3.</span> <span class="nav-text">Format width</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Justify-string"><span class="nav-number">1.6.4.</span> <span class="nav-text">Justify string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Numeric-notations"><span class="nav-number">1.6.5.</span> <span class="nav-text">Numeric notations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.7.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2019/02/09/Programming-Language/Python/f-Strings-A-New-and-Improved-Way-to-String-Interpolation-in-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Python String] f-Strings: A New and Improved Way to String Interpolation in Python | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Python String] f-Strings: A New and Improved Way to String Interpolation in Python
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-02-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-09T00:00:00+00:00">2019-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>11 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>f-Strings: A New and Improved Way to String Interpolation in Python</h1>
+<p>Also called “formatted string literals,” f-strings are string literals that have an f at the beginning and curly braces containing expressions that will be replaced with their values. The expressions are evaluated at runtime and then formatted using the <code>__format__</code> protocol. As always, the Python docs are your friend when you want to learn more.</p>
+<p>Here are some of the ways f-strings can make your life easier.</p>
+<span id="more"></span>
+<h2 id="Simple-Syntax">Simple Syntax</h2>
+<p>The syntax is similar to the one you used with <code>str.format()</code> but less verbose. Look at how easily readable this is:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name = <span class="string">&quot;Eric&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>age = <span class="number">74</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;Hello, <span class="subst">&#123;name&#125;</span>. You are <span class="subst">&#123;age&#125;</span>.&quot;</span></span><br><span class="line"><span class="string">&#x27;Hello, Eric. You are 74.&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>It would also be valid to use a capital letter <code>F</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">F&quot;Hello, <span class="subst">&#123;name&#125;</span>. You are <span class="subst">&#123;age&#125;</span>.&quot;</span></span><br><span class="line"><span class="string">&#x27;Hello, Eric. You are 74.&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Do you love f-strings yet? I hope that, by the end of this article, you’ll answer &gt;&gt;&gt; <code>F&quot;Yes!&quot;</code>.</p>
+<h2 id="Arbitrary-Expressions">Arbitrary Expressions</h2>
+<p>Because f-strings are evaluated at runtime, you can put any and all valid Python expressions in them. This allows you to do some nifty things.</p>
+<p>You could do something pretty straightforward, like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;<span class="subst">&#123;<span class="number">2</span> * <span class="number">37</span>&#125;</span>&quot;</span></span><br><span class="line"><span class="string">&#x27;74&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>But you could also call functions. Here’s an example:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">to_lowercase</span>(<span class="params"><span class="built_in">input</span></span>):</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> <span class="built_in">input</span>.lower()</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name = <span class="string">&quot;Eric Idle&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;<span class="subst">&#123;to_lowercase(name)&#125;</span> is funny.&quot;</span></span><br><span class="line"><span class="string">&#x27;eric idle is funny.&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>You also have the option of calling a method directly:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;<span class="subst">&#123;name.lower()&#125;</span> is funny.&quot;</span></span><br><span class="line"><span class="string">&#x27;eric idle is funny.&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>You could even use objects created from classes with f-strings. Imagine you had the following class:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Comedian</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, first_name, last_name, age</span>):</span><br><span class="line">        <span class="variable language_">self</span>.first_name = first_name</span><br><span class="line">        <span class="variable language_">self</span>.last_name = last_name</span><br><span class="line">        <span class="variable language_">self</span>.age = age</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;<span class="subst">&#123;self.first_name&#125;</span> <span class="subst">&#123;self.last_name&#125;</span> is <span class="subst">&#123;self.age&#125;</span>.&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__repr__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;<span class="subst">&#123;self.first_name&#125;</span> <span class="subst">&#123;self.last_name&#125;</span> is <span class="subst">&#123;self.age&#125;</span>. Surprise!&quot;</span></span><br></pre></td></tr></table></figure>
+<p>You’d be able to do this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>new_comedian = Comedian(<span class="string">&quot;Eric&quot;</span>, <span class="string">&quot;Idle&quot;</span>, <span class="string">&quot;74&quot;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;<span class="subst">&#123;new_comedian&#125;</span>&quot;</span></span><br><span class="line"><span class="string">&#x27;Eric Idle is 74.&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>The <code>__str__()</code> and <code>__repr__()</code> methods deal with how objects are presented as strings, so you’ll need to make sure you include at least one of those methods in your class definition. If you have to pick one, go with <code>__repr__()</code> because it can be used in place of <code>__str__()</code>.</p>
+<p>The string returned by <code>__str__()</code> is the informal string representation of an object and should be readable. The string returned by <code>__repr__()</code> is the official representation and should be unambiguous. Calling <code>str()</code> and <code>repr()</code> is preferable to using <code>__str__()</code> and <code>__repr__()</code> directly.</p>
+<p>By default, f-strings will use <code>__str__()</code>, but you can make sure they use <code>__repr__()</code> if you include the conversion flag <code>!r</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;<span class="subst">&#123;new_comedian&#125;</span>&quot;</span></span><br><span class="line"><span class="string">&#x27;Eric Idle is 74.&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;<span class="subst">&#123;new_comedian!r&#125;</span>&quot;</span></span><br><span class="line"><span class="string">&#x27;Eric Idle is 74. Surprise!&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>If you’d like to read some of the conversation that resulted in f-strings supporting full Python expressions, you can do so here.</p>
+<h2 id="Multiline-f-Strings">Multiline f-Strings</h2>
+<p>You can have multiline strings:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name = <span class="string">&quot;Eric&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>profession = <span class="string">&quot;comedian&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>affiliation = <span class="string">&quot;Monty Python&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message = (</span><br><span class="line"><span class="meta">... </span>    <span class="string">f&quot;Hi <span class="subst">&#123;name&#125;</span>. &quot;</span></span><br><span class="line"><span class="meta">... </span>    <span class="string">f&quot;You are a <span class="subst">&#123;profession&#125;</span>. &quot;</span></span><br><span class="line"><span class="meta">... </span>    <span class="string">f&quot;You were in <span class="subst">&#123;affiliation&#125;</span>.&quot;</span></span><br><span class="line"><span class="meta">... </span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message</span><br><span class="line"><span class="string">&#x27;Hi Eric. You are a comedian. You were in Monty Python.&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>But remember that you need to place an <code>f</code> in front of each line of a multiline string. The following code won’t work:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">message = (</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message = (</span><br><span class="line"><span class="meta">... </span>    <span class="string">f&quot;Hi <span class="subst">&#123;name&#125;</span>. &quot;</span></span><br><span class="line"><span class="meta">... </span>    <span class="string">&quot;You are a &#123;profession&#125;. &quot;</span></span><br><span class="line"><span class="meta">... </span>    <span class="string">&quot;You were in &#123;affiliation&#125;.&quot;</span></span><br><span class="line"><span class="meta">... </span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message</span><br><span class="line"><span class="string">&#x27;Hi Eric. You are a &#123;profession&#125;. You were in &#123;affiliation&#125;.&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>If you don’t put an f in front of each individual line, then you’ll just have regular, old, garden-variety strings and not shiny, new, fancy f-strings.</p>
+<p>If you want to spread strings over multiple lines, you also have the option of escaping a return with a :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">message = (</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message = <span class="string">f&quot;Hi <span class="subst">&#123;name&#125;</span>. &quot;</span> \</span><br><span class="line"><span class="meta">... </span>          <span class="string">f&quot;You are a <span class="subst">&#123;profession&#125;</span>. &quot;</span> \</span><br><span class="line"><span class="meta">... </span>          <span class="string">f&quot;You were in <span class="subst">&#123;affiliation&#125;</span>.&quot;</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message</span><br><span class="line"><span class="string">&#x27;Hi Eric. You are a comedian. You were in Monty Python.&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>But this is what will happen if you use “”&quot;:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">message = (</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"><span class="meta">... </span>    Hi <span class="subst">&#123;name&#125;</span>. </span></span><br><span class="line"><span class="string"><span class="meta">... </span>    You are a <span class="subst">&#123;profession&#125;</span>. </span></span><br><span class="line"><span class="string"><span class="meta">... </span>    You were in <span class="subst">&#123;affiliation&#125;</span>.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>&quot;&quot;&quot;</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>message</span><br><span class="line"><span class="string">&#x27;\n    Hi Eric.\n    You are a comedian.\n    You were in Monty Python.\n&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Read up on indentation guidelines in PEP 8.</p>
+<h2 id="Speed">Speed</h2>
+<p>The <code>f</code> in f-strings may as well stand for “fast.”</p>
+<p>f-strings are faster than both %-formatting and <code>str.format()</code>. As you already saw, f-strings are expressions evaluated at runtime rather than constant values. Here’s an excerpt from the docs:</p>
+<p>“F-strings provide a way to embed expressions inside string literals, using a minimal syntax. It should be noted that an f-string is really an expression evaluated at run time, not a constant value. In Python source code, an f-string is a literal string, prefixed with f, which contains expressions inside braces. The expressions are replaced with their values.” (Source)</p>
+<p>At runtime, the expression inside the curly braces is evaluated in its own scope and then put together with the string literal part of the f-string. The resulting string is then returned. That’s all it takes.</p>
+<p>Here’s a speed comparison:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> timeit</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>timeit.timeit(<span class="string">&quot;&quot;&quot;name = &quot;Eric&quot;</span></span><br><span class="line"><span class="string"><span class="meta">... </span>age = 74</span></span><br><span class="line"><span class="string"><span class="meta">... </span>&#x27;%s is %s.&#x27; % (name, age)&quot;&quot;&quot;</span>, number = <span class="number">10000</span>)</span><br><span class="line"><span class="number">0.003324444866599663</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>timeit.timeit(<span class="string">&quot;&quot;&quot;name = &quot;Eric&quot;</span></span><br><span class="line"><span class="string"><span class="meta">... </span>age = 74</span></span><br><span class="line"><span class="string"><span class="meta">... </span>&#x27;&#123;&#125; is &#123;&#125;.&#x27;.format(name, age)&quot;&quot;&quot;</span>, number = <span class="number">10000</span>)</span><br><span class="line"><span class="number">0.004242089427570761</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>timeit.timeit(<span class="string">&quot;&quot;&quot;name = &quot;Eric&quot;</span></span><br><span class="line"><span class="string"><span class="meta">... </span>age = 74</span></span><br><span class="line"><span class="string"><span class="meta">... </span>f&#x27;&#123;name&#125; is &#123;age&#125;.&#x27;&quot;&quot;&quot;</span>, number = <span class="number">10000</span>)</span><br><span class="line"><span class="number">0.0024820892040722242</span></span><br></pre></td></tr></table></figure>
+<p>As you can see, f-strings come out on top.</p>
+<p>However, that wasn’t always the case. When they were first implemented, they had some speed issues and needed to be made faster than <code>str.format()</code>. A special <code>BUILD_STRING</code> opcode was introduced.</p>
+<h2 id="The-Pesky-Details">The Pesky Details</h2>
+<p>Now that you’ve learned all about why f-strings are great, I’m sure you want to get out there and start using them. Here are a few details to keep in mind as you venture off into this brave new world.</p>
+<h3 id="Quotation-Marks">Quotation Marks</h3>
+<p>You can use various types of quotation marks inside the expressions. Just make sure you are not using the same type of quotation mark on the outside of the f-string as you are using in the expression.</p>
+<p>This code will work:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;<span class="subst">&#123;<span class="string">&#x27;Eric Idle&#x27;</span>&#125;</span>&quot;</span></span><br><span class="line"><span class="string">&#x27;Eric Idle&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>This code will also work:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&#x27;<span class="subst">&#123;<span class="string">&quot;Eric Idle&quot;</span>&#125;</span>&#x27;</span></span><br><span class="line"><span class="string">&#x27;Eric Idle&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>You can also use triple quotes:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;&quot;&quot;Eric Idle&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">&#x27;Eric Idle&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&#x27;&#x27;&#x27;Eric Idle&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;Eric Idle&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>If you find you need to use the same type of quotation mark on both the inside and the outside of the string, then you can escape with <code>\</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;The \&quot;comedian\&quot; is <span class="subst">&#123;name&#125;</span>, aged <span class="subst">&#123;age&#125;</span>.&quot;</span></span><br><span class="line"><span class="string">&#x27;The &quot;comedian&quot; is Eric Idle, aged 74.&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Dictionaries">Dictionaries</h3>
+<p>Speaking of quotation marks, watch out when you are working with dictionaries. If you are going to use single quotation marks for the keys of the dictionary, then remember to make sure you’re using double quotation marks for the f-strings containing the keys.</p>
+<p>This will work:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>comedian = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Eric Idle&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">74</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;The comedian is <span class="subst">&#123;comedian[<span class="string">&#x27;name&#x27;</span>]&#125;</span>, aged <span class="subst">&#123;comedian[<span class="string">&#x27;age&#x27;</span>]&#125;</span>.&quot;</span></span><br><span class="line">The comedian <span class="keyword">is</span> Eric Idle, aged <span class="number">74.</span></span><br></pre></td></tr></table></figure>
+<p>But this will be a hot mess with a syntax error:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>comedian = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Eric Idle&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">74</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&#x27;The comedian is <span class="subst">&#123;comedian[<span class="string">&#x27;name&#x27;</span>]&#125;</span>, aged <span class="subst">&#123;comedian[<span class="string">&#x27;age&#x27;</span>]&#125;</span>.&#x27;</span></span><br><span class="line">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="number">1</span></span><br><span class="line">    <span class="string">f&#x27;The comedian is <span class="subst">&#123;comedian[<span class="string">&#x27;name&#x27;</span>]&#125;</span>, aged <span class="subst">&#123;comedian[<span class="string">&#x27;age&#x27;</span>]&#125;</span>.&#x27;</span></span><br><span class="line">                                    ^</span><br><span class="line">SyntaxError: invalid syntax</span><br></pre></td></tr></table></figure>
+<p>If you use the same type of quotation mark around the dictionary keys as you do on the outside of the f-string, then the quotation mark at the beginning of the first dictionary key will be interpreted as the end of the string.</p>
+<h3 id="Braces">Braces</h3>
+<p>In order to make a brace appear in your string, you must use double braces:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;&#123;&#123;70 + 4&#125;&#125;&quot;</span></span><br><span class="line"><span class="string">&#x27;&#123;70 + 4&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Note that using triple braces will result in there being only single braces in your string:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;&#123;&#123;<span class="subst">&#123;<span class="number">70</span> + <span class="number">4</span>&#125;</span>&#125;&#125;&quot;</span></span><br><span class="line"><span class="string">&#x27;&#123;74&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>However, you can get more braces to show if you use more than triple braces:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;&#123;&#123;&#123;&#123;70 + 4&#125;&#125;&#125;&#125;&quot;</span></span><br><span class="line"><span class="string">&#x27;&#123;&#123;70 + 4&#125;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Backslashes">Backslashes</h3>
+<p>As you saw earlier, it is possible for you to use backslash escapes in the string portion of an f-string. However, you can’t use backslashes to escape in the expression part of an f-string:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;<span class="subst">&#123;\<span class="string">&quot;Eric Idle\&quot;&#125;&quot;</span></span></span></span><br><span class="line"><span class="subst"><span class="string">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="number">1</span></span></span></span><br><span class="line"><span class="subst"><span class="string">    <span class="string">f&quot;<span class="subst">&#123;\<span class="string">&quot;Eric Idle\&quot;&#125;&quot;</span></span></span></span></span></span><br><span class="line"><span class="subst"><span class="string"><span class="subst"><span class="string">                      ^</span></span></span></span></span><br><span class="line"><span class="subst"><span class="string"><span class="subst"><span class="string">SyntaxError: f-string expression part cannot include a backslash</span></span></span></span></span><br></pre></td></tr></table></figure>
+<p>You can work around this by evaluating the expression beforehand and using the result in the f-string:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name = <span class="string">&quot;Eric Idle&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;<span class="subst">&#123;name&#125;</span>&quot;</span></span><br><span class="line"><span class="string">&#x27;Eric Idle&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Inline-Comments">Inline Comments</h3>
+<p>Expressions should not include comments using the # symbol. You’ll get a syntax error:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">f&quot;Eric is <span class="subst">&#123;<span class="number">2</span> * <span class="number">37</span> #Oh my!&#125;</span>.&quot;</span></span><br><span class="line">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="number">1</span></span><br><span class="line">    <span class="string">f&quot;Eric is <span class="subst">&#123;<span class="number">2</span> * <span class="number">37</span> #Oh my!&#125;</span>.&quot;</span></span><br><span class="line">                                ^</span><br><span class="line">SyntaxError: f-string expression part cannot include <span class="string">&#x27;#&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Format-String">Format String</h2>
+<p>The following example formats datetime, float, width and justify.</p>
+<h3 id="Format-datetime">Format datetime</h3>
+<p>The example displays a formatted current datetime. The datetime format specifiers follow the <code>:</code> character.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> datetime</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>now = datetime.datetime.now()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;now:%Y-%m-%d %H:%M&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="number">2019</span>-05-<span class="number">11</span> <span class="number">22</span>:<span class="number">39</span></span><br></pre></td></tr></table></figure>
+<h3 id="Format-floats">Format floats</h3>
+<p>Floating point values have the <code>f</code> suffix. We can also specify the precision<code>:</code> the number of decimal places. The precision is a value that goes right after the dot character.</p>
+<p>The example prints a formatted floating point value. The output shows the number having two and five decimal places.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>val = <span class="number">12.3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;val:<span class="number">.2</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="number">12.30</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;val:<span class="number">.5</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="number">12.30000</span></span><br></pre></td></tr></table></figure>
+<h3 id="Format-width">Format width</h3>
+<p>The width specifier sets the width of the value. The value may be filled with spaces or other characters if the value is shorter than the specified width.</p>
+<p>The example prints three columns. Each of the columns has a predefined width. The first column uses <code>0</code> to fill shorter values. This is the output.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;x:02&#125;</span> <span class="subst">&#123;x*x:<span class="number">3</span>&#125;</span> <span class="subst">&#123;x*x*x:<span class="number">4</span>&#125;</span>&#x27;</span>)</span><br><span class="line">01   <span class="number">1</span>    <span class="number">1</span></span><br><span class="line">02   <span class="number">4</span>    <span class="number">8</span></span><br><span class="line">03   <span class="number">9</span>   <span class="number">27</span></span><br><span class="line">04  <span class="number">16</span>   <span class="number">64</span></span><br><span class="line">05  <span class="number">25</span>  <span class="number">125</span></span><br><span class="line">06  <span class="number">36</span>  <span class="number">216</span></span><br><span class="line">07  <span class="number">49</span>  <span class="number">343</span></span><br><span class="line">08  <span class="number">64</span>  <span class="number">512</span></span><br><span class="line">09  <span class="number">81</span>  <span class="number">729</span></span><br><span class="line"><span class="number">10</span> <span class="number">100</span> <span class="number">1000</span></span><br></pre></td></tr></table></figure>
+<h3 id="Justify-string">Justify string</h3>
+<p>By default, the strings are justified to the left. We can use the <code>&gt;</code> character to justify the strings to the right. The <code>&gt;</code> character follows the colon character.</p>
+<p>We have four strings of different length. We set the width of the output to ten characters. The values are justified to the right.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 = <span class="string">&#x27;a&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2 = <span class="string">&#x27;ab&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s3 = <span class="string">&#x27;abc&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s4 = <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;s1:&gt;<span class="number">10</span>&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;s2:&gt;<span class="number">10</span>&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;s3:&gt;<span class="number">10</span>&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;s4:&gt;<span class="number">10</span>&#125;</span>&#x27;</span>)</span><br><span class="line">         a</span><br><span class="line">        ab</span><br><span class="line">       abc</span><br><span class="line">      abcd</span><br></pre></td></tr></table></figure>
+<h3 id="Numeric-notations">Numeric notations</h3>
+<p>Numbers can have various numeric notations, such as decadic or hexadecimal.</p>
+<p>The example prints a value in three different notations.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">300</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># hexadecimal</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;a:x&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># octal</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;a:o&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># scientific</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;a:e&#125;</span>&quot;</span>)</span><br><span class="line">12c</span><br><span class="line"><span class="number">454</span></span><br><span class="line"><span class="number">3.000000e+02</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.python.org/dev/peps/pep-0498/">PEP 498 – Literal String Interpolation | Python.org - https://www.python.org/dev/peps/pep-0498/</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://realpython.com/python-string-formatting/">Python String Formatting Best Practices – Real Python - https://realpython.com/python-string-formatting/</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://realpython.com/python-f-strings/">Python 3’s f-Strings: An Improved String Formatting Syntax (Guide) – Real Python - https://realpython.com/python-f-strings/</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.programiz.com/python-programming/string-interpolation">Python String Interpolation - https://www.programiz.com/python-programming/string-interpolation</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://towardsdatascience.com/python-string-interpolation-829e14e1fc75">Python String Interpolation. Learn the basics of string… | by Iffat Malik Gore | Towards Data Science - https://towardsdatascience.com/python-string-interpolation-829e14e1fc75</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zetcode.com/python/fstring/">Python f-string - formatting strings in Python with f-string - https://zetcode.com/python/fstring/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/String-Interpolation/" rel="tag"># String Interpolation</a>
+              <a href="/tags/Template-String/" rel="tag"># Template String</a>
+              <a href="/tags/str-format/" rel="tag"># str.format</a>
+              <a href="/tags/String/" rel="tag"># String</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/02/09/DevOps/Configuration-Management/Ansible/Ansible-Galaxy/Use-Ansible-grog-package-to-manage-packages-on-different-operating-systems/" rel="prev" title="[Ansible Galaxy] Use Ansible grog.package to manage packages on different operating systems">
+                  <i class="fa fa-angle-left"></i> [Ansible Galaxy] Use Ansible grog.package to manage packages on different operating systems
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/02/23/DevOps/Configuration-Management/Ansible/Ansible-Galaxy/Use-Ansible-falco-to-setup-and-monitor-Falco-Behavioral-activity/" rel="next" title="[Ansible Galaxy] Use Ansible falco to setup and monitor Falco Behavioral activity">
+                  [Ansible Galaxy] Use Ansible falco to setup and monitor Falco Behavioral activity <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"d526d3474eaefa9b4ac87dd4bcf0c716"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

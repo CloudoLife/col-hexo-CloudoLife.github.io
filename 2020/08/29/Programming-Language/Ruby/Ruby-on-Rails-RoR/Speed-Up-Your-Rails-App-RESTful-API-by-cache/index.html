@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Rails Cache Caching means to store content generated during the request-response cycle and to reuse it when responding to similar requests. Caching is often the most effective way to boost an applicat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Ruby on Rails (RoR)] Speed Up Your Rails App RESTful API by cache">
+<meta property="og:url" content="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Speed-Up-Your-Rails-App-RESTful-API-by-cache/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Rails Cache Caching means to store content generated during the request-response cycle and to reuse it when responding to similar requests. Caching is often the most effective way to boost an applicat">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-29T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.940Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Rails &#x2F; Ruby on Rails (RoR)">
+<meta property="article:tag" content="Best Practices">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Cache">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Speed-Up-Your-Rails-App-RESTful-API-by-cache/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Speed-Up-Your-Rails-App-RESTful-API-by-cache/","path":"2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Speed-Up-Your-Rails-App-RESTful-API-by-cache/","title":"[Ruby on Rails (RoR)] Speed Up Your Rails App RESTful API by cache"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Ruby on Rails (RoR)] Speed Up Your Rails App RESTful API by cache | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Rails Cache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Enable-caching"><span class="nav-number">1.1.</span> <span class="nav-text">Enable caching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fragment-caching"><span class="nav-number">1.2.</span> <span class="nav-text">Fragment caching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Low-Level-Caching"><span class="nav-number">1.3.</span> <span class="nav-text">Low-Level Caching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL-Caching"><span class="nav-number">1.4.</span> <span class="nav-text">SQL Caching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-Stores"><span class="nav-number">1.5.</span> <span class="nav-text">Cache Stores</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration"><span class="nav-number">1.5.1.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ActiveSupport-Cache-Store"><span class="nav-number">1.5.2.</span> <span class="nav-text">ActiveSupport::Cache::Store</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Connection-Pool-Options"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">Connection Pool Options</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Custom-Cache-Stores"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">Custom Cache Stores</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ActiveSupport-Cache-RedisCacheStore"><span class="nav-number">1.5.3.</span> <span class="nav-text">ActiveSupport::Cache::RedisCacheStore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ActiveSupport-Cache-NullStore"><span class="nav-number">1.5.4.</span> <span class="nav-text">ActiveSupport::Cache::NullStore</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-Keys"><span class="nav-number">1.6.</span> <span class="nav-text">Cache Keys</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.7.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Speed-Up-Your-Rails-App-RESTful-API-by-cache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Ruby on Rails (RoR)] Speed Up Your Rails App RESTful API by cache | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Ruby on Rails (RoR)] Speed Up Your Rails App RESTful API by cache
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-08-29 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-29T00:00:00+00:00">2020-08-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Rails-Ruby-on-Rails-RoR/" itemprop="url" rel="index"><span itemprop="name">Rails / Ruby on Rails (RoR)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Ruby/Rails-Ruby-on-Rails-RoR/Best-Practices/" itemprop="url" rel="index"><span itemprop="name">Best Practices</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>11 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Rails Cache</h1>
+<p>Caching means to store content generated during the request-response cycle and to reuse it when responding to similar requests.</p>
+<p>Caching is often the most effective way to boost an application’s performance. Through caching, web sites running on a single server with a single database can sustain a load of thousands of concurrent users.</p>
+<p>Rails provides a set of caching features out of the box. This guide will teach you the scope and purpose of each one of them. Master these techniques and your Rails applications can serve millions of views without exorbitant response times or server bills.</p>
+<span id="more"></span>
+<h2 id="Enable-caching">Enable caching</h2>
+<p>By default, caching is only enabled in your production environment. To play around with caching locally you’ll want to enable caching in your local environment by setting config.action_controller.perform_caching to true in the relevant config/environments/*.rb file:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.action_controller.perform_caching = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Changing the value of config.action_controller.perform_caching will only have an effect on the caching provided by the Action Controller component. For instance, it will not impact low-level caching, that we address below.</p>
+<hr>
+<h2 id="Fragment-caching">Fragment caching</h2>
+<p>Fragment caching is supported within <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rails/jbuilder">rails/jbuilder: Jbuilder: generate JSON objects with a Builder-style DSL - https://github.com/rails/jbuilder</a>, it uses Rails.cache and works like caching in HTML templates:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">json.cache! [<span class="string">&#x27;v1&#x27;</span>, <span class="variable">@person</span>], <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes <span class="keyword">do</span></span><br><span class="line">  json.extract! <span class="variable">@person</span>, <span class="symbol">:name</span>, <span class="symbol">:age</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>You can also conditionally cache a block by using cache_if! like this:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">json.cache_if! !admin?, [<span class="string">&#x27;v1&#x27;</span>, <span class="variable">@person</span>], <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes <span class="keyword">do</span></span><br><span class="line">  json.extract! <span class="variable">@person</span>, <span class="symbol">:name</span>, <span class="symbol">:age</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>If you are rendering fragments for a collection of objects, have a look at <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yonahforst/jbuilder_cache_multi">yonahforst/jbuilder_cache_multi - https://github.com/yonahforst/jbuilder_cache_multi</a> gem. It uses fetch_multi (&gt;= Rails 4.1) to fetch multiple keys at once.</p>
+<p>Renders the given block for each item in the collection. Accepts optional ‘key’ attribute in options (e.g. key: ‘v1’).</p>
+<p>Note: At the moment, does not accept the partial name as an argument (#todo)</p>
+<p>Examples:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">json.cache_collection! <span class="variable">@people</span>, <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes <span class="keyword">do</span> |<span class="params">person</span>|</span><br><span class="line">  json.partial! <span class="string">&#x27;person&#x27;</span>, <span class="symbol">:person</span> =&gt; person</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Or with optional key</span></span><br><span class="line"></span><br><span class="line">json.cache_collection! <span class="variable">@people</span>, <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes, <span class="symbol">key:</span> <span class="string">&#x27;v1&#x27;</span> <span class="keyword">do</span> |<span class="params">person</span>|</span><br><span class="line">  json.partial! <span class="string">&#x27;person&#x27;</span>, <span class="symbol">:person</span> =&gt; person</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Or with a proc as a key </span></span><br><span class="line"></span><br><span class="line">json.cache_collection! <span class="variable">@people</span>, <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes, <span class="symbol">key:</span> <span class="built_in">proc</span> &#123;|<span class="params">person</span>| person.last_posted_at &#125; <span class="keyword">do</span> |<span class="params">person</span>|</span><br><span class="line">  json.partial! <span class="string">&#x27;person&#x27;</span>, <span class="symbol">:person</span> =&gt; person</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>Last thing: If you are using a collection for the cache key, may I recommend the ‘scope_cache_key’ gem? (check out my fork for a Rails 4 version: <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/joshblour/scope_cache_key">https://github.com/joshblour/scope_cache_key</a>). It very quickly calculates a hash for all items in the collection (MD5 hash of updated_at + IDs).</p>
+<p>You can also conditionally cache a block by using cache_collection_if! like this:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">json.cache_collection_if! do_cache?, <span class="variable">@people</span>, <span class="symbol">expires_in:</span> <span class="number">10</span>.minutes <span class="keyword">do</span> |<span class="params">person</span>|</span><br><span class="line">  json.partial! <span class="string">&#x27;person&#x27;</span>, <span class="symbol">:person</span> =&gt; person</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="Low-Level-Caching">Low-Level Caching</h2>
+<p>Sometimes you need to cache a particular value or query result instead of caching json or view fragments. Rails’ caching mechanism works great for storing any kind of information.</p>
+<p>The most efficient way to implement low-level caching is using the Rails.cache.fetch method. This method does both reading and writing to the cache. When passed only a single argument, the key is fetched and value from the cache is returned. If a block is passed, that block will be executed in the event of a cache miss. The return value of the block will be written to the cache under the given cache key, and that return value will be returned. In case of cache hit, the cached value will be returned without executing the block.</p>
+<p>Consider the following example. An application has a Product model with an instance method that looks up the product’s price on a competing website. The data returned by this method would be perfect for low-level caching:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/product.rb</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">competing_price</span></span><br><span class="line">    <span class="title class_">Rails</span>.cache.fetch(<span class="string">&quot;<span class="subst">#&#123;cache_key_with_version&#125;</span>/competing_price&quot;</span>, <span class="symbol">expires_in:</span> <span class="number">12</span>.hours) <span class="keyword">do</span></span><br><span class="line">      <span class="title class_">Competitor</span><span class="symbol">:</span><span class="symbol">:API</span>.find_price(id)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="SQL-Caching">SQL Caching</h2>
+<p>Query caching is a Rails feature that caches the result set returned by each query. If Rails encounters the same query again for that request, it will use the cached result set as opposed to running the query against the database again.</p>
+<p>For example:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/controllers/product_controller.rb</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProductsController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="comment"># Run a find query</span></span><br><span class="line">    <span class="variable">@products</span> = <span class="title class_">Product</span>.all</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Run the same query again</span></span><br><span class="line">    <span class="variable">@products</span> = <span class="title class_">Product</span>.all</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>The second time the same query is run against the database, it’s not actually going to hit the database. The first time the result is returned from the query it is stored in the query cache (in memory) and the second time it’s pulled from memory.</p>
+<p>However, it’s important to note that query caches are created at the start of an action and destroyed at the end of that action and thus persist only for the duration of the action. If you’d like to store query results in a more persistent fashion, you can with low level caching.</p>
+<h2 id="Cache-Stores">Cache Stores</h2>
+<p>Rails provides different stores for the cached data (apart from SQL and page caching).</p>
+<ul>
+<li>
+<p>ActiveSupport::Cache::MemoryStore</p>
+</li>
+<li>
+<p>ActiveSupport::Cache::FileStore</p>
+</li>
+<li>
+<p>ActiveSupport::Cache::MemCacheStore</p>
+</li>
+<li>
+<p>ActiveSupport::Cache::RedisCacheStore</p>
+</li>
+<li>
+<p>ActiveSupport::Cache::NullStore</p>
+</li>
+<li>
+<p>Or Custom ActiveSupport::Cache</p>
+</li>
+</ul>
+<h3 id="Configuration">Configuration</h3>
+<p>You can set up your application’s default cache store by setting the config.cache_store configuration option. Other parameters can be passed as arguments to the cache store’s constructor:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/environment.rb or config/environments/*.rb</span></span><br><span class="line"></span><br><span class="line">config.cache_store = <span class="symbol">:memory_store</span>, &#123; <span class="symbol">size:</span> <span class="number">64</span>.megabytes &#125;</span><br></pre></td></tr></table></figure>
+<p>Alternatively, you can call ActionController::Base.cache_store outside of a configuration block.</p>
+<h3 id="ActiveSupport-Cache-Store">ActiveSupport::Cache::Store</h3>
+<p>This class provides the foundation for interacting with the cache in Rails. This is an abstract class and you cannot use it on its own. Rather you must use a concrete implementation of the class tied to a storage engine. Rails ships with several implementations documented below.</p>
+<p>The main methods to call are read, write, delete, exist?, and fetch. The fetch method takes a block and will either return an existing value from the cache, or evaluate the block and write the result to the cache if no value exists.</p>
+<p>There are some common options that can be used by all cache implementations. These can be passed to the constructor or the various methods to interact with entries.</p>
+<ul>
+<li>
+<p>:namespace - This option can be used to create a namespace within the cache store. It is especially useful if your application shares a cache with other applications.</p>
+</li>
+<li>
+<p>:compress - Enabled by default. Compresses cache entries so more data can be stored in the same memory footprint, leading to fewer cache evictions and higher hit rates.</p>
+</li>
+<li>
+<p>:compress_threshold - Defaults to 1kB. Cache entries larger than this threshold, specified in bytes, are compressed.</p>
+</li>
+<li>
+<p>:expires_in - This option sets an expiration time in seconds for the cache entry, if the cache store supports it, when it will be automatically removed from the cache.</p>
+</li>
+<li>
+<p>:race_condition_ttl - This option is used in conjunction with the :expires_in option. It will prevent race conditions when cache entries expire by preventing multiple processes from simultaneously regenerating the same entry (also known as the dog pile effect). This option sets the number of seconds that an expired entry can be reused while a new value is being regenerated. It’s a good practice to set this value if you use the :expires_in option.</p>
+</li>
+</ul>
+<h4 id="Connection-Pool-Options">Connection Pool Options</h4>
+<p>By default the MemCacheStore and RedisCacheStore use a single connection per process. This means that if you’re using Puma, or another threaded server, you can have multiple threads waiting for the connection to become available. To increase the number of available connections you can enable connection pooling.</p>
+<p>First, add the connection_pool gem to your Gemfile:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line">gem <span class="string">&#x27;connection_pool&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Next, pass the :pool_size and/or :pool_timeout options when configuring the cache store:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.cache_store = <span class="symbol">:mem_cache_store</span>, <span class="string">&quot;cache.example.com&quot;</span>, &#123; <span class="symbol">pool_size:</span> <span class="number">5</span>, <span class="symbol">pool_timeout:</span> <span class="number">5</span> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>:pool_size - This option sets the number of connections per process (defaults to 5).</p>
+</li>
+<li>
+<p>:pool_timeout - This option sets the number of seconds to wait for a connection (defaults to 5). If no connection is available within the timeout, a Timeout::Error will be raised.</p>
+</li>
+</ul>
+<h4 id="Custom-Cache-Stores">Custom Cache Stores</h4>
+<p>You can create your own custom cache store by simply extending ActiveSupport::Cache::Store and implementing the appropriate methods. This way, you can swap in any number of caching technologies into your Rails application.</p>
+<p>To use a custom cache store, simply set the cache store to a new instance of your custom class.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.cache_store = <span class="title class_">MyCacheStore</span>.new</span><br></pre></td></tr></table></figure>
+<h3 id="ActiveSupport-Cache-RedisCacheStore">ActiveSupport::Cache::RedisCacheStore</h3>
+<p>The Redis cache store takes advantage of Redis support for automatic eviction when it reaches max memory, allowing it to behave much like a Memcached cache server.</p>
+<hr>
+<p>Deployment note: Redis doesn’t expire keys by default, so take care to use a dedicated Redis cache server. Don’t fill up your persistent-Redis server with volatile cache data! Read the Redis cache server setup guide in detail.</p>
+<hr>
+<p>For a cache-only Redis server, set maxmemory-policy to one of the variants of allkeys. Redis 4+ supports least-frequently-used eviction (allkeys-lfu), an excellent default choice. Redis 3 and earlier should use least-recently-used eviction (allkeys-lru).</p>
+<p>Set cache read and write timeouts relatively low. Regenerating a cached value is often faster than waiting more than a second to retrieve it. Both read and write timeouts default to 1 second, but may be set lower if your network is consistently low-latency.</p>
+<p>By default, the cache store will not attempt to reconnect to Redis if the connection fails during a request. If you experience frequent disconnects you may wish to enable reconnect attempts.</p>
+<p>Cache reads and writes never raise exceptions; they just return nil instead, behaving as if there was nothing in the cache. To gauge whether your cache is hitting exceptions, you may provide an error_handler to report to an exception gathering service. It must accept three keyword arguments: method, the cache store method that was originally called; returning, the value that was returned to the user, typically nil; and exception, the exception that was rescued.</p>
+<p>To get started, add the redis gem to your Gemfile:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line">gem <span class="string">&#x27;redis&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>You can enable support for the faster hiredis connection library by additionally adding its ruby wrapper to your Gemfile:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line"></span><br><span class="line">gem <span class="string">&#x27;hiredis&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>Redis cache store will automatically require &amp; use hiredis if available. No further configuration is needed.</p>
+<p>Finally, add the configuration in the config/environment.rb or relevant config/environments/*.rb file:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.cache_store = <span class="symbol">:redis_cache_store</span>, &#123; <span class="symbol">url:</span> <span class="variable constant_">ENV</span>[<span class="string">&#x27;REDIS_URL&#x27;</span>] &#125;</span><br></pre></td></tr></table></figure>
+<p>A more complex, production Redis cache store may look something like this:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/environment.rb or config/environments/*.rb</span></span><br><span class="line"></span><br><span class="line">cache_servers = <span class="string">%w(redis://cache-01:6379/0 redis://cache-02:6379/0)</span></span><br><span class="line">config.cache_store = <span class="symbol">:redis_cache_store</span>, &#123; <span class="symbol">url:</span> cache_servers,</span><br><span class="line"></span><br><span class="line">  <span class="symbol">connect_timeout:</span>    <span class="number">30</span>,  <span class="comment"># Defaults to 20 seconds</span></span><br><span class="line">  <span class="symbol">read_timeout:</span>       <span class="number">0.2</span>, <span class="comment"># Defaults to 1 second</span></span><br><span class="line">  <span class="symbol">write_timeout:</span>      <span class="number">0.2</span>, <span class="comment"># Defaults to 1 second</span></span><br><span class="line">  <span class="symbol">reconnect_attempts:</span> <span class="number">1</span>,   <span class="comment"># Defaults to 0</span></span><br><span class="line"></span><br><span class="line">  <span class="symbol">error_handler:</span> -&gt; (<span class="symbol">method:</span>, <span class="symbol">returning:</span>, <span class="symbol">exception:</span>) &#123;</span><br><span class="line">    <span class="comment"># Report errors to Sentry as warnings</span></span><br><span class="line">    <span class="title class_">Raven</span>.capture_exception exception, <span class="symbol">level:</span> <span class="string">&#x27;warning&#x27;</span>,</span><br><span class="line">      <span class="symbol">tags:</span> &#123; <span class="symbol">method:</span> method, <span class="symbol">returning:</span> returning &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ActiveSupport-Cache-NullStore">ActiveSupport::Cache::NullStore</h3>
+<p>This cache store implementation is meant to be used only in development or test environments and it never stores anything. This can be very useful in development when you have code that interacts directly with Rails.cache but caching may interfere with being able to see the results of code changes. With this cache store, all fetch and read operations will result in a miss.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.cache_store = <span class="symbol">:null_store</span></span><br></pre></td></tr></table></figure>
+<h2 id="Cache-Keys">Cache Keys</h2>
+<p>The keys used in a cache can be any object that responds to either cache_key or to_param. You can implement the cache_key method on your classes if you need to generate custom keys. Active Record will generate keys based on the class name and record id.</p>
+<p>You can use Hashes and Arrays of values as cache keys.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This is a legal cache key</span></span><br><span class="line"><span class="title class_">Rails</span>.cache.read(<span class="symbol">site:</span> <span class="string">&quot;mysite&quot;</span>, <span class="symbol">owners:</span> [owner_1, owner_2])</span><br></pre></td></tr></table></figure>
+<hr>
+<p>The keys you use on Rails.cache will not be the same as those actually used with the storage engine. They may be modified with a namespace or altered to fit technology backend constraints. This means, for instance, that you can’t save values with Rails.cache and then try to pull them out with the dalli gem. However, you also don’t need to worry about exceeding the memcached size limit or violating syntax rules.</p>
+<hr>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/caching_with_rails.html">Caching with Rails: An Overview — Ruby on Rails Guides - https://guides.rubyonrails.org/caching_with_rails.html</a> to learn more about Rails caching.</p>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://guides.rubyonrails.org/caching_with_rails.html">Caching with Rails: An Overview — Ruby on Rails Guides - https://guides.rubyonrails.org/caching_with_rails.html</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://scotch.io/tutorials/how-to-improve-website-performance-with-caching-in-rails">How to Improve Website Performance With Caching in Rails ― Scotch.io - https://scotch.io/tutorials/how-to-improve-website-performance-with-caching-in-rails</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/rails/jbuilder">rails/jbuilder: Jbuilder: generate JSON objects with a Builder-style DSL - https://github.com/rails/jbuilder</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yonahforst/jbuilder_cache_multi">yonahforst/jbuilder_cache_multi - https://github.com/yonahforst/jbuilder_cache_multi</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yonahforst/scope_cache_key">yonahforst/scope_cache_key: Add cache_key functionality to ActiveRecord scopes - https://github.com/yonahforst/scope_cache_key - https://github.com/yonahforst/scope_cache_key</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Rails-Ruby-on-Rails-RoR/" rel="tag"># Rails / Ruby on Rails (RoR)</a>
+              <a href="/tags/Best-Practices/" rel="tag"># Best Practices</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Programming-Language/" rel="tag"># Programming Language</a>
+              <a href="/tags/Cache/" rel="tag"># Cache</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Use-rails-jbuilder-to-generate-JSON-objects-with-a-Builder-style-DSL/" rel="prev" title="[Ruby on Rails (RoR)] Use rails jbuilder to generate JSON objects with a Builder-style DSL ">
+                  <i class="fa fa-angle-left"></i> [Ruby on Rails (RoR)] Use rails jbuilder to generate JSON objects with a Builder-style DSL 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/08/29/Programming-Language/Ruby/Ruby-on-Rails-RoR/Joins-vs-Preload-vs-Includes-vs-Eager-load-in-Rails-ActiveRecord/" rel="next" title="[Ruby on Rails (RoR)] Joins vs Preload vs Includes vs Eager load in Rails ActiveRecord">
+                  [Ruby on Rails (RoR)] Joins vs Preload vs Includes vs Eager load in Rails ActiveRecord <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"37dad0e8becbd1d0fea37b70aff02f39"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>

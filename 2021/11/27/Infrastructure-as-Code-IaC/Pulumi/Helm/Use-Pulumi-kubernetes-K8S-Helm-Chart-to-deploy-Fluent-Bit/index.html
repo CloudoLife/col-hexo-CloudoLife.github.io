@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="sJgro_9-KyRL3EkTM5KW84pQPrg2Fv1KdkibDRBIulE">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cloudolife.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.23.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Fluent Bit Fluent Bit is an open source Log Processor and Forwarder which allows you to collect any data like metrics and logs from different sources, enrich them with filters and send them to multipl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Fluent Bit">
+<meta property="og:url" content="https://cloudolife.com/2021/11/27/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Fluent-Bit/index.html">
+<meta property="og:site_name" content="Cloud-oriented Life">
+<meta property="og:description" content="Fluent Bit Fluent Bit is an open source Log Processor and Forwarder which allows you to collect any data like metrics and logs from different sources, enrich them with filters and send them to multipl">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-27T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T09:49:34.915Z">
+<meta property="article:author" content="CloudoLife">
+<meta property="article:tag" content="Infrastructure as Code (IaC)">
+<meta property="article:tag" content="Kubernetes (K8S)">
+<meta property="article:tag" content="Cloud Native">
+<meta property="article:tag" content="Helm">
+<meta property="article:tag" content="Pulumi">
+<meta property="article:tag" content="TypeScript">
+<meta property="article:tag" content="CNCF">
+<meta property="article:tag" content="Cloud Native Computing Foundation">
+<meta property="article:tag" content="Cloud Native Computing Foundation (CNCF)">
+<meta property="article:tag" content="Elastic">
+<meta property="article:tag" content="Elasticsearch">
+<meta property="article:tag" content="Logger">
+<meta property="article:tag" content="Kibana">
+<meta property="article:tag" content="Fluent Bit">
+<meta property="article:tag" content="Fluentd">
+<meta property="article:tag" content="Fluent">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cloudolife.com/2021/11/27/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Fluent-Bit/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cloudolife.com/2021/11/27/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Fluent-Bit/","path":"2021/11/27/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Fluent-Bit/","title":"[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Fluent Bit"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Fluent Bit | Cloud-oriented Life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Y9QPJWXQN"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-8Y9QPJWXQN","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?995d7016a56cfd5c2ef6f2e6640a670e"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script data-ad-client="ca-pub-8693122033969144" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Cloud-oriented Life" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cloud-oriented Life</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cloud Native Technology Improves Lives</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1646</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">331</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">584</span></a></li><li class="menu-item menu-item-ansible"><a href="/tags/Ansible/" rel="section"><i class="fa fa-book fa-fw"></i>Ansible</a></li><li class="menu-item menu-item-awesome-software"><a href="/tags/Awesome-Software/" rel="section"><i class="fa fa-book fa-fw"></i>Awesome Software</a></li><li class="menu-item menu-item-golang-(go)"><a href="/tags/Golang-Go/" rel="section"><i class="fa fa-book fa-fw"></i>Golang (Go)</a></li><li class="menu-item menu-item-helm"><a href="/tags/Helm/" rel="section"><i class="fa fa-book fa-fw"></i>Helm</a></li><li class="menu-item menu-item-java"><a href="/tags/Java/" rel="section"><i class="fa fa-book fa-fw"></i>Java</a></li><li class="menu-item menu-item-javascript"><a href="/tags/JavaScript/" rel="section"><i class="fa fa-book fa-fw"></i>JavaScript</a></li><li class="menu-item menu-item-knative"><a href="/tags/Knative/" rel="section"><i class="fa fa-book fa-fw"></i>Knative</a></li><li class="menu-item menu-item-kubernetes-(k8s)"><a href="/tags/Kubernetes-K8S/" rel="section"><i class="fa fa-book fa-fw"></i>Kubernetes (K8S)</a></li><li class="menu-item menu-item-macos"><a href="/tags/macOS/" rel="section"><i class="fa fa-book fa-fw"></i>macOS</a></li><li class="menu-item menu-item-python"><a href="/tags/Python/" rel="section"><i class="fa fa-book fa-fw"></i>Python</a></li><li class="menu-item menu-item-pulumi"><a href="/tags/Pulumi/" rel="section"><i class="fa fa-book fa-fw"></i>Pulumi</a></li><li class="menu-item menu-item-react"><a href="/tags/React/" rel="section"><i class="fa fa-book fa-fw"></i>React</a></li><li class="menu-item menu-item-ruby"><a href="/tags/Ruby/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby</a></li><li class="menu-item menu-item-ruby-on-rails"><a href="/tags/Ruby-on-Rails-RoR/" rel="section"><i class="fa fa-book fa-fw"></i>Ruby On Rails</a></li><li class="menu-item menu-item-rust"><a href="/tags/Rust/" rel="section"><i class="fa fa-book fa-fw"></i>Rust</a></li><li class="menu-item menu-item-serverless"><a href="/tags/Serverless/" rel="section"><i class="fa fa-book fa-fw"></i>Serverless</a></li><li class="menu-item menu-item-service-mesh"><a href="/tags/Service-Mesh/" rel="section"><i class="fa fa-book fa-fw"></i>Service Mesh</a></li><li class="menu-item menu-item-svelte"><a href="/tags/Svelte/" rel="section"><i class="fa fa-book fa-fw"></i>Svelte</a></li><li class="menu-item menu-item-taro"><a href="/tags/Taro/" rel="section"><i class="fa fa-book fa-fw"></i>Taro</a></li><li class="menu-item menu-item-terraform"><a href="/tags/Terraform/" rel="section"><i class="fa fa-book fa-fw"></i>Terraform</a></li><li class="menu-item menu-item-typescript"><a href="/tags/TypeScript/" rel="section"><i class="fa fa-book fa-fw"></i>TypeScript</a></li><li class="menu-item menu-item-about"><a href="/about-us/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-rss"><a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Fluent Bit</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">1.2.</span> <span class="nav-text">Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pulumi-New"><span class="nav-number">1.2.1.</span> <span class="nav-text">Pulumi New</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pulumi-Configuration"><span class="nav-number">1.2.2.</span> <span class="nav-text">Pulumi Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Configure-Kubernetes"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Configure Kubernetes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Configure-Values-yaml"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Configure Values.yaml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#main-ts"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">main.ts</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pulumi-Up"><span class="nav-number">1.2.3.</span> <span class="nav-text">Pulumi Up</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pulumi-Destroy"><span class="nav-number">1.2.4.</span> <span class="nav-text">Pulumi Destroy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">1.3.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CloudoLife</p>
+  <div class="site-description" itemprop="description">A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">584</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">331</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1646</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CloudoLife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/CloudoLife" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;CloudoLife" rel="noopener me external nofollow noreferrer" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://cloudolife.cn/" title="https:&#x2F;&#x2F;cloudolife.cn" rel="noopener external nofollow noreferrer" target="_blank">CLoudoLife - Chinese (Simplified)</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cloudolife.com/2021/11/27/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Fluent-Bit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CloudoLife">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cloud-oriented Life">
+      <meta itemprop="description" content="A Husband and Father, Knowledge Worker, Full-skilled Cloud Engineer">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Fluent Bit | Cloud-oriented Life">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Fluent Bit
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-27 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-27T00:00:00+00:00">2021-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-10 09:49:34" itemprop="dateModified" datetime="2025-06-10T09:49:34+00:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/" itemprop="url" rel="index"><span itemprop="name">Infrastructure as Code (IaC)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Cloud-Native/" itemprop="url" rel="index"><span itemprop="name">Cloud Native</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Cloud-Native/Kubernetes-K8S/" itemprop="url" rel="index"><span itemprop="name">Kubernetes (K8S)</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Infrastructure-as-Code-IaC/Cloud-Native/Kubernetes-K8S/Pulumi/" itemprop="url" rel="index"><span itemprop="name">Pulumi</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>4.5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1>Fluent Bit</h1>
+<p>Fluent Bit is an open source Log Processor and Forwarder which allows you to collect any data like metrics and logs from different sources, enrich them with filters and send them to multiple destinations. It’s the preferred choice for containerized environments like Kubernetes.</p>
+<p>Fluent Bit is designed with performance in mind: high throughput with low CPU and Memory usage. It’s written in C language and has a pluggable architecture supporting more than 70 extensions for inputs, filters and outputs.</p>
+<p>This article is about how to use Pulumi, kubernetes (K8S) provider, Helm Chart and TypeScript SDK to deploy Fluent Bit within Kubernetes (K8S).</p>
+<span id="more"></span>
+<h2 id="Prerequisites">Prerequisites</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/">Kubernetes (K8S)</a></p>
+<p>Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/docs/setup/">Getting started | Kubernetes - https://kubernetes.io/docs/setup/</a> to leanr more.</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.pulumi.com/">Pulumi - Modern Infrastructure as Code - https://www.pulumi.com/</a></p>
+<p>Pulumi is a modern infrastructure-as-code platform that allows you to use common programming languages, tools, and frameworks, to provision, update, and manage cloud infrastructure resources.</p>
+<p>Install the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.pulumi.com/">Pulumi - https://www.pulumi.com/</a> CLI.</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mac OS X</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install pulumi</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.pulumi.com/docs/get-started/install/">Download and Install | Pulumi - https://www.pulumi.com/docs/get-started/install/</a> to learn more about others OS.</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://nodejs.org/en/">Node.js - https://nodejs.org/en/</a></p>
+<p>Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.</p>
+<p>Install <a target="_blank" rel="noopener external nofollow noreferrer" href="https://nodejs.org/en/">Node.js - https://nodejs.org/en/</a> CLI.</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mac OS X</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">brew install node</span></span><br></pre></td></tr></table></figure>
+<p>See <a target="_blank" rel="noopener external nofollow noreferrer" href="https://nodejs.org/en/">Node.js - https://nodejs.org/en/</a> to learn more about others OS.</p>
+</li>
+</ul>
+<h2 id="Usage">Usage</h2>
+<h3 id="Pulumi-New">Pulumi New</h3>
+<p>Create the workspace directory.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">mkdir</span> -p col-example-pulumi-typescript-fluent-bit</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> col-example-pulumi-typescript-fluent-bit</span></span><br></pre></td></tr></table></figure>
+<p>Pulumi login into local file system.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi login file://.</span></span><br><span class="line">Logged in to cloudolife as cloudolife (file://.)</span><br><span class="line">or visit https://pulumi.com/docs/reference/install/ for manual instructions and release notes.</span><br></pre></td></tr></table></figure>
+<p>Pulumi new a project with kubernetes-typescript SDK.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi new kubernetes-typescript</span></span><br></pre></td></tr></table></figure>
+<p>The above command will create some files within the current directory.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tree . -L 1</span><br><span class="line">.</span><br><span class="line">├── node_modules/</span><br><span class="line">├── package.json</span><br><span class="line">├── package.json.lock</span><br><span class="line">├── Pulumi.dev.yaml</span><br><span class="line">├── Pulumi.yaml</span><br><span class="line">└── main.ts</span><br></pre></td></tr></table></figure>
+<p>Install <code>js-yaml</code> package to load and parse yaml file.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm i js-yaml</span></span><br></pre></td></tr></table></figure>
+<h3 id="Pulumi-Configuration">Pulumi Configuration</h3>
+<h4 id="Configure-Kubernetes">Configure Kubernetes</h4>
+<p>By default, Pulumi will look for a kubeconfig file in the following locations, just like kubectl:</p>
+<ul>
+<li>
+<p>The environment variable: <code>$KUBECONFIG</code>,</p>
+</li>
+<li>
+<p>Or in current user’s default kubeconfig directory: <code>~/.kube/config</code></p>
+</li>
+</ul>
+<p>If the kubeconfig file is not in either of these locations, Pulumi will not find it, and it will fail to authenticate against the cluster. Set one of these locations to a valid kubeconfig file, if you have not done so already.</p>
+<h4 id="Configure-Values-yaml">Configure Values.yaml</h4>
+<p>Edit <a href="./values.yaml">values.yaml</a> and replace content within <code>&#123;&#123; &#125;&#125;</code>.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># values.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># helm-charts/values.yaml at main · fluent/helm-charts</span></span><br><span class="line"><span class="comment"># https://github.com/fluent/helm-charts/blob/main/charts/fluent-bit/values.yaml</span></span><br></pre></td></tr></table></figure>
+<h4 id="main-ts">main.ts</h4>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> pulumi <span class="keyword">from</span> <span class="string">&quot;@pulumi/pulumi&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> k8s <span class="keyword">from</span> <span class="string">&quot;@pulumi/kubernetes&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> yaml = <span class="built_in">require</span>(<span class="string">&#x27;js-yaml&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs   = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> nameElastic = <span class="string">&quot;elastic&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// kubernetes.core/v1.Namespace | Pulumi</span></span><br><span class="line"><span class="comment">// https://www.pulumi.com/docs/reference/pkg/kubernetes/core/v1/namespace/</span></span><br><span class="line"><span class="keyword">const</span> namespaceElastic = <span class="keyword">new</span> k8s.<span class="property">core</span>.<span class="property">v1</span>.<span class="title class_">Namespace</span>(nameElastic, &#123;</span><br><span class="line">    <span class="attr">metadata</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: nameElastic,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> values = yaml.<span class="title function_">safeLoad</span>(fs.<span class="title function_">readFileSync</span>(<span class="string">&quot;./values.yaml&quot;</span>, <span class="string">&#x27;utf8&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> charNameFluentBit = <span class="string">&quot;fluent-bit&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> charFluentBit = <span class="keyword">new</span> k8s.<span class="property">helm</span>.<span class="property">v3</span>.<span class="title class_">Chart</span>(charNameFluentBit, &#123;</span><br><span class="line">    <span class="attr">chart</span>: charNameFluentBit,</span><br><span class="line">    <span class="attr">version</span>: <span class="string">&quot;0.19.7&quot;</span>,</span><br><span class="line">    <span class="attr">fetchOpts</span>:&#123;</span><br><span class="line">        <span class="attr">repo</span>: <span class="string">&quot;https://fluent.github.io/helm-charts&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">values</span>: values,</span><br><span class="line">    <span class="attr">namespace</span>: namespaceElastic.<span class="property">metadata</span>.<span class="property">name</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Pulumi-Up">Pulumi Up</h3>
+<p>Run pulumi up to create the namespace and pods.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi up</span></span><br></pre></td></tr></table></figure>
+<p>See pods about fluent-bit.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl -n elastic get pods | grep fluent-bit</span></span><br><span class="line">fluent-bit-5twrq                         1/1     Running   0          4h15m</span><br><span class="line">fluent-bit-b29zc                         1/1     Running   0          4h15m</span><br><span class="line">fluent-bit-gnmqw                         1/1     Running   0          4h15m</span><br></pre></td></tr></table></figure>
+<h3 id="Pulumi-Destroy">Pulumi Destroy</h3>
+<p>Destroy all resources created by Pulumi.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pulumi destroy</span></span><br></pre></td></tr></table></figure>
+<h2 id="References">References</h2>
+<p>[1] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://fluentbit.io/">Fluent Bit - https://fluentbit.io/</a></p>
+<p>[2] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluent/helm-charts/tree/main/charts/fluent-bit">helm-charts/charts/fluent-bit at main · fluent/helm-charts - https://github.com/fluent/helm-charts/tree/main/charts/fluent-bit</a></p>
+<p>[3] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.fluentbit.io/manual/installation/kubernetes#installing-with-helm-chart">Installing with Helm Chart | Kubernetes - Fluent Bit: Official Manual - https://docs.fluentbit.io/manual/installation/kubernetes#installing-with-helm-chart</a></p>
+<p>[4] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/fluent/helm-charts/blob/main/charts/fluent-bit/values.yaml">helm-charts/values.yaml at main · fluent/helm-charts - https://github.com/fluent/helm-charts/blob/main/charts/fluent-bit/values.yaml</a></p>
+<p>[5] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.pulumi.com/docs/get-started/kubernetes/">Kubernetes Getting Started | Pulumi - https://www.pulumi.com/docs/get-started/kubernetes/</a></p>
+<p>[6] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.pulumi.com/">Pulumi - Modern Infrastructure as Code - https://www.pulumi.com/</a></p>
+<p>[7] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://kubernetes.io/">Kubernetes - https://kubernetes.io/</a></p>
+<p>[8] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.typescriptlang.org/">TypeScript: Typed JavaScript at Any Scale. - https://www.typescriptlang.org/</a></p>
+<p>[9] <a target="_blank" rel="noopener external nofollow noreferrer" href="https://helm.sh/">Helm - https://helm.sh/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/bitcoin.png" alt="CloudoLife Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/CloudoLife" rel="external nofollow noreferrer">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Infrastructure-as-Code-IaC/" rel="tag"># Infrastructure as Code (IaC)</a>
+              <a href="/tags/Kubernetes-K8S/" rel="tag"># Kubernetes (K8S)</a>
+              <a href="/tags/Cloud-Native/" rel="tag"># Cloud Native</a>
+              <a href="/tags/Helm/" rel="tag"># Helm</a>
+              <a href="/tags/Pulumi/" rel="tag"># Pulumi</a>
+              <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
+              <a href="/tags/CNCF/" rel="tag"># CNCF</a>
+              <a href="/tags/Cloud-Native-Computing-Foundation/" rel="tag"># Cloud Native Computing Foundation</a>
+              <a href="/tags/Cloud-Native-Computing-Foundation-CNCF/" rel="tag"># Cloud Native Computing Foundation (CNCF)</a>
+              <a href="/tags/Elastic/" rel="tag"># Elastic</a>
+              <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
+              <a href="/tags/Logger/" rel="tag"># Logger</a>
+              <a href="/tags/Kibana/" rel="tag"># Kibana</a>
+              <a href="/tags/Fluent-Bit/" rel="tag"># Fluent Bit</a>
+              <a href="/tags/Fluentd/" rel="tag"># Fluentd</a>
+              <a href="/tags/Fluent/" rel="tag"># Fluent</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/27/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-x509-certificate-exporter/" rel="prev" title="[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy x509-certificate-exporter">
+                  <i class="fa fa-angle-left"></i> [Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy x509-certificate-exporter
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/11/27/Infrastructure-as-Code-IaC/Pulumi/Helm/Use-Pulumi-kubernetes-K8S-Helm-Chart-to-deploy-Argo-CD/" rel="next" title="[Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Argo CD">
+                  [Infrastructure as Code (IaC) Pulumi] Use Pulumi kubernetes (K8S) Helm Chart to deploy Argo CD <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CloudoLife</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">2.6m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">39:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"CloudoLife","repo":"col-hexo-CloudoLife.github.io","client_id":"4ca3ae8fb3a49237db9a","client_secret":"98d6652508799ef4350ab05aabe855e58f549112","admin_user":"benjamincloudolife","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"b055ad6ad28dc48d8f37ff8350ffcebf"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>
